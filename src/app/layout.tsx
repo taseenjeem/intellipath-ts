@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import "/styles/globals.scss";
+import { ThemeProvider } from "../../providers/ThemProvider";
 
 const fontStyle = Barlow({
   subsets: ["latin"],
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontStyle.className}>{children}</body>
+      <body className={fontStyle.className}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
