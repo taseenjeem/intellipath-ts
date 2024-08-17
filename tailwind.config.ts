@@ -7,7 +7,14 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+        },
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
