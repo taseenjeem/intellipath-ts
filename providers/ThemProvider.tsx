@@ -1,5 +1,5 @@
 "use client";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { ThemeContext } from "../context";
 import LoadingScreen from "@/components/global/Loadings/LoadingScreen";
 
@@ -7,9 +7,9 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState("sunset");
-  const [isMounted, setIsMounted] = useState(false);
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  const [theme, setTheme] = useState<string>("sunset");
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
     setIsMounted(true);
