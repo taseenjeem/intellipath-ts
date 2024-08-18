@@ -26,16 +26,16 @@ const Cta = () => {
       </div>
       <div className="grid md:grid-cols-2 gap-8 mt-5 md:mt-10">
         <div className="bg-base-300 card card-compact card-body hover:shadow-xl border border-base-300 hover:border-primary duration-300">
-          <div className="flex flex-col md:flex-row items-center">
+          <div className="flex flex-col md:flex-row items-center gap-5 md:gap-0">
             <div className="space-y-3">
               <h3 className="text-2xl font-semibold">Become an instructor</h3>
-              <p>
+              <p className="text-sm md:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
                 laboriosam cupiditate voluptatibus dolor, reiciendis eos
                 repudiandae perspiciatis nisi quia odio!
               </p>
               <Link href={`#`} className="btn btn-primary btn-outline">
-                Become Instructor
+                Become an Instructor
               </Link>
             </div>
             <Image
@@ -46,16 +46,16 @@ const Cta = () => {
           </div>
         </div>
         <div className="bg-base-300 card card-compact card-body hover:shadow-xl border border-base-300 hover:border-primary duration-300">
-          <div className="flex flex-col md:flex-row items-center">
+          <div className="flex flex-col md:flex-row items-center gap-5 md:gap-0">
             <div className="space-y-3">
               <h3 className="text-2xl font-semibold">Become an learner</h3>
-              <p>
+              <p className="text-sm md:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
                 laboriosam cupiditate voluptatibus dolor, reiciendis eos
                 repudiandae perspiciatis nisi quia odio!
               </p>
               <Link href={`#`} className="btn btn-primary btn-outline">
-                Become Learner
+                Become a Learner
               </Link>
             </div>
             <Image
