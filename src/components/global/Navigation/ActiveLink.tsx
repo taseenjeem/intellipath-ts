@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
 
 interface ActiveLinkProps {
   href: string;
-  children: ReactNode;
+  children: React.ReactNode;
   isSmallDevice?: boolean;
 }
 
