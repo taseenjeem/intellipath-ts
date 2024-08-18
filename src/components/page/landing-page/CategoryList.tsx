@@ -1,7 +1,7 @@
-import CategoryCard from "@/components/global/ui/CategoryCard";
+import CategoryCard from "@/src/components/global/ui/CategoryCard";
 import Link from "next/link";
-import { getCategories } from "../../../../database/db-queries";
-import { ICategory } from "../../../../types";
+import { getCategories } from "@/database/db-queries";
+import { ICategory } from "@/types";
 
 const CategoryList = async () => {
   const allCategories = await getCategories();
