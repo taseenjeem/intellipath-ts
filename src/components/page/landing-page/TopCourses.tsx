@@ -4,7 +4,7 @@ import CourseCard from "../../global/ui/CourseCard";
 import { ICourses } from "@/types";
 
 const TopCourses = async () => {
-  const topCourses = await getTopCourses();
+  const topCourses: ICourses[] = await getTopCourses();
 
   return (
     <section className="container min-h-screen w-full mt-7 md:mt-28">
