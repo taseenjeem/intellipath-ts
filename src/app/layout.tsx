@@ -4,6 +4,7 @@ import "/styles/globals.scss";
 import { ThemeProvider } from "../../providers/ThemProvider";
 import Footer from "../components/global/Footer/Footer";
 import Navbar from "../components/global/Navigation/Navbar";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 const fontStyle = Barlow({
   subsets: ["latin"],
@@ -25,10 +26,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={fontStyle.className}>
         <ThemeProvider>
-          <Navbar>
-            {children}
-            <Footer />
-          </Navbar>
+          <ReduxProvider>
+            <Navbar>
+              {children}
+              <Footer />
+            </Navbar>
+          </ReduxProvider>
         </ThemeProvider>
       </body>
     </html>
