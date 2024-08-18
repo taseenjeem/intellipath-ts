@@ -1,7 +1,7 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
 import { ThemeContext } from "../context";
-import LoadingScreen from "@/components/global/Loadings/LoadingScreen";
+import LoadingScreen from "@/src/components/global/Loadings/LoadingScreen";
 
 interface ThemeProviderProps {
   children: ReactNode;

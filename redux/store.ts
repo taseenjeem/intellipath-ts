@@ -10,6 +10,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
+import UserSliceReducer from "./slices/userSlices";
 
 const createNoopStorage = () => {
   return {
@@ -36,7 +37,7 @@ const persistConfig = {
   whitelist: [],
 };
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({ users: UserSliceReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

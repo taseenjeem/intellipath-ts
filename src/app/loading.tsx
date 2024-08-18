@@ -1,4 +1,4 @@
-import LoadingScreen from "@/components/global/Loadings/LoadingScreen";
+import LoadingScreen from "../components/global/Loadings/LoadingScreen";
 
 const loading = () => {
   return <LoadingScreen />;
