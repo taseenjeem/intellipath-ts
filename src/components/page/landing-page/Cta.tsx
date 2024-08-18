@@ -24,7 +24,7 @@ const Cta = () => {
           Read Documentation
         </Link>
       </div>
-      <div className="grid md:grid-cols-2 gap-8 mt-5 md:mt-10">
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 mt-5 md:mt-10">
         <div className="bg-base-300 card card-compact card-body hover:shadow-xl border border-base-300 hover:border-primary duration-300">
           <div className="flex flex-col md:flex-row items-center gap-5 md:gap-0">
             <div className="space-y-3">
