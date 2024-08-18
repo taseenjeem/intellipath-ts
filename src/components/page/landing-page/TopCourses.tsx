@@ -27,7 +27,7 @@ const TopCourses = async () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 w-full mt-5 md:mt-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 w-full mt-5 md:mt-10">
         {topCourses.map((item: ICourses) => (
           <CourseCard key={item.id} courseDetails={item} />
         ))}
