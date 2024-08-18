@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "title": "Full-Stack Web Development",
+    "slug":"Course-details",
+    "description": "Learn to build dynamic websites and web applications using HTML, CSS, JavaScript, and backend technologies.",
+    "instructor": "John Doe",
+    "rating": 4.8,
+    "reviews": 3245,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "2",
+    "title": "Data Science and Machine Learning",
+    "slug":"Course-details",
+    "description": "Master data analysis, visualization, and machine learning algorithms to make data-driven decisions.",
+    "instructor": "Jane Smith",
+    "rating": 4.7,
+    "reviews": 2876,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "3",
+    "title": "Digital Marketing",
+    "slug":"Course-details",
+    "description": "Learn strategies for SEO, social media marketing, content marketing, and more to grow your business online.",
+    "instructor": "Mark Johnson",
+    "rating": 4.6,
+    "reviews": 1950,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "4",
+    "title": "Graphic Design",
+    "slug":"Course-details",
+    "description": "Develop your creativity and learn essential design tools like Adobe Photoshop and Illustrator.",
+    "instructor": "Emily Davis",
+    "rating": 4.9,
+    "reviews": 1475,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "5",
+    "title": "Project Management",
+    "slug":"Course-details",
+    "description": "Acquire skills to effectively manage projects, lead teams, and deliver results on time and within budget.",
+    "instructor": "Michael Brown",
+    "rating": 4.8,
+    "reviews": 1320,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "6",
+    "title": "Python Programming",
+    "slug":"Course-details",
+    "description": "Learn Python from scratch and advance to developing complex applications and automation scripts.",
+    "instructor": "Sarah Wilson",
+    "rating": 4.7,
+    "reviews": 2590,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "7",
+    "title": "Photography",
+    "slug":"Course-details",
+    "description": "Master the art of photography, from camera settings to composition and post-processing.",
+    "instructor": "David Miller",
+    "rating": 4.9,
+    "reviews": 1110,
+    "image": "/assets/images/course-thumbnail.png"
+  },
+  {
+    "id": "8",
+    "title": "Public Speaking",
+    "slug":"Course-details",
+    "description": "Enhance your communication skills and confidence to deliver compelling presentations and speeches.",
+    "instructor": "Laura Garcia",
+    "rating": 4.8,
+    "reviews": 1800,
+    "image": "/assets/images/course-thumbnail.png"
+  }
+]
