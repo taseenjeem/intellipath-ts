@@ -4,13 +4,8 @@ import ThemeController from "./ThemeController";
 import UserActionBtns from "./UserActionBtns";
 import CloseBtn from "./CloseBtn";
 import Logo from "../ui/Logo";
-import { ReactNode } from "react";
 
-interface NavbarProps {
-  children: ReactNode;
-}
-
-const Navbar = ({ children }: NavbarProps) => {
+const Navbar = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="drawer drawer-end">
       <input id="menu-contents" type="checkbox" className="drawer-toggle" />
