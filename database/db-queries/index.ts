@@ -9,3 +9,9 @@ export const getTopCourses = async () => {
     (module) => module.default
   );
 };
+
+export const getTestimonials = async () => {
+  return import("@/database/json/testimonials.json").then(
+    (module) => module.default
+  );
+};

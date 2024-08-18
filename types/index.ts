@@ -16,3 +16,14 @@ export interface ICourses {
   rating: number;
   reviews: number;
 }
+
+export interface ITestimonial {
+  id: string;
+  name: string;
+  avatar: string;
+  role: string;
+  course: string;
+  content: string;
+  rating: number;
+  date: string;
+}

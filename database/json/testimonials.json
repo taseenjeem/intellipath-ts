@@ -1,81 +1,90 @@
 [
   {
+    "id": "1",
     "name": "Alice Johnson",
     "role": "Student",
     "course": "Full-Stack Web Development",
-    "review": "I was absolutely blown away by the comprehensive coverage of full-stack web development at IntelliPath. The instructors' expertise and real-world examples made learning a breeze. From front-end frameworks to server-side technologies, I now feel confident in my ability to build complex web applications. IntelliPath truly sets the gold standard!",
+    "content": "I was absolutely blown away by the comprehensive coverage of full-stack web development at IntelliPath. The instructors' expertise and real-world examples made learning a breeze. From front-end frameworks to server-side technologies, I now feel confident in my ability to build complex web applications. IntelliPath truly sets the gold standard!",
     "rating": 5,
     "date": "2024-06-01",
     "avatar": "https://randomuser.me/api/portraits/women/1.jpg"
   },
   {
+    "id": "2",
     "name": "Robert Lee",
     "role": "Instructor",
     "course": "Data Science and Machine Learning",
-    "review": "Having taught at IntelliPath for a while now, I'm consistently impressed by the students' progress. The platform's focus on practical learning and hands-on projects is a game-changer. Whether it's wrangling data or training machine learning models, IntelliPath provides an excellent environment for mastering complex concepts.",
+    "content": "Having taught at IntelliPath for a while now, I'm consistently impressed by the students' progress. The platform's focus on practical learning and hands-on projects is a game-changer. Whether it's wrangling data or training machine learning models, IntelliPath provides an excellent environment for mastering complex concepts.",
     "rating": 4.9,
     "date": "2024-05-20",
     "avatar": "https://randomuser.me/api/portraits/men/2.jpg"
   },
   {
+    "id": "3",
     "name": "Maria Hernandez",
     "role": "Student",
     "course": "Digital Marketing",
-    "review": "The digital marketing course at IntelliPath was nothing short of fantastic! The case studies and real-world examples helped me bridge theory and practice, and the instructors' guidance was invaluable. I now feel equipped to create effective marketing campaigns.",
+    "content": "The digital marketing course at IntelliPath was nothing short of fantastic! The case studies and real-world examples helped me bridge theory and practice, and the instructors' guidance was invaluable. I now feel equipped to create effective marketing campaigns.",
     "rating": 4.8,
     "date": "2024-06-15",
     "avatar": "https://randomuser.me/api/portraits/women/3.jpg"
   },
   {
+    "id": "4",
     "name": "David Kim",
     "role": "Instructor",
     "course": "Python Programming",
-    "review": "Python is a great language to learn, and IntelliPath's course does it justice. I love seeing students' faces light up when they grasp a new concept! The practical exercises and coding challenges were especially helpful.",
+    "content": "Python is a great language to learn, and IntelliPath's course does it justice. I love seeing students' faces light up when they grasp a new concept! The practical exercises and coding challenges were especially helpful.",
     "rating": 4.7,
     "date": "2024-06-10",
     "avatar": "https://randomuser.me/api/portraits/men/4.jpg"
   },
   {
+    "id": "5",
     "name": "Samantha Brown",
     "role": "Student",
     "course": "Graphic Design",
-    "review": "I <3 the graphic design course! The instructors are super supportive, and the feedback on my projects was invaluable. Whether it's typography, color theory, or layout design, IntelliPath's program has been a creative journey.",
+    "content": "I <3 the graphic design course! The instructors are super supportive, and the feedback on my projects was invaluable. Whether it's typography, color theory, or layout design, IntelliPath's program has been a creative journey.",
     "rating": 4.9,
     "date": "2024-06-05",
     "avatar": "https://randomuser.me/api/portraits/women/5.jpg"
   },
   {
+    "id": "6",
     "name": "Michael Green",
     "role": "Instructor",
     "course": "Project Management",
-    "review": "I've had a blast teaching at IntelliPath! The platform's focus on real-world projects has been a game-changer for my students. Whether it's agile methodologies, stakeholder communication, or risk management, IntelliPath equips project managers with practical skills.",
+    "content": "I've had a blast teaching at IntelliPath! The platform's focus on real-world projects has been a game-changer for my students. Whether it's agile methodologies, stakeholder communication, or risk management, IntelliPath equips project managers with practical skills.",
     "rating": 4.8,
     "date": "2024-05-30",
     "avatar": "https://randomuser.me/api/portraits/men/6.jpg"
   },
   {
+    "id": "7",
     "name": "Linda Martinez",
     "role": "Student",
     "course": "Photography",
-    "review": "I took the photography course to improve my skills, and I'm thrilled with the results! The instructors were knowledgeable, patient, and encouraging. Whether it's composition, lighting, or post-processing, IntelliPath's photography program is top-notch.",
+    "content": "I took the photography course to improve my skills, and I'm thrilled with the results! The instructors were knowledgeable, patient, and encouraging. Whether it's composition, lighting, or post-processing, IntelliPath's photography program is top-notch.",
     "rating": 5,
     "date": "2024-06-12",
     "avatar": "https://randomuser.me/api/portraits/women/7.jpg"
   },
   {
+    "id": "8",
     "name": "James Wilson",
     "role": "Instructor",
     "course": "Public Speaking",
-    "review": "Public speaking can be intimidating, but IntelliPath's resources and support make it an enjoyable experience. I love seeing students gain confidence in their abilities. Whether it's persuasive techniques, body language, or overcoming stage fright, IntelliPath's public speaking course delivers.",
+    "content": "Public speaking can be intimidating, but IntelliPath's resources and support make it an enjoyable experience. I love seeing students gain confidence in their abilities. Whether it's persuasive techniques, body language, or overcoming stage fright, IntelliPath's public speaking course delivers.",
     "rating": 4.8,
     "date": "2024-06-08",
     "avatar": "https://randomuser.me/api/portraits/men/8.jpg"
   },
   {
+    "id": "9",
     "name": "Sophia Adams",
     "role": "Student",
     "course": "User Experience Design",
-    "review": "The user experience design course at IntelliPath exceeded my expectations! The hands-on projects and usability testing exercises were eye-opening. I now approach design with empathy and a user-centric mindset. IntelliPath truly prepares students for real-world UX challenges.",
+    "content": "The user experience design course at IntelliPath exceeded my expectations! The hands-on projects and usability testing exercises were eye-opening. I now approach design with empathy and a user-centric mindset. IntelliPath truly prepares students for real-world UX challenges.",
     "rating": 4.9,
     "date": "2024-06-20",
     "avatar": "https://randomuser.me/api/portraits/women/9.jpg"
