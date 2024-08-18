@@ -1,9 +1,11 @@
 import CategoryCard from "@/components/global/ui/CategoryCard";
 import Link from "next/link";
 import { getCategories } from "../../../../database/db-queries";
+import { ICategory } from "../../../../types";
 
 const CategoryList = async () => {
   const allCategories = await getCategories();
+
   return (
     <>
       <section className="container min-h-screen w-full mt-7 md:mt-28">
@@ -28,7 +30,7 @@ const CategoryList = async () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 w-full mt-5 md:mt-10">
-          {allCategories.map((item: any) => (
+          {allCategories.map((item: ICategory) => (
             <CategoryCard key={item.id} category={item} />
           ))}
         </div>
