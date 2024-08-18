@@ -4,7 +4,7 @@ import { getCategories } from "@/database/db-queries";
 import { ICategory } from "@/types";
 
 const CategoryList = async () => {
-  const allCategories = await getCategories();
+  const allCategories: ICategory[] = await getCategories();
 
   return (
     <>
