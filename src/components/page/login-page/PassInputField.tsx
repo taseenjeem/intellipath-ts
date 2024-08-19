@@ -1,8 +1,15 @@
 "use client";
+import { LoginFormInputs } from "@/types";
 import { useState } from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { PiEyeClosedDuotone, PiEyeDuotone } from "react-icons/pi";
 
-const PassInputField = ({ register, errors }) => {
+interface PasswordInputFieldProps {
+  register: UseFormRegister<LoginFormInputs>;
+  errors: FieldErrors<LoginFormInputs>;
+}
+
+const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

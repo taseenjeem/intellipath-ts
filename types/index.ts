@@ -27,3 +27,8 @@ export interface ITestimonial {
   rating: number;
   date: string;
 }
+
+export interface LoginFormInputs {
+  email: string;
+  password: string;
+}
