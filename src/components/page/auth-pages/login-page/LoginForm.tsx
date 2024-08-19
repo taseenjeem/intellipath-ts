@@ -5,7 +5,7 @@ import PassInputField from "./PassInputField";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { useState } from "react";
-import Logo from "../../global/ui/Logo";
+import Logo from "../../../global/ui/Logo";
 import { LoginFormInputs } from "@/types";
 
 const LoginForm = () => {

@@ -1,5 +1,5 @@
 import SocialAuth from "@/src/components/global/ui/SocialAuth";
-import LoginForm from "@/src/components/page/login-page/LoginForm";
+import LoginForm from "@/src/components/page/auth-pages/login-page/LoginForm";
 import Link from "next/link";
 
 export const metadata = {
