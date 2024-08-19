@@ -5,6 +5,7 @@ import { ThemeProvider } from "../../providers/ThemProvider";
 import Footer from "../components/global/Footer/Footer";
 import Navbar from "../components/global/Navigation/Navbar";
 import ReduxProvider from "@/providers/ReduxProvider";
+import { ToastContainer } from "react-toastify";
 
 const fontStyle = Barlow({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <ThemeProvider>
           <ReduxProvider>
             <Navbar>
+              <ToastContainer position="top-center" theme="colored" />
               {children}
               <Footer />
             </Navbar>
