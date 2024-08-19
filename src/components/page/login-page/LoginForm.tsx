@@ -9,7 +9,7 @@ import Logo from "../../global/ui/Logo";
 import { LoginFormInputs } from "@/types";
 
 const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const methods = useForm<LoginFormInputs>();
 
   const handleLogin: SubmitHandler<LoginFormInputs> = async (data) => {
