@@ -10,7 +10,7 @@ interface PasswordInputFieldProps {
 }
 
 const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
     <>
