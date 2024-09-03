@@ -1,6 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 
-const MONGO_URI: string | undefined = process.env.MONGODB_URI;
+const MONGODB_URI: string | undefined = process.env.MONGODB_URI;
 
 interface CachedConnection {
   connection?: Mongoose;
@@ -10,9 +10,9 @@ interface CachedConnection {
 const cached: CachedConnection = {};
 
 const connectMongodb = async (): Promise<Mongoose> => {
-  if (!MONGO_URI) {
+  if (!MONGODB_URI) {
     throw new Error(
-      "Please define the MONGO_URI environment variable inside .env"
+      "Please define the MONGODB_URI environment variable inside .env"
     );
   }
 
@@ -25,7 +25,7 @@ const connectMongodb = async (): Promise<Mongoose> => {
       bufferCommands: false,
       dbName: process.env.DB_NAME,
     };
-    cached.promise = mongoose.connect(MONGO_URI, opts);
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
   }
 
   try {
