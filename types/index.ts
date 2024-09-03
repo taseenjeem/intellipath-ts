@@ -49,12 +49,16 @@ export interface ILearnerInfo {
   firstName: string;
   lastName: string;
   username: string;
-  gender: string;
-  birthDate: string;
-  country: string;
+  password: string;
+  profileImageUrl?: string | null;
+  gender?: string | null;
+  birthDate?: string | null;
+  country?: string | null;
   email: string;
-  phone: string;
-  address: string;
-  role: string;
-  courses: [];
+  phone?: string | null;
+  address?: string | null;
+  role?: string;
+  courses?: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }

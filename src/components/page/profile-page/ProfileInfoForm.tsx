@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import { ICountry, ILearnerInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
@@ -62,7 +61,7 @@ const ProfileInfoForm = () => {
               name="firstName"
               type="text"
               className="input input-bordered"
-              value={formData.firstName}
+              value={formData.firstName ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -76,7 +75,7 @@ const ProfileInfoForm = () => {
               name="lastName"
               type="text"
               className="input input-bordered"
-              value={formData.lastName}
+              value={formData.lastName ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -90,7 +89,7 @@ const ProfileInfoForm = () => {
               name="username"
               type="text"
               className="input input-bordered"
-              value={formData.username}
+              value={formData.username ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -103,7 +102,7 @@ const ProfileInfoForm = () => {
               id="gender"
               name="gender"
               className="select select-bordered"
-              value={formData.gender}
+              value={formData.gender ?? ""}
               onChange={handleChange}
             >
               <option disabled value="">
@@ -124,7 +123,7 @@ const ProfileInfoForm = () => {
               name="birthDate"
               type="date"
               className="input input-bordered"
-              value={formData.birthDate}
+              value={formData.birthDate ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -137,7 +136,7 @@ const ProfileInfoForm = () => {
               id="country"
               name="country"
               className="select select-bordered"
-              value={formData.country}
+              value={formData.country ?? ""}
               onChange={handleChange}
             >
               <option value="" disabled>
@@ -160,7 +159,7 @@ const ProfileInfoForm = () => {
               name="email"
               type="email"
               className="input input-bordered"
-              value={formData.email}
+              value={formData.email ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -173,9 +172,8 @@ const ProfileInfoForm = () => {
               id="phone"
               name="phone"
               type="number"
-              min={0}
               className="input input-bordered"
-              value={formData.phone}
+              value={formData.phone ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -190,7 +188,7 @@ const ProfileInfoForm = () => {
             name="address"
             type="text"
             className="input input-bordered"
-            value={formData.address}
+            value={formData.address ?? ""}
             onChange={handleChange}
           />
         </div>

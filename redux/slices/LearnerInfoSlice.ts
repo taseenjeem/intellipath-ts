@@ -5,6 +5,8 @@ const initialState: ILearnerInfo = {
   firstName: "",
   lastName: "",
   username: "",
+  password: "",
+  profileImageUrl: "",
   gender: "",
   birthDate: "",
   country: "",
