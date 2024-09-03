@@ -45,7 +45,8 @@ export interface ICountry {
   code: string;
 }
 
-export interface IFormData {
+export interface ILearnerInfo {
+  _id: string;
   name: string;
   username: string;
   gender: string;
@@ -54,4 +55,5 @@ export interface IFormData {
   email: string;
   phone: string;
   address: string;
+  courses: [];
 }
