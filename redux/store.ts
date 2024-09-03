@@ -34,7 +34,7 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [],
+  whitelist: ["learnerInfo"],
 };
 
 const rootReducer = combineReducers({ learnerInfo: learnerInfoReducer });
