@@ -52,17 +52,31 @@ const ProfileInfoForm = () => {
     <div className="bg-base-300 card card-compact mt-5 md:mt-16">
       <form onSubmit={handleSubmit} className="card-body">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
-          {/* Name Input */}
+          {/* First Name Input */}
           <div className="form-control">
             <label className="label" htmlFor="name">
-              <span className="label-text">Full Name</span>
+              <span className="label-text">First Name</span>
             </label>
             <input
-              id="name"
-              name="name"
+              id="firstName"
+              name="firstName"
               type="text"
               className="input input-bordered"
-              value={formData.name}
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Last Name Input */}
+          <div className="form-control">
+            <label className="label" htmlFor="name">
+              <span className="label-text">Last Name</span>
+            </label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              className="input input-bordered"
+              value={formData.lastName}
               onChange={handleChange}
             />
           </div>
@@ -165,20 +179,20 @@ const ProfileInfoForm = () => {
               onChange={handleChange}
             />
           </div>
-          {/* Address Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="address">
-              <span className="label-text">Your Address</span>
-            </label>
-            <input
-              id="address"
-              name="address"
-              type="text"
-              className="input input-bordered"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </div>
+        </div>
+        {/* Address Input */}
+        <div className="form-control">
+          <label className="label" htmlFor="address">
+            <span className="label-text">Your Address</span>
+          </label>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            className="input input-bordered"
+            value={formData.address}
+            onChange={handleChange}
+          />
         </div>
         <div className="card-actions justify-end mt-5">
           {isLoading ? (

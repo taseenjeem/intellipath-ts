@@ -2,8 +2,8 @@ import { ILearnerInfo } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: ILearnerInfo = {
-  _id: "",
-  name: "",
+  firstName: "",
+  lastName: "",
   username: "",
   gender: "",
   birthDate: "",

@@ -46,8 +46,8 @@ export interface ICountry {
 }
 
 export interface ILearnerInfo {
-  _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   username: string;
   gender: string;
   birthDate: string;
