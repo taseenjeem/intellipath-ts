@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ICountry } from "@/types";
+import { ICountry, ILearnerInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { updateLearnerInfo } from "@/redux/slices/LearnerInfoSlice";
 
@@ -12,7 +12,8 @@ const getCountries = async () => {
 
 const ProfileInfoForm = () => {
   const dispatch = useAppDispatch();
-  const formData = useAppSelector((state: RootState) => state.learnerInfo);
+  const savedFormData = useAppSelector((state: RootState) => state.learnerInfo);
+  const [formData, setFormData] = useState<ILearnerInfo>(savedFormData);
   const [allCountries, setAllCountries] = useState<ICountry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -28,7 +29,10 @@ const ProfileInfoForm = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    dispatch(updateLearnerInfo({ [name]: value }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +40,7 @@ const ProfileInfoForm = () => {
     setIsLoading(true);
 
     try {
-      console.log(formData);
+      dispatch(updateLearnerInfo(formData));
     } catch (error) {
       console.log(error);
     } finally {
