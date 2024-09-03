@@ -6,6 +6,7 @@ import Footer from "../components/global/Footer/Footer";
 import Navbar from "../components/global/Navigation/Navbar";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import connectMongodb from "@/database/services/connectMongodb";
 
 const fontStyle = Barlow({

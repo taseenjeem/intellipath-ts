@@ -7,15 +7,26 @@ import PassInputField from "./PassInputField";
 import { toast } from "react-toastify";
 import Logo from "@/src/components/global/ui/Logo";
 import { IRegisterFormInputs } from "@/types";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const methods = useForm<IRegisterFormInputs>();
+  const router = useRouter();
 
   const handleRegister: SubmitHandler<IRegisterFormInputs> = async (data) => {
     setIsLoading(true);
     try {
-      console.log(data);
+      const response = await fetch(`/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application" },
+        body: JSON.stringify(data),
+      });
+
+      if (response.status === 201) {
+        toast.success("Registration successful! Please login");
+        router.push(`/auth/login`);
+      }
     } catch (error: any) {
       toast.error(error.message);
       methods.setError("root.serverError", { message: error.message });

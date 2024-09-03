@@ -21,6 +21,6 @@ const userSchema: Schema<ILearnerInfo> = new Schema(
 );
 
 const User: Model<ILearnerInfo> =
-  mongoose.models.Users || model<ILearnerInfo>("Users", userSchema);
+  mongoose.models.users || model<ILearnerInfo>("users", userSchema);
 
 export default User;
