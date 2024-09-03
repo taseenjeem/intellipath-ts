@@ -1,4 +1,5 @@
 "use client";
+import { ICountry, IFormData } from "@/types";
 import { useState, useEffect } from "react";
 
 const getCountries = async () => {
@@ -8,7 +9,7 @@ const getCountries = async () => {
 };
 
 const ProfileInfoForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<IFormData>({
     name: "",
     username: "",
     gender: "",
@@ -19,9 +20,9 @@ const ProfileInfoForm = () => {
     address: "",
   });
 
-  const [allCountries, setAllCountries] = useState([]);
+  const [allCountries, setAllCountries] = useState<ICountry[]>([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -31,7 +32,9 @@ const ProfileInfoForm = () => {
     fetchCountries();
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -39,7 +42,7 @@ const ProfileInfoForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 

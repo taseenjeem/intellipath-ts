@@ -44,3 +44,14 @@ export interface ICountry {
   name: string;
   code: string;
 }
+
+export interface IFormData {
+  name: string;
+  username: string;
+  gender: string;
+  birthDate: string;
+  country: string;
+  email: string;
+  phone: string;
+  address: string;
+}
