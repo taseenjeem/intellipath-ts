@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { ICountry, ILearnerInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
