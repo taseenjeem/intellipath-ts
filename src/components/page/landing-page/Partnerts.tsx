@@ -36,7 +36,7 @@ const companies = [
 
 const Partners = () => {
   return (
-    <section className="w-full wrapper mt-7 md:mt-28">
+    <section className="container w-full mt-7 md:mt-28">
       <div className="md:flex md:items-end md:justify-between">
         <div className="max-w-2xl">
           <h2 className="lg:text-5xl text-3xl text-primary uppercase font-bold">
