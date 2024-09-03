@@ -15,6 +15,8 @@ const initialState: ILearnerInfo = {
   address: "",
   role: "",
   courses: [],
+  createdAt: null,
+  updatedAt: null,
 };
 
 const learnerInfoSlice = createSlice({
