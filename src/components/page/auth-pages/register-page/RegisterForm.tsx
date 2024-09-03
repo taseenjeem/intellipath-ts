@@ -6,13 +6,13 @@ import EmailInputField from "./EmailInputField";
 import PassInputField from "./PassInputField";
 import { toast } from "react-toastify";
 import Logo from "@/src/components/global/ui/Logo";
-import { RegisterFormInputs } from "@/types";
+import { IRegisterFormInputs } from "@/types";
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const methods = useForm<RegisterFormInputs>();
+  const methods = useForm<IRegisterFormInputs>();
 
-  const handleRegister: SubmitHandler<RegisterFormInputs> = async (data) => {
+  const handleRegister: SubmitHandler<IRegisterFormInputs> = async (data) => {
     setIsLoading(true);
     try {
       console.log(data);
