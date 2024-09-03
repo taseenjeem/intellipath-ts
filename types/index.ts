@@ -55,5 +55,6 @@ export interface ILearnerInfo {
   email: string;
   phone: string;
   address: string;
+  role: string;
   courses: [];
 }

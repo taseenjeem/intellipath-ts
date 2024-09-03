@@ -11,6 +11,7 @@ const initialState: ILearnerInfo = {
   email: "",
   phone: "",
   address: "",
+  role: "",
   courses: [],
 };
 
