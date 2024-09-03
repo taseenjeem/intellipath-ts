@@ -17,7 +17,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         try {
-          const existingUser = await User.findOne({ email: credentials.email });
+          const existingUser = await User.findOne({
+            email: credentials?.email,
+          });
 
           if (existingUser && existingUser.password) {
             const verifyPassword = await bcrypt.compare(
