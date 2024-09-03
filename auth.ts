@@ -17,16 +17,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         try {
-          const user = await User.findOne({ email: credentials.email });
+          const existingUser = await User.findOne({ email: credentials.email });
 
-          if (user && user.password) {
+          if (existingUser && existingUser.password) {
             const verifyPassword = await bcrypt.compare(
               credentials.password,
-              user.password
+              existingUser.password
             );
 
             if (verifyPassword) {
-              return user;
+              return existingUser;
             } else {
               throw new Error("Invalid password. Try again.");
             }
