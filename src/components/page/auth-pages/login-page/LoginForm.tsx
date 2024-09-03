@@ -6,13 +6,13 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../global/ui/Logo";
-import { LoginFormInputs } from "@/types";
+import { ILoginFormInputs } from "@/types";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const methods = useForm<LoginFormInputs>();
+  const methods = useForm<ILoginFormInputs>();
 
-  const handleLogin: SubmitHandler<LoginFormInputs> = async (data) => {
+  const handleLogin: SubmitHandler<ILoginFormInputs> = async (data) => {
     setIsLoading(true);
     try {
       console.log(data);

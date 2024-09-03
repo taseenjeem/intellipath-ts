@@ -28,14 +28,19 @@ export interface ITestimonial {
   date: string;
 }
 
-export interface LoginFormInputs {
+export interface ILoginFormInputs {
   email: string;
   password: string;
 }
 
-export interface RegisterFormInputs {
+export interface IRegisterFormInputs {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+}
+
+export interface ICountry {
+  name: string;
+  code: string;
 }
