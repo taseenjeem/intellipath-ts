@@ -1,7 +1,7 @@
 import { ILearnerInfo } from "@/types";
 import mongoose, { Schema, Model, model } from "mongoose";
 
-const userSchema: Schema<ILearnerInfo> = new Schema(
+const learnerSchema: Schema<ILearnerInfo> = new Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -20,7 +20,7 @@ const userSchema: Schema<ILearnerInfo> = new Schema(
   { timestamps: true }
 );
 
-const User: Model<ILearnerInfo> =
-  mongoose.models.users || model<ILearnerInfo>("users", userSchema);
+const Learner: Model<ILearnerInfo> =
+  mongoose.models.users || model<ILearnerInfo>("users", learnerSchema);
 
-export default User;
+export default Learner;
