@@ -2,6 +2,7 @@ import { IUserInfo } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IUserInfo = {
+  _id: "",
   firstName: "",
   lastName: "",
   username: "",

@@ -52,6 +52,7 @@ export interface ICredentialLoginFormData {
 }
 
 export interface IUserInfo {
+  _id: string;
   firstName: string;
   lastName: string;
   username: string;

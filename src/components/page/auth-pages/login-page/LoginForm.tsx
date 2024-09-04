@@ -7,13 +7,16 @@ import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../global/ui/Logo";
 import { ILoginFormInputs } from "@/types";
-import { credentialLogin } from "@/database/server-actions";
+import { credentialLogin, getUserByEmail } from "@/database/server-actions";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/store";
+import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const methods = useForm<ILoginFormInputs>();
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleLogin: SubmitHandler<ILoginFormInputs> = async (data) => {
     setIsLoading(true);
@@ -21,6 +24,12 @@ const LoginForm = () => {
       const response = await credentialLogin(data);
 
       if (response.success) {
+        const userInfo = await getUserByEmail(data);
+
+        if (userInfo) {
+          dispatch(updateUserInfo(userInfo));
+        }
+
         toast.success(response.message);
         router.push("/");
       } else {
