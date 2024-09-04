@@ -99,3 +99,8 @@ export interface IInstructorInfo {
   createdAt?: Date | null;
   updatedAt?: Date | null;
 }
+
+export interface ICredentialLoginFormData {
+  email: string;
+  password: string;
+}

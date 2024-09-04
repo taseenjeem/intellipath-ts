@@ -7,17 +7,28 @@ import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../global/ui/Logo";
 import { ILoginFormInputs } from "@/types";
+import { credentialLogin } from "@/database/server-actions";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const methods = useForm<ILoginFormInputs>();
+  const router = useRouter();
 
   const handleLogin: SubmitHandler<ILoginFormInputs> = async (data) => {
     setIsLoading(true);
     try {
-      console.log(data);
+      const response = await credentialLogin(data);
+
+      if (response.success) {
+        toast.success(response.message);
+        router.push("/");
+      } else {
+        toast.error("Invalid credentials. Try again!");
+        methods.setError("root.serverError", { message: response.message });
+      }
     } catch (error: any) {
-      toast.error(error.message);
+      toast.error("An error occurred while processing your request.");
       methods.setError("root.serverError", { message: error.message });
     } finally {
       setIsLoading(false);
