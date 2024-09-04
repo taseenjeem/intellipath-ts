@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
-import User from "./database/db-models/learnerModel";
 import bcrypt from "bcryptjs";
+import User from "./database/db-models/userModel";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: { strategy: "jwt" },
@@ -20,6 +20,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const existingUser = await User.findOne({
             email: credentials?.email,
           });
+
+          if (!existingUser) {
+            throw new Error("User email is not found.");
+          }
 
           if (existingUser && existingUser.password) {
             const verifyPassword = await bcrypt.compare(
