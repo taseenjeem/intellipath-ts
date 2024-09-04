@@ -1,5 +1,5 @@
 import { IUserInfo } from "@/types";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { model, Model, Schema } from "mongoose";
 
 const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
   {
@@ -46,6 +46,7 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model<IUserInfo>("User", UserSchema);
+const User: Model<IUserInfo> =
+  mongoose.models.users || model<IUserInfo>("users", UserSchema);
 
 export default User;
