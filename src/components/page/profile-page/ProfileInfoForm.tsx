@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { ICountry, ILearnerInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import { updateLearnerInfo } from "@/redux/slices/UserInfoSlice";
+import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -40,7 +40,7 @@ const ProfileInfoForm = () => {
     setIsLoading(true);
 
     try {
-      dispatch(updateLearnerInfo(formData));
+      dispatch(updateUserInfo(formData));
     } catch (error) {
       console.log(error);
     } finally {
