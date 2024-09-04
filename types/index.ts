@@ -63,3 +63,39 @@ export interface ILearnerInfo {
   createdAt?: Date | null;
   updatedAt?: Date | null;
 }
+
+export interface IInstructorInfo {
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  profileImageUrl?: string | null;
+  gender?: string | null;
+  birthDate?: string | null;
+  country?: string | null;
+  email: string;
+  phone?: string | null;
+  address?: string | null;
+  role?: string;
+  expertise: string[];
+  courses?: string[];
+  biography?: string | null;
+  education?: {
+    degree: string;
+    institution: string;
+    yearOfCompletion: string;
+  }[];
+  teachingExperience?: number | null;
+  certifications?: {
+    title: string;
+    issuer: string;
+    dateOfIssue: string;
+  }[];
+  socialLinks?: {
+    linkedin?: string;
+    twitter?: string;
+    website?: string;
+  };
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
+}
