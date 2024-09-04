@@ -1,9 +1,9 @@
-import { ILoginFormInputs } from "@/types";
+import { ICredentialLoginFormData } from "@/types";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface EmailInputFieldProps {
-  register: UseFormRegister<ILoginFormInputs>;
-  errors: FieldErrors<ILoginFormInputs>;
+  register: UseFormRegister<ICredentialLoginFormData>;
+  errors: FieldErrors<ICredentialLoginFormData>;
 }
 
 const EmailInputField = ({ register, errors }: EmailInputFieldProps) => {

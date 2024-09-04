@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../global/ui/Logo";
-import { ILoginFormInputs } from "@/types";
+import { ICredentialLoginFormData } from "@/types";
 import { credentialLogin, getUserByEmail } from "@/database/server-actions";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/store";
@@ -14,11 +14,11 @@ import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const methods = useForm<ILoginFormInputs>();
+  const methods = useForm<ICredentialLoginFormData>();
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const handleLogin: SubmitHandler<ILoginFormInputs> = async (data) => {
+  const handleLogin: SubmitHandler<ICredentialLoginFormData> = async (data) => {
     setIsLoading(true);
     try {
       const response = await credentialLogin(data);
