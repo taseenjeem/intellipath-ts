@@ -13,6 +13,7 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
     return {
       success: true,
       message: "You have successfully logged in.",
+      userEmail: formData.email,
     };
   } catch (error: any) {
     console.error(error);
