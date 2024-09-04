@@ -10,7 +10,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import learnerInfoReducer from "./slices/LearnerInfoSlice";
+import userInfoReducer from "./slices/UserInfoSlice";
 
 const createNoopStorage = () => {
   return {
@@ -34,10 +34,10 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["learnerInfo"],
+  whitelist: ["userInfo"],
 };
 
-const rootReducer = combineReducers({ learnerInfo: learnerInfoReducer });
+const rootReducer = combineReducers({ userInfo: userInfoReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -19,7 +19,7 @@ const initialState: ILearnerInfo = {
   updatedAt: null,
 };
 
-const learnerInfoSlice = createSlice({
+const userInfoSlice = createSlice({
   name: "learnerInfo",
   initialState,
   reducers: {
@@ -33,5 +33,5 @@ const learnerInfoSlice = createSlice({
   },
 });
 
-export const { updateLearnerInfo, resetLearnerInfo } = learnerInfoSlice.actions;
-export default learnerInfoSlice.reducer;
+export const { updateLearnerInfo, resetLearnerInfo } = userInfoSlice.actions;
+export default userInfoSlice.reducer;

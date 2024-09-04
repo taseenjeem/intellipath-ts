@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { ICountry, ILearnerInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import { updateLearnerInfo } from "@/redux/slices/LearnerInfoSlice";
+import { updateLearnerInfo } from "@/redux/slices/UserInfoSlice";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -12,7 +12,7 @@ const getCountries = async () => {
 
 const ProfileInfoForm = () => {
   const dispatch = useAppDispatch();
-  const savedFormData = useAppSelector((state: RootState) => state.learnerInfo);
+  const savedFormData = useAppSelector((state: RootState) => state.userInfo);
   const [formData, setFormData] = useState<ILearnerInfo>(savedFormData);
   const [allCountries, setAllCountries] = useState<ICountry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
