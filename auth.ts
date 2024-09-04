@@ -13,7 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         if (typeof credentials.password !== "string") {
-          throw new Error("Invalid password format.");
+          throw new Error("Invalid password format. Password must be a string");
         }
 
         try {
