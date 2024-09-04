@@ -22,14 +22,11 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await credentialLogin(data);
-
       if (response.success) {
         const userInfo = await getUserByEmail(data);
-
         if (userInfo) {
           dispatch(updateUserInfo(userInfo));
         }
-
         toast.success(response.message);
         router.push("/");
       } else {
