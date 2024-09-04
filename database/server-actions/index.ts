@@ -4,20 +4,16 @@ import { ICredentialLoginFormData } from "@/types";
 
 export const credentialLogin = async (formData: ICredentialLoginFormData) => {
   try {
-    const response = await signIn("credentials", {
+    await signIn("credentials", {
       email: formData.email,
       password: formData.password,
       redirect: false,
     });
 
-    if (response?.error) {
-      return {
-        success: false,
-        message: response.error || "Login failed",
-      };
-    } else {
-      return { success: true, message: "Login successful!" };
-    }
+    return {
+      success: true,
+      message: "You have successfully logged in.",
+    };
   } catch (error: any) {
     console.error(error);
     return {
