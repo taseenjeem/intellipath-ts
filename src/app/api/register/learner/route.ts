@@ -1,4 +1,4 @@
-import Learner from "@/database/db-models/learnerModel";
+import User from "@/database/db-models/userModel";
 import connectMongodb from "@/database/services/connectMongodb";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
@@ -14,20 +14,25 @@ export const POST = async (request: NextRequest) => {
 
   let username = baseUsername;
 
-  let userExists = await Learner.exists({ username });
+  let userExists = await User.exists({ username });
 
   while (userExists) {
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     username = `${baseUsername}${randomSuffix}`;
-    userExists = await Learner.exists({ username });
+    userExists = await User.exists({ username });
   }
 
   const hashedPassword = await bcrypt.hash(learnerInfo.password, 10);
 
-  const newUser = { ...learnerInfo, username, password: hashedPassword };
+  const newUser = {
+    ...learnerInfo,
+    username,
+    role: "learner",
+    password: hashedPassword,
+  };
 
   try {
-    await Learner.create(newUser);
+    await User.create(newUser);
     return new NextResponse("User created successfully", { status: 201 });
   } catch (err: unknown) {
     if (err instanceof Error) {

@@ -17,7 +17,7 @@ const RegisterForm = () => {
   const handleRegister: SubmitHandler<IRegisterFormInputs> = async (data) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/register`, {
+      const response = await fetch(`/api/register/learner`, {
         method: "POST",
         headers: { "Content-Type": "application" },
         body: JSON.stringify(data),

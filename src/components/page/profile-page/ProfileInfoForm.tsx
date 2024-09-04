@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ICountry, ILearnerInfo } from "@/types";
+import { ICountry, IUserInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
@@ -13,7 +13,7 @@ const getCountries = async () => {
 const ProfileInfoForm = () => {
   const dispatch = useAppDispatch();
   const savedFormData = useAppSelector((state: RootState) => state.userInfo);
-  const [formData, setFormData] = useState<ILearnerInfo>(savedFormData);
+  const [formData, setFormData] = useState<IUserInfo>(savedFormData);
   const [allCountries, setAllCountries] = useState<ICountry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
