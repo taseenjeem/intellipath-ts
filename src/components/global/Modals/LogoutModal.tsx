@@ -1,13 +1,11 @@
 "use client";
 import { resetUserInfo } from "@/redux/slices/UserInfoSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useAppDispatch } from "@/redux/store";
 import { signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 
 const LogoutModal = () => {
   const dispatch = useAppDispatch();
-  const authData = useAppSelector((state) => state.userInfo);
-  const fullName = authData?.firstName + " " + authData?.lastName;
 
   const closeModal = () => {
     const logoutModal = document.getElementById(
@@ -33,8 +31,8 @@ const LogoutModal = () => {
             Are you sure you want to logout?
           </h3>
           <p className="py-4">
-            {fullName}, Your learning journey will be paused, but you can always
-            resume anytime. See you soon!
+            Your learning journey will be paused, but you can always resume
+            anytime. See you soon!
           </p>
           <div className="flex justify-end gap-5">
             <button onClick={logout} className="btn btn-primary">
