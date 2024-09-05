@@ -4,11 +4,11 @@ import EmailInputField from "./EmailInputField";
 import PassInputField from "./PassInputField";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../../global/ui/Logo";
 import { ICredentialLoginFormData } from "@/types";
 import { credentialLogin, getUserByEmail } from "@/database/server-actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
@@ -17,6 +17,17 @@ const LoginForm = () => {
   const methods = useForm<ICredentialLoginFormData>();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const message = searchParams.get("message");
+    if (message === "login_required") {
+      toast.warn("Access denied. Please login.");
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.delete("message");
+      router.replace(currentUrl.toString());
+    }
+  }, [searchParams, router]);
 
   const handleLogin: SubmitHandler<ICredentialLoginFormData> = async (data) => {
     setIsLoading(true);

@@ -13,7 +13,10 @@ export default auth((req) => {
     nextUrl.pathname === ROOT;
 
   if (!isAuthenticated && !isPublicRoute) {
-    return Response.redirect(new URL(LOGIN, nextUrl));
+    const loginUrl = new URL(LOGIN, nextUrl);
+    loginUrl.searchParams.set("message", "login_required");
+
+    return Response.redirect(loginUrl);
   }
 });
 
