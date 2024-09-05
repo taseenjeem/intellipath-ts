@@ -28,15 +28,28 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   return (
     <>
       {authData && session ? (
-        <div className="avatar">
-          <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
-            <Image
-              width={32}
-              height={32}
-              src="https://randomuser.me/api/portraits/men/8.jpg"
-              alt="Profile"
-            />
-          </div>
+        <div className="dropdown dropdown-end">
+          <button tabIndex={0} className="avatar">
+            <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
+              <Image
+                width={32}
+                height={32}
+                src="https://randomuser.me/api/portraits/men/8.jpg"
+                alt="Profile"
+              />
+            </div>
+          </button>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 border border-primary rounded-box z-[1] w-52 p-2 mt-5 shadow"
+          >
+            <li>
+              <Link href={`/profile/${authData.username}`}>My Profile</Link>
+            </li>
+            <li>
+              <a>Log Out</a>
+            </li>
+          </ul>
         </div>
       ) : (
         <Link

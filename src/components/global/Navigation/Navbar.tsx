@@ -43,7 +43,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
               </label>
             </div>
             <div className="flex-none hidden items-center lg:block">
-              <ul className="menu menu-horizontal items-center text-primary">
+              <ul className="flex items-center text-primary">
                 {/* Navbar menu content here */}
                 <li>
                   <ActiveLink href={`/features`}>Features</ActiveLink>
@@ -66,7 +66,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
                 <li>
                   <ActiveLink href={`#`}>Our Community</ActiveLink>
                 </li>
-                <li>
+                <li className="mx-5">
                   <UserActionBtns />
                 </li>
                 <li>
