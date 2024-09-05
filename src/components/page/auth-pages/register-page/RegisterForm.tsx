@@ -19,13 +19,15 @@ const RegisterForm = () => {
     try {
       const response = await fetch(`/api/register/learner`, {
         method: "POST",
-        headers: { "Content-Type": "application" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       if (response.status === 201) {
         toast.success("Registration successful! Please login");
         router.push(`/auth/login`);
+      } else if (response.status === 400) {
+        toast.warning("Email already exists. Try another email");
       }
     } catch (error: any) {
       toast.error(error.message);
