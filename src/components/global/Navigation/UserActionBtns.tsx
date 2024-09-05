@@ -25,6 +25,15 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
     }
   };
 
+  const openLogoutModal = () => {
+    const logoutModal = document.getElementById(
+      "logout-modal"
+    ) as HTMLDialogElement | null;
+    if (logoutModal) {
+      logoutModal.showModal();
+    }
+  };
+
   return (
     <>
       {authData && session ? (
@@ -47,7 +56,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
               <Link href={`/profile/${authData.username}`}>My Profile</Link>
             </li>
             <li>
-              <a>Log Out</a>
+              <button onClick={openLogoutModal}>Log Out</button>
             </li>
           </ul>
         </div>
