@@ -66,7 +66,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
                 <li>
                   <ActiveLink href={`#`}>Our Community</ActiveLink>
                 </li>
-                <li className="mx-5">
+                <li>
                   <UserActionBtns />
                 </li>
                 <li>
