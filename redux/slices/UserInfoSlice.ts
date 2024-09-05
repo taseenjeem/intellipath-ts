@@ -37,8 +37,9 @@ const userInfoSlice = createSlice({
     updateUserInfo: (state, action: PayloadAction<Partial<IUserInfo>>) => {
       return { ...state, ...action.payload };
     },
+    resetUserInfo: () => initialState,
   },
 });
 
-export const { updateUserInfo } = userInfoSlice.actions;
+export const { updateUserInfo, resetUserInfo } = userInfoSlice.actions;
 export default userInfoSlice.reducer;
