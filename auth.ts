@@ -3,7 +3,12 @@ import CredentialProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "./database/db-models/userModel";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  signIn,
+  signOut,
+  auth,
+} = NextAuth({
   session: { strategy: "jwt" },
   providers: [
     CredentialProvider({

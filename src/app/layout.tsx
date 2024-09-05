@@ -8,6 +8,7 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import connectMongodb from "@/database/services/connectMongodb";
+import { SessionProvider } from "next-auth/react";
 
 const fontStyle = Barlow({
   subsets: ["latin"],
@@ -31,13 +32,15 @@ export default async function RootLayout({
     <html lang="en">
       <body className={fontStyle.className}>
         <ThemeProvider>
-          <ReduxProvider>
-            <Navbar>
-              <ToastContainer position="top-center" theme="colored" />
-              {children}
-              <Footer />
-            </Navbar>
-          </ReduxProvider>
+          <SessionProvider>
+            <ReduxProvider>
+              <Navbar>
+                <ToastContainer position="top-center" theme="colored" />
+                {children}
+                <Footer />
+              </Navbar>
+            </ReduxProvider>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
