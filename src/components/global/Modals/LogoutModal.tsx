@@ -26,7 +26,7 @@ const LogoutModal = () => {
   return (
     <>
       <dialog id="logout-modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box border border-primary">
+        <div className="modal-box">
           <h3 className="font-bold text-2xl text-primary">
             Are you sure you want to logout?
           </h3>
