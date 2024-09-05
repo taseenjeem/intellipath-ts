@@ -26,10 +26,10 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
   }
 };
 
-export const getUserByEmail = async (credentials: ICredentialLoginFormData) => {
+export const getUserByEmail = async (email: string) => {
   try {
     await connectMongodb();
-    const user = await User.findOne({ email: credentials.email }).lean();
+    const user = await User.findOne({ email }).lean();
     return user;
   } catch (error) {
     console.error("Error finding user by email:", error);
