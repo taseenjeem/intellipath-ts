@@ -26,9 +26,9 @@ const LoginForm = () => {
         const userInfo = await getUserByEmail(data);
         if (userInfo) {
           dispatch(updateUserInfo(userInfo));
+          toast.success(response.message);
+          router.push("/");
         }
-        toast.success(response.message);
-        router.push("/");
       } else {
         toast.error("Invalid credentials. Try again!");
         methods.setError("root.serverError", { message: response.message });

@@ -2,6 +2,7 @@ import { IUserInfo } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IUserInfo = {
+  status: false,
   _id: "",
   firstName: "",
   lastName: "",
@@ -35,7 +36,7 @@ const userInfoSlice = createSlice({
   initialState,
   reducers: {
     updateUserInfo: (state, action: PayloadAction<Partial<IUserInfo>>) => {
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, status: true };
     },
     resetUserInfo: () => initialState,
   },

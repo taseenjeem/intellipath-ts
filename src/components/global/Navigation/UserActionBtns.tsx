@@ -1,6 +1,5 @@
 "use client";
 import { useAppSelector } from "@/redux/store";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,7 +11,6 @@ interface IUserActionBtnsProps {
 const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   const pathName = usePathname();
   const isActive = pathName.includes("/auth");
-  const { data: session } = useSession();
   const authData = useAppSelector((state) => state.userInfo);
 
   const closeDrawer = () => {
@@ -36,7 +34,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
 
   return (
     <>
-      {authData && session ? (
+      {authData.status ? (
         <div className="dropdown dropdown-end">
           <button tabIndex={0} className="avatar">
             <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
