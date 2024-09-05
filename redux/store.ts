@@ -1,6 +1,6 @@
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import {
   FLUSH,
   PAUSE,
@@ -10,7 +10,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import UserSliceReducer from "./slices/userSlices";
+import userInfoReducer from "./slices/UserInfoSlice";
 
 const createNoopStorage = () => {
   return {
@@ -34,10 +34,10 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [],
+  whitelist: ["userInfo"],
 };
 
-const rootReducer = combineReducers({ users: UserSliceReducer });
+const rootReducer = combineReducers({ userInfo: userInfoReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -54,5 +54,6 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;

@@ -43,7 +43,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
               </label>
             </div>
             <div className="flex-none hidden items-center lg:block">
-              <ul className="menu menu-horizontal items-center text-primary">
+              <ul className="flex items-center justify-center text-primary">
                 {/* Navbar menu content here */}
                 <li>
                   <ActiveLink href={`/features`}>Features</ActiveLink>
@@ -123,10 +123,10 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
             </ActiveLink>
           </li>
           <li>
-            <UserActionBtns isSmallDevice={true} />
+            <ThemeController />
           </li>
           <li>
-            <ThemeController />
+            <UserActionBtns isSmallDevice={true} />
           </li>
         </ul>
       </div>
