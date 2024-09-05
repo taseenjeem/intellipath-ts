@@ -123,10 +123,10 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
             </ActiveLink>
           </li>
           <li>
-            <UserActionBtns isSmallDevice={true} />
+            <ThemeController />
           </li>
           <li>
-            <ThemeController />
+            <UserActionBtns isSmallDevice={true} />
           </li>
         </ul>
       </div>
