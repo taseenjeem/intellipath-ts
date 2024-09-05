@@ -42,7 +42,11 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
                 <Image
                   width={32}
                   height={32}
-                  src="https://randomuser.me/api/portraits/men/8.jpg"
+                  src={
+                    authData?.profileImageUrl
+                      ? authData.profileImageUrl
+                      : "/assets/images/profile-placeholder.jpg"
+                  }
                   alt="Profile"
                 />
               </div>
