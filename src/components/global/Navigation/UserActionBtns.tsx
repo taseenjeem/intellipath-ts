@@ -35,7 +35,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   return (
     <>
       {authData.status ? (
-        <div className="dropdown dropdown-end mx-5">
+        <div className="dropdown dropdown-end lg:mx-3 lg:mt-1">
           <button tabIndex={0} className="avatar">
             <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
               <Image
