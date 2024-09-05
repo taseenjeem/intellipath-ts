@@ -14,7 +14,7 @@ const ThemeController = () => {
   };
 
   return (
-    <label className="swap swap-rotate">
+    <label className="swap swap-rotate ml-3 lg:mt-1">
       <input
         type="checkbox"
         className="theme-controller"
