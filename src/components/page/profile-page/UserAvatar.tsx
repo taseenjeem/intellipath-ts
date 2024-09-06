@@ -1,15 +1,22 @@
 "use client";
 import Image from "next/image";
-import maleDp from "/public/assets/images/male.svg";
 import { MdModeEdit } from "react-icons/md";
 
-const UserAvatar = () => {
+interface IUserAvatarProps {
+  profileImageUrl: string | null;
+}
+
+const UserAvatar = ({ profileImageUrl }: IUserAvatarProps) => {
   return (
     <div className="relative">
       <div className="avatar">
         <div className="ring-primary ring-offset-base-100 w-20 md:w-40 rounded-full ring ring-offset-2">
           <Image
-            src={maleDp}
+            src={
+              profileImageUrl
+                ? profileImageUrl
+                : "/assets/images/profile-placeholder.jpg"
+            }
             width={160}
             height={160}
             alt="User profile avatar"
