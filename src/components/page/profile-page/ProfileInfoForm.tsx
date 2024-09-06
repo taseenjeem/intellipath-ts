@@ -36,9 +36,13 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]:
+        name === "expertise"
+          ? value.split(",").map((item) => item.trim())
+          : value,
     }));
   };
 
@@ -193,28 +197,29 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           </div>
           {/* Expertise Input */}
           <div className="form-control">
-            <label className="label" htmlFor="phone">
+            <label className="label" htmlFor="expertise">
               <span className="label-text">Your Expertise</span>
               <span className="text-xs">
-                use coma (,) to separate the skills
+                Use commas (,) to separate the skills
               </span>
             </label>
             <div className="p-2 border-2 border-base-100 rounded-md mb-2">
               {formData?.expertise?.length === 0 ? (
-                <span className="">You did not added any skills yet!</span>
+                <span>You haven&apos;t added any skills yet!</span>
               ) : (
                 formData?.expertise?.map((item) => (
-                  <span className="badge badge-primary" key={item}>
+                  <span className="badge badge-primary mr-1" key={item}>
                     {item}
                   </span>
                 ))
               )}
             </div>
             <input
-              id="phone"
-              name="phone"
+              id="expertise"
+              name="expertise"
               type="text"
               className="input input-bordered"
+              placeholder="Ex: JavaScript, React, Node.js"
               onChange={handleChange}
             />
           </div>
