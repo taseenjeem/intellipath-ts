@@ -1,11 +1,10 @@
-import { socialAuth } from "@/database/server-actions";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 const SocialAuth = () => {
   return (
     <div className="card-body pt-1">
       <div className="divider">OR</div>
-      <form action={socialAuth}>
+      <form>
         <div className="grid gap-2 md:grid-cols-2">
           <button
             type="submit"

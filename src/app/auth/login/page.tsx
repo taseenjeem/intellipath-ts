@@ -1,4 +1,3 @@
-import SocialAuth from "@/src/components/global/ui/SocialAuth";
 import LoginForm from "@/src/components/page/auth-pages/login-page/LoginForm";
 import Link from "next/link";
 
@@ -33,7 +32,6 @@ const LoginPage = () => {
           </div>
           <div className="card shrink-0 w-full max-w-lg bg-base-200">
             <LoginForm />
-            <SocialAuth />
           </div>
         </div>
       </div>
