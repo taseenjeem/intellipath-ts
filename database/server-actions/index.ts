@@ -74,3 +74,13 @@ export const updateUserProfileImage = async (userId: string, file: File) => {
     };
   }
 };
+
+export const updateUserDetails = async (userId: string, updatedData: any) => {
+  try {
+    await connectMongodb();
+    await User.findByIdAndUpdate(userId, updatedData);
+  } catch (error) {
+    console.error("Error updating user details:", error);
+    throw new Error("Error updating user details");
+  }
+};
