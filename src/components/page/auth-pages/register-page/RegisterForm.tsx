@@ -41,7 +41,7 @@ const RegisterForm = () => {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(handleRegister)}
-        className="card-body pb-0"
+        className="card-body"
       >
         <Logo formMode={true} />
         <NameInputField
