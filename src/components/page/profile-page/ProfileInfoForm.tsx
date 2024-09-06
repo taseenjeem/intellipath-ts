@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { ICountry, IUserInfo } from "@/types";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
+import { getUserByEmail, updateUserDetails } from "@/database/server-actions";
+import { toast } from "react-toastify";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -10,7 +12,12 @@ const getCountries = async () => {
   );
 };
 
-const ProfileInfoForm = () => {
+interface IProfileInfoFormProps {
+  userId: string;
+  userEmail: string;
+}
+
+const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
   const dispatch = useAppDispatch();
   const savedFormData = useAppSelector((state: RootState) => state.userInfo);
   const [formData, setFormData] = useState<IUserInfo>(savedFormData);
@@ -35,12 +42,17 @@ const ProfileInfoForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      dispatch(updateUserInfo(formData));
+      await updateUserDetails(userId, formData);
+      const userInfo = await getUserByEmail(userEmail);
+      if (userInfo) {
+        dispatch(updateUserInfo(userInfo));
+        toast.success("User updated successfully");
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -91,6 +103,21 @@ const ProfileInfoForm = () => {
               type="text"
               className="input input-bordered"
               value={formData.username ?? ""}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Email Input */}
+          <div className="form-control">
+            <label className="label" htmlFor="email">
+              <span className="label-text">Your Email</span>
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="input input-bordered cursor-not-allowed"
+              readOnly
+              value={formData.email ?? ""}
               onChange={handleChange}
             />
           </div>
@@ -150,20 +177,6 @@ const ProfileInfoForm = () => {
               ))}
             </select>
           </div>
-          {/* Email Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="email">
-              <span className="label-text">Your Email</span>
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="input input-bordered"
-              value={formData.email ?? ""}
-              onChange={handleChange}
-            />
-          </div>
           {/* Phone Input */}
           <div className="form-control">
             <label className="label" htmlFor="phone">
@@ -175,6 +188,33 @@ const ProfileInfoForm = () => {
               type="number"
               className="input input-bordered"
               value={formData.phone ?? ""}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Expertise Input */}
+          <div className="form-control">
+            <label className="label" htmlFor="phone">
+              <span className="label-text">Your Expertise</span>
+              <span className="text-xs">
+                use coma (,) to separate the skills
+              </span>
+            </label>
+            <div className="p-2 border-2 border-base-100 rounded-md mb-2">
+              {formData?.expertise?.length === 0 ? (
+                <span className="">You did not added any skills yet!</span>
+              ) : (
+                formData?.expertise?.map((item) => (
+                  <span className="badge badge-primary" key={item}>
+                    {item}
+                  </span>
+                ))
+              )}
+            </div>
+            <input
+              id="phone"
+              name="phone"
+              type="text"
+              className="input input-bordered"
               onChange={handleChange}
             />
           </div>

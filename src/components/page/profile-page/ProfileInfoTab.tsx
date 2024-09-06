@@ -41,7 +41,7 @@ const ProfileInfoTab = () => {
             </div>
           </div>
         </div>
-        <ProfileInfoForm />
+        <ProfileInfoForm userId={userData?._id} userEmail={userData?.email} />
       </div>
     </>
   );
