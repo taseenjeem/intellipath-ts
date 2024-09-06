@@ -36,3 +36,41 @@ export const getUserByEmail = async (email: string) => {
     throw new Error("Error finding user by email");
   }
 };
+
+export const updateUserProfileImage = async (userId: string, file: File) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    const imgbbApiKey = process.env.IMGBB_API_KEY;
+    const response = await fetch(
+      `https://api.imgbb.com/1/upload?key=${imgbbApiKey}&expiration=600`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error("Image upload failed");
+    }
+
+    const imageUrl = data.data.url;
+
+    await connectMongodb();
+    await User.findByIdAndUpdate(userId, { profileImageUrl: imageUrl });
+
+    return {
+      success: true,
+      imageUrl,
+    };
+  } catch (error) {
+    console.error("Error uploading image or updating user:", error);
+    return {
+      success: false,
+      message: "Failed to upload image or update user",
+    };
+  }
+};
