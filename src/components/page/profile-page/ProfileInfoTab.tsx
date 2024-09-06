@@ -1,8 +1,13 @@
+"use client";
 import { PiStudentFill } from "react-icons/pi";
+import { FaChalkboardTeacher } from "react-icons/fa";
 import UserAvatar from "./UserAvatar";
 import ProfileInfoForm from "./ProfileInfoForm";
+import { useAppSelector } from "@/redux/store";
 
 const ProfileInfoTab = () => {
+  const userData = useAppSelector((state) => state.userInfo);
+
   return (
     <>
       <input
@@ -18,11 +23,17 @@ const ProfileInfoTab = () => {
           <UserAvatar />
           <div className="md:space-y-2 space-y-1">
             <h2 className="md:text-2xl text-xl text-primary font-semibold">
-              Md. Ta-Seen Fuad Jeem
+              {userData?.fullName}
             </h2>
-            <h3 className="md:text-xl">@taseenjeem</h3>
+            <h3 className="md:text-xl">@{userData?.username}</h3>
             <div className="badge badge-primary badge-outline md:badge-lg">
-              <PiStudentFill className="mr-1" /> <p>Student</p>
+              {userData?.role === "learner" && (
+                <PiStudentFill className="mr-1" />
+              )}
+              {userData?.role === "instructor" && (
+                <FaChalkboardTeacher className="mr-1" />
+              )}
+              <p className="capitalize">{userData?.role}</p>
             </div>
           </div>
         </div>
