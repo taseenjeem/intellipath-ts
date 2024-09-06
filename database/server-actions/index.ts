@@ -36,3 +36,8 @@ export const getUserByEmail = async (email: string) => {
     throw new Error("Error finding user by email");
   }
 };
+
+export const socialAuth = async (formData: any) => {
+  const action = formData.get("action");
+  await signIn(action, { redirectTo: "/" });
+};
