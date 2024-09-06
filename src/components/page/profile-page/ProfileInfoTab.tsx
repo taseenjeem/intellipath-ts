@@ -21,12 +21,12 @@ const ProfileInfoTab = () => {
       <div role="tabpanel" className="tab-content w-full mt-5">
         <div className="mt-10 flex justify-center md:justify-start items-center md:gap-7 gap-4">
           <UserAvatar profileImageUrl={userData?.profileImageUrl ?? null} />
-          <div className="md:space-y-2 space-y-1">
+          <div>
             <h2 className="md:text-2xl text-xl text-primary font-semibold">
               {userData?.fullName}
             </h2>
             <h3 className="md:text-xl">@{userData?.username}</h3>
-            <div className="badge badge-primary badge-outline md:badge-lg">
+            <div className="badge badge-primary badge-outline md:badge-lg mt-2">
               {userData?.role === "learner" && (
                 <PiStudentFill className="mr-1" />
               )}
