@@ -22,6 +22,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
   const savedFormData = useAppSelector((state: RootState) => state.userInfo);
   const [formData, setFormData] = useState<IUserInfo>(savedFormData);
   const [allCountries, setAllCountries] = useState<ICountry[]>([]);
+  const [newExpertise, setNewExpertise] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,18 +33,26 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     fetchCountries();
   }, []);
 
+  // Handle changes in form inputs
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
     setFormData((prevData) => ({
       ...prevData,
-      [name]:
-        name === "expertise"
-          ? value.split(",").map((item) => item.trim())
-          : value,
+      [name]: value,
     }));
+  };
+
+  // Handle adding new skill
+  const handleAddSkill = () => {
+    if (newExpertise.trim()) {
+      setFormData((prevData) => ({
+        ...prevData,
+        expertise: [...(prevData.expertise ?? []), newExpertise.trim()],
+      }));
+      setNewExpertise(""); // Reset input field after adding
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +60,10 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     setIsLoading(true);
 
     try {
+      // Update the user details in the database
       await updateUserDetails(userId, formData);
+
+      // Fetch updated user info and update redux slice
       const userInfo = await getUserByEmail(userEmail);
       if (userInfo) {
         dispatch(updateUserInfo(userInfo));
@@ -59,6 +71,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Failed to update user information");
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +83,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
           {/* First Name Input */}
           <div className="form-control">
-            <label className="label" htmlFor="name">
+            <label className="label" htmlFor="firstName">
               <span className="label-text">First Name</span>
             </label>
             <input
@@ -84,7 +97,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           </div>
           {/* Last Name Input */}
           <div className="form-control">
-            <label className="label" htmlFor="name">
+            <label className="label" htmlFor="lastName">
               <span className="label-text">Last Name</span>
             </label>
             <input
@@ -199,29 +212,36 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           <div className="form-control">
             <label className="label" htmlFor="expertise">
               <span className="label-text">Your Expertise</span>
-              <span className="text-xs">
-                Use commas (,) to separate the skills
-              </span>
             </label>
-            <div className="p-2 border-2 border-base-100 rounded-md mb-2">
+            <div className="p-2 border-2 border-base-100 rounded-md mb-2 flex flex-wrap gap-2">
               {formData?.expertise?.length === 0 ? (
                 <span>You haven&apos;t added any skills yet!</span>
               ) : (
                 formData?.expertise?.map((item) => (
-                  <span className="badge badge-primary mr-1" key={item}>
+                  <span className="badge badge-primary badge-lg" key={item}>
                     {item}
                   </span>
                 ))
               )}
             </div>
-            <input
-              id="expertise"
-              name="expertise"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: JavaScript, React, Node.js"
-              onChange={handleChange}
-            />
+            <div className="flex gap-2 items-center">
+              <input
+                id="expertise"
+                name="expertise"
+                type="text"
+                className="input input-bordered w-full"
+                placeholder="Ex: JavaScript, React, Node.js"
+                value={newExpertise}
+                onChange={(e) => setNewExpertise(e.target.value)}
+              />
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleAddSkill}
+              >
+                Add Skill
+              </button>
+            </div>
           </div>
         </div>
         {/* Address Input */}
@@ -238,6 +258,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
             onChange={handleChange}
           />
         </div>
+        {/* Submit Button */}
         <div className="card-actions justify-end mt-5">
           {isLoading ? (
             <button
