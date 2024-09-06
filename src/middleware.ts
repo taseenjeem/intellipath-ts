@@ -1,5 +1,5 @@
 import { authConfig } from "@/auth.config";
-import { LOGIN, PUBLIC_ROUTES, ROOT } from "@/utils/publicRoutes";
+import { PRIVATE_ROUTES } from "@/utils/privateRoutes";
 import NextAuth from "next-auth";
 
 const { auth } = NextAuth(authConfig);
@@ -8,12 +8,12 @@ export default auth((req) => {
   const { nextUrl } = req;
   const isAuthenticated = !!req.auth;
 
-  const isPublicRoute =
-    PUBLIC_ROUTES.find((route) => nextUrl.pathname.startsWith(route)) ||
-    nextUrl.pathname === ROOT;
+  const isPrivateRoute = PRIVATE_ROUTES.find((route) =>
+    nextUrl.pathname.startsWith(route)
+  );
 
-  if (!isAuthenticated && !isPublicRoute) {
-    const loginUrl = new URL(LOGIN, nextUrl);
+  if (isPrivateRoute && !isAuthenticated) {
+    const loginUrl = new URL("/auth/login", nextUrl);
     loginUrl.searchParams.set("message", "login_required");
 
     return Response.redirect(loginUrl);
