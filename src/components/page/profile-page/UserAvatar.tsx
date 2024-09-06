@@ -23,9 +23,18 @@ const UserAvatar = ({ profileImageUrl }: IUserAvatarProps) => {
           />
         </div>
       </div>
-      <button className="btn btn-sm btn-circle btn-primary absolute md:bottom-4 bottom-0 right-0">
-        <MdModeEdit className="text-white" />
-      </button>
+      <label
+        htmlFor="profileImageUrl"
+        className="btn btn-sm btn-circle btn-primary cursor-pointer absolute md:bottom-4 bottom-0 right-0 flex justify-center items-center"
+      >
+        <MdModeEdit className="text-white cursor-pointer" />
+        <input
+          type="file"
+          name="profileImageUrl"
+          id="profileImageUrl"
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+        />
+      </label>
     </div>
   );
 };
