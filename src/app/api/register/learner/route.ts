@@ -14,10 +14,22 @@ export const POST = async (request: NextRequest) => {
   } else {
     await connectMongodb();
 
-    let baseUsername = (learnerInfo.firstName + learnerInfo.lastName)
-      .toLowerCase()
-      .replace(/\s+/g, "");
+    let { firstName, lastName, fullName } = learnerInfo;
 
+    if (firstName && lastName) {
+      fullName = `${firstName} ${lastName}`.trim();
+    } else if (!firstName && !lastName && fullName) {
+      const fullNameParts = fullName.trim().split(" ");
+      lastName = fullNameParts.pop();
+      firstName = fullNameParts.join(" ");
+    } else {
+      return new NextResponse(
+        "Either firstName and lastName, or fullName must be provided",
+        { status: 400 }
+      );
+    }
+
+    let baseUsername = (firstName + lastName).toLowerCase().replace(/\s+/g, "");
     let username = baseUsername;
 
     let userExists = await User.exists({ username });
@@ -32,9 +44,13 @@ export const POST = async (request: NextRequest) => {
 
     const newUser = {
       ...learnerInfo,
+      firstName,
+      lastName,
+      fullName,
       username,
       role: "learner",
       password: hashedPassword,
+      authenticationMethod: "credential",
     };
 
     try {
