@@ -81,6 +81,8 @@ export interface IUserInfo {
   socialLinks?: {
     linkedin?: string;
     twitter?: string;
+    facebook?: string;
+    github?: string;
     website?: string;
   };
   createdAt?: Date | null;
