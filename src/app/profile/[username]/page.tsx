@@ -18,7 +18,7 @@ const MyAccountPage = async ({ params }: IMyAccountPageProps) => {
         My Profile
       </h1>
       <div role="tablist" className="tabs tabs-bordered w-full mt-5">
-        <ProfileInfoTab />
+        <ProfileInfoTab userData={userData} />
         <CoursesTab />
         <SettingsTab />
       </div>

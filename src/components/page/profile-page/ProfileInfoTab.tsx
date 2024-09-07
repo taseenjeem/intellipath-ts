@@ -1,13 +1,14 @@
-"use client";
-import { useAppSelector } from "@/redux/store";
+import { IUserInfo } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import Image from "next/image";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { PiStudentFill } from "react-icons/pi";
 
-const ProfileInfoTab = () => {
-  const userData = useAppSelector((state) => state.userInfo);
+interface IProfileInfoTabProps {
+  userData: IUserInfo | null;
+}
 
+const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
   return (
     <>
       <input
