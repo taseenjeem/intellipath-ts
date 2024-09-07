@@ -78,9 +78,9 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
   };
 
   return (
-    <div className="bg-base-300 card card-compact mt-5 md:mt-16">
+    <div className="bg-base-300 card card-compact mt-5 md:mt-16 lg:w-1/2">
       <form onSubmit={handleSubmit} className="card-body">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {/* First Name Input */}
           <div className="form-control">
             <label className="label" htmlFor="firstName">
