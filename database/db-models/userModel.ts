@@ -45,6 +45,8 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
     socialLinks: {
       linkedin: { type: String, default: null },
       twitter: { type: String, default: null },
+      facebook: { type: String, default: null },
+      github: { type: String, default: null },
       website: { type: String, default: null },
     },
   },
