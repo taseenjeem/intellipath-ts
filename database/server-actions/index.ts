@@ -37,6 +37,17 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
+export const getUserByID = async (userID: string) => {
+  try {
+    await connectMongodb();
+    const user = await User.findById(userID).lean();
+    return user;
+  } catch (error) {
+    console.error("Error finding user by ID:", error);
+    throw new Error("Error finding user by ID");
+  }
+};
+
 export const updateUserProfileImage = async (userId: string, file: File) => {
   const formData = new FormData();
   formData.append("image", file);
