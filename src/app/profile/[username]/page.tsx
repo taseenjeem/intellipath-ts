@@ -1,8 +1,17 @@
+import { getUserByUsername } from "@/database/server-actions";
 import CoursesTab from "@/src/components/page/profile-page/CourseTab";
 import ProfileInfoTab from "@/src/components/page/profile-page/ProfileInfoTab";
 import SettingsTab from "@/src/components/page/profile-page/SettingsTab";
 
-const MyAccountPage = () => {
+interface IMyAccountPageProps {
+  params: {
+    username: string;
+  };
+}
+
+const MyAccountPage = async ({ params }: IMyAccountPageProps) => {
+  const userData = await getUserByUsername(params.username);
+
   return (
     <section className="custom-min-h container w-full">
       <h1 className="lg:text-4xl text-3xl text-primary uppercase font-semibold mt-5">
