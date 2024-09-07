@@ -33,7 +33,6 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     fetchCountries();
   }, []);
 
-  // Handle changes in form inputs
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -44,14 +43,13 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     }));
   };
 
-  // Handle adding new skill
   const handleAddSkill = () => {
     if (newExpertise.trim()) {
       setFormData((prevData) => ({
         ...prevData,
         expertise: [...(prevData.expertise ?? []), newExpertise.trim()],
       }));
-      setNewExpertise(""); // Reset input field after adding
+      setNewExpertise("");
     }
   };
 
@@ -60,10 +58,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     setIsLoading(true);
 
     try {
-      // Update the user details in the database
       await updateUserDetails(userId, formData);
 
-      // Fetch updated user info and update redux slice
       const userInfo = await getUserByEmail(userEmail);
       if (userInfo) {
         dispatch(updateUserInfo(userInfo));
