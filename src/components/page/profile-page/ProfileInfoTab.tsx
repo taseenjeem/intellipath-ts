@@ -116,8 +116,33 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
         <hr className="md:my-10 my-5" />
         <div>
           <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
-            Education and Skills
+            Academic Education
           </h3>
+          <div className="grid grid-cols-3 gap-4 mt-5">
+            {userData?.education?.map((item) => (
+              <div
+                className="bg-primary p-5 rounded-lg text-base-200"
+                key={item.degree}
+              >
+                <ul className="text-white">
+                  <li className="text-xl font-bold">{item.degree}</li>
+                  <hr className="my-3" />
+                  <li>
+                    <strong>Institution: </strong>
+                    {item.institution}
+                  </li>
+                  <li>
+                    <strong>Location: </strong>
+                    {item.location}
+                  </li>
+                  <li>
+                    <strong>Year of accomplished: </strong>
+                    {item.yearOfCompletion}
+                  </li>
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

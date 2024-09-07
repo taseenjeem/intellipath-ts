@@ -69,6 +69,7 @@ export interface IUserInfo {
   education?: {
     degree: string;
     institution: string;
+    location: string;
     yearOfCompletion: string;
   }[];
   teachingExperience?: number | null;

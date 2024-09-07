@@ -30,6 +30,7 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
       {
         degree: { type: String, required: true },
         institution: { type: String, required: true },
+        location: { type: String, required: true },
         yearOfCompletion: { type: String, required: true },
       },
     ],
