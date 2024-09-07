@@ -44,7 +44,7 @@ export const updateUserProfileImage = async (userId: string, file: File) => {
   try {
     const imgbbApiKey = process.env.IMGBB_API_KEY;
     const response = await fetch(
-      `https://api.imgbb.com/1/upload?key=${imgbbApiKey}&expiration=600`,
+      `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
       {
         method: "POST",
         body: formData,

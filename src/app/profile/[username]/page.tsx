@@ -1,5 +1,6 @@
 import CoursesTab from "@/src/components/page/profile-page/CourseTab";
 import ProfileInfoTab from "@/src/components/page/profile-page/ProfileInfoTab";
+import SettingsTab from "@/src/components/page/profile-page/SettingsTab";
 
 const MyAccountPage = () => {
   return (
@@ -10,6 +11,7 @@ const MyAccountPage = () => {
       <div role="tablist" className="tabs tabs-bordered w-full mt-5">
         <ProfileInfoTab />
         <CoursesTab />
+        <SettingsTab />
       </div>
     </section>
   );

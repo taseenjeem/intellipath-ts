@@ -14,7 +14,6 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   const isActive = pathName.includes("/auth");
   const { data: session } = useSession();
   const authData = useAppSelector((state) => state.userInfo);
-  console.log(session);
 
   const closeDrawer = () => {
     const menuCheckbox = document.getElementById(
