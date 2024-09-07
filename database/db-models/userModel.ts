@@ -34,7 +34,16 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
         yearOfCompletion: { type: String, required: true },
       },
     ],
-    teachingExperience: { type: Number, default: null },
+    teachingExperience: {
+      totalExperience: { type: Number, required: true },
+      details: [
+        {
+          institution: { type: String, required: true },
+          platform: { type: String, required: true },
+          period: { type: String, required: true },
+        },
+      ],
+    },
     certifications: [
       {
         title: { type: String, required: true },

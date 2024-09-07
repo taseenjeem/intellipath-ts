@@ -22,7 +22,10 @@ const initialState: IUserInfo = {
   courses: [],
   biography: null,
   education: [],
-  teachingExperience: null,
+  teachingExperience: {
+    details: [],
+    totalExperience: 0,
+  },
   certifications: [],
   socialLinks: {
     linkedin: "",

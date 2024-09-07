@@ -72,7 +72,14 @@ export interface IUserInfo {
     location: string;
     yearOfCompletion: string;
   }[];
-  teachingExperience?: number | null;
+  teachingExperience?: {
+    details: {
+      institution?: string;
+      platform?: string;
+      period?: string;
+    }[];
+    totalExperience?: number;
+  };
   certifications?: {
     title: string;
     issuer: string;
