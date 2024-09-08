@@ -2,7 +2,14 @@ import { IUserInfo } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import Image from "next/image";
 import Link from "next/link";
-import { FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaGithub,
+  FaFacebook,
+  FaLinkedin,
+} from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { TbWorldWww } from "react-icons/tb";
 import { PiStudentFill } from "react-icons/pi";
 
 interface IProfileInfoTabProps {
@@ -22,45 +29,123 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
       />
       <div role="tabpanel" className="tab-content w-full mt-5">
         <div className="mt-12">
-          <div className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-5">
-            <div className="avatar">
-              <div className="ring-primary ring-offset-base-100 size-44 rounded-full ring ring-offset-2">
-                <Image
-                  width={128}
-                  height={128}
-                  src={
-                    userData?.profileImageUrl
-                      ? userData.profileImageUrl
-                      : "/assets/images/profile-placeholder.jpg"
-                  }
-                  alt="Profile"
-                />
+          <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-5">
+              <div className="avatar">
+                <div className="ring-primary ring-offset-base-100 size-44 rounded-full ring ring-offset-2">
+                  <Image
+                    width={128}
+                    height={128}
+                    src={
+                      userData?.profileImageUrl
+                        ? userData.profileImageUrl
+                        : "/assets/images/profile-placeholder.jpg"
+                    }
+                    alt="Profile"
+                  />
+                </div>
+              </div>
+              <div className="text-center md:text-start">
+                <h3 className="text-4xl font-semibold text-primary">
+                  {userData?.fullName}
+                </h3>
+                <h4 className="text-lg">@{userData?.username}</h4>
+                <div className="badge badge-primary badge-outline md:badge-lg mt-2">
+                  {userData?.role === "learner" && (
+                    <PiStudentFill className="mr-1" />
+                  )}
+                  {userData?.role === "instructor" && (
+                    <FaChalkboardTeacher className="mr-1" />
+                  )}
+                  <p className="capitalize">{userData?.role}</p>
+                </div>
               </div>
             </div>
-            <div className="text-center md:text-start">
-              <h3 className="text-4xl font-semibold text-primary">
-                {userData?.fullName}
-              </h3>
-              <h4 className="text-lg">@{userData?.username}</h4>
-              <div className="badge badge-primary badge-outline md:badge-lg mt-2">
-                {userData?.role === "learner" && (
-                  <PiStudentFill className="mr-1" />
+            <div className="">
+              <ul className="space-y-2">
+                {userData?.socialLinks?.facebook && (
+                  <li className="flex items-center gap-2">
+                    <FaFacebook size={25} />
+                    <Link
+                      href={userData?.socialLinks?.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-hover"
+                    >
+                      Facebook
+                    </Link>
+                  </li>
                 )}
-                {userData?.role === "instructor" && (
-                  <FaChalkboardTeacher className="mr-1" />
+                {userData?.socialLinks?.twitter && (
+                  <li className="flex items-center gap-2">
+                    <FaXTwitter size={25} />
+                    <Link
+                      href={userData?.socialLinks?.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-hover"
+                    >
+                      X (formerly twitter)
+                    </Link>
+                  </li>
                 )}
-                <p className="capitalize">{userData?.role}</p>
-              </div>
+                {userData?.socialLinks?.linkedin && (
+                  <li className="flex items-center gap-2">
+                    <FaLinkedin size={25} />
+                    <Link
+                      href={userData?.socialLinks?.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-hover"
+                    >
+                      LinkedIn
+                    </Link>
+                  </li>
+                )}
+                {userData?.socialLinks?.github && (
+                  <li className="flex items-center gap-2">
+                    <FaGithub size={25} />
+                    <Link
+                      href={userData?.socialLinks?.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-hover"
+                    >
+                      Github
+                    </Link>
+                  </li>
+                )}
+                {userData?.socialLinks?.website && (
+                  <li className="flex items-center gap-2">
+                    <TbWorldWww size={25} />
+                    <Link
+                      href={userData?.socialLinks?.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-hover"
+                    >
+                      Website
+                    </Link>
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
-          {userData?.biography && (
-            <div className="mt-10 space-y-3">
-              <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
-                About {userData?.fullName}
-              </h3>
+          <div className="mt-10 space-y-3">
+            <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
+              About {userData?.fullName}
+            </h3>
+            {userData?.biography ? (
               <p>{userData?.biography}</p>
-            </div>
-          )}
+            ) : (
+              <div className="border rounded-lg p-20 mt-5">
+                <p className="text-center">
+                  You have not added any bio yet! Go to the &quot;Settings&quot;
+                  tab to add your bio.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
         <hr className="md:my-10 my-5" />
         <div className="grid grid-cols-1 gap-5 md:gap-0 md:grid-cols-2">
