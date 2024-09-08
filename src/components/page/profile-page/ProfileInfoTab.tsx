@@ -245,29 +245,40 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
               Teaching Experience
             </h3>
             <h4 className="my-4">
-              <strong>Total Teaching Experience:</strong> years
+              <strong>Total Teaching Experience:</strong>
+              {userData?.teachingExperience?.totalExperience} years
             </h4>
-            <div className="grid grid-cols-3 gap-4 mt-5">
-              {userData?.teachingExperience?.details?.map((item) => (
-                <div
-                  className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
-                  key={item.institution}
-                >
-                  <ul>
-                    <li className="text-xl font-bold">{item.institution}</li>
-                    <hr className="my-3 border-gray-400" />
-                    <li>
-                      <strong>Teaching Platform: </strong>
-                      {item.platform}
-                    </li>
-                    <li>
-                      <strong>: </strong>
-                      {item.period}
-                    </li>
-                  </ul>
-                </div>
-              ))}
-            </div>
+            {userData?.teachingExperience?.details &&
+            userData?.teachingExperience?.details.length > 0 ? (
+              <div className="grid grid-cols-3 gap-4 mt-5">
+                {userData?.teachingExperience?.details?.map((item) => (
+                  <div
+                    className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                    key={item.institution}
+                  >
+                    <ul>
+                      <li className="text-xl font-bold">{item.institution}</li>
+                      <hr className="my-3 border-gray-400" />
+                      <li>
+                        <strong>Teaching Platform: </strong>
+                        {item.platform}
+                      </li>
+                      <li>
+                        <strong>: </strong>
+                        {item.period}
+                      </li>
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="border rounded-lg p-20 mt-5">
+                <p className="text-center">
+                  You have not added any teaching experience yet! Go to the
+                  &quot;Settings&quot; tab to add your teaching experience.
+                </p>
+              </div>
+            )}
           </div>
         )}
         <div>
