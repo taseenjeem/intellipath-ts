@@ -24,12 +24,12 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
         name="my_tabs_1"
         role="tab"
         className="tab whitespace-nowrap"
-        aria-label="Profile Information"
+        aria-label="My Information"
         defaultChecked
       />
       <div role="tabpanel" className="tab-content w-full mt-5">
         <div className="mt-12">
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row justify-between">
             <div className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-5">
               <div className="avatar">
                 <div className="ring-primary ring-offset-base-100 size-44 rounded-full ring ring-offset-2">
@@ -61,7 +61,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
                 </div>
               </div>
             </div>
-            <div className="">
+            <div className="mt-10">
               <ul className="space-y-2">
                 {userData?.socialLinks?.facebook && (
                   <li className="flex items-center gap-2">
@@ -138,7 +138,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
             {userData?.biography ? (
               <p>{userData?.biography}</p>
             ) : (
-              <div className="border rounded-lg p-20 mt-5">
+              <div className="border rounded-lg p-10 md:p-20 mt-5">
                 <p className="text-center">
                   You have not added any bio yet! Go to the &quot;Settings&quot;
                   tab to add your bio.
@@ -205,7 +205,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
             Academic Education
           </h3>
           {userData?.education && userData?.education.length > 0 ? (
-            <div className="grid grid-cols-3 gap-4 mt-5">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
               {userData?.education?.map((item) => (
                 <div
                   className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
@@ -231,7 +231,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
               ))}
             </div>
           ) : (
-            <div className="border rounded-lg p-20 mt-5">
+            <div className="border rounded-lg p-10 md:p-20 mt-5">
               <p className="text-center">
                 You have not added any education qualifications yet! Go to the
                 &quot;Settings&quot; tab to add your academic education.
@@ -250,7 +250,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
             </h4>
             {userData?.teachingExperience?.details &&
             userData?.teachingExperience?.details.length > 0 ? (
-              <div className="grid grid-cols-3 gap-4 mt-5">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
                 {userData?.teachingExperience?.details?.map((item) => (
                   <div
                     className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
@@ -272,7 +272,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
                 ))}
               </div>
             ) : (
-              <div className="border rounded-lg p-20 mt-5">
+              <div className="border rounded-lg p-10 md:p-20 mt-5">
                 <p className="text-center">
                   You have not added any teaching experience yet! Go to the
                   &quot;Settings&quot; tab to add your teaching experience.
@@ -286,7 +286,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
             Certifications
           </h3>
           {userData?.certifications && userData.certifications.length > 0 ? (
-            <div className="grid grid-cols-3 gap-4 mt-5">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
               {userData?.certifications?.map((item) => (
                 <div
                   className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
@@ -313,7 +313,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
               ))}
             </div>
           ) : (
-            <div className="border rounded-lg p-20 mt-5">
+            <div className="border rounded-lg p-10 md:p-20 mt-5">
               <p className="text-center">
                 You have not added any certifications yet! Go to the
                 &quot;Settings&quot; tab to add your certifications.
@@ -334,7 +334,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
               ))}
             </div>
           ) : (
-            <div className="border rounded-lg p-20 mt-5">
+            <div className="border rounded-lg p-10 md:p-20 mt-5">
               <p className="text-center">
                 You have not added any expertise yet! Go to the
                 &quot;Settings&quot; tab to add your skills.
