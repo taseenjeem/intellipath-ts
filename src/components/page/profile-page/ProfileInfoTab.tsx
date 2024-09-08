@@ -328,7 +328,10 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
           {userData?.expertise && userData.expertise.length > 0 ? (
             <div className="flex flex-wrap gap-3 mt-5">
               {userData?.expertise?.map((item) => (
-                <div className="badge badge-primary badge-lg" key={item}>
+                <div
+                  className="badge badge-primary h-[2rem] text-lg leading-6 px-[0.988rem]"
+                  key={item}
+                >
                   {item}
                 </div>
               ))}
