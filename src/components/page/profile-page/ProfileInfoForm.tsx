@@ -5,6 +5,7 @@ import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 import { getUserByEmail, updateUserDetails } from "@/database/server-actions";
 import { toast } from "react-toastify";
+import { IoClose } from "react-icons/io5";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -53,6 +54,13 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
       }));
       setNewExpertise("");
     }
+  };
+
+  const handleRemoveSkill = (skillToRemove: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      expertise: prevData.expertise?.filter((skill) => skill !== skillToRemove),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -256,17 +264,24 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
             <label className="label" htmlFor="expertise">
               <span className="label-text">Your Expertise</span>
             </label>
-            <div className="p-2 h-60 border-2 border-base-100 rounded-md mb-2 flex flex-wrap gap-2">
+            <div className="px-2 py-5 h-60 border-2 border-base-100 rounded-md mb-2 flex flex-wrap gap-10">
               {formData?.expertise?.length === 0 ? (
                 <span>You haven&apos;t added any skills yet!</span>
               ) : (
                 formData?.expertise?.map((item) => (
-                  <span
-                    className="badge badge-primary h-[2rem] text-lg leading-6 px-[0.988rem]"
+                  <div
+                    className="badge badge-primary h-[2rem] text-lg leading-6 px-[0.988rem] relative"
                     key={item}
                   >
                     {item}
-                  </span>
+                    <button
+                      type="button"
+                      className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-3 -right-3"
+                      onClick={() => handleRemoveSkill(item)}
+                    >
+                      <IoClose />
+                    </button>
+                  </div>
                 ))
               )}
             </div>
