@@ -48,7 +48,7 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
       {
         title: { type: String, default: null },
         issuer: { type: String, default: null },
-        dateOfIssue: { type: Date, default: null },
+        dateOfIssue: { type: String, default: null },
         url: { type: String, default: null },
       },
     ],
