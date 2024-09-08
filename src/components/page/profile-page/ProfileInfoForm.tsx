@@ -68,7 +68,6 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
       education: [...(prevFormData.education ?? []), education],
     }));
 
-    // Clear education input fields
     setEducation({
       degree: "",
       institution: "",
@@ -89,6 +88,13 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     setFormData((prevData) => ({
       ...prevData,
       expertise: prevData.expertise?.filter((skill) => skill !== skillToRemove),
+    }));
+  };
+
+  const handleRemoveEducation = (degree: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      education: prevData.education?.filter((edu) => edu.degree !== degree),
     }));
   };
 
@@ -289,9 +295,17 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
                 {formData?.education?.map((item) => (
                   <div
-                    className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                    className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-300 hover:border-primary duration-300 relative"
                     key={item.degree}
                   >
+                    <button
+                      type="button"
+                      className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
+                      onClick={() => handleRemoveEducation(item.degree)}
+                    >
+                      <IoClose />
+                    </button>
+
                     <ul>
                       <li className="text-xl font-bold">{item.degree}</li>
                       <hr className="my-3 border-gray-400" />
