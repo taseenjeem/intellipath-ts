@@ -61,7 +61,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
                 </div>
               </div>
             </div>
-            <div className="mt-10">
+            <div className="mt-10 md:mt-0">
               <ul className="space-y-2">
                 {userData?.socialLinks?.facebook && (
                   <li className="flex items-center gap-2">
