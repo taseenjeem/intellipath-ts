@@ -204,31 +204,40 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
           <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
             Academic Education
           </h3>
-          <div className="grid grid-cols-3 gap-4 mt-5">
-            {userData?.education?.map((item) => (
-              <div
-                className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
-                key={item.degree}
-              >
-                <ul>
-                  <li className="text-xl font-bold">{item.degree}</li>
-                  <hr className="my-3 border-gray-400" />
-                  <li>
-                    <strong>Institution: </strong>
-                    {item.institution}
-                  </li>
-                  <li>
-                    <strong>Location: </strong>
-                    {item.location}
-                  </li>
-                  <li>
-                    <strong>Year of accomplished: </strong>
-                    {item.yearOfCompletion}
-                  </li>
-                </ul>
-              </div>
-            ))}
-          </div>
+          {userData?.education && userData?.education.length > 0 ? (
+            <div className="grid grid-cols-3 gap-4 mt-5">
+              {userData?.education?.map((item) => (
+                <div
+                  className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                  key={item.degree}
+                >
+                  <ul>
+                    <li className="text-xl font-bold">{item.degree}</li>
+                    <hr className="my-3 border-gray-400" />
+                    <li>
+                      <strong>Institution: </strong>
+                      {item.institution}
+                    </li>
+                    <li>
+                      <strong>Location: </strong>
+                      {item.location}
+                    </li>
+                    <li>
+                      <strong>Year of accomplished: </strong>
+                      {item.yearOfCompletion}
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="border rounded-lg p-20 mt-5">
+              <p className="text-center">
+                You have not added any education qualifications yet! Go to the
+                &quot;Settings&quot; tab to add your academic education.
+              </p>
+            </div>
+          )}
         </div>
         {userData?.role === "instructor" && (
           <div>
