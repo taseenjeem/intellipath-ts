@@ -6,6 +6,9 @@ interface ISettingsInfoFormProps {
 }
 
 const SettingsTab = ({ userId, userEmail }: ISettingsInfoFormProps) => {
+  const data = { userId, userEmail };
+  const plainDataValue = JSON.parse(JSON.stringify(data));
+
   return (
     <>
       <input
@@ -17,7 +20,10 @@ const SettingsTab = ({ userId, userEmail }: ISettingsInfoFormProps) => {
       />
       <div role="tabpanel" className="tab-content mt-5">
         <div className="card card-body bg-base-300">
-          <ProfileInfoForm userId={userId} userEmail={userEmail} />
+          <ProfileInfoForm
+            userId={plainDataValue.userId}
+            userEmail={plainDataValue.userEmail}
+          />
         </div>
       </div>
     </>
