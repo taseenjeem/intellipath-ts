@@ -182,8 +182,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
               />
             </div>
           </div>
-          <hr className="md:my-10 my-5" />
-          <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mb-5">
+          <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 my-5">
             Contact information
           </h3>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
@@ -253,9 +252,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
               />
             </div>
           </div>
-
-          <hr className="md:my-10 my-5" />
-          <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mb-5">
+          <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 my-5">
             Skills & Expertise
           </h3>
 
