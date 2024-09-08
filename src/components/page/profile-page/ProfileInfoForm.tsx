@@ -25,6 +25,12 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
   const [allCountries, setAllCountries] = useState<ICountry[]>([]);
   const [newExpertise, setNewExpertise] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [education, setEducation] = useState({
+    degree: "",
+    institution: "",
+    location: "",
+    yearOfCompletion: "",
+  });
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -54,6 +60,29 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
       }));
       setNewExpertise("");
     }
+  };
+
+  const handleAddEducation = () => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      education: [...(prevFormData.education ?? []), education],
+    }));
+
+    // Clear education input fields
+    setEducation({
+      degree: "",
+      institution: "",
+      location: "",
+      yearOfCompletion: "",
+    });
+  };
+
+  const handleEducationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      [name]: value,
+    }));
   };
 
   const handleRemoveSkill = (skillToRemove: string) => {
@@ -301,6 +330,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
                   type="text"
                   className="input input-bordered"
                   placeholder="Ex: BSc, BCS, Hons"
+                  value={education.degree}
+                  onChange={handleEducationChange}
                 />
               </div>
               <div className="form-control">
@@ -313,6 +344,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
                   type="text"
                   className="input input-bordered"
                   placeholder="Ex: University of Oxford"
+                  value={education.institution}
+                  onChange={handleEducationChange}
                 />
               </div>
               <div className="form-control">
@@ -325,6 +358,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
                   type="text"
                   className="input input-bordered"
                   placeholder="Ex: UK"
+                  value={education.location}
+                  onChange={handleEducationChange}
                 />
               </div>
               <div className="form-control">
@@ -337,10 +372,16 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
                   type="text"
                   className="input input-bordered"
                   placeholder="Ex: 2018 - 2020, 2018 - Present"
+                  value={education.yearOfCompletion}
+                  onChange={handleEducationChange}
                 />
               </div>
               <div className="w-full">
-                <button className="btn w-full btn-primary">
+                <button
+                  type="button"
+                  className="btn w-full btn-primary"
+                  onClick={handleAddEducation}
+                >
                   Add New Academic Education
                 </button>
               </div>
