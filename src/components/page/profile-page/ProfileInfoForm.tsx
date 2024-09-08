@@ -246,17 +246,25 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
             </div>
           </div>
 
+          <hr className="md:my-10 my-5" />
+          <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mb-5">
+            Skills & Expertise
+          </h3>
+
           {/* Expertise Input */}
           <div className="form-control">
             <label className="label" htmlFor="expertise">
               <span className="label-text">Your Expertise</span>
             </label>
-            <div className="p-2 border-2 border-base-100 rounded-md mb-2 flex flex-wrap gap-2">
+            <div className="p-2 h-60 border-2 border-base-100 rounded-md mb-2 flex flex-wrap gap-2">
               {formData?.expertise?.length === 0 ? (
                 <span>You haven&apos;t added any skills yet!</span>
               ) : (
                 formData?.expertise?.map((item) => (
-                  <span className="badge badge-primary badge-lg" key={item}>
+                  <span
+                    className="badge badge-primary h-[2rem] text-lg leading-6 px-[0.988rem]"
+                    key={item}
+                  >
                     {item}
                   </span>
                 ))
