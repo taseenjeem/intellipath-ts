@@ -49,6 +49,7 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
         title: { type: String, required: true },
         issuer: { type: String, required: true },
         dateOfIssue: { type: Date, required: true },
+        url: { type: String, default: null },
       },
     ],
     socialLinks: {

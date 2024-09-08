@@ -84,6 +84,7 @@ export interface IUserInfo {
     title: string;
     issuer: string;
     dateOfIssue: string;
+    url: string;
   }[];
   socialLinks?: {
     linkedin?: string;

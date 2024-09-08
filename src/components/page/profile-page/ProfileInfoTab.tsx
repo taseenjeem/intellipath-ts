@@ -1,6 +1,7 @@
 import { IUserInfo } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import Image from "next/image";
+import Link from "next/link";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { PiStudentFill } from "react-icons/pi";
 
@@ -121,12 +122,12 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
           <div className="grid grid-cols-3 gap-4 mt-5">
             {userData?.education?.map((item) => (
               <div
-                className="bg-primary p-5 rounded-lg text-base-200"
+                className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
                 key={item.degree}
               >
-                <ul className="text-white">
+                <ul>
                   <li className="text-xl font-bold">{item.degree}</li>
-                  <hr className="my-3" />
+                  <hr className="my-3 border-gray-400" />
                   <li>
                     <strong>Institution: </strong>
                     {item.institution}
@@ -143,6 +144,98 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
               </div>
             ))}
           </div>
+        </div>
+        {userData?.role === "instructor" && (
+          <div>
+            <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
+              Teaching Experience
+            </h3>
+            <h4 className="my-4">
+              <strong>Total Teaching Experience:</strong> years
+            </h4>
+            <div className="grid grid-cols-3 gap-4 mt-5">
+              {userData?.teachingExperience?.details?.map((item) => (
+                <div
+                  className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                  key={item.institution}
+                >
+                  <ul>
+                    <li className="text-xl font-bold">{item.institution}</li>
+                    <hr className="my-3 border-gray-400" />
+                    <li>
+                      <strong>Teaching Platform: </strong>
+                      {item.platform}
+                    </li>
+                    <li>
+                      <strong>: </strong>
+                      {item.period}
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        <div>
+          <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
+            Certifications
+          </h3>
+          {userData?.certifications && userData.certifications.length > 0 ? (
+            <div className="grid grid-cols-3 gap-4 mt-5">
+              {userData?.certifications?.map((item) => (
+                <div
+                  className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                  key={item.title}
+                >
+                  <ul>
+                    <li className="text-xl font-bold">{item.title}</li>
+                    <hr className="my-3 border-gray-400" />
+                    <li>
+                      <strong>Issuer: </strong>
+                      {item.issuer}
+                    </li>
+                    <li>
+                      <strong>Date of Issue: </strong>
+                      {item.dateOfIssue}
+                    </li>
+                    <li>
+                      <Link className="link" href={item.url}>
+                        Show credentials
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="border rounded-lg p-20 mt-5">
+              <p className="text-center">
+                You have not added any certifications yet! Go to the
+                &quot;Settings&quot; tab to add your certifications.
+              </p>
+            </div>
+          )}
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
+            Skill and Expertise
+          </h3>
+          {userData?.expertise && userData.expertise.length > 0 ? (
+            <div className="flex flex-wrap gap-3 mt-5">
+              {userData?.expertise?.map((item) => (
+                <div className="badge badge-primary badge-lg" key={item}>
+                  {item}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="border rounded-lg p-20 mt-5">
+              <p className="text-center">
+                You have not added any expertise yet! Go to the
+                &quot;Settings&quot; tab to add your skills.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </>
