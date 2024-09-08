@@ -20,7 +20,10 @@ const MyAccountPage = async ({ params }: IMyAccountPageProps) => {
       <div role="tablist" className="tabs tabs-bordered w-full mt-5">
         <ProfileInfoTab userData={userData} />
         <CoursesTab />
-        <SettingsTab />
+        <SettingsTab
+          userEmail={userData?.email ?? ""}
+          userId={userData?._id ?? ""}
+        />
       </div>
     </section>
   );
