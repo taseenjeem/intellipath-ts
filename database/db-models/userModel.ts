@@ -28,27 +28,27 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
     biography: { type: String, default: null },
     education: [
       {
-        degree: { type: String, required: true },
-        institution: { type: String, required: true },
-        location: { type: String, required: true },
-        yearOfCompletion: { type: String, required: true },
+        degree: { type: String, default: null },
+        institution: { type: String, default: null },
+        location: { type: String, default: null },
+        yearOfCompletion: { type: String, default: null },
       },
     ],
     teachingExperience: {
-      totalExperience: { type: Number, required: true },
+      totalExperience: { type: Number, default: null },
       details: [
         {
-          institution: { type: String, required: true },
-          platform: { type: String, required: true },
-          period: { type: String, required: true },
+          institution: { type: String, default: null },
+          platform: { type: String, default: null },
+          period: { type: String, default: null },
         },
       ],
     },
     certifications: [
       {
-        title: { type: String, required: true },
-        issuer: { type: String, required: true },
-        dateOfIssue: { type: Date, required: true },
+        title: { type: String, default: null },
+        issuer: { type: String, default: null },
+        dateOfIssue: { type: Date, default: null },
         url: { type: String, default: null },
       },
     ],
