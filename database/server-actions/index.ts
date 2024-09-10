@@ -30,7 +30,7 @@ export const getUserByEmail = async (email: string) => {
   try {
     await connectMongodb();
     const user = await User.findOne({ email }).lean();
-    return user;
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by email:", error);
     throw new Error("Error finding user by email");

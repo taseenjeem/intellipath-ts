@@ -1,19 +1,41 @@
 "use client";
-import { useAppSelector } from "@/redux/store";
+import { getUserByEmail } from "@/database/server-actions";
+import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface IUserActionBtnsProps {
   isSmallDevice?: boolean;
 }
 
+interface ILoginSessionProps {
+  user: { email: string };
+  expires: string;
+}
+
 const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   const pathName = usePathname();
   const isActive = pathName.includes("/auth");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const authData = useAppSelector((state) => state.userInfo);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (status === "authenticated" && session) {
+        const userData = await getUserByEmail(session?.user?.email ?? "");
+
+        if (userData) {
+          dispatch(updateUserInfo(userData));
+        }
+      }
+    };
+    fetchUserData();
+  }, [session, status, dispatch]);
 
   const closeDrawer = () => {
     const menuCheckbox = document.getElementById(
@@ -36,7 +58,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
 
   return (
     <>
-      {authData.status || session ? (
+      {authData.status && status === "authenticated" ? (
         <>
           <div className="dropdown dropdown-end lg:mx-3 lg:mt-1 hidden md:block">
             <button tabIndex={0} className="avatar">
