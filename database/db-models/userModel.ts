@@ -16,7 +16,7 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
     },
     profileImageUrl: { type: String, default: null },
     gender: { type: String, default: null },
-    birthDate: { type: Date, default: null },
+    birthDate: { type: String, default: null },
     country: { type: String, default: null },
     phone: { type: String, default: null },
     address: { type: String, default: null },
