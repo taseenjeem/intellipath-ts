@@ -12,21 +12,24 @@ interface IUserActionBtnsProps {
   isSmallDevice?: boolean;
 }
 
-interface ILoginSessionProps {
+interface ILoginSession {
   user: { email: string };
   expires: string;
+  status: string;
 }
 
 const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   const pathName = usePathname();
   const isActive = pathName.includes("/auth");
   const { data: session, status } = useSession();
+  const [loginSession, setLoginSession] = useState<ILoginSession | null>(null);
   const authData = useAppSelector((state) => state.userInfo);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (status === "authenticated" && session) {
+        setLoginSession({ ...session, status: status } as ILoginSession);
         const userData = await getUserByEmail(session?.user?.email ?? "");
 
         if (userData) {
@@ -58,7 +61,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
 
   return (
     <>
-      {authData.status && status === "authenticated" ? (
+      {authData.status && loginSession?.status === "authenticated" ? (
         <>
           <div className="dropdown dropdown-end lg:mx-3 lg:mt-1 hidden md:block">
             <button tabIndex={0} className="avatar">
