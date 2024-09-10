@@ -30,7 +30,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
     const fetchUserData = async () => {
       if (status === "authenticated" && session) {
         setLoginSession({ ...session, status: status } as ILoginSession);
-        const userData = await getUserByEmail(session?.user?.email ?? "");
+        const userData = await getUserByEmail(loginSession?.user.email ?? "");
 
         if (userData) {
           dispatch(updateUserInfo(userData));
@@ -38,7 +38,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
       }
     };
     fetchUserData();
-  }, [session, status, dispatch]);
+  }, [session, status, loginSession, dispatch]);
 
   const closeDrawer = () => {
     const menuCheckbox = document.getElementById(
