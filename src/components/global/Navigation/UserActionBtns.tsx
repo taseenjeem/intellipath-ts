@@ -6,39 +6,28 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface IUserActionBtnsProps {
   isSmallDevice?: boolean;
-}
-
-interface ILoginSession {
-  user: { email: string };
-  expires: string;
-  status: string;
 }
 
 const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   const pathName = usePathname();
   const isActive = pathName.includes("/auth");
   const { data: session, status } = useSession();
-  const [loginSession, setLoginSession] = useState<ILoginSession | null>(null);
   const authData = useAppSelector((state) => state.userInfo);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (status === "authenticated" && session) {
-        setLoginSession({ ...session, status: status } as ILoginSession);
-        const userData = await getUserByEmail(loginSession?.user.email ?? "");
-
-        if (userData) {
-          dispatch(updateUserInfo(userData));
-        }
+      if (status === "authenticated" && session?.user?.email) {
+        const userData = await getUserByEmail(session.user.email);
+        dispatch(updateUserInfo(userData));
       }
     };
     fetchUserData();
-  }, [session, status, loginSession, dispatch]);
+  }, [dispatch, session?.user?.email, status]);
 
   const closeDrawer = () => {
     const menuCheckbox = document.getElementById(
@@ -59,9 +48,11 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
     }
   };
 
+  console.log("this is session: ", session);
+
   return (
     <>
-      {authData.status && loginSession?.status === "authenticated" ? (
+      {authData.status && status === "authenticated" ? (
         <>
           <div className="dropdown dropdown-end lg:mx-3 lg:mt-1 hidden md:block">
             <button tabIndex={0} className="avatar">
