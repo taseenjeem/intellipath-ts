@@ -52,7 +52,7 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
 
   return (
     <>
-      {authData.status && status === "authenticated" ? (
+      {status === "authenticated" || authData.status ? (
         <>
           <div className="dropdown dropdown-end lg:mx-3 lg:mt-1 hidden md:block">
             <button tabIndex={0} className="avatar">
