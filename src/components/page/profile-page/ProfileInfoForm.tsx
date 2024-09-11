@@ -1,10 +1,23 @@
 "use client";
-import { useEffect, useState } from "react";
-import { ICountry, IUserInfo } from "@/types";
-import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { getUserByEmail, updateUserDetails } from "@/database/server-actions";
 import { toast } from "react-toastify";
+import {
+  initializeFormData,
+  setAllCountries,
+  setIsLoading,
+  setFormData,
+  setNewExpertise,
+  setEducation,
+  setCertifications,
+  addEducation,
+  addCertification,
+  addSkill,
+  removeEducation,
+  removeCertification,
+  removeSkill,
+} from "@/redux/slices/profileInfoSlice";
 import EditPersonalInfo from "./EditPersonalInfo";
 import EditContactInfo from "./EditContactInfo";
 import EditAcademicInfo from "./EditAcademicInfo";
@@ -24,31 +37,26 @@ interface IProfileInfoFormProps {
 
 const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
   const dispatch = useAppDispatch();
-  const savedFormData = useAppSelector((state: RootState) => state.userInfo);
-  const [formData, setFormData] = useState<IUserInfo>(savedFormData);
-  const [allCountries, setAllCountries] = useState<ICountry[]>([]);
-  const [newExpertise, setNewExpertise] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [education, setEducation] = useState({
-    degree: "",
-    institution: "",
-    location: "",
-    yearOfCompletion: "",
-  });
-  const [certifications, setCertifications] = useState({
-    title: "",
-    issuer: "",
-    dateOfIssue: "",
-    url: "",
-  });
+  const {
+    formData,
+    allCountries,
+    newExpertise,
+    isLoading,
+    education,
+    certifications,
+  } = useAppSelector((state) => state.editProfileInfo);
+
+  const userInfo = useAppSelector((state) => state.userInfo);
 
   useEffect(() => {
     const fetchCountries = async () => {
       const countries = await getCountries();
-      setAllCountries(countries);
+      dispatch(setAllCountries(countries));
     };
+
     fetchCountries();
-  }, []);
+    dispatch(initializeFormData(userInfo));
+  }, [dispatch, userInfo]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -56,108 +64,26 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     >
   ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleAddEducation = () => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      education: [...(prevFormData.education ?? []), education],
-    }));
-
-    setEducation({
-      degree: "",
-      institution: "",
-      location: "",
-      yearOfCompletion: "",
-    });
-  };
-
-  const handleEducationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      [name]: value,
-    }));
-  };
-
-  const handleRemoveEducation = (degree: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      education: prevData.education?.filter((edu) => edu.degree !== degree),
-    }));
-  };
-
-  const handleAddCertification = () => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      certifications: [...(prevFormData.certifications ?? []), certifications],
-    }));
-
-    setCertifications({
-      title: "",
-      issuer: "",
-      dateOfIssue: "",
-      url: "",
-    });
-  };
-
-  const handleCertificationChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setCertifications((prevCertifications) => ({
-      ...prevCertifications,
-      [name]: value,
-    }));
-  };
-
-  const handleRemoveCertification = (title: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      certifications: prevData.certifications?.filter(
-        (item) => item.title !== title
-      ),
-    }));
-  };
-
-  const handleAddSkill = () => {
-    if (newExpertise.trim()) {
-      setFormData((prevData) => ({
-        ...prevData,
-        expertise: [...(prevData.expertise ?? []), newExpertise.trim()],
-      }));
-      setNewExpertise("");
-    }
-  };
-
-  const handleRemoveSkill = (skillToRemove: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      expertise: prevData.expertise?.filter((skill) => skill !== skillToRemove),
-    }));
+    dispatch(setFormData({ ...formData, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
 
     try {
       await updateUserDetails(userId, formData);
-      const userInfo = await getUserByEmail(userEmail);
+      const updatedUserInfo = await getUserByEmail(userEmail);
 
-      if (userInfo) {
-        dispatch(updateUserInfo(userInfo));
+      if (updatedUserInfo) {
+        dispatch(setFormData(updatedUserInfo));
         toast.success("User updated successfully");
       }
     } catch (error) {
       console.log(error);
       toast.error("Failed to update user information");
     } finally {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -176,23 +102,34 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
         <EditAcademicInfo
           education={education}
           formData={formData}
-          onAdd={handleAddEducation}
-          onChange={handleEducationChange}
-          onRemove={handleRemoveEducation}
+          onAdd={() => dispatch(addEducation())}
+          onChange={(e) =>
+            dispatch(
+              setEducation({ ...education, [e.target.name]: e.target.value })
+            )
+          }
+          onRemove={(degree) => dispatch(removeEducation(degree))}
         />
         <EditCertifications
           certifications={certifications}
           formData={formData}
-          onAdd={handleAddCertification}
-          onChange={handleCertificationChange}
-          onRemove={handleRemoveCertification}
+          onAdd={() => dispatch(addCertification())}
+          onChange={(e) =>
+            dispatch(
+              setCertifications({
+                ...certifications,
+                [e.target.name]: e.target.value,
+              })
+            )
+          }
+          onRemove={(title) => dispatch(removeCertification(title))}
         />
         <EditExpertise
           formData={formData}
-          onAdd={handleAddSkill}
-          onRemove={handleRemoveSkill}
+          onAdd={() => dispatch(addSkill())}
+          onRemove={(skill) => dispatch(removeSkill(skill))}
           newExpertise={newExpertise}
-          setNewExpertise={setNewExpertise}
+          setNewExpertise={(value) => dispatch(setNewExpertise(value))}
         />
 
         {/* Submit Button */}
