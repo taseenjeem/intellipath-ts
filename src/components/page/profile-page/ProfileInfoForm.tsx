@@ -23,6 +23,7 @@ import EditContactInfo from "./EditContactInfo";
 import EditAcademicInfo from "./EditAcademicInfo";
 import EditCertifications from "./EditCertifications";
 import EditExpertise from "./EditExpertise";
+import EditExperience from "./EditExperience";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -133,6 +134,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           }
           onRemove={(title) => dispatch(removeCertification(title))}
         />
+
+        <EditExperience />
 
         <EditExpertise
           formData={formData}
