@@ -93,7 +93,13 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
         Personal information
       </h3>
       <form onSubmit={handleSubmit} className="">
-        <EditPersonalInfo formData={formData} handleChange={handleChange} />
+        <EditPersonalInfo
+          profileImageUrl={formData?.profileImageUrl}
+          userEmail={formData?.email}
+          userId={formData?._id}
+          formData={formData}
+          handleChange={handleChange}
+        />
         <EditContactInfo
           formData={formData}
           onChange={handleChange}

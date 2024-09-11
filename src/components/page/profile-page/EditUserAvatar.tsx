@@ -6,17 +6,17 @@ import { useAppDispatch } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 import { toast } from "react-toastify";
 
-interface IUserAvatarProps {
-  profileImageUrl: string | null;
+interface IEditUserAvatarProps {
+  profileImageUrl: string | null | undefined;
   userId: string;
   userEmail: string;
 }
 
-const UserAvatar = ({
+const EditUserAvatar = ({
   profileImageUrl,
   userId,
   userEmail,
-}: IUserAvatarProps) => {
+}: IEditUserAvatarProps) => {
   const dispatch = useAppDispatch();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ const UserAvatar = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative size-40 mt-6 mb-10 mx-auto">
       <div className="avatar">
         <div className="ring-primary ring-offset-base-100 w-20 md:w-40 rounded-full ring ring-offset-2">
           <Image
@@ -79,4 +79,4 @@ const UserAvatar = ({
   );
 };
 
-export default UserAvatar;
+export default EditUserAvatar;

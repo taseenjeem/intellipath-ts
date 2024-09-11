@@ -1,7 +1,11 @@
 import { IUserInfo } from "@/types";
+import EditUserAvatar from "./EditUserAvatar";
 
 interface IEditPersonalInfoProps {
   formData: IUserInfo;
+  profileImageUrl: string | null | undefined;
+  userId: string;
+  userEmail: string;
   handleChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -12,9 +16,17 @@ interface IEditPersonalInfoProps {
 const EditPersonalInfo = ({
   formData,
   handleChange,
+  profileImageUrl,
+  userId,
+  userEmail,
 }: IEditPersonalInfoProps) => {
   return (
     <>
+      <EditUserAvatar
+        profileImageUrl={profileImageUrl}
+        userEmail={userEmail}
+        userId={userId}
+      />
       <div className="grid grid-cols-1 gap-5 md:grid-cols-5">
         {/* First Name Input */}
         <div className="form-control">
