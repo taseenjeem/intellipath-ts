@@ -5,7 +5,6 @@ import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 import { getUserByEmail, updateUserDetails } from "@/database/server-actions";
 import { toast } from "react-toastify";
-import { IoClose } from "react-icons/io5";
 import EditPersonalInfo from "./EditPersonalInfo";
 import EditContactInfo from "./EditContactInfo";
 import EditAcademicInfo from "./EditAcademicInfo";
