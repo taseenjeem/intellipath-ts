@@ -1,7 +1,8 @@
-import { IUserInfo } from "@/types";
+import { ICountry, IUserInfo } from "@/types";
 
 interface IEditContactInfoProps {
   formData: IUserInfo;
+  allCountries: ICountry[];
   handleChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -9,7 +10,11 @@ interface IEditContactInfoProps {
   ) => void;
 }
 
-const EditContactInfo = ({ formData, handleChange }: IEditContactInfoProps) => {
+const EditContactInfo = ({
+  formData,
+  handleChange,
+  allCountries,
+}: IEditContactInfoProps) => {
   return (
     <>
       <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mt-16 mb-5">

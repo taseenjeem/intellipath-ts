@@ -167,7 +167,11 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
       <form onSubmit={handleSubmit} className="">
         <div className="">
           <EditPersonalInfo formData={formData} handleChange={handleChange} />
-          <EditContactInfo formData={formData} handleChange={handleChange} />
+          <EditContactInfo
+            formData={formData}
+            handleChange={handleChange}
+            allCountries={allCountries}
+          />
           <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mt-16 mb-5">
             Academic Education
           </h3>
