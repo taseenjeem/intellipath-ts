@@ -547,7 +547,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
               <div className="w-full">
                 <button
                   type="button"
-                  className="btn btn-primary mt-3"
+                  className="btn btn-primary mt-3 w-full"
                   onClick={handleAddCertification}
                 >
                   Add New Certification
