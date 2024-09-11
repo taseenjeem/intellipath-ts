@@ -62,16 +62,6 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     }));
   };
 
-  const handleAddSkill = () => {
-    if (newExpertise.trim()) {
-      setFormData((prevData) => ({
-        ...prevData,
-        expertise: [...(prevData.expertise ?? []), newExpertise.trim()],
-      }));
-      setNewExpertise("");
-    }
-  };
-
   const handleAddEducation = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -84,6 +74,21 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
       location: "",
       yearOfCompletion: "",
     });
+  };
+
+  const handleEducationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      [name]: value,
+    }));
+  };
+
+  const handleRemoveEducation = (degree: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      education: prevData.education?.filter((edu) => edu.degree !== degree),
+    }));
   };
 
   const handleAddCertification = () => {
@@ -100,14 +105,6 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     });
   };
 
-  const handleEducationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      [name]: value,
-    }));
-  };
-
   const handleCertificationChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -118,26 +115,29 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     }));
   };
 
-  const handleRemoveSkill = (skillToRemove: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      expertise: prevData.expertise?.filter((skill) => skill !== skillToRemove),
-    }));
-  };
-
-  const handleRemoveEducation = (degree: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      education: prevData.education?.filter((edu) => edu.degree !== degree),
-    }));
-  };
-
   const handleRemoveCertification = (title: string) => {
     setFormData((prevData) => ({
       ...prevData,
       certifications: prevData.certifications?.filter(
         (item) => item.title !== title
       ),
+    }));
+  };
+
+  const handleAddSkill = () => {
+    if (newExpertise.trim()) {
+      setFormData((prevData) => ({
+        ...prevData,
+        expertise: [...(prevData.expertise ?? []), newExpertise.trim()],
+      }));
+      setNewExpertise("");
+    }
+  };
+
+  const handleRemoveSkill = (skillToRemove: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      expertise: prevData.expertise?.filter((skill) => skill !== skillToRemove),
     }));
   };
 
