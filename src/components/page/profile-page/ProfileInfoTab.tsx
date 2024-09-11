@@ -85,7 +85,7 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
                       rel="noopener noreferrer"
                       className="link-hover"
                     >
-                      X (formerly twitter)
+                      X (twitter)
                     </Link>
                   </li>
                 )}
