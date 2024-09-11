@@ -199,9 +199,8 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
             </div>
           </div>
         </div>
-        <hr className="md:my-10 my-5" />
         <div>
-          <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
+          <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
             Academic Education
           </h3>
           {userData?.education && userData?.education.length > 0 ? (
