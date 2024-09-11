@@ -147,8 +147,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
 
     try {
       await updateUserDetails(userId, formData);
-
       const userInfo = await getUserByEmail(userEmail);
+
       if (userInfo) {
         dispatch(updateUserInfo(userInfo));
         toast.success("User updated successfully");
