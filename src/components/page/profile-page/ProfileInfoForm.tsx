@@ -100,11 +100,13 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           formData={formData}
           handleChange={handleChange}
         />
+
         <EditContactInfo
           formData={formData}
           onChange={handleChange}
           allCountries={allCountries}
         />
+
         <EditAcademicInfo
           education={education}
           formData={formData}
@@ -116,6 +118,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           }
           onRemove={(degree) => dispatch(removeEducation(degree))}
         />
+
         <EditCertifications
           certifications={certifications}
           formData={formData}
@@ -130,6 +133,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           }
           onRemove={(title) => dispatch(removeCertification(title))}
         />
+
         <EditExpertise
           formData={formData}
           onAdd={() => dispatch(addSkill())}
