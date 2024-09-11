@@ -9,17 +9,17 @@ interface IEditAcademicInfoProps {
     location: string;
     yearOfCompletion: string;
   };
-  handleRemoveEducation: (degree: string) => void;
-  handleEducationChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleAddEducation: () => void;
+  onRemove: (degree: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAdd: () => void;
 }
 
 const EditAcademicInfo = ({
   formData,
-  handleRemoveEducation,
+  onRemove,
   education,
-  handleEducationChange,
-  handleAddEducation,
+  onChange,
+  onAdd,
 }: IEditAcademicInfoProps) => {
   return (
     <>
@@ -37,7 +37,7 @@ const EditAcademicInfo = ({
                 <button
                   type="button"
                   className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
-                  onClick={() => handleRemoveEducation(item.degree)}
+                  onClick={() => onRemove(item.degree)}
                 >
                   <IoClose />
                 </button>
@@ -81,7 +81,7 @@ const EditAcademicInfo = ({
               className="input input-bordered"
               placeholder="Ex: BSc, BCS, Hons"
               value={education.degree}
-              onChange={handleEducationChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -95,7 +95,7 @@ const EditAcademicInfo = ({
               className="input input-bordered"
               placeholder="Ex: University of Oxford"
               value={education.institution}
-              onChange={handleEducationChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -109,7 +109,7 @@ const EditAcademicInfo = ({
               className="input input-bordered"
               placeholder="Ex: UK"
               value={education.location}
-              onChange={handleEducationChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -123,14 +123,14 @@ const EditAcademicInfo = ({
               className="input input-bordered"
               placeholder="Ex: 2018 - 2020, 2018 - Present"
               value={education.yearOfCompletion}
-              onChange={handleEducationChange}
+              onChange={onChange}
             />
           </div>
           <div className="w-full">
             <button
               type="button"
               className="btn w-full btn-primary"
-              onClick={handleAddEducation}
+              onClick={onAdd}
             >
               Add New Academic Education
             </button>

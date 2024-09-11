@@ -3,7 +3,7 @@ import { ICountry, IUserInfo } from "@/types";
 interface IEditContactInfoProps {
   formData: IUserInfo;
   allCountries: ICountry[];
-  handleChange: (
+  onChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
@@ -12,7 +12,7 @@ interface IEditContactInfoProps {
 
 const EditContactInfo = ({
   formData,
-  handleChange,
+  onChange,
   allCountries,
 }: IEditContactInfoProps) => {
   return (
@@ -33,7 +33,7 @@ const EditContactInfo = ({
             className="input input-bordered cursor-not-allowed"
             readOnly
             value={formData.email ?? ""}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </div>
         {/* Phone Input */}
@@ -47,7 +47,7 @@ const EditContactInfo = ({
             type="number"
             className="input input-bordered"
             value={formData.phone ?? ""}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </div>
         {/* Country Input */}
@@ -60,7 +60,7 @@ const EditContactInfo = ({
             name="country"
             className="select select-bordered"
             value={formData.country ?? ""}
-            onChange={handleChange}
+            onChange={onChange}
           >
             <option value="" disabled>
               Please select your country
@@ -83,7 +83,7 @@ const EditContactInfo = ({
             type="text"
             className="input input-bordered"
             value={formData.address ?? ""}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </div>
       </div>

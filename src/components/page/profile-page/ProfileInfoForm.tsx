@@ -167,35 +167,33 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
         Personal information
       </h3>
       <form onSubmit={handleSubmit} className="">
-        <div className="">
-          <EditPersonalInfo formData={formData} handleChange={handleChange} />
-          <EditContactInfo
-            formData={formData}
-            handleChange={handleChange}
-            allCountries={allCountries}
-          />
-          <EditAcademicInfo
-            education={education}
-            formData={formData}
-            handleAddEducation={handleAddEducation}
-            handleEducationChange={handleEducationChange}
-            handleRemoveEducation={handleRemoveEducation}
-          />
-          <EditCertifications
-            certifications={certifications}
-            formData={formData}
-            handleAddCertification={handleAddCertification}
-            handleCertificationChange={handleCertificationChange}
-            handleRemoveCertification={handleRemoveCertification}
-          />
-          <EditExpertise
-            formData={formData}
-            handleAddSkill={handleAddSkill}
-            handleRemoveSkill={handleRemoveSkill}
-            newExpertise={newExpertise}
-            setNewExpertise={setNewExpertise}
-          />
-        </div>
+        <EditPersonalInfo formData={formData} handleChange={handleChange} />
+        <EditContactInfo
+          formData={formData}
+          onChange={handleChange}
+          allCountries={allCountries}
+        />
+        <EditAcademicInfo
+          education={education}
+          formData={formData}
+          onAdd={handleAddEducation}
+          onChange={handleEducationChange}
+          onRemove={handleRemoveEducation}
+        />
+        <EditCertifications
+          certifications={certifications}
+          formData={formData}
+          onAdd={handleAddCertification}
+          onChange={handleCertificationChange}
+          onRemove={handleRemoveCertification}
+        />
+        <EditExpertise
+          formData={formData}
+          onAdd={handleAddSkill}
+          onRemove={handleRemoveSkill}
+          newExpertise={newExpertise}
+          setNewExpertise={setNewExpertise}
+        />
 
         {/* Submit Button */}
         <div className="card-actions justify-end mt-5">

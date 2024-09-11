@@ -9,17 +9,17 @@ interface IEditCertificationProps {
     dateOfIssue: string;
     url: string;
   };
-  handleRemoveCertification: (title: string) => void;
-  handleCertificationChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleAddCertification: () => void;
+  onRemove: (title: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAdd: () => void;
 }
 
 const EditCertifications = ({
   formData,
-  handleRemoveCertification,
+  onRemove,
   certifications,
-  handleCertificationChange,
-  handleAddCertification,
+  onChange,
+  onAdd,
 }: IEditCertificationProps) => {
   return (
     <>
@@ -37,7 +37,7 @@ const EditCertifications = ({
                 <button
                   type="button"
                   className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
-                  onClick={() => handleRemoveCertification(item.title)}
+                  onClick={() => onRemove(item.title)}
                 >
                   <IoClose />
                 </button>
@@ -82,7 +82,7 @@ const EditCertifications = ({
               className="input input-bordered"
               placeholder="EX: Certificate of Best Developer in 2024"
               value={certifications.title}
-              onChange={handleCertificationChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -96,7 +96,7 @@ const EditCertifications = ({
               className="input input-bordered"
               placeholder="Ex: University of Oxford"
               value={certifications.issuer}
-              onChange={handleCertificationChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -110,7 +110,7 @@ const EditCertifications = ({
               className="input input-bordered"
               placeholder="Ex: 17 Feb 2016"
               value={certifications.dateOfIssue}
-              onChange={handleCertificationChange}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -124,14 +124,14 @@ const EditCertifications = ({
               className="input input-bordered"
               placeholder="Ex: www.something.com"
               value={certifications.url}
-              onChange={handleCertificationChange}
+              onChange={onChange}
             />
           </div>
           <div className="w-full">
             <button
               type="button"
               className="btn btn-primary mt-3 w-full"
-              onClick={handleAddCertification}
+              onClick={onAdd}
             >
               Add New Certification
             </button>

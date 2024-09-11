@@ -3,18 +3,18 @@ import { IoClose } from "react-icons/io5";
 
 interface IEditExpertiseProps {
   formData: IUserInfo;
-  handleRemoveSkill: (skill: string) => void;
+  onRemove: (skill: string) => void;
   newExpertise: string;
   setNewExpertise: (value: string) => void;
-  handleAddSkill: () => void;
+  onAdd: () => void;
 }
 
 const EditExpertise = ({
   formData,
-  handleRemoveSkill,
+  onRemove,
   newExpertise,
   setNewExpertise,
-  handleAddSkill,
+  onAdd,
 }: IEditExpertiseProps) => {
   return (
     <>
@@ -39,7 +39,7 @@ const EditExpertise = ({
                 <button
                   type="button"
                   className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-3 -right-3"
-                  onClick={() => handleRemoveSkill(item)}
+                  onClick={() => onRemove(item)}
                 >
                   <IoClose />
                 </button>
@@ -57,11 +57,7 @@ const EditExpertise = ({
             value={newExpertise}
             onChange={(e) => setNewExpertise(e.target.value)}
           />
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleAddSkill}
-          >
+          <button type="button" className="btn btn-primary" onClick={onAdd}>
             Add Skill
           </button>
         </div>
