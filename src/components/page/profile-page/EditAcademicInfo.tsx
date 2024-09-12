@@ -1,5 +1,7 @@
 import { IUserInfo } from "@/types";
 import { IoClose } from "react-icons/io5";
+import AddAcademicInfoModal from "./AddAcademicInfoModal";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 interface IEditAcademicInfoProps {
   formData: IUserInfo;
@@ -13,6 +15,16 @@ interface IEditAcademicInfoProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: () => void;
 }
+
+const openModal = () => {
+  const logoutModal = document.getElementById(
+    "add_academic_info"
+  ) as HTMLDialogElement | null;
+
+  if (logoutModal) {
+    logoutModal.showModal();
+  }
+};
 
 const EditAcademicInfo = ({
   formData,
@@ -60,83 +72,30 @@ const EditAcademicInfo = ({
                 </ul>
               </div>
             ))}
+            <div
+              onClick={openModal}
+              role="button"
+              className="border rounded-lg w-full h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
+            >
+              <IoIosAddCircleOutline size={60} />
+              Add New Academic Info
+            </div>
           </div>
         ) : (
-          <div className="border rounded-lg p-10 md:p-20 mt-5">
+          <div className="border rounded-3xl p-10 md:p-20 mt-5">
             <p className="text-center">
               You have not added any education qualifications yet! Go to the
               &quot;Settings&quot; tab to add your academic education.
             </p>
           </div>
         )}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-5 items-end mt-5">
-          <div className="form-control">
-            <label className="label" htmlFor="degree">
-              <span className="label-text">Degree</span>
-            </label>
-            <input
-              id="degree"
-              name="degree"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: BSc, BCS, Hons"
-              value={education.degree}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="institution">
-              <span className="label-text">Institution</span>
-            </label>
-            <input
-              id="institution"
-              name="institution"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: University of Oxford"
-              value={education.institution}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="location">
-              <span className="label-text">Location</span>
-            </label>
-            <input
-              id="location"
-              name="location"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: UK"
-              value={education.location}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="yearOfCompletion">
-              <span className="label-text">Time Period</span>
-            </label>
-            <input
-              id="yearOfCompletion"
-              name="yearOfCompletion"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: 2018 - 2020, 2018 - Present"
-              value={education.yearOfCompletion}
-              onChange={onChange}
-            />
-          </div>
-          <div className="w-full">
-            <button
-              type="button"
-              className="btn w-full btn-primary"
-              onClick={onAdd}
-            >
-              Add New Academic Education
-            </button>
-          </div>
-        </div>
       </div>
+
+      <AddAcademicInfoModal
+        education={education}
+        onAdd={onAdd}
+        onChange={onChange}
+      />
     </>
   );
 };
