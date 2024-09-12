@@ -56,6 +56,7 @@ const EditAcademicInfo = ({
 
                 <ul>
                   <li className="text-xl font-bold">{item.degree}</li>
+                  <li className="my-1 text-sm">{item.yearOfCompletion}</li>
                   <hr className="my-3 border-gray-400" />
                   <li>
                     <strong>Institution: </strong>
@@ -64,10 +65,6 @@ const EditAcademicInfo = ({
                   <li>
                     <strong>Location: </strong>
                     {item.location}
-                  </li>
-                  <li>
-                    <strong>Year of accomplished: </strong>
-                    {item.yearOfCompletion}
                   </li>
                 </ul>
               </div>
