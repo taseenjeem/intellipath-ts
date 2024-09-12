@@ -77,7 +77,7 @@ const EditCertifications = ({
             <div
               onClick={openModal}
               role="button"
-              className="border rounded-lg w-full min-h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
+              className="border rounded-2xl w-full min-h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
             >
               <IoIosAddCircleOutline size={60} />
               Add New Certification
