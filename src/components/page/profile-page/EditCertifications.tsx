@@ -66,7 +66,7 @@ const EditCertifications = ({
                     {item.dateOfIssue}
                   </li>
                   <li className="flex gap-1">
-                    <strong>Show Credentials: </strong>
+                    <strong>Credentials: </strong>
                     <p className="line-clamp-1">
                       {item.url ? item.url : "N/A"}
                     </p>
