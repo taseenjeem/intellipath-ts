@@ -82,11 +82,13 @@ const EditAcademicInfo = ({
             </div>
           </div>
         ) : (
-          <div className="border rounded-3xl p-10 md:p-20 mt-5">
-            <p className="text-center">
-              You have not added any education qualifications yet! Go to the
-              &quot;Settings&quot; tab to add your academic education.
-            </p>
+          <div
+            onClick={openModal}
+            role="button"
+            className="border rounded-2xl w-full min-h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
+          >
+            <IoIosAddCircleOutline size={60} />
+            Add New Academic Info
           </div>
         )}
       </div>
