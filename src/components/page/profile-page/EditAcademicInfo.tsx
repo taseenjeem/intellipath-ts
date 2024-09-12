@@ -43,7 +43,7 @@ const EditAcademicInfo = ({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
             {formData?.education?.map((item) => (
               <div
-                className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-300 hover:border-primary duration-300 relative"
+                className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-100 hover:border-primary duration-300 relative"
                 key={item.degree}
               >
                 <button
