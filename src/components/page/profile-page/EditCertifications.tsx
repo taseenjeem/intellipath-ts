@@ -1,5 +1,7 @@
 import { IUserInfo } from "@/types";
 import { IoClose } from "react-icons/io5";
+import AddCertificationModal from "./AddCertificationModal";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 interface IEditCertificationProps {
   formData: IUserInfo;
@@ -13,6 +15,16 @@ interface IEditCertificationProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: () => void;
 }
+
+const openModal = () => {
+  const logoutModal = document.getElementById(
+    "add_certification"
+  ) as HTMLDialogElement | null;
+
+  if (logoutModal) {
+    logoutModal.showModal();
+  }
+};
 
 const EditCertifications = ({
   formData,
@@ -53,7 +65,7 @@ const EditCertifications = ({
                     <strong>Date of Issue: </strong>
                     {item.dateOfIssue}
                   </li>
-                  <li>
+                  <li className="flex gap-1">
                     <strong>Show Credentials: </strong>
                     <p className="line-clamp-1">
                       {item.url ? item.url : "N/A"}
@@ -62,6 +74,14 @@ const EditCertifications = ({
                 </ul>
               </div>
             ))}
+            <div
+              onClick={openModal}
+              role="button"
+              className="border rounded-lg w-full min-h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
+            >
+              <IoIosAddCircleOutline size={60} />
+              Add New Certification
+            </div>
           </div>
         ) : (
           <div className="border rounded-lg p-10 md:p-20 mt-5">
@@ -70,74 +90,13 @@ const EditCertifications = ({
             </p>
           </div>
         )}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-5 items-end mt-5">
-          <div className="form-control">
-            <label className="label" htmlFor="title">
-              <span className="label-text">Title</span>
-            </label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              className="input input-bordered"
-              placeholder="EX: Certificate of Best Developer in 2024"
-              value={certifications.title}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="issuer">
-              <span className="label-text">Issuer</span>
-            </label>
-            <input
-              id="issuer"
-              name="issuer"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: University of Oxford"
-              value={certifications.issuer}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="dateOfIssue">
-              <span className="label-text">Date of issue</span>
-            </label>
-            <input
-              id="dateOfIssue"
-              name="dateOfIssue"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: 17 Feb 2016"
-              value={certifications.dateOfIssue}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="url">
-              <span className="label-text">Credential Link</span>
-            </label>
-            <input
-              id="url"
-              name="url"
-              type="text"
-              className="input input-bordered"
-              placeholder="Ex: www.something.com"
-              value={certifications.url}
-              onChange={onChange}
-            />
-          </div>
-          <div className="w-full">
-            <button
-              type="button"
-              className="btn btn-primary mt-3 w-full"
-              onClick={onAdd}
-            >
-              Add New Certification
-            </button>
-          </div>
-        </div>
       </div>
+
+      <AddCertificationModal
+        certifications={certifications}
+        onAdd={onAdd}
+        onChange={onChange}
+      />
     </>
   );
 };
