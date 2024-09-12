@@ -18,6 +18,13 @@ interface ProfileState {
     dateOfIssue: string;
     url: string;
   };
+  totalExperience: number;
+  experienceDetails: {
+    companyName: string;
+    designation: string;
+    location: string;
+    period: string;
+  };
 }
 
 const initialState: ProfileState = {
@@ -36,6 +43,13 @@ const initialState: ProfileState = {
     issuer: "",
     dateOfIssue: "",
     url: "",
+  },
+  totalExperience: 0,
+  experienceDetails: {
+    companyName: "",
+    designation: "",
+    location: "",
+    period: "",
   },
 };
 
