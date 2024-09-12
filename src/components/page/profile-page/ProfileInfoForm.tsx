@@ -135,7 +135,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           onRemove={(title) => dispatch(removeCertification(title))}
         />
 
-        <EditExperience />
+        <EditExperience formData={formData} />
 
         <EditExpertise
           formData={formData}

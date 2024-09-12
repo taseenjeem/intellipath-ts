@@ -38,8 +38,9 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
       totalExperience: { type: Number, default: null },
       details: [
         {
-          institution: { type: String, default: null },
-          platform: { type: String, default: null },
+          companyName: { type: String, default: null },
+          designation: { type: String, default: null },
+          location: { type: String, default: null },
           period: { type: String, default: null },
         },
       ],

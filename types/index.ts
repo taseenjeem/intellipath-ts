@@ -74,8 +74,9 @@ export interface IUserInfo {
   }[];
   teachingExperience?: {
     details: {
-      institution?: string;
-      platform?: string;
+      companyName?: string;
+      designation?: string;
+      location?: string;
       period?: string;
     }[];
     totalExperience?: number;
