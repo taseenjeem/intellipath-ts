@@ -42,12 +42,12 @@ const AddCertificationModal = ({
               <h3 className="text-xl font-bold text-primary mb-5">
                 Add new certification
               </h3>
-              <button
+              <span
                 onClick={closeModal}
                 className="btn btn-primary btn-circle btn-sm"
               >
                 <CgClose />
-              </button>
+              </span>
             </div>
             <div className="form-control">
               <label className="label" htmlFor="title">
