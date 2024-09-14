@@ -139,20 +139,22 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           onRemove={(title) => dispatch(removeCertification(title))}
         />
 
-        <EditExperience
-          formData={formData}
-          experience={experience}
-          onAdd={() => dispatch(addExperience())}
-          onRemove={(companyName) => dispatch(removeExperience(companyName))}
-          onChange={(e) =>
-            dispatch(
-              setExperience({
-                ...experience,
-                [e.target.name]: e.target.value,
-              })
-            )
-          }
-        />
+        {formData.role === "instructor" && (
+          <EditExperience
+            formData={formData}
+            experience={experience}
+            onAdd={() => dispatch(addExperience())}
+            onRemove={(companyName) => dispatch(removeExperience(companyName))}
+            onChange={(e) =>
+              dispatch(
+                setExperience({
+                  ...experience,
+                  [e.target.name]: e.target.value,
+                })
+              )
+            }
+          />
+        )}
 
         <EditExpertise
           formData={formData}
