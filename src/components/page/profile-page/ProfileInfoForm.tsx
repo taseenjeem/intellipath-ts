@@ -27,6 +27,7 @@ import EditAcademicInfo from "./EditAcademicInfo";
 import EditCertifications from "./EditCertifications";
 import EditExpertise from "./EditExpertise";
 import EditExperience from "./EditExperience";
+import EditSocialLinks from "./EditSocialLinks";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -163,6 +164,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           newExpertise={newExpertise}
           setNewExpertise={(value) => dispatch(setNewExpertise(value))}
         />
+
+        <EditSocialLinks />
 
         {/* Submit Button */}
         <div className="card-actions justify-end mt-5">
