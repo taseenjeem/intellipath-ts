@@ -23,14 +23,10 @@ const EditExperience = ({ formData }: IEditExperienceProps) => {
       <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mt-16 mb-5">
         Experiences
       </h3>
-      <h3>
-        Total Experiences: {formData?.teachingExperience?.totalExperience} years
-      </h3>
       <div>
-        {formData?.teachingExperience?.details &&
-        formData?.teachingExperience?.details.length > 0 ? (
+        {formData?.experience && formData?.experience.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
-            {formData?.teachingExperience?.details?.map((item) => (
+            {formData?.experience?.map((item) => (
               <div
                 className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-100 hover:border-primary duration-300 relative"
                 key={item.companyName}

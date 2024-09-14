@@ -72,20 +72,17 @@ export interface IUserInfo {
     location: string;
     yearOfCompletion: string;
   }[];
-  teachingExperience?: {
-    details: {
-      companyName?: string;
-      designation?: string;
-      location?: string;
-      period?: string;
-    }[];
-    totalExperience?: number;
-  };
   certifications?: {
     title: string;
     issuer: string;
     dateOfIssue: string;
     url: string;
+  }[];
+  experience?: {
+    companyName: string;
+    designation: string;
+    location: string;
+    period: string;
   }[];
   socialLinks?: {
     linkedin?: string;

@@ -18,8 +18,7 @@ interface ProfileState {
     dateOfIssue: string;
     url: string;
   };
-  totalExperience: number;
-  experienceDetails: {
+  experience: {
     companyName: string;
     designation: string;
     location: string;
@@ -44,8 +43,7 @@ const initialState: ProfileState = {
     dateOfIssue: "",
     url: "",
   },
-  totalExperience: 0,
-  experienceDetails: {
+  experience: {
     companyName: "",
     designation: "",
     location: "",

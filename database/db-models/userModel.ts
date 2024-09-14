@@ -34,23 +34,20 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
         yearOfCompletion: { type: String, default: null },
       },
     ],
-    teachingExperience: {
-      totalExperience: { type: Number, default: null },
-      details: [
-        {
-          companyName: { type: String, default: null },
-          designation: { type: String, default: null },
-          location: { type: String, default: null },
-          period: { type: String, default: null },
-        },
-      ],
-    },
     certifications: [
       {
         title: { type: String, default: null },
         issuer: { type: String, default: null },
         dateOfIssue: { type: String, default: null },
         url: { type: String, default: null },
+      },
+    ],
+    experience: [
+      {
+        companyName: { type: String, default: null },
+        designation: { type: String, default: null },
+        location: { type: String, default: null },
+        period: { type: String, default: null },
       },
     ],
     socialLinks: {
