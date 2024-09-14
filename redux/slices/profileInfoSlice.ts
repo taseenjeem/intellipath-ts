@@ -24,11 +24,13 @@ interface ProfileState {
     location: string;
     period: string;
   };
-  linkedin: string;
-  twitter: string;
-  facebook: string;
-  github: string;
-  website: string;
+  socialLinks: {
+    linkedin: string | null;
+    twitter: string | null;
+    facebook: string | null;
+    github: string | null;
+    website: string | null;
+  };
 }
 
 const initialState: ProfileState = {
@@ -54,11 +56,13 @@ const initialState: ProfileState = {
     location: "",
     period: "",
   },
-  linkedin: "",
-  twitter: "",
-  facebook: "",
-  github: "",
-  website: "",
+  socialLinks: {
+    linkedin: null,
+    twitter: null,
+    facebook: null,
+    github: null,
+    website: null,
+  },
 };
 
 const profileInfoSlice = createSlice({
