@@ -1,5 +1,16 @@
 import { CgClose } from "react-icons/cg";
 
+interface IExperienceModalProps {
+  experience: {
+    companyName: string;
+    designation: string;
+    location: string;
+    period: string;
+  };
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAdd: () => void;
+}
+
 const closeModal = () => {
   const logoutModal = document.getElementById(
     "add_experience"
@@ -9,7 +20,16 @@ const closeModal = () => {
   }
 };
 
-const AddExperienceModal = () => {
+const AddExperienceModal = ({
+  experience,
+  onAdd,
+  onChange,
+}: IExperienceModalProps) => {
+  const addExperience = () => {
+    onAdd();
+    closeModal();
+  };
+
   return (
     <>
       <dialog
@@ -37,6 +57,8 @@ const AddExperienceModal = () => {
               name="companyName"
               type="text"
               className="input input-bordered"
+              value={experience.companyName}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -48,6 +70,8 @@ const AddExperienceModal = () => {
               name="designation"
               type="text"
               className="input input-bordered"
+              value={experience.designation}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -59,6 +83,8 @@ const AddExperienceModal = () => {
               name="location"
               type="text"
               className="input input-bordered"
+              value={experience.location}
+              onChange={onChange}
             />
           </div>
           <div className="form-control">
@@ -70,10 +96,16 @@ const AddExperienceModal = () => {
               name="period"
               type="text"
               className="input input-bordered"
+              value={experience.period}
+              onChange={onChange}
             />
           </div>
           <div className="w-full">
-            <button type="button" className="btn btn-primary mt-3 w-full">
+            <button
+              type="button"
+              className="btn btn-primary mt-3 w-full"
+              onClick={addExperience}
+            >
               Done
             </button>
           </div>

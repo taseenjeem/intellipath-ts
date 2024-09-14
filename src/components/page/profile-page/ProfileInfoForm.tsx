@@ -17,6 +17,9 @@ import {
   removeEducation,
   removeCertification,
   removeSkill,
+  addExperience,
+  removeExperience,
+  setExperience,
 } from "@/redux/slices/profileInfoSlice";
 import EditPersonalInfo from "./EditPersonalInfo";
 import EditContactInfo from "./EditContactInfo";
@@ -45,6 +48,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     isLoading,
     education,
     certifications,
+    experience,
   } = useAppSelector((state) => state.editProfileInfo);
 
   const userInfo = useAppSelector((state) => state.userInfo);
@@ -135,7 +139,20 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           onRemove={(title) => dispatch(removeCertification(title))}
         />
 
-        <EditExperience formData={formData} />
+        <EditExperience
+          formData={formData}
+          experience={experience}
+          onAdd={() => dispatch(addExperience())}
+          onRemove={(companyName) => dispatch(removeExperience(companyName))}
+          onChange={(e) =>
+            dispatch(
+              setExperience({
+                ...experience,
+                [e.target.name]: e.target.value,
+              })
+            )
+          }
+        />
 
         <EditExpertise
           formData={formData}

@@ -79,6 +79,9 @@ const profileInfoSlice = createSlice({
     ) {
       state.certifications = action.payload;
     },
+    setExperience(state, action: PayloadAction<ProfileState["experience"]>) {
+      state.experience = action.payload;
+    },
     addEducation(state) {
       state.formData.education = [
         ...(state.formData.education || []),
@@ -103,6 +106,18 @@ const profileInfoSlice = createSlice({
         url: "",
       };
     },
+    addExperience(state) {
+      state.formData.experience = [
+        ...(state.formData.experience || []),
+        state.experience,
+      ];
+      state.experience = {
+        companyName: "",
+        designation: "",
+        location: "",
+        period: "",
+      };
+    },
     addSkill(state) {
       if (state.newExpertise.trim()) {
         state.formData.expertise = [
@@ -122,6 +137,11 @@ const profileInfoSlice = createSlice({
         (item) => item.title !== action.payload
       );
     },
+    removeExperience(state, action: PayloadAction<string>) {
+      state.formData.experience = state.formData.experience?.filter(
+        (item) => item.companyName !== action.payload
+      );
+    },
     removeSkill(state, action: PayloadAction<string>) {
       state.formData.expertise = state.formData.expertise?.filter(
         (skill) => skill !== action.payload
@@ -138,11 +158,14 @@ export const {
   setIsLoading,
   setEducation,
   setCertifications,
+  setExperience,
   addEducation,
   addCertification,
+  addExperience,
   addSkill,
   removeEducation,
   removeCertification,
+  removeExperience,
   removeSkill,
 } = profileInfoSlice.actions;
 

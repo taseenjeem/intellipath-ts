@@ -5,6 +5,15 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 
 interface IEditExperienceProps {
   formData: IUserInfo;
+  experience: {
+    companyName: string;
+    designation: string;
+    location: string;
+    period: string;
+  };
+  onRemove: (title: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAdd: () => void;
 }
 
 const openModal = () => {
@@ -17,7 +26,13 @@ const openModal = () => {
   }
 };
 
-const EditExperience = ({ formData }: IEditExperienceProps) => {
+const EditExperience = ({
+  formData,
+  experience,
+  onAdd,
+  onRemove,
+  onChange,
+}: IEditExperienceProps) => {
   return (
     <>
       <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mt-16 mb-5">
@@ -34,6 +49,7 @@ const EditExperience = ({ formData }: IEditExperienceProps) => {
                 <button
                   type="button"
                   className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
+                  onClick={() => onRemove(item.companyName)}
                 >
                   <IoClose />
                 </button>
@@ -74,7 +90,11 @@ const EditExperience = ({ formData }: IEditExperienceProps) => {
         )}
       </div>
 
-      <AddExperienceModal />
+      <AddExperienceModal
+        experience={experience}
+        onAdd={onAdd}
+        onChange={onChange}
+      />
     </>
   );
 };
