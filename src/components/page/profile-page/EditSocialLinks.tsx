@@ -1,4 +1,11 @@
-const EditSocialLinks = () => {
+import { IUserInfo } from "@/types";
+
+interface IEditSocialLinkProps {
+  formData: IUserInfo;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const EditSocialLinks = ({ formData, onChange }: IEditSocialLinkProps) => {
   return (
     <>
       <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mt-16 mb-5">
@@ -14,17 +21,21 @@ const EditSocialLinks = () => {
             name="facebook"
             type="text"
             className="input input-bordered"
+            value={formData?.socialLinks?.facebook || ""}
+            onChange={onChange}
           />
         </div>
         <div className="form-control">
           <label className="label" htmlFor="twitter">
-            <span className="label-text">X (twitter)</span>
+            <span className="label-text">X (Twitter)</span>
           </label>
           <input
             id="twitter"
             name="twitter"
             type="text"
             className="input input-bordered"
+            value={formData?.socialLinks?.twitter || ""}
+            onChange={onChange}
           />
         </div>
         <div className="form-control">
@@ -36,6 +47,8 @@ const EditSocialLinks = () => {
             name="linkedin"
             type="text"
             className="input input-bordered"
+            value={formData?.socialLinks?.linkedin || ""}
+            onChange={onChange}
           />
         </div>
         <div className="form-control">
@@ -47,6 +60,8 @@ const EditSocialLinks = () => {
             name="github"
             type="text"
             className="input input-bordered"
+            value={formData?.socialLinks?.github || ""}
+            onChange={onChange}
           />
         </div>
         <div className="form-control">
@@ -58,6 +73,8 @@ const EditSocialLinks = () => {
             name="website"
             type="text"
             className="input input-bordered"
+            value={formData?.socialLinks?.website || ""}
+            onChange={onChange}
           />
         </div>
       </div>

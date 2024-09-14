@@ -70,7 +70,20 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     >
   ) => {
     const { name, value } = e.target;
-    dispatch(setFormData({ ...formData, [name]: value }));
+
+    if (formData?.socialLinks && name in formData.socialLinks) {
+      dispatch(
+        setFormData({
+          ...formData,
+          socialLinks: {
+            ...formData.socialLinks,
+            [name]: value,
+          },
+        })
+      );
+    } else {
+      dispatch(setFormData({ ...formData, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -165,9 +178,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
           setNewExpertise={(value) => dispatch(setNewExpertise(value))}
         />
 
-        <EditSocialLinks />
+        <EditSocialLinks formData={formData} onChange={handleChange} />
 
-        {/* Submit Button */}
         <div className="card-actions justify-end mt-5">
           {isLoading ? (
             <button
