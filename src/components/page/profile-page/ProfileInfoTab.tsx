@@ -240,28 +240,24 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
             <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
               Teaching Experience
             </h3>
-            <h4 className="my-4">
-              <strong>Total Teaching Experience:</strong>
-              {userData?.teachingExperience?.totalExperience} years
-            </h4>
-            {userData?.teachingExperience?.details &&
-            userData?.teachingExperience?.details.length > 0 ? (
+            {userData?.experience && userData?.experience.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
-                {userData?.teachingExperience?.details?.map((item) => (
+                {userData?.experience.map((item) => (
                   <div
-                    className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
-                    key={item.institution}
+                    className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-100 hover:border-primary duration-300 relative"
+                    key={item.companyName}
                   >
                     <ul>
-                      <li className="text-xl font-bold">{item.institution}</li>
+                      <li className="text-xl font-bold">{item.companyName}</li>
+                      <li className="my-1 text-sm">{item.period}</li>
                       <hr className="my-3 border-gray-400" />
                       <li>
-                        <strong>Teaching Platform: </strong>
-                        {item.platform}
+                        <strong>Designation: </strong>
+                        {item.designation}
                       </li>
                       <li>
-                        <strong>: </strong>
-                        {item.period}
+                        <strong>Location: </strong>
+                        {item.location}
                       </li>
                     </ul>
                   </div>
