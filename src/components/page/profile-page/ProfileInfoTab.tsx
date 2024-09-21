@@ -26,8 +26,8 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
               <div className="avatar">
                 <div className="ring-primary ring-offset-base-100 size-44 rounded-full ring ring-offset-2">
                   <Image
-                    width={128}
-                    height={128}
+                    width={176}
+                    height={176}
                     src={
                       userData?.profileImageUrl
                         ? userData.profileImageUrl
