@@ -106,3 +106,14 @@ export const updateUserDetails = async (userId: string, updatedData: any) => {
     throw new Error("Error updating user details");
   }
 };
+
+export const checkUsernameAvailability = async (username: string) => {
+  try {
+    await connectMongodb();
+    const existingUser = await User.findOne({ username });
+    return !!existingUser;
+  } catch (error) {
+    console.error("Error checking username:", error);
+    throw new Error("Error checking username availability");
+  }
+};

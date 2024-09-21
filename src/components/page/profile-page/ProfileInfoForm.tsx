@@ -1,7 +1,11 @@
 "use client";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { getUserByEmail, updateUserDetails } from "@/database/server-actions";
+import {
+  checkUsernameAvailability,
+  getUserByEmail,
+  updateUserDetails,
+} from "@/database/server-actions";
 import { toast } from "react-toastify";
 import {
   initializeFormData,
@@ -86,6 +90,16 @@ const ProfileInfoForm = () => {
     dispatch(setIsLoading(true));
 
     try {
+      const isUsernameTaken = await checkUsernameAvailability(
+        formData.username
+      );
+
+      if (isUsernameTaken && userInfo.username !== formData.username) {
+        toast.warning("Username is already taken. Please choose another one.");
+        dispatch(setIsLoading(false));
+        return;
+      }
+
       await updateUserDetails(formData._id, formData);
       const updatedUserInfo = await getUserByEmail(formData.email);
 
