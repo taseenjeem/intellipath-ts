@@ -35,12 +35,7 @@ const getCountries = async () => {
   );
 };
 
-interface IProfileInfoFormProps {
-  userId: string;
-  userEmail: string;
-}
-
-const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
+const ProfileInfoForm = () => {
   const dispatch = useAppDispatch();
   const {
     formData,
@@ -91,8 +86,8 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
     dispatch(setIsLoading(true));
 
     try {
-      await updateUserDetails(userId, formData);
-      const updatedUserInfo = await getUserByEmail(userEmail);
+      await updateUserDetails(formData._id, formData);
+      const updatedUserInfo = await getUserByEmail(formData.email);
 
       if (updatedUserInfo) {
         dispatch(setFormData(updatedUserInfo));
@@ -107,7 +102,7 @@ const ProfileInfoForm = ({ userId, userEmail }: IProfileInfoFormProps) => {
   };
 
   return (
-    <div>
+    <div className="bg-base-200 p-3 md:p-6 mt-5 rounded-3xl">
       <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mb-5">
         Personal information
       </h3>

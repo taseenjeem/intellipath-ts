@@ -52,7 +52,7 @@ export const getUserByUsername = async (username: string) => {
   try {
     await connectMongodb();
     const user = await User.findOne({ username }).lean();
-    return user;
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by username:", error);
     throw new Error("Error finding user by username");

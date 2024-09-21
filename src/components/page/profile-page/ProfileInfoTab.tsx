@@ -19,16 +19,8 @@ interface IProfileInfoTabProps {
 const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
   return (
     <>
-      <input
-        type="radio"
-        name="my_tabs_1"
-        role="tab"
-        className="tab whitespace-nowrap"
-        aria-label="My Information"
-        defaultChecked
-      />
-      <div role="tabpanel" className="tab-content w-full mt-5">
-        <div className="mt-12">
+      <div className="w-full mt-5 bg-base-200 p-3 md:p-6 rounded-3xl">
+        <div className="">
           <div className="flex flex-col md:flex-row justify-between">
             <div className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-5">
               <div className="avatar">

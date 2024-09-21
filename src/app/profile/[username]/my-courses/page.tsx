@@ -1,5 +1,9 @@
 const MyCoursesPage = () => {
-  return <>Hello World</>;
+  return (
+    <>
+      <div>hello</div>
+    </>
+  );
 };
 
 export default MyCoursesPage;
