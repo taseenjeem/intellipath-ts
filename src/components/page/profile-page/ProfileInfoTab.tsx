@@ -204,7 +204,12 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
                 >
                   <ul>
                     <li className="text-xl font-bold">{item.degree}</li>
-                    <li className="my-1 text-sm">{item.yearOfCompletion}</li>
+                    <li className="my-1 text-sm">
+                      {formatDate(item.startDate)} -{" "}
+                      {item.endDate === "present"
+                        ? "Present"
+                        : formatDate(item.endDate)}
+                    </li>
                     <hr className="my-3 border-gray-400" />
                     <li>
                       <strong>Institution: </strong>
@@ -241,7 +246,12 @@ const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
                   >
                     <ul>
                       <li className="text-xl font-bold">{item.companyName}</li>
-                      <li className="my-1 text-sm">{item.period}</li>
+                      <li className="my-1 text-sm">
+                        {formatDate(item.startDate)} -{" "}
+                        {item.endDate === "present"
+                          ? "Present"
+                          : formatDate(item.endDate)}
+                      </li>
                       <hr className="my-3 border-gray-400" />
                       <li>
                         <strong>Designation: </strong>

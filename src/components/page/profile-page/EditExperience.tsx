@@ -2,6 +2,7 @@ import { IUserInfo } from "@/types";
 import AddExperienceModal from "./AddExperienceModal";
 import { IoClose } from "react-icons/io5";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { formatDate } from "@/utils/dateFormatter";
 
 interface IEditExperienceProps {
   formData: IUserInfo;
@@ -9,7 +10,8 @@ interface IEditExperienceProps {
     companyName: string;
     designation: string;
     location: string;
-    period: string;
+    startDate: string;
+    endDate: string;
   };
   onRemove: (title: string) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -56,7 +58,12 @@ const EditExperience = ({
 
                 <ul>
                   <li className="text-xl font-bold">{item.companyName}</li>
-                  <li className="my-1 text-sm">{item.period}</li>
+                  <li className="my-1 text-sm">
+                    {formatDate(item.startDate)} -{" "}
+                    {item.endDate === "present"
+                      ? "Present"
+                      : formatDate(item.endDate)}
+                  </li>
                   <hr className="my-3 border-gray-400" />
                   <li>
                     <strong>Designation: </strong>

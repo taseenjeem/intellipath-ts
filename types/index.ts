@@ -67,7 +67,6 @@ export interface IUserInfo {
   expertise?: string[];
   biography?: string | null;
   education?: {
-    _id: string;
     degree: string;
     institution: string;
     location: string;
@@ -75,14 +74,12 @@ export interface IUserInfo {
     endDate: string;
   }[];
   certifications?: {
-    _id: string;
     title: string;
     issuer: string;
     dateOfIssue: string;
     url: string;
   }[];
   experience?: {
-    _id: string;
     companyName: string;
     designation: string;
     location: string;

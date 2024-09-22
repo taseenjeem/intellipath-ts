@@ -2,6 +2,7 @@ import { IUserInfo } from "@/types";
 import { IoClose } from "react-icons/io5";
 import AddAcademicInfoModal from "./AddAcademicInfoModal";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { formatDate } from "@/utils/dateFormatter";
 
 interface IEditAcademicInfoProps {
   formData: IUserInfo;
@@ -9,7 +10,8 @@ interface IEditAcademicInfoProps {
     degree: string;
     institution: string;
     location: string;
-    yearOfCompletion: string;
+    startDate: string;
+    endDate: string;
   };
   onRemove: (degree: string) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -56,7 +58,12 @@ const EditAcademicInfo = ({
 
                 <ul>
                   <li className="text-xl font-bold">{item.degree}</li>
-                  <li className="my-1 text-sm">{item.yearOfCompletion}</li>
+                  <li className="my-1 text-sm">
+                    {formatDate(item.startDate)} -{" "}
+                    {item.endDate === "present"
+                      ? "Present"
+                      : formatDate(item.endDate)}
+                  </li>
                   <hr className="my-3 border-gray-400" />
                   <li>
                     <strong>Institution: </strong>

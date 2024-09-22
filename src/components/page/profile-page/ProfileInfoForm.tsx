@@ -64,13 +64,14 @@ const ProfileInfoForm = () => {
   }, [dispatch, userInfo]);
 
   const handleAddEducation = () => {
-    const { degree, institution, location, yearOfCompletion } = education;
+    const { degree, institution, location, startDate, endDate } = education;
 
     if (
       degree === "" ||
       institution === "" ||
       location === "" ||
-      yearOfCompletion === ""
+      startDate === "" ||
+      endDate === ""
     ) {
       toast.error("Please fill in all required fields for education.");
       return;
@@ -91,13 +92,15 @@ const ProfileInfoForm = () => {
   };
 
   const handleAddExpertise = () => {
-    const { companyName, designation, location, period } = experience;
+    const { companyName, designation, location, startDate, endDate } =
+      experience;
 
     if (
       companyName === "" ||
       designation === "" ||
       location === "" ||
-      period === ""
+      startDate === "" ||
+      endDate === ""
     ) {
       toast.error("Please fill in all required fields for experience.");
       return;

@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 
 interface IAcademicInfoModalProps {
@@ -5,7 +7,8 @@ interface IAcademicInfoModalProps {
     degree: string;
     institution: string;
     location: string;
-    yearOfCompletion: string;
+    startDate: string;
+    endDate: string | "present";
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: () => void;
@@ -25,10 +28,27 @@ const AddAcademicInfoModal = ({
   onChange,
   onAdd,
 }: IAcademicInfoModalProps) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const addAcademicInfo = () => {
     onAdd();
     closeModal();
   };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      onChange({
+        target: { name: "endDate", value: "present" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    } else {
+      onChange({
+        target: { name: "endDate", value: "" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    }
+  };
+
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <>
@@ -91,23 +111,51 @@ const AddAcademicInfoModal = ({
             />
           </div>
           <div className="form-control">
-            <label className="label" htmlFor="yearOfCompletion">
-              <span className="label-text">Time Period</span>
+            <label className="label" htmlFor="startDate">
+              <span className="label-text">Starts in</span>
+              <span className="text-xs">(MM/DD/YYYY)</span>
             </label>
             <input
-              id="yearOfCompletion"
-              name="yearOfCompletion"
-              type="text"
+              id="startDate"
+              name="startDate"
+              type="date"
               className="input input-bordered"
-              placeholder="Ex: 2018 - 2020, 2018 - Present"
-              value={education.yearOfCompletion}
+              value={education.startDate}
               onChange={onChange}
+              max={today}
             />
+          </div>
+          <div className="form-control">
+            <label className="label" htmlFor="endDate">
+              <span className="label-text">Ended in</span>
+              <span className="text-xs">(MM/DD/YYYY)</span>
+            </label>
+            <input
+              id="endDate"
+              name="endDate"
+              type="date"
+              className={`input input-bordered ${
+                isChecked ? "cursor-not-allowed" : ""
+              }`}
+              value={isChecked ? "present" : education.endDate}
+              onChange={onChange}
+              max={today}
+              disabled={isChecked}
+            />
+            <label className="cursor-pointer flex items-center gap-2 mt-3">
+              <input
+                type="checkbox"
+                className="checkbox checkbox-primary checkbox-sm"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+              <span className="label-text">Currently studying here</span>
+            </label>
           </div>
           <div className="w-full flex justify-end mt-6">
             <button
               type="button"
-              className="btn  btn-primary"
+              className="btn btn-primary"
               onClick={addAcademicInfo}
             >
               Done

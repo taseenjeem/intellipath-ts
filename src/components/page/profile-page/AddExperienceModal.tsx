@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 
 interface IExperienceModalProps {
@@ -5,7 +7,8 @@ interface IExperienceModalProps {
     companyName: string;
     designation: string;
     location: string;
-    period: string;
+    startDate: string;
+    endDate: string;
   };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: () => void;
@@ -25,10 +28,27 @@ const AddExperienceModal = ({
   onAdd,
   onChange,
 }: IExperienceModalProps) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const addExperience = () => {
     onAdd();
     closeModal();
   };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      onChange({
+        target: { name: "endDate", value: "present" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    } else {
+      onChange({
+        target: { name: "endDate", value: "" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    }
+  };
+
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <>
@@ -88,17 +108,46 @@ const AddExperienceModal = ({
             />
           </div>
           <div className="form-control">
-            <label className="label" htmlFor="period">
-              <span className="label-text">Period</span>
+            <label className="label" htmlFor="startDate">
+              <span className="label-text">Starts in</span>
+              <span className="text-xs">(MM/DD/YYYY)</span>
             </label>
             <input
-              id="period"
-              name="period"
-              type="text"
+              id="startDate"
+              name="startDate"
+              type="date"
               className="input input-bordered"
-              value={experience.period}
+              value={experience.startDate}
               onChange={onChange}
+              max={today}
             />
+          </div>
+          <div className="form-control">
+            <label className="label" htmlFor="endDate">
+              <span className="label-text">Ended in</span>
+              <span className="text-xs">(MM/DD/YYYY)</span>
+            </label>
+            <input
+              id="endDate"
+              name="endDate"
+              type="date"
+              className={`input input-bordered ${
+                isChecked ? "cursor-not-allowed" : ""
+              }`}
+              value={isChecked ? "present" : experience.endDate}
+              onChange={onChange}
+              max={today}
+              disabled={isChecked}
+            />
+            <label className="cursor-pointer flex items-center gap-2 mt-3">
+              <input
+                type="checkbox"
+                className="checkbox checkbox-primary checkbox-sm"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+              <span className="label-text">Currently studying here</span>
+            </label>
           </div>
           <div className="w-full">
             <button
