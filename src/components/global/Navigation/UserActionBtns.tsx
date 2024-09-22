@@ -48,8 +48,6 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
     }
   };
 
-  console.log("this is session: ", session);
-
   return (
     <>
       {status === "authenticated" || authData.status ? (

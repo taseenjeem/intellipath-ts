@@ -63,6 +63,49 @@ const ProfileInfoForm = () => {
     dispatch(initializeFormData(userInfo));
   }, [dispatch, userInfo]);
 
+  const handleAddEducation = () => {
+    const { degree, institution, location, yearOfCompletion } = education;
+
+    if (
+      degree === "" ||
+      institution === "" ||
+      location === "" ||
+      yearOfCompletion === ""
+    ) {
+      toast.error("Please fill in all required fields for education.");
+      return;
+    } else {
+      dispatch(addEducation());
+    }
+  };
+
+  const handleAddCertification = () => {
+    const { issuer, dateOfIssue, title, url } = certifications;
+
+    if (issuer === "" || dateOfIssue === "" || title === "" || url === "") {
+      toast.error("Please fill in all required fields for certification.");
+      return;
+    } else {
+      dispatch(addCertification());
+    }
+  };
+
+  const handleAddExpertise = () => {
+    const { companyName, designation, location, period } = experience;
+
+    if (
+      companyName === "" ||
+      designation === "" ||
+      location === "" ||
+      period === ""
+    ) {
+      toast.error("Please fill in all required fields for experience.");
+      return;
+    } else {
+      dispatch(addExperience());
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -138,7 +181,7 @@ const ProfileInfoForm = () => {
         <EditAcademicInfo
           education={education}
           formData={formData}
-          onAdd={() => dispatch(addEducation())}
+          onAdd={handleAddEducation}
           onChange={(e) =>
             dispatch(
               setEducation({ ...education, [e.target.name]: e.target.value })
@@ -150,7 +193,7 @@ const ProfileInfoForm = () => {
         <EditCertifications
           certifications={certifications}
           formData={formData}
-          onAdd={() => dispatch(addCertification())}
+          onAdd={handleAddCertification}
           onChange={(e) =>
             dispatch(
               setCertifications({
@@ -166,7 +209,7 @@ const ProfileInfoForm = () => {
           <EditExperience
             formData={formData}
             experience={experience}
-            onAdd={() => dispatch(addExperience())}
+            onAdd={handleAddExpertise}
             onRemove={(companyName) => dispatch(removeExperience(companyName))}
             onChange={(e) =>
               dispatch(
