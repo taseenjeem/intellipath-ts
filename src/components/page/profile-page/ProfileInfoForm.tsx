@@ -32,6 +32,7 @@ import EditCertifications from "./EditCertifications";
 import EditExpertise from "./EditExpertise";
 import EditExperience from "./EditExperience";
 import EditSocialLinks from "./EditSocialLinks";
+import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -149,8 +150,11 @@ const ProfileInfoForm = () => {
       await updateUserDetails(formData._id, formData);
       const updatedUserInfo = await getUserByEmail(formData.email);
 
+      console.log(updatedUserInfo);
+
       if (updatedUserInfo) {
         dispatch(setFormData(updatedUserInfo));
+        dispatch(updateUserInfo(updatedUserInfo));
         toast.success("User updated successfully");
       }
     } catch (error) {

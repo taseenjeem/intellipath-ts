@@ -1,4 +1,4 @@
-import { IUserInfo } from "@/types";
+"use client";
 import { formatDate } from "@/utils/dateFormatter";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +11,11 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
 import { PiStudentFill } from "react-icons/pi";
+import { useAppSelector } from "@/redux/store";
 
-interface IProfileInfoTabProps {
-  userData: IUserInfo | null;
-}
+const ProfileInfoTab = () => {
+  const userData = useAppSelector((state) => state.userInfo);
 
-const ProfileInfoTab = ({ userData }: IProfileInfoTabProps) => {
   return (
     <>
       <div className="w-full mt-5 bg-base-200 p-3 md:p-6 rounded-3xl">
