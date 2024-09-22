@@ -51,77 +51,75 @@ const ProfileInfoTab = () => {
               </div>
             </div>
           </div>
-          <div className="mt-10 md:mt-0">
-            <ul className="space-y-2">
-              {userData?.socialLinks?.facebook && (
-                <li className="flex items-center gap-2">
-                  <FaFacebook size={25} />
-                  <Link
-                    href={userData?.socialLinks?.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-hover"
-                  >
-                    Facebook
-                  </Link>
-                </li>
-              )}
-              {userData?.socialLinks?.twitter && (
-                <li className="flex items-center gap-2">
-                  <FaXTwitter size={25} />
-                  <Link
-                    href={userData?.socialLinks?.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-hover"
-                  >
-                    X (twitter)
-                  </Link>
-                </li>
-              )}
-              {userData?.socialLinks?.linkedin && (
-                <li className="flex items-center gap-2">
-                  <FaLinkedin size={25} />
-                  <Link
-                    href={userData?.socialLinks?.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-hover"
-                  >
-                    LinkedIn
-                  </Link>
-                </li>
-              )}
-              {userData?.socialLinks?.github && (
-                <li className="flex items-center gap-2">
-                  <FaGithub size={25} />
-                  <Link
-                    href={userData?.socialLinks?.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-hover"
-                  >
-                    Github
-                  </Link>
-                </li>
-              )}
-              {userData?.socialLinks?.website && (
-                <li className="flex items-center gap-2">
-                  <TbWorldWww size={25} />
-                  <Link
-                    href={userData?.socialLinks?.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-hover"
-                  >
-                    Website
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </div>
+          <ul className="space-y-2 my-8 md:my-0">
+            {userData?.socialLinks?.facebook && (
+              <li className="flex items-center gap-2">
+                <FaFacebook size={25} />
+                <Link
+                  href={userData?.socialLinks?.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-hover"
+                >
+                  Facebook
+                </Link>
+              </li>
+            )}
+            {userData?.socialLinks?.twitter && (
+              <li className="flex items-center gap-2">
+                <FaXTwitter size={25} />
+                <Link
+                  href={userData?.socialLinks?.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-hover"
+                >
+                  X (twitter)
+                </Link>
+              </li>
+            )}
+            {userData?.socialLinks?.linkedin && (
+              <li className="flex items-center gap-2">
+                <FaLinkedin size={25} />
+                <Link
+                  href={userData?.socialLinks?.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-hover"
+                >
+                  LinkedIn
+                </Link>
+              </li>
+            )}
+            {userData?.socialLinks?.github && (
+              <li className="flex items-center gap-2">
+                <FaGithub size={25} />
+                <Link
+                  href={userData?.socialLinks?.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-hover"
+                >
+                  Github
+                </Link>
+              </li>
+            )}
+            {userData?.socialLinks?.website && (
+              <li className="flex items-center gap-2">
+                <TbWorldWww size={25} />
+                <Link
+                  href={userData?.socialLinks?.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-hover"
+                >
+                  Website
+                </Link>
+              </li>
+            )}
+          </ul>
         </div>
-        <div className="mt-10 space-y-3">
+        <div className="space-y-3 md:mt-10">
           <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
             About {userData?.fullName}
           </h3>
