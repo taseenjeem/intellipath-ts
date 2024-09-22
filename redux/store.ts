@@ -11,6 +11,7 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import userInfoReducer from "./slices/UserInfoSlice";
+import editProfileInfoReducer from "./slices/profileInfoSlice";
 
 const createNoopStorage = () => {
   return {
@@ -37,7 +38,10 @@ const persistConfig = {
   whitelist: ["userInfo"],
 };
 
-const rootReducer = combineReducers({ userInfo: userInfoReducer });
+const rootReducer = combineReducers({
+  userInfo: userInfoReducer,
+  editProfileInfo: editProfileInfoReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

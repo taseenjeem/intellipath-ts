@@ -51,8 +51,10 @@ export interface IUserInfo {
   _id: string;
   firstName: string;
   lastName: string;
+  fullName: string;
   username: string;
   password: string;
+  authenticationMethod: string;
   profileImageUrl?: string | null;
   gender?: string | null;
   birthDate?: string | null;
@@ -67,17 +69,28 @@ export interface IUserInfo {
   education?: {
     degree: string;
     institution: string;
-    yearOfCompletion: string;
+    location: string;
+    startDate: string;
+    endDate: string;
   }[];
-  teachingExperience?: number | null;
   certifications?: {
     title: string;
     issuer: string;
     dateOfIssue: string;
+    url: string;
+  }[];
+  experience?: {
+    companyName: string;
+    designation: string;
+    location: string;
+    startDate: string;
+    endDate: string;
   }[];
   socialLinks?: {
     linkedin?: string;
     twitter?: string;
+    facebook?: string;
+    github?: string;
     website?: string;
   };
   createdAt?: Date | null;

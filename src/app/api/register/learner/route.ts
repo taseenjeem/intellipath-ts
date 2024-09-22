@@ -14,12 +14,10 @@ export const POST = async (request: NextRequest) => {
   } else {
     await connectMongodb();
 
-    let baseUsername = (learnerInfo.firstName + learnerInfo.lastName)
-      .toLowerCase()
-      .replace(/\s+/g, "");
+    const { firstName, lastName } = learnerInfo;
 
+    let baseUsername = (firstName + lastName).toLowerCase().replace(/\s+/g, "");
     let username = baseUsername;
-
     let userExists = await User.exists({ username });
 
     while (userExists) {
@@ -32,9 +30,13 @@ export const POST = async (request: NextRequest) => {
 
     const newUser = {
       ...learnerInfo,
+      firstName,
+      lastName,
+      fullName: firstName + " " + lastName,
       username,
       role: "learner",
       password: hashedPassword,
+      authenticationMethod: "credential",
     };
 
     try {

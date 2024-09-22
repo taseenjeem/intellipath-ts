@@ -1,7 +1,37 @@
 "use client";
-import { useEffect, useState } from "react";
-import { ICountry, IUserInfo } from "@/types";
-import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import {
+  checkUsernameAvailability,
+  getUserByEmail,
+  updateUserDetails,
+} from "@/database/server-actions";
+import { toast } from "react-toastify";
+import {
+  initializeFormData,
+  setAllCountries,
+  setIsLoading,
+  setFormData,
+  setNewExpertise,
+  setEducation,
+  setCertifications,
+  addEducation,
+  addCertification,
+  addSkill,
+  removeEducation,
+  removeCertification,
+  removeSkill,
+  addExperience,
+  removeExperience,
+  setExperience,
+} from "@/redux/slices/profileInfoSlice";
+import EditPersonalInfo from "./EditPersonalInfo";
+import EditContactInfo from "./EditContactInfo";
+import EditAcademicInfo from "./EditAcademicInfo";
+import EditCertifications from "./EditCertifications";
+import EditExpertise from "./EditExpertise";
+import EditExperience from "./EditExperience";
+import EditSocialLinks from "./EditSocialLinks";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const getCountries = async () => {
@@ -12,187 +42,203 @@ const getCountries = async () => {
 
 const ProfileInfoForm = () => {
   const dispatch = useAppDispatch();
-  const savedFormData = useAppSelector((state: RootState) => state.userInfo);
-  const [formData, setFormData] = useState<IUserInfo>(savedFormData);
-  const [allCountries, setAllCountries] = useState<ICountry[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {
+    formData,
+    allCountries,
+    newExpertise,
+    isLoading,
+    education,
+    certifications,
+    experience,
+  } = useAppSelector((state) => state.editProfileInfo);
+
+  const userInfo = useAppSelector((state) => state.userInfo);
 
   useEffect(() => {
     const fetchCountries = async () => {
       const countries = await getCountries();
-      setAllCountries(countries);
+      dispatch(setAllCountries(countries));
     };
-    fetchCountries();
-  }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    fetchCountries();
+    dispatch(initializeFormData(userInfo));
+  }, [dispatch, userInfo]);
+
+  const handleAddEducation = () => {
+    const { degree, institution, location, startDate, endDate } = education;
+
+    if (
+      degree === "" ||
+      institution === "" ||
+      location === "" ||
+      startDate === "" ||
+      endDate === ""
+    ) {
+      toast.error("Please fill in all required fields for education.");
+      return;
+    } else {
+      dispatch(addEducation());
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAddCertification = () => {
+    const { issuer, dateOfIssue, title, url } = certifications;
+
+    if (issuer === "" || dateOfIssue === "" || title === "" || url === "") {
+      toast.error("Please fill in all required fields for certification.");
+      return;
+    } else {
+      dispatch(addCertification());
+    }
+  };
+
+  const handleAddExpertise = () => {
+    const { companyName, designation, location, startDate, endDate } =
+      experience;
+
+    if (
+      companyName === "" ||
+      designation === "" ||
+      location === "" ||
+      startDate === "" ||
+      endDate === ""
+    ) {
+      toast.error("Please fill in all required fields for experience.");
+      return;
+    } else {
+      dispatch(addExperience());
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    if (formData?.socialLinks && name in formData.socialLinks) {
+      dispatch(
+        setFormData({
+          ...formData,
+          socialLinks: {
+            ...formData.socialLinks,
+            [name]: value,
+          },
+        })
+      );
+    } else {
+      dispatch(setFormData({ ...formData, [name]: value }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
 
     try {
-      dispatch(updateUserInfo(formData));
+      const isUsernameTaken = await checkUsernameAvailability(
+        formData.username
+      );
+
+      if (isUsernameTaken && userInfo.username !== formData.username) {
+        toast.warning("Username is already taken. Please choose another one.");
+        dispatch(setIsLoading(false));
+        return;
+      }
+
+      await updateUserDetails(formData._id, formData);
+      const updatedUserInfo = await getUserByEmail(formData.email);
+
+      console.log(updatedUserInfo);
+
+      if (updatedUserInfo) {
+        dispatch(setFormData(updatedUserInfo));
+        dispatch(updateUserInfo(updatedUserInfo));
+        toast.success("User updated successfully");
+      }
     } catch (error) {
       console.log(error);
+      toast.error("Failed to update user information");
     } finally {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
     }
   };
 
   return (
-    <div className="bg-base-300 card card-compact mt-5 md:mt-16">
-      <form onSubmit={handleSubmit} className="card-body">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
-          {/* First Name Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="name">
-              <span className="label-text">First Name</span>
-            </label>
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              className="input input-bordered"
-              value={formData.firstName ?? ""}
-              onChange={handleChange}
-            />
-          </div>
-          {/* Last Name Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="name">
-              <span className="label-text">Last Name</span>
-            </label>
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              className="input input-bordered"
-              value={formData.lastName ?? ""}
-              onChange={handleChange}
-            />
-          </div>
-          {/* Username Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="username">
-              <span className="label-text">Username</span>
-            </label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              className="input input-bordered"
-              value={formData.username ?? ""}
-              onChange={handleChange}
-            />
-          </div>
-          {/* Gender Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="gender">
-              <span className="label-text">Gender</span>
-            </label>
-            <select
-              id="gender"
-              name="gender"
-              className="select select-bordered"
-              value={formData.gender ?? ""}
-              onChange={handleChange}
-            >
-              <option disabled value="">
-                Select your gender
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
-          {/* Birth Date Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="birthDate">
-              <span className="label-text">Date of birth</span>
-            </label>
-            <input
-              id="birthDate"
-              name="birthDate"
-              type="date"
-              className="input input-bordered"
-              value={formData.birthDate ?? ""}
-              onChange={handleChange}
-            />
-          </div>
-          {/* Country Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="country">
-              <span className="label-text">Your Country</span>
-            </label>
-            <select
-              id="country"
-              name="country"
-              className="select select-bordered"
-              value={formData.country ?? ""}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Please select your country
-              </option>
-              {allCountries.map((item) => (
-                <option key={item.code} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          {/* Email Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="email">
-              <span className="label-text">Your Email</span>
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="input input-bordered"
-              value={formData.email ?? ""}
-              onChange={handleChange}
-            />
-          </div>
-          {/* Phone Input */}
-          <div className="form-control">
-            <label className="label" htmlFor="phone">
-              <span className="label-text">Your Phone Number</span>
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="number"
-              className="input input-bordered"
-              value={formData.phone ?? ""}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        {/* Address Input */}
-        <div className="form-control">
-          <label className="label" htmlFor="address">
-            <span className="label-text">Your Address</span>
-          </label>
-          <input
-            id="address"
-            name="address"
-            type="text"
-            className="input input-bordered"
-            value={formData.address ?? ""}
-            onChange={handleChange}
+    <div className="bg-base-200 p-4 md:p-6 mt-5 rounded-3xl">
+      <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mb-5">
+        Personal information
+      </h3>
+      <form onSubmit={handleSubmit} className="">
+        <EditPersonalInfo
+          profileImageUrl={formData?.profileImageUrl}
+          userEmail={formData?.email}
+          userId={formData?._id}
+          formData={formData}
+          handleChange={handleChange}
+        />
+
+        <EditContactInfo
+          formData={formData}
+          onChange={handleChange}
+          allCountries={allCountries}
+        />
+
+        <EditAcademicInfo
+          education={education}
+          formData={formData}
+          onAdd={handleAddEducation}
+          onChange={(e) =>
+            dispatch(
+              setEducation({ ...education, [e.target.name]: e.target.value })
+            )
+          }
+          onRemove={(degree) => dispatch(removeEducation(degree))}
+        />
+
+        <EditCertifications
+          certifications={certifications}
+          formData={formData}
+          onAdd={handleAddCertification}
+          onChange={(e) =>
+            dispatch(
+              setCertifications({
+                ...certifications,
+                [e.target.name]: e.target.value,
+              })
+            )
+          }
+          onRemove={(title) => dispatch(removeCertification(title))}
+        />
+
+        {formData.role === "instructor" && (
+          <EditExperience
+            formData={formData}
+            experience={experience}
+            onAdd={handleAddExpertise}
+            onRemove={(companyName) => dispatch(removeExperience(companyName))}
+            onChange={(e) =>
+              dispatch(
+                setExperience({
+                  ...experience,
+                  [e.target.name]: e.target.value,
+                })
+              )
+            }
           />
-        </div>
+        )}
+
+        <EditExpertise
+          formData={formData}
+          onAdd={() => dispatch(addSkill())}
+          onRemove={(skill) => dispatch(removeSkill(skill))}
+          newExpertise={newExpertise}
+          setNewExpertise={(value) => dispatch(setNewExpertise(value))}
+        />
+
+        <EditSocialLinks formData={formData} onChange={handleChange} />
+
         <div className="card-actions justify-end mt-5">
           {isLoading ? (
             <button

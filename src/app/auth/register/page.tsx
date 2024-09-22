@@ -34,7 +34,6 @@ const RegisterPage = () => {
           </div>
           <div className="card shrink-0 w-full max-w-lg bg-base-200">
             <RegisterForm />
-            <SocialAuth />
           </div>
         </div>
       </div>

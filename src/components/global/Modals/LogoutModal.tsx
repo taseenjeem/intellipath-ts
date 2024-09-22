@@ -2,10 +2,12 @@
 import { resetUserInfo } from "@/redux/slices/UserInfoSlice";
 import { useAppDispatch } from "@/redux/store";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const LogoutModal = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const closeModal = () => {
     const logoutModal = document.getElementById(
@@ -21,6 +23,7 @@ const LogoutModal = () => {
     await signOut();
     closeModal();
     toast.success("Logged out successfully!");
+    router.push("/");
   };
 
   return (
