@@ -7,18 +7,21 @@ interface ProfileState {
   newExpertise: string;
   isLoading: boolean;
   education: {
+    _id: string;
     degree: string;
     institution: string;
     location: string;
     yearOfCompletion: string;
   };
   certifications: {
+    _id: string;
     title: string;
     issuer: string;
     dateOfIssue: string;
     url: string;
   };
   experience: {
+    _id: string;
     companyName: string;
     designation: string;
     location: string;
@@ -39,18 +42,21 @@ const initialState: ProfileState = {
   newExpertise: "",
   isLoading: false,
   education: {
+    _id: "",
     degree: "",
     institution: "",
     location: "",
     yearOfCompletion: "",
   },
   certifications: {
+    _id: "",
     title: "",
     issuer: "",
     dateOfIssue: "",
     url: "",
   },
   experience: {
+    _id: "",
     companyName: "",
     designation: "",
     location: "",
@@ -102,6 +108,7 @@ const profileInfoSlice = createSlice({
         state.education,
       ];
       state.education = {
+        _id: "",
         degree: "",
         institution: "",
         location: "",
@@ -114,6 +121,7 @@ const profileInfoSlice = createSlice({
         state.certifications,
       ];
       state.certifications = {
+        _id: "",
         title: "",
         issuer: "",
         dateOfIssue: "",
@@ -126,6 +134,7 @@ const profileInfoSlice = createSlice({
         state.experience,
       ];
       state.experience = {
+        _id: "",
         companyName: "",
         designation: "",
         location: "",
