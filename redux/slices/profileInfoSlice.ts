@@ -11,7 +11,8 @@ interface ProfileState {
     degree: string;
     institution: string;
     location: string;
-    yearOfCompletion: string;
+    startDate: string;
+    endDate: string;
   };
   certifications: {
     _id: string;
@@ -25,7 +26,8 @@ interface ProfileState {
     companyName: string;
     designation: string;
     location: string;
-    period: string;
+    startDate: string;
+    endDate: string;
   };
   socialLinks: {
     linkedin: string | null;
@@ -46,7 +48,8 @@ const initialState: ProfileState = {
     degree: "",
     institution: "",
     location: "",
-    yearOfCompletion: "",
+    startDate: "",
+    endDate: "",
   },
   certifications: {
     _id: "",
@@ -60,7 +63,8 @@ const initialState: ProfileState = {
     companyName: "",
     designation: "",
     location: "",
-    period: "",
+    startDate: "",
+    endDate: "",
   },
   socialLinks: {
     linkedin: null,
@@ -112,7 +116,8 @@ const profileInfoSlice = createSlice({
         degree: "",
         institution: "",
         location: "",
-        yearOfCompletion: "",
+        startDate: "",
+        endDate: "",
       };
     },
     addCertification(state) {
@@ -138,7 +143,8 @@ const profileInfoSlice = createSlice({
         companyName: "",
         designation: "",
         location: "",
-        period: "",
+        startDate: "",
+        endDate: "",
       };
     },
     addSkill(state) {

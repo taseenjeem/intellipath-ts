@@ -71,7 +71,8 @@ export interface IUserInfo {
     degree: string;
     institution: string;
     location: string;
-    yearOfCompletion: string;
+    startDate: string;
+    endDate: string;
   }[];
   certifications?: {
     _id: string;
@@ -85,7 +86,8 @@ export interface IUserInfo {
     companyName: string;
     designation: string;
     location: string;
-    period: string;
+    startDate: string;
+    endDate: string;
   }[];
   socialLinks?: {
     linkedin?: string;
