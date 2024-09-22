@@ -2,6 +2,7 @@ import { IUserInfo } from "@/types";
 import { IoClose } from "react-icons/io5";
 import AddCertificationModal from "./AddCertificationModal";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { formatDate } from "@/utils/dateFormatter";
 
 interface IEditCertificationProps {
   formData: IUserInfo;
@@ -63,7 +64,7 @@ const EditCertifications = ({
                   </li>
                   <li>
                     <strong>Date of Issue: </strong>
-                    {item.dateOfIssue}
+                    {formatDate(item.dateOfIssue)}
                   </li>
                   <li className="flex gap-1">
                     <strong>Credentials: </strong>

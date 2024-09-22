@@ -294,7 +294,7 @@ const ProfileInfoTab = () => {
                     </li>
                     <li>
                       <strong>Date of Issue: </strong>
-                      {item.dateOfIssue}
+                      {formatDate(item.dateOfIssue)}
                     </li>
                     <li>
                       <Link className="link" href={item.url}>

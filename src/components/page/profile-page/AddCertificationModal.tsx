@@ -30,6 +30,8 @@ const AddCertificationModal = ({
     closeModal();
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
   return (
     <>
       <dialog
@@ -80,15 +82,17 @@ const AddCertificationModal = ({
             <div className="form-control">
               <label className="label" htmlFor="dateOfIssue">
                 <span className="label-text">Date of issue</span>
+                <span className="text-xs">(MM/DD/YYYY)</span>
               </label>
               <input
                 id="dateOfIssue"
                 name="dateOfIssue"
-                type="text"
+                type="date"
                 className="input input-bordered"
                 placeholder="Ex: 17 Feb 2016"
                 value={certifications.dateOfIssue}
                 onChange={onChange}
+                max={today}
               />
             </div>
             <div className="form-control">
