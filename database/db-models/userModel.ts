@@ -31,7 +31,8 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
         degree: { type: String, default: null },
         institution: { type: String, default: null },
         location: { type: String, default: null },
-        yearOfCompletion: { type: String, default: null },
+        startDate: { type: String, default: null },
+        endDate: { type: String, default: null },
       },
     ],
     certifications: [
@@ -47,7 +48,8 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
         companyName: { type: String, default: null },
         designation: { type: String, default: null },
         location: { type: String, default: null },
-        period: { type: String, default: null },
+        startDate: { type: String, default: null },
+        endDate: { type: String, default: null },
       },
     ],
     socialLinks: {
