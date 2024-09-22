@@ -53,7 +53,7 @@ const EditUserAvatar = ({
   return (
     <div className="relative size-40 mt-6 mb-10 mx-auto">
       <div className="avatar">
-        <div className="ring-primary ring-offset-base-100 w-20 md:w-40 rounded-full ring ring-offset-2">
+        <div className="ring-primary ring-offset-base-100 w-40 rounded-full ring ring-offset-2">
           <Image
             src={profileImageUrl || "/assets/images/profile-placeholder.jpg"}
             width={160}

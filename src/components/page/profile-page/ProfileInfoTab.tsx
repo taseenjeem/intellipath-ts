@@ -194,7 +194,7 @@ const ProfileInfoTab = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
               {userData?.education?.map((item) => (
                 <div
-                  className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                  className="p-3 md:p-6 rounded-xl w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
                   key={item.degree}
                 >
                   <ul>
@@ -236,7 +236,7 @@ const ProfileInfoTab = () => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
                 {userData?.experience.map((item) => (
                   <div
-                    className="card card-body w-full h-full bg-base-100 hover:shadow-xl border border-base-100 hover:border-primary duration-300 relative"
+                    className="p-3 md:p-6 rounded-xl w-full h-full bg-base-100 hover:shadow-xl border border-base-100 hover:border-primary duration-300 relative"
                     key={item.companyName}
                   >
                     <ul>
@@ -278,7 +278,7 @@ const ProfileInfoTab = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
               {userData?.certifications?.map((item) => (
                 <div
-                  className="card card-body w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
+                  className="p-3 md:p-6 rounded-xl w-full h-full bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300"
                   key={item.title}
                 >
                   <ul>
