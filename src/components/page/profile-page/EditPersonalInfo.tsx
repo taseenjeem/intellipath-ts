@@ -113,6 +113,7 @@ const EditPersonalInfo = ({
         <textarea
           id="biography"
           name="biography"
+          placeholder="Tell us about yourself"
           className="input input-bordered pt-3 min-h-60"
           value={formData.biography ?? ""}
           onChange={handleChange}
