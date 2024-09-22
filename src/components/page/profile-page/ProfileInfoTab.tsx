@@ -18,7 +18,7 @@ const ProfileInfoTab = () => {
 
   return (
     <>
-      <div className="w-full mt-5 bg-base-200 p-3 md:p-6 rounded-3xl">
+      <div className="w-full mt-5 bg-base-200 p-4 md:p-6 rounded-3xl">
         <div className="">
           <div className="flex flex-col md:flex-row justify-between">
             <div className="flex flex-col md:flex-row justify-center md:justify-start items-center gap-5">

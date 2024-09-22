@@ -166,7 +166,7 @@ const ProfileInfoForm = () => {
   };
 
   return (
-    <div className="bg-base-200 p-3 md:p-6 mt-5 rounded-3xl">
+    <div className="bg-base-200 p-4 md:p-6 mt-5 rounded-3xl">
       <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mb-5">
         Personal information
       </h3>
