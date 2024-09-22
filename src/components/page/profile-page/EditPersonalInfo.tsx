@@ -94,6 +94,7 @@ const EditPersonalInfo = ({
         <div className="form-control">
           <label className="label" htmlFor="birthDate">
             <span className="label-text">Date of birth</span>
+            <span className="text-xs">(MM/DD/YYYY)</span>
           </label>
           <input
             id="birthDate"
