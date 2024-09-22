@@ -26,9 +26,11 @@ const EditExpertise = ({
         <label className="label" htmlFor="expertise">
           <span className="label-text">Your Expertise</span>
         </label>
-        <div className="px-2 py-5 h-60 border-2 border-base-100 rounded-md mb-2 flex flex-wrap gap-10">
+        <div className="px-2 py-5 h-60 border rounded-2xl mb-2 flex flex-wrap gap-10">
           {formData?.expertise?.length === 0 ? (
-            <span>You haven&apos;t added any skills yet!</span>
+            <div className="flex justify-center items-center w-full">
+              <p>You haven&apos;t added any skills yet!</p>
+            </div>
           ) : (
             formData?.expertise?.map((item) => (
               <div
