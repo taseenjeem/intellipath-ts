@@ -257,14 +257,17 @@ const ProfileInfoForm = () => {
 
         <div className="card-actions justify-end mt-5">
           {isLoading ? (
-            <button disabled className="btn btn-primary no-animation">
+            <button
+              disabled
+              className="btn btn-primary no-animation max-w-96 w-full"
+            >
               <span className="loading loading-spinner"></span>
               Saving..
             </button>
           ) : (
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary max-w-96 w-full"
               disabled={!isFormChanged}
             >
               Save Information
