@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   checkUsernameAvailability,
@@ -33,6 +33,7 @@ import EditExpertise from "./EditExpertise";
 import EditExperience from "./EditExperience";
 import EditSocialLinks from "./EditSocialLinks";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
+import { IUserInfo } from "@/types";
 
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -54,6 +55,11 @@ const ProfileInfoForm = () => {
 
   const userInfo = useAppSelector((state) => state.userInfo);
 
+  const [initialFormData, setInitialFormData] = useState<IUserInfo | null>(
+    null
+  );
+  const [isFormChanged, setIsFormChanged] = useState(false);
+
   useEffect(() => {
     const fetchCountries = async () => {
       const countries = await getCountries();
@@ -62,7 +68,17 @@ const ProfileInfoForm = () => {
 
     fetchCountries();
     dispatch(initializeFormData(userInfo));
+
+    setInitialFormData(userInfo);
   }, [dispatch, userInfo]);
+
+  useEffect(() => {
+    if (JSON.stringify(formData) !== JSON.stringify(initialFormData)) {
+      setIsFormChanged(true);
+    } else {
+      setIsFormChanged(false);
+    }
+  }, [formData, initialFormData]);
 
   const handleAddEducation = () => {
     const { degree, institution, location, startDate, endDate } = education;
@@ -246,7 +262,11 @@ const ProfileInfoForm = () => {
               Saving..
             </button>
           ) : (
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!isFormChanged}
+            >
               Save Information
             </button>
           )}

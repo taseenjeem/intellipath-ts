@@ -37,7 +37,7 @@ const ProfileInfoTab = () => {
             </div>
             <div className="text-center md:text-start">
               <h3 className="text-4xl font-semibold text-primary">
-                {userData?.fullName}
+                {userData?.firstName} {userData?.lastName}
               </h3>
               <h4 className="text-lg">@{userData?.username}</h4>
               <div className="badge badge-primary badge-outline md:badge-lg mt-2">
