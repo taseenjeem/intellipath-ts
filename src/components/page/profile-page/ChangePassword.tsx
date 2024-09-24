@@ -1,4 +1,5 @@
 import ChangePassForm from "./ChangePassForm";
+import ResetPassForm from "./ResetPassForm";
 
 const ChangePassword = () => {
   return (
@@ -14,6 +15,7 @@ const ChangePassword = () => {
           <h3 className="text-2xl font-semibold text-primary mb-5">
             Reset password
           </h3>
+          <ResetPassForm />
         </div>
       </div>
     </section>
