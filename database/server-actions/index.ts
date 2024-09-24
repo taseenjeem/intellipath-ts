@@ -1,8 +1,9 @@
 "use server";
 import { signIn } from "@/auth";
-import { ICredentialLoginFormData } from "@/types";
+import { IChangePassForm, ICredentialLoginFormData } from "@/types";
 import connectMongodb from "../services/connectMongodb";
 import User from "../db-models/userModel";
+import bcrypt from "bcryptjs";
 
 export const credentialLogin = async (formData: ICredentialLoginFormData) => {
   try {
@@ -41,7 +42,7 @@ export const getUserByID = async (userID: string) => {
   try {
     await connectMongodb();
     const user = await User.findById(userID).lean();
-    return user;
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by ID:", error);
     throw new Error("Error finding user by ID");
@@ -115,5 +116,42 @@ export const checkUsernameAvailability = async (username: string) => {
   } catch (error) {
     console.error("Error checking username:", error);
     throw new Error("Error checking username availability");
+  }
+};
+
+export const changeUserPassword = async (
+  userID: string,
+  updatedData: IChangePassForm
+) => {
+  try {
+    await connectMongodb();
+    const existingUser = await User.findById(userID);
+    if (!existingUser) {
+      throw new Error("User not found");
+    }
+    const verifyPassword = await bcrypt.compare(
+      updatedData.currentPassword,
+      existingUser.password
+    );
+    if (!verifyPassword) {
+      throw new Error("Current password is incorrect");
+    }
+    const isSamePassword = await bcrypt.compare(
+      updatedData.newPassword,
+      existingUser.password
+    );
+    if (isSamePassword) {
+      throw new Error(
+        "New password cannot be the same as the current password"
+      );
+    }
+    const hashedPassword = await bcrypt.hash(updatedData.newPassword, 10);
+    await User.findByIdAndUpdate(userID, {
+      password: hashedPassword,
+    });
+  } catch (error) {
+    const err = error as Error;
+    console.error("Error updating user password:", err.message);
+    throw new Error(err.message || "Error updating user password");
   }
 };
