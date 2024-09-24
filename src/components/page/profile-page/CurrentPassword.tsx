@@ -4,12 +4,12 @@ import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { PiEyeClosedDuotone, PiEyeDuotone } from "react-icons/pi";
 
-interface ICurrentPassword {
+interface ICurrentPasswordProps {
   register: UseFormRegister<IChangePassForm>;
   errors: FieldErrors<IChangePassForm>;
 }
 
-const CurrentPassword = ({ register, errors }: ICurrentPassword) => {
+const CurrentPassword = ({ register, errors }: ICurrentPasswordProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (

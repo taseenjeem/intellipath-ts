@@ -4,28 +4,30 @@ import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { PiEyeClosedDuotone, PiEyeDuotone } from "react-icons/pi";
 
-interface INewPasswordProps {
+interface IConfirmNewPassProps {
   register: UseFormRegister<IChangePassForm>;
   errors: FieldErrors<IChangePassForm>;
 }
 
-const NewPassword = ({ register, errors }: INewPasswordProps) => {
+const ConfirmNewPass = ({ register, errors }: IConfirmNewPassProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
     <>
       <div className="form-control relative">
-        <label htmlFor="newPassword" className="label">
+        <label htmlFor="confirmNewPassword" className="label">
           <span
-            className={`label-text ${errors?.newPassword ? "text-error" : ""}`}
+            className={`label-text ${
+              errors?.confirmNewPassword ? "text-error" : ""
+            }`}
           >
-            Create a new password
+            Confirm your new password
           </span>
         </label>
         <div className="join">
           <input
-            {...register("newPassword", {
-              required: "Your new password is required",
+            {...register("confirmNewPassword", {
+              required: "Confirming your new password is required",
               pattern: {
                 value:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -34,17 +36,17 @@ const NewPassword = ({ register, errors }: INewPasswordProps) => {
               },
             })}
             type={showPassword ? "text" : "password"}
-            id="newPassword"
-            name="newPassword"
+            id="confirmNewPassword"
+            name="confirmNewPassword"
             placeholder="aBcD@123"
             className={`input input-bordered w-full join-item ${
-              errors?.newPassword ? "input-error" : ""
+              errors?.confirmNewPassword ? "input-error" : ""
             }`}
           />
           <button
             type="button"
             className={`btn join-item ${
-              errors?.newPassword ? "btn-error" : "btn-neutral"
+              errors?.confirmNewPassword ? "btn-error" : "btn-neutral"
             }`}
             onClick={() => setShowPassword(!showPassword)}
           >
@@ -55,10 +57,10 @@ const NewPassword = ({ register, errors }: INewPasswordProps) => {
             )}
           </button>
         </div>
-        {errors?.newPassword && (
+        {errors?.confirmNewPassword && (
           <div className="label">
             <span className="label-text-alt text-error">
-              {errors.newPassword.message}
+              {errors.confirmNewPassword.message}
             </span>
           </div>
         )}
@@ -67,4 +69,4 @@ const NewPassword = ({ register, errors }: INewPasswordProps) => {
   );
 };
 
-export default NewPassword;
+export default ConfirmNewPass;
