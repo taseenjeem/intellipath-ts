@@ -108,7 +108,7 @@ const ProfileInfoForm = () => {
     }
   };
 
-  const handleAddExpertise = () => {
+  const handleAddExperience = () => {
     const { companyName, designation, location, startDate, endDate } =
       experience;
 
@@ -232,7 +232,7 @@ const ProfileInfoForm = () => {
           <EditExperience
             formData={formData}
             experience={experience}
-            onAdd={handleAddExpertise}
+            onAdd={handleAddExperience}
             onRemove={(companyName) => dispatch(removeExperience(companyName))}
             onChange={(e) =>
               dispatch(
