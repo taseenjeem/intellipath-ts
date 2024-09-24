@@ -218,18 +218,19 @@ const ProfileInfoForm = () => {
           education={education}
           formData={formData}
           onAdd={handleAddEducation}
+          onRemove={(_id) => dispatch(removeEducation(_id))}
           onChange={(e) =>
             dispatch(
               setEducation({ ...education, [e.target.name]: e.target.value })
             )
           }
-          onRemove={(degree) => dispatch(removeEducation(degree))}
         />
 
         <EditCertifications
           certifications={certifications}
           formData={formData}
           onAdd={handleAddCertification}
+          onRemove={(_id) => dispatch(removeCertification(_id))}
           onChange={(e) =>
             dispatch(
               setCertifications({
@@ -238,7 +239,6 @@ const ProfileInfoForm = () => {
               })
             )
           }
-          onRemove={(title) => dispatch(removeCertification(title))}
         />
 
         {formData.role === "instructor" && (
@@ -246,7 +246,7 @@ const ProfileInfoForm = () => {
             formData={formData}
             experience={experience}
             onAdd={handleAddExperience}
-            onRemove={(companyName) => dispatch(removeExperience(companyName))}
+            onRemove={(_id) => dispatch(removeExperience(_id))}
             onChange={(e) =>
               dispatch(
                 setExperience({

@@ -82,6 +82,7 @@ export interface IUserInfo {
   biography?: string | null; // Optional biography of the user
   education?: {
     // Optional list of education details
+    _id?: string; // Unique ID for the education information
     degree: string; // Degree obtained
     institution: string; // Institution where the degree was obtained
     location: string; // Location of the institution
@@ -90,6 +91,7 @@ export interface IUserInfo {
   }[];
   certifications?: {
     // Optional list of certifications obtained
+    _id?: string; // Unique ID for the certification information
     title: string; // Title of the certification
     issuer: string; // Issuer of the certification
     dateOfIssue: string; // Date the certification was issued
@@ -97,6 +99,7 @@ export interface IUserInfo {
   }[];
   experience?: {
     // Optional list of work experience details
+    _id?: string; // Unique ID for the experience information
     companyName: string; // Name of the company
     designation: string; // Job title or designation
     location: string; // Location of the company

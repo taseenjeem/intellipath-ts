@@ -7,6 +7,7 @@ interface ProfileState {
   newExpertise: string;
   isLoading: boolean;
   education: {
+    _id?: string;
     degree: string;
     institution: string;
     location: string;
@@ -14,12 +15,14 @@ interface ProfileState {
     endDate: string;
   };
   certifications: {
+    _id?: string;
     title: string;
     issuer: string;
     dateOfIssue: string;
     url: string;
   };
   experience: {
+    _id?: string;
     companyName: string;
     designation: string;
     location: string;
@@ -165,19 +168,19 @@ const profileInfoSlice = createSlice({
     // Removes an education entry based on the degree
     removeEducation(state, action: PayloadAction<string>) {
       state.formData.education = state.formData.education?.filter(
-        (edu) => edu.degree !== action.payload // Filter out the education entry with the specified degree
+        (edu) => edu._id !== action.payload // Filter out the education entry with the specified degree
       );
     },
     // Removes a certification entry based on the title
     removeCertification(state, action: PayloadAction<string>) {
       state.formData.certifications = state.formData.certifications?.filter(
-        (item) => item.title !== action.payload // Filter out the certification entry with the specified title
+        (item) => item._id !== action.payload // Filter out the certification entry with the specified title
       );
     },
     // Removes an experience entry based on the company name
     removeExperience(state, action: PayloadAction<string>) {
       state.formData.experience = state.formData.experience?.filter(
-        (item) => item.companyName !== action.payload // Filter out the experience entry with the specified company name
+        (item) => item._id !== action.payload // Filter out the experience entry with the specified company name
       );
     },
     // Removes a skill from the expertise list
