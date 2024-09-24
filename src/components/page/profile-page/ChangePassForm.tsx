@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import CurrentPassword from "./CurrentPassword";
+import NewPassword from "./NewPassword";
 
 const ChangePassForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,6 +32,10 @@ const ChangePassForm = () => {
           className="space-y-4"
         >
           <CurrentPassword
+            register={methods.register}
+            errors={methods.formState.errors}
+          />
+          <NewPassword
             register={methods.register}
             errors={methods.formState.errors}
           />
