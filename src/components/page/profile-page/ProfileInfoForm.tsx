@@ -126,6 +126,19 @@ const ProfileInfoForm = () => {
     }
   };
 
+  const handleAddExpertise = (newExpertise: string) => {
+    const alreadyExisted = formData.expertise?.find(
+      (item) => item.toLowerCase === newExpertise.toLowerCase
+    );
+
+    if (alreadyExisted) {
+      toast.warning("Skill already exists.");
+      return;
+    } else {
+      dispatch(addSkill());
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -247,7 +260,7 @@ const ProfileInfoForm = () => {
 
         <EditExpertise
           formData={formData}
-          onAdd={() => dispatch(addSkill())}
+          onAdd={handleAddExpertise}
           onRemove={(skill) => dispatch(removeSkill(skill))}
           newExpertise={newExpertise}
           setNewExpertise={(value) => dispatch(setNewExpertise(value))}
