@@ -46,6 +46,12 @@ export interface ICredentialLoginFormData {
   password: string;
 }
 
+export interface IChangePassForm {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
 export interface IUserInfo {
   status: boolean;
   _id: string;
