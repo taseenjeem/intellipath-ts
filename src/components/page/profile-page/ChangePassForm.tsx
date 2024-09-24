@@ -7,7 +7,7 @@ import CurrentPassword from "./CurrentPassword";
 import NewPassword from "./NewPassword";
 import ConfirmNewPass from "./ConfirmNewPass";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { changeUserPassword, getUserByID } from "@/database/server-actions";
+import { getUserByID } from "@/database/server-actions";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const ChangePassForm = () => {
