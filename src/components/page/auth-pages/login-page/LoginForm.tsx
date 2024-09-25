@@ -13,53 +13,53 @@ import { useAppDispatch } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 
 const LoginForm = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const methods = useForm<ICredentialLoginFormData>();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const searchParams = useSearchParams();
+  const [isLoading, setIsLoading] = useState<boolean>(false); // State to manage loading status
+  const methods = useForm<ICredentialLoginFormData>(); // Initialize react-hook-form methods
+  const router = useRouter(); // Router instance for navigation
+  const dispatch = useAppDispatch(); // Redux dispatch function
+  const searchParams = useSearchParams(); // To get query parameters from the URL
 
   useEffect(() => {
-    const message = searchParams.get("message");
+    const message = searchParams.get("message"); // Check if "login_required" message exists in URL
     if (message === "login_required") {
-      toast.warn("Access denied. Please login.");
+      toast.warn("Access denied. Please login."); // Show warning toast if login is required
       const currentUrl = new URL(window.location.href);
-      currentUrl.searchParams.delete("message");
-      router.replace(currentUrl.toString());
+      currentUrl.searchParams.delete("message"); // Remove message from URL
+      router.replace(currentUrl.toString()); // Replace URL without message parameter
     }
   }, [searchParams, router]);
 
   const handleLogin: SubmitHandler<ICredentialLoginFormData> = async (data) => {
-    setIsLoading(true);
+    setIsLoading(true); // Set loading state to true while processing
     try {
-      const response = await credentialLogin(data);
+      const response = await credentialLogin(data); // Attempt to log in using provided credentials
       if (response.success) {
-        const userInfo = await getUserByEmail(data.email);
-        if (userInfo) {
-          dispatch(updateUserInfo(userInfo));
-          toast.success(response.message);
-          router.push("/");
-        }
+        const userInfo = await getUserByEmail(data.email); // Fetch user data by email after successful login
+        dispatch(updateUserInfo(userInfo)); // Update Redux store with user info
+        toast.success(response.message); // Show success message
+        router.push("/"); // Redirect to home page
       } else {
-        toast.error("Invalid credentials. Try again!");
-        methods.setError("root.serverError", { message: response.message });
+        toast.error("Invalid credentials. Try again!"); // Show error if login fails
+        methods.setError("root.serverError", { message: response.message }); // Set form error
       }
     } catch (error: any) {
-      toast.error("An error occurred while processing your request.");
-      methods.setError("root.serverError", { message: error.message });
+      toast.error("An error occurred while processing your request."); // Show error toast if request fails
+      methods.setError("root.serverError", { message: error.message }); // Set server error in form
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Reset loading state after processing
     }
   };
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleLogin)} className="card-body">
-        <Logo formMode={true} />
+        <Logo formMode={true} /> {/* Render logo */}
+        {/* Render email input field */}
         <EmailInputField
           register={methods.register}
           errors={methods.formState.errors}
         />
+        {/* Render password input field */}
         <PassInputField
           register={methods.register}
           errors={methods.formState.errors}
@@ -69,12 +69,14 @@ const LoginForm = () => {
             <button disabled className="btn btn-primary">
               <span className="loading loading-spinner"></span>
               Loading..
-            </button>
+            </button> // Show loading spinner while login is in progress
           ) : (
             <button type="submit" className="btn btn-primary">
               Login
-            </button>
+            </button> // Show login button if not loading
           )}
+
+          {/* Link to reset password page */}
           <label className="label flex justify-start mt-3">
             <Link
               href="/reset-password"

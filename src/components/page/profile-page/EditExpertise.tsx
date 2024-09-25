@@ -6,7 +6,7 @@ interface IEditExpertiseProps {
   onRemove: (skill: string) => void;
   newExpertise: string;
   setNewExpertise: (value: string) => void;
-  onAdd: () => void;
+  onAdd: (newExpertise: string) => void;
 }
 
 const EditExpertise = ({
@@ -59,7 +59,11 @@ const EditExpertise = ({
             value={newExpertise}
             onChange={(e) => setNewExpertise(e.target.value)}
           />
-          <button type="button" className="btn btn-primary" onClick={onAdd}>
+          <button
+            type="button"
+            className="btn btn-primary btn-outline"
+            onClick={() => onAdd(newExpertise)}
+          >
             Add Skill
           </button>
         </div>

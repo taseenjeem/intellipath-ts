@@ -13,15 +13,18 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     setTheme(storedTheme);
   }, []);
 
+  // If the component has not yet mounted, display the loading screen
   if (!isMounted) {
-    return <LoadingScreen />;
+    return <LoadingScreen />; // Return loading screen until mounted
   }
 
+  // Function to change the current theme
   const changeTheme = (newTheme: string) => {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };
 
+  // Providing the theme context value to children components
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
       <div data-theme={theme}>{children}</div>

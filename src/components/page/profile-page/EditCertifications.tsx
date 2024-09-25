@@ -50,7 +50,7 @@ const EditCertifications = ({
                 <button
                   type="button"
                   className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
-                  onClick={() => onRemove(item.title)}
+                  onClick={() => onRemove(item?._id ?? "")}
                 >
                   <IoClose />
                 </button>

@@ -16,18 +16,21 @@ const EmailInputField = ({ register, errors }: EmailInputFieldProps) => {
       </label>
       <input
         {...register("email", {
+          // Registering the email input with validation rules
           required: "Your email is required",
           pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: "Please enter a valid email address",
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Regex pattern for email validation
+            message: "Please enter a valid email address", // Error message for invalid email
           },
         })}
         type="email"
         id="email"
         name="email"
         placeholder="example@email.com"
-        className={`input input-bordered ${errors?.email ? "input-error" : ""}`}
+        className={`input input-bordered ${errors?.email ? "input-error" : ""}`} // Conditional styling based on error state
       />
+
+      {/* Display error message if there's a validation error */}
       {errors?.email && (
         <div className="label">
           <span className="label-text-alt text-error">
