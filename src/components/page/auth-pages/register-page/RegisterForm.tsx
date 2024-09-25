@@ -19,7 +19,7 @@ const RegisterForm = () => {
     setIsLoading(true); // Set loading state to true
     try {
       // Sending POST request to register the learner
-      const response = await fetch(`/api/register/learner`, {
+      const response = await fetch(`/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
