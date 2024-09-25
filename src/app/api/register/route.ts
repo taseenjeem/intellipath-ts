@@ -5,17 +5,17 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-  const learnerInfo = await request.json(); // Parse the request body
+  const userInfo = await request.json(); // Parse the request body
 
   // Check if a user with the provided email already exists
-  const userAlreadyExists = await getUserByEmail(learnerInfo.email);
+  const userAlreadyExists = await getUserByEmail(userInfo.email);
 
-  if (userAlreadyExists?.email === learnerInfo.email) {
+  if (userAlreadyExists?.email === userInfo.email) {
     return new NextResponse("Email already exists", { status: 400 }); // Return an error if the email already exists
   } else {
     await connectMongodb(); // Connect to the MongoDB database
 
-    const { firstName, lastName } = learnerInfo;
+    const { firstName, lastName } = userInfo;
 
     // Generate a base username from first and last name, and ensure uniqueness
     let baseUsername = (firstName + lastName).toLowerCase().replace(/\s+/g, "");
@@ -30,16 +30,15 @@ export const POST = async (request: NextRequest) => {
     }
 
     // Hash the user's password
-    const hashedPassword = await bcrypt.hash(learnerInfo.password, 10);
+    const hashedPassword = await bcrypt.hash(userInfo.password, 10);
 
     // Construct a new user object
     const newUser = {
-      ...learnerInfo,
+      ...userInfo,
       firstName,
       lastName,
       fullName: firstName + " " + lastName,
       username,
-      role: "learner",
       password: hashedPassword,
       authenticationMethod: "credential",
     };
