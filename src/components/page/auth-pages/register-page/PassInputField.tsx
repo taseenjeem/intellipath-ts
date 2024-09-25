@@ -125,4 +125,4 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
   );
 };
 
-export default PassInputField; // Exporting the component
+export default PassInputField;
