@@ -30,10 +30,9 @@ export default auth((req) => {
     return Response.redirect(redirectedUrl); // Redirect the user to the login page
   }
 
-  // If the route is restricted and the user is authenticated, redirect them to a forbidden page or handle accordingly
+  // If the route is restricted and the user is authenticated, redirect them to home page
   if (isRestrictedRoute && isAuthenticated) {
     const redirectedUrl = new URL("/", nextUrl); // Set the redirect URL to home
-    redirectedUrl.searchParams.set("message", "already_authenticated"); // Add a message to indicate that user is authenticated
     return Response.redirect(redirectedUrl); // Redirect the user to the forbidden page
   }
 
