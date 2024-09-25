@@ -1,5 +1,8 @@
 import { authConfig } from "@/auth.config";
-import { PRIVATE_ROUTES, AUTH_RESTRICTED_ROUTES } from "@/utils/privateRoutes";
+import {
+  AUTHENTICATED_RESTRICTED_ROUTES,
+  PRIVATE_ROUTES,
+} from "@/utils/privateRoutes";
 import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -16,7 +19,7 @@ export default auth((req) => {
   );
 
   // Check if the current path is part of the restricted routes
-  const isRestrictedRoute = AUTH_RESTRICTED_ROUTES.find((route) =>
+  const isRestrictedRoute = AUTHENTICATED_RESTRICTED_ROUTES.find((route) =>
     nextUrl.pathname.startsWith(route)
   );
 
@@ -29,8 +32,9 @@ export default auth((req) => {
 
   // If the route is restricted and the user is authenticated, redirect them to a forbidden page or handle accordingly
   if (isRestrictedRoute && isAuthenticated) {
-    const forbiddenUrl = new URL("/forbidden-url", nextUrl); // Set the redirect URL to a forbidden page
-    return Response.redirect(forbiddenUrl); // Redirect the user to the forbidden page
+    const currentUrl = new URL("/", nextUrl); // Set the redirect URL to a forbidden page
+    currentUrl.searchParams.set("message", "already_authenticated"); // Add a message to indicate that user is authenticated
+    return Response.redirect(currentUrl); // Redirect the user to the forbidden page
   }
 
   // If none of the above conditions are met, allow the request to proceed
