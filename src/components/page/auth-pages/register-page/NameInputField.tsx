@@ -72,4 +72,4 @@ const NameInputField = ({ register, errors }: NameInputFieldProps) => {
   );
 };
 
-export default NameInputField; // Exporting the component
+export default NameInputField;
