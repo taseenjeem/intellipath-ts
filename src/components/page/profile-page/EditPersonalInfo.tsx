@@ -106,6 +106,7 @@ const EditPersonalInfo = ({
           />
         </div>
       </div>
+      {/* About me Input  */}
       <div className="form-control mt-5">
         <label className="label" htmlFor="birthDate">
           <span className="label-text">About me / Biography</span>
