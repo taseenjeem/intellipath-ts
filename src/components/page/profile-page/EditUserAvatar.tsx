@@ -12,6 +12,9 @@ interface IEditUserAvatarProps {
   userEmail: string;
 }
 
+// Supported file types
+const supportedFileTypes = ["image/jpeg", "image/png"];
+
 const EditUserAvatar = ({
   profileImageUrl,
   userId,
@@ -21,10 +24,35 @@ const EditUserAvatar = ({
 
   // Handler for when the user selects a new file to upload
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]; // Getting the selected file
+    const files = e.target.files;
+
+    // Check if multiple files were selected
+    if (files && files.length > 1) {
+      toast.warning("Please select only one file.");
+      return;
+    }
+
+    const file = files?.[0]; // Getting the selected file
 
     // Check if a file was selected
     if (file) {
+      // Validate file type
+      if (!supportedFileTypes.includes(file.type)) {
+        toast.error(
+          "Unsupported file type. Please select a jpeg or png image."
+        );
+        return;
+      }
+
+      // Maximum file size (32MB)
+      const MAX_FILE_SIZE = 32 * 1024 * 1024; // 32MB in bytes
+
+      // Validate file size
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error("File is too large. Maximum allowed size is 32MB.");
+        return;
+      }
+
       const formData = new FormData(); // Creating FormData object to send file data
       formData.append("image", file); // Appending the file to the formData
       formData.append("userId", userId); // Adding user ID to the formData
@@ -48,11 +76,15 @@ const EditUserAvatar = ({
             toast.success("Profile picture updated successfully");
           }
         } else {
+          toast.error(`Image upload failed: ${result.message}`);
           console.error("Image upload failed:", result.message);
         }
       } catch (error) {
+        toast.error("Error uploading image. Please try again.");
         console.error("Error uploading image:", error);
       }
+    } else {
+      toast.error("No file selected. Please choose a file.");
     }
   };
 
