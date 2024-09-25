@@ -38,6 +38,7 @@ export interface IRegisterFormInputs {
   email: string; // Email address of the user
   password: string; // Password for the user's account
   confirmPassword: string; // Confirmation of the password
+  role: string; // Roles associated with the user
 }
 
 // Interface representing a country
