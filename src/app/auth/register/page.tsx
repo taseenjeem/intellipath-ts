@@ -32,7 +32,7 @@ const RegisterPage = () => {
               Log In
             </Link>
           </div>
-          <div className="card shrink-0 w-full max-w-lg bg-base-200">
+          <div className="card shrink-0 w-full max-w-lg bg-base-200 shadow-lg">
             <RegisterForm />
           </div>
         </div>
