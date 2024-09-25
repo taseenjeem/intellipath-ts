@@ -35,11 +35,9 @@ const LoginForm = () => {
       const response = await credentialLogin(data); // Attempt to log in using provided credentials
       if (response.success) {
         const userInfo = await getUserByEmail(data.email); // Fetch user data by email after successful login
-        if (userInfo) {
-          dispatch(updateUserInfo(userInfo)); // Update Redux store with user info
-          toast.success(response.message); // Show success message
-          router.push("/"); // Redirect to home page
-        }
+        dispatch(updateUserInfo(userInfo)); // Update Redux store with user info
+        toast.success(response.message); // Show success message
+        router.push("/"); // Redirect to home page
       } else {
         toast.error("Invalid credentials. Try again!"); // Show error if login fails
         methods.setError("root.serverError", { message: response.message }); // Set form error
