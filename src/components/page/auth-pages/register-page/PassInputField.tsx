@@ -10,14 +10,15 @@ interface PasswordInputFieldProps {
 }
 
 const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false); // State to manage password visibility
   const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-  const { watch } = useFormContext();
-  const password = watch("password");
+    useState<boolean>(false); // State to manage confirm password visibility
+  const { watch } = useFormContext(); // Accessing form context to watch password value
+  const password = watch("password"); // Watching the password field
 
   return (
     <>
+      {/* Password Input */}
       <div className="form-control relative">
         <label htmlFor="password" className="label">
           <span
@@ -29,28 +30,28 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
         <div className="join">
           <input
             {...register("password", {
-              required: "Your password is required",
+              required: "Your password is required", // Required validation
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, // Regex for password complexity
                 message:
-                  "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a symbol",
+                  "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a symbol", // Error message for invalid password
               },
             })}
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? "text" : "password"} // Toggles input type for password visibility
             id="password"
             name="password"
             placeholder="aBcD@123"
             className={`input input-bordered w-full join-item ${
               errors?.password ? "input-error" : ""
-            }`}
+            }`} // Conditional styling
           />
           <button
             type="button"
             className={`btn join-item ${
               errors?.password ? "btn-error" : "btn-neutral"
-            }`}
-            onClick={() => setShowPassword(!showPassword)}
+            }`} // Button styling based on error state
+            onClick={() => setShowPassword(!showPassword)} // Toggles password visibility
           >
             {showPassword ? (
               <PiEyeDuotone className="size-6" />
@@ -59,6 +60,8 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
             )}
           </button>
         </div>
+
+        {/* Displays error message if there's a validation error */}
         {errors?.password && (
           <div className="label">
             <span className="label-text-alt text-error">
@@ -68,6 +71,7 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
         )}
       </div>
 
+      {/* Confirm Password Input */}
       <div className="form-control relative">
         <label htmlFor="confirmPassword" className="label">
           <span
@@ -81,24 +85,24 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
         <div className="join">
           <input
             {...register("confirmPassword", {
-              required: "Please confirm your password",
+              required: "Please confirm your password", // Required validation
               validate: (value) =>
-                value === password || "Passwords do not match",
+                value === password || "Passwords do not match", // Validation for matching passwords
             })}
-            type={showConfirmPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"} // Toggles input type for password visibility
             id="confirmPassword"
             name="confirmPassword"
             placeholder="aBcD@123"
             className={`input input-bordered w-full join-item ${
               errors?.confirmPassword ? "input-error" : ""
-            }`}
+            }`} // Conditional styling
           />
           <button
             type="button"
             className={`btn join-item ${
               errors?.confirmPassword ? "btn-error" : "btn-neutral"
-            }`}
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            }`} // Button styling based on error state
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)} // Toggles confirm password visibility
           >
             {showConfirmPassword ? (
               <PiEyeDuotone className="size-6" />
@@ -107,6 +111,8 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
             )}
           </button>
         </div>
+
+        {/* Displays error message if there's a validation error */}
         {errors?.confirmPassword && (
           <div className="label">
             <span className="label-text-alt text-error">
@@ -119,4 +125,4 @@ const PassInputField = ({ register, errors }: PasswordInputFieldProps) => {
   );
 };
 
-export default PassInputField;
+export default PassInputField; // Exporting the component
