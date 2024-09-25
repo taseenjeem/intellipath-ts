@@ -25,16 +25,16 @@ export default auth((req) => {
 
   // If the route is private and the user is not authenticated, redirect them to the login page
   if (isPrivateRoute && !isAuthenticated) {
-    const loginUrl = new URL("/auth/login", nextUrl); // Set the redirect URL to the login page
-    loginUrl.searchParams.set("message", "login_required"); // Add a message to indicate login is required
-    return Response.redirect(loginUrl); // Redirect the user to the login page
+    const redirectedUrl = new URL("/auth/login", nextUrl); // Set the redirect URL to the login page
+    redirectedUrl.searchParams.set("message", "login_required"); // Add a message to indicate login is required
+    return Response.redirect(redirectedUrl); // Redirect the user to the login page
   }
 
   // If the route is restricted and the user is authenticated, redirect them to a forbidden page or handle accordingly
   if (isRestrictedRoute && isAuthenticated) {
-    const currentUrl = new URL("/", nextUrl); // Set the redirect URL to a forbidden page
-    currentUrl.searchParams.set("message", "already_authenticated"); // Add a message to indicate that user is authenticated
-    return Response.redirect(currentUrl); // Redirect the user to the forbidden page
+    const redirectedUrl = new URL("/", nextUrl); // Set the redirect URL to home
+    redirectedUrl.searchParams.set("message", "already_authenticated"); // Add a message to indicate that user is authenticated
+    return Response.redirect(redirectedUrl); // Redirect the user to the forbidden page
   }
 
   // If none of the above conditions are met, allow the request to proceed
