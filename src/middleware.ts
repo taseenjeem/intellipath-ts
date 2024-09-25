@@ -24,7 +24,6 @@ export default auth((req) => {
   if (isPrivateRoute && !isAuthenticated) {
     const loginUrl = new URL("/auth/login", nextUrl); // Set the redirect URL to the login page
     loginUrl.searchParams.set("message", "login_required"); // Add a message to indicate login is required
-
     return Response.redirect(loginUrl); // Redirect the user to the login page
   }
 
