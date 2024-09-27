@@ -1,4 +1,7 @@
+import DescriptionTab from "./DescriptionTab";
 import LessonsList from "./LessonsList";
+import RefsTab from "./RefsTab";
+import ReviewTab from "./ReviewTab";
 import VideoPlayer from "./VideoPlayer";
 
 const CourseControls = () => {
@@ -8,6 +11,11 @@ const CourseControls = () => {
         <VideoPlayer />
         <LessonsList />
       </section>
+      <div role="tablist" className="tabs tabs-bordered mt-5">
+        <DescriptionTab />
+        <RefsTab />
+        <ReviewTab />
+      </div>
     </>
   );
 };
