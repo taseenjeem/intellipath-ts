@@ -11,7 +11,7 @@ const CourseControls = () => {
         <VideoPlayer />
         <LessonsList />
       </section>
-      <div role="tablist" className="tabs tabs-bordered mt-5">
+      <div role="tablist" className="tabs tabs-bordered lg:tabs-lg mt-5">
         <DescriptionTab />
         <RefsTab />
         <ReviewTab />
