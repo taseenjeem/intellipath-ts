@@ -5,9 +5,15 @@ import { FaStar } from "react-icons/fa";
 
 interface CourseCardProps {
   courseDetails: ICourses;
+  purchased?: boolean;
+  href: string;
 }
 
-const CourseCard = ({ courseDetails }: CourseCardProps) => {
+const CourseCard = ({
+  courseDetails,
+  purchased = false,
+  href,
+}: CourseCardProps) => {
   return (
     <div className="card card-compact bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300 group">
       <figure className="w-full max-w-[358px] max-h-[202px] overflow-hidden">
@@ -43,11 +49,8 @@ const CourseCard = ({ courseDetails }: CourseCardProps) => {
         </div>
 
         <div className="card-actions w-full md:mt-5 mt-2">
-          <Link
-            href={courseDetails?.slug}
-            className="btn btn-sm md:btn-md btn-primary w-full"
-          >
-            Learn More
+          <Link href={href} className="btn btn-sm md:btn-md btn-primary w-full">
+            {purchased ? "Start learning" : "Learn more"}
           </Link>
         </div>
       </div>

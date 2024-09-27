@@ -9,7 +9,7 @@ export interface ICategory {
 
 // Interface representing a course
 export interface ICourses {
-  id: string; // Unique identifier for the course
+  _id: string; // Unique identifier for the course
   title: string; // Title of the course
   slug: string; // URL-friendly version of the title
   thumbnail: string; // URL of the course thumbnail image

@@ -29,7 +29,8 @@ const ProfileNavigation = ({ username }: { username: string }) => {
         <Link
           href={`/profile/${username}/my-courses`} // Link to user's courses
           className={`${
-            pathName === `/profile/${username}/my-courses`
+            pathName === `/profile/${username}/my-courses` ||
+            pathName.includes("/my-courses")
               ? "bg-primary text-base-100"
               : ""
           } flex items-center p-2 rounded-xl gap-2`} // Conditional styling
