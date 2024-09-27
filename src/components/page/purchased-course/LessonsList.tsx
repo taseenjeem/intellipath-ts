@@ -9,7 +9,7 @@ const LessonsList = () => {
       <div className="space-y-3">
         <div className="collapse collapse-arrow bg-base-300">
           <input type="radio" name="my-accordion-2" defaultChecked />
-          <div className="collapse-title text-lg font-medium">
+          <div className="collapse-title font-medium">
             Click to open this one and close others
           </div>
           <div className="collapse-content">
@@ -20,7 +20,7 @@ const LessonsList = () => {
         </div>
         <div className="collapse collapse-arrow bg-base-300">
           <input type="radio" name="my-accordion-2" />
-          <div className="collapse-title text-lg font-medium">
+          <div className="collapse-title font-medium">
             Click to open this one and close others
           </div>
           <div className="collapse-content">
@@ -31,7 +31,7 @@ const LessonsList = () => {
         </div>
         <div className="collapse collapse-arrow bg-base-300">
           <input type="radio" name="my-accordion-2" />
-          <div className="collapse-title text-lg font-medium">
+          <div className="collapse-title font-medium">
             Click to open this one and close others
           </div>
           <div className="collapse-content">

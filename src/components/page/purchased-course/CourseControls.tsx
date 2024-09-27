@@ -3,7 +3,7 @@ import VideoPlayer from "./VideoPlayer";
 
 const CourseControls = () => {
   return (
-    <section className="flex gap-5 h-[calc(100vh-600px)] md:min-h-[calc(100vh-350px)]">
+    <section className="flex flex-col lg:flex-row gap-5 aspect-1 lg:aspect-3">
       <VideoPlayer />
       <LessonsList />
     </section>
