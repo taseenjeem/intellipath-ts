@@ -10,6 +10,7 @@ const VideoPlayer = () => {
             width="100%"
             height="100%"
             className="absolute top-0 left-0"
+            controls
             url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
           />
         </div>
