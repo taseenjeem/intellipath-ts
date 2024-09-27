@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { BiLinkExternal } from "react-icons/bi";
+
 const RefsTab = () => {
   return (
     <>
@@ -9,7 +12,18 @@ const RefsTab = () => {
         aria-label="References"
       />
       <div role="tabpanel" className="tab-content pt-5">
-        Reference
+        <ul className="flex flex-col gap-2">
+          <li className="inline-block">
+            <Link
+              href={`#`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 link-hover hover:text-primary duration-150"
+            >
+              <BiLinkExternal /> Lorem ipsum dolor sit amet
+            </Link>
+          </li>
+        </ul>
       </div>
     </>
   );
