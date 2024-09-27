@@ -6,7 +6,7 @@ const ReviewTab = () => {
         name="course_tabs"
         role="tab"
         className="tab"
-        aria-label="Review"
+        aria-label="Reviews"
       />
       <div role="tabpanel" className="tab-content pt-5">
         Reviews
