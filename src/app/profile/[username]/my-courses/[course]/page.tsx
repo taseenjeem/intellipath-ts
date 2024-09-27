@@ -9,7 +9,10 @@ const PurchasedCourse = async ({
 
   return (
     <>
-      <Breadcrumbs username={params.username} course={course?.title ?? ""} />
+      <Breadcrumbs
+        username={params.username}
+        course={course?.title ?? "Failed to load course name"}
+      />
       <VideoPlayer />
     </>
   );
