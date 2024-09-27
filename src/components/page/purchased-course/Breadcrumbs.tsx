@@ -11,7 +11,7 @@ const Breadcrumbs = ({
 }) => {
   return (
     <>
-      <div className="breadcrumbs text-lg mt-5">
+      <div className="breadcrumbs text-lg my-5">
         <ul className="flex items-center">
           <li>
             <Link

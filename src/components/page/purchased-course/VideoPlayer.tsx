@@ -4,8 +4,8 @@ import ReactPlayer from "react-player";
 const VideoPlayer = () => {
   return (
     <>
-      <div className="mt-5 w-full bg-base-200 p-5 rounded-2xl">
-        <div className="relative h-[calc(100vh-600px)] md:min-h-[calc(100vh-350px)]">
+      <div className="w-full lg:w-[70%] bg-base-200 p-5 rounded-2xl">
+        <div className="relative h-full">
           <ReactPlayer
             width="100%"
             height="100%"
