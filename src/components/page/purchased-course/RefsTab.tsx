@@ -11,7 +11,7 @@ const RefsTab = () => {
         className="tab"
         aria-label="References"
       />
-      <div role="tabpanel" className="tab-content pt-5">
+      <div role="tabpanel" className="tab-content pt-5 min-h-[60vh]">
         <ul className="flex flex-col gap-2">
           <li className="inline-block">
             <Link

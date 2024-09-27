@@ -9,7 +9,7 @@ const DescriptionTab = () => {
         aria-label="Descriptions"
         defaultChecked
       />
-      <div role="tabpanel" className="tab-content pt-5">
+      <div role="tabpanel" className="tab-content pt-5 min-h-[60vh]">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam
         eligendi mollitia fugiat esse ipsam neque nisi temporibus, expedita
         aliquid soluta. Reprehenderit fuga dolore nobis voluptas accusamus. Cum

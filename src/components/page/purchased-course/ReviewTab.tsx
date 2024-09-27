@@ -11,7 +11,7 @@ const ReviewTab = () => {
         className="tab"
         aria-label="Reviews"
       />
-      <div role="tabpanel" className="tab-content pt-5">
+      <div role="tabpanel" className="tab-content pt-5 min-h-[60vh]">
         <div className="w-full h-[500px] border-2 border-gray-500 overflow-hidden overflow-y-auto rounded-2xl p-5 space-y-3">
           <ReviewCard />
           <ReviewCard />
