@@ -1,3 +1,4 @@
+import AddReview from "./AddReview";
 import ReviewCard from "./ReviewCard";
 
 const ReviewTab = () => {
@@ -18,6 +19,7 @@ const ReviewTab = () => {
           <ReviewCard />
           <ReviewCard />
         </div>
+        <AddReview />
       </div>
     </>
   );
