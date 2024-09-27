@@ -15,7 +15,7 @@ const ReviewCard = () => {
           />
           <div>
             <h4 className="font-semibold">John Doe</h4>
-            <span className="flex gap-1 text-sm">
+            <span className="flex gap-1 text-sm text-primary">
               <FaStar />
               <FaStar />
               <FaStar />
