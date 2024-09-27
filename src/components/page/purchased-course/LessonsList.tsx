@@ -8,9 +8,31 @@ const LessonsList = () => {
       </div>
       <div className="space-y-3">
         <div className="collapse collapse-arrow bg-base-300">
-          <input type="checkbox" />
+          <input type="radio" name="my-accordion-2" defaultChecked />
           <div className="collapse-title text-lg font-medium">
-            Click me to show/hide content
+            Click to open this one and close others
+          </div>
+          <div className="collapse-content">
+            <button className="btn btn-primary btn-outline justify-start flex items-center gap-2 p-2 rounded-xl w-full">
+              <FaRegCirclePlay /> <p>Lorem ipsum dolor sit amet </p>
+            </button>
+          </div>
+        </div>
+        <div className="collapse collapse-arrow bg-base-300">
+          <input type="radio" name="my-accordion-2" />
+          <div className="collapse-title text-lg font-medium">
+            Click to open this one and close others
+          </div>
+          <div className="collapse-content">
+            <button className="btn btn-primary btn-outline justify-start flex items-center gap-2 p-2 rounded-xl w-full">
+              <FaRegCirclePlay /> <p>Lorem ipsum dolor sit amet </p>
+            </button>
+          </div>
+        </div>
+        <div className="collapse collapse-arrow bg-base-300">
+          <input type="radio" name="my-accordion-2" />
+          <div className="collapse-title text-lg font-medium">
+            Click to open this one and close others
           </div>
           <div className="collapse-content">
             <button className="btn btn-primary btn-outline justify-start flex items-center gap-2 p-2 rounded-xl w-full">
