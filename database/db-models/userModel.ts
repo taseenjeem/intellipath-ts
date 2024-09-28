@@ -21,9 +21,7 @@ const UserSchema: Schema<IUserInfo> = new mongoose.Schema(
     phone: { type: String, default: null },
     address: { type: String, default: null },
     role: { type: String, enum: ["learner", "instructor"], required: true },
-    courses: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Course", default: [] },
-    ],
+    courses: [{ type: Schema.Types.ObjectId, ref: "Courses", default: [] }],
     expertise: { type: [String], default: [] },
     biography: { type: String, default: null },
     education: [
