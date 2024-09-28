@@ -21,11 +21,13 @@ export interface ICourses {
 
 export interface ITestimonial {
   _id: string;
-  user: string;
-  course: string;
+  user: Types.ObjectId;
+  course: Types.ObjectId;
   content: string;
   rating: number;
   date: string;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 }
 
 export interface IRegisterFormInputs {
@@ -123,4 +125,6 @@ export interface ICourse {
   testimonials: ITestimonial[];
   short_description: string;
   full_description: string;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 }
