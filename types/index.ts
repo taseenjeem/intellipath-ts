@@ -122,6 +122,7 @@ export interface ICourse {
   duration: string;
   requirements: string;
   coupons?: { _id?: string; code: string; discount: number }[];
+  lessons: { _id?: string; title: string; url: string }[];
   testimonials: ITestimonial[];
   short_description: string;
   full_description: string;

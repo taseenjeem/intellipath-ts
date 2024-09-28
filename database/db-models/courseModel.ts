@@ -23,6 +23,12 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
         discount: { type: Number, required: true },
       },
     ],
+    lessons: [
+      {
+        title: { type: String, required: true },
+        url: { type: String, required: true },
+      },
+    ],
     testimonials: [{ type: Schema.Types.ObjectId, ref: "testimonials" }],
     short_description: { type: String, required: true },
     full_description: { type: String, required: true },
