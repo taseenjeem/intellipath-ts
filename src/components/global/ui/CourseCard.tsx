@@ -1,10 +1,10 @@
-import { ICourses } from "@/types";
+import { ICourse } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 
 interface CourseCardProps {
-  courseDetails: ICourses;
+  courseDetails: ICourse;
   purchased?: boolean;
   href: string;
 }
@@ -29,20 +29,20 @@ const CourseCard = ({
         <h2 className="text-base md:text-xl font-semibold leading-tight md:leading-normal">
           {courseDetails?.title}
         </h2>
-        <p className="text-xs md:text-base">{courseDetails?.description}</p>
+        <p className="text-xs md:text-base">
+          {courseDetails?.short_description}
+        </p>
         <div className="flex flex-col md:flex-row justify-between">
           <span className="text-xs md:text-base">
             <strong>Instructor: </strong>
-            <span className="link-hover cursor-pointer">
-              {courseDetails?.instructor}
-            </span>
+            <span className="link-hover cursor-pointer">Taseen Jeem</span>
           </span>
           <span className="flex items-center gap-2 text-accent text-xs md:text-base mt-2 md:mt-0">
             <span className="cursor-pointer" title="Total reviews">
-              ({courseDetails?.reviews})
+              ({courseDetails?.testimonials.length})
             </span>{" "}
             <span className="cursor-pointer" title="Average ratings">
-              {courseDetails?.rating}
+              5
             </span>
             <FaStar />
           </span>

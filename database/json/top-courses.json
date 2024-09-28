@@ -1,82 +1,46 @@
 [
   {
-    "_id": "1",
-    "title": "Full-Stack Web Development",
-    "slug": "full-stack-web-development-by-john-doe",
-    "description": "Learn to build dynamic websites and web applications using HTML, CSS, JavaScript, and backend technologies.",
-    "instructor": "John Doe",
-    "rating": 4.8,
-    "reviews": 3245,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "2",
-    "title": "Data Science and Machine Learning",
-    "slug": "data-science-and-machine-learning-by-jane-smith",
-    "description": "Master data analysis, visualization, and machine learning algorithms to make data-driven decisions.",
-    "instructor": "Jane Smith",
-    "rating": 4.7,
-    "reviews": 2876,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "3",
-    "title": "Digital Marketing",
-    "slug": "digital-marketing-by-mark-johnson",
-    "description": "Learn strategies for SEO, social media marketing, content marketing, and more to grow your business online.",
-    "instructor": "Mark Johnson",
-    "rating": 4.6,
-    "reviews": 1950,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "4",
-    "title": "Graphic Design",
-    "slug": "graphic-design-by-emily-davis",
-    "description": "Develop your creativity and learn essential design tools like Adobe Photoshop and Illustrator.",
-    "instructor": "Emily Davis",
-    "rating": 4.9,
-    "reviews": 1475,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "5",
-    "title": "Project Management",
-    "slug": "project-management-by-michael-brown",
-    "description": "Acquire skills to effectively manage projects, lead teams, and deliver results on time and within budget.",
-    "instructor": "Michael Brown",
-    "rating": 4.8,
-    "reviews": 1320,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "6",
-    "title": "Python Programming",
-    "slug": "python-programming-by-sarah-wilson",
-    "description": "Learn Python from scratch and advance to developing complex applications and automation scripts.",
-    "instructor": "Sarah Wilson",
-    "rating": 4.7,
-    "reviews": 2590,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "7",
-    "title": "Photography",
-    "slug": "photography-by-david-miller",
-    "description": "Master the art of photography, from camera settings to composition and post-processing.",
-    "instructor": "David Miller",
-    "rating": 4.9,
-    "reviews": 1110,
-    "thumbnail": "/assets/images/course-thumbnail.png"
-  },
-  {
-    "_id": "8",
-    "title": "Public Speaking",
-    "slug": "public-speaking-by-laura-garcia",
-    "description": "Enhance your communication skills and confidence to deliver compelling presentations and speeches.",
-    "instructor": "Laura Garcia",
-    "rating": 4.8,
-    "reviews": 1800,
-    "thumbnail": "/assets/images/course-thumbnail.png"
+    "_id": "64b8f9c2a4d2f93b88d4f4b5",
+    "title": "Introduction to Data Science",
+    "slug": "introduction-to-data-science",
+    "instructor": "64b8f9d3c2a4f93b88d4f4b6",
+    "thumbnail": "/assets/images/course-thumbnail.png",
+    "category": "Data Science",
+    "price": 199.99,
+    "discount": 15,
+    "language": "English",
+    "duration": "12 hours",
+    "requirements": "Basic understanding of mathematics and programming.",
+    "level": "Beginner",
+    "coupons": [
+      {
+        "_id": "64b8f9e4c2a4f93b88d4f4b7",
+        "code": "DSCIENCE15",
+        "discount": 15
+      },
+      {
+        "_id": "64b8f9e5c2a4f93b88d4f4b8",
+        "code": "WELCOME10",
+        "discount": 10
+      }
+    ],
+    "lessons": [
+      {
+        "_id": "64b8f9e6c2a4f93b88d4f4b9",
+        "title": "What is Data Science?",
+        "url": "https://example.com/lessons/what-is-data-science"
+      },
+      {
+        "_id": "64b8f9e7c2a4f93b88d4f4ba",
+        "title": "Data Wrangling Basics",
+        "url": "https://example.com/lessons/data-wrangling-basics"
+      }
+    ],
+    "enrollments": ["64b8f9f8c2a4f93b88d4f4bb", "64b8f9f9c2a4f93b88d4f4bc"],
+    "testimonials": ["64b8f9fac2a4f93b88d4f4bd", "64b8f9fbc2a4f93b88d4f4be"],
+    "short_description": "Learn the basics of data science, data wrangling, and analysis techniques.",
+    "full_description": "This course covers the fundamental concepts of data science including data collection, cleaning, and visualization techniques, suitable for beginners.",
+    "createdAt": "2024-01-01T10:00:00.000Z",
+    "updatedAt": "2024-09-28T12:00:00.000Z"
   }
 ]
