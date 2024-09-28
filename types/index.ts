@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export interface ICategory {
   id: string;
   title: string;
@@ -18,10 +20,8 @@ export interface ICourses {
 }
 
 export interface ITestimonial {
-  id: string;
-  name: string;
-  avatar: string;
-  role: string;
+  _id: string;
+  user: string;
   course: string;
   content: string;
   rating: number;
@@ -105,4 +105,22 @@ export interface IUserInfo {
   };
   createdAt?: Date | null;
   updatedAt?: Date | null;
+}
+
+export interface ICourse {
+  _id: string;
+  title: string;
+  slug: string;
+  instructor: Types.ObjectId;
+  thumbnail: string;
+  category: string;
+  price: number;
+  discount: number;
+  language: string;
+  duration: string;
+  requirements: string;
+  coupons?: { _id?: string; code: string; discount: number }[];
+  testimonials: ITestimonial[];
+  short_description: string;
+  full_description: string;
 }

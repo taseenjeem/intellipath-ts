@@ -32,7 +32,7 @@ const Testimonial = async () => {
         <div className="mt-5 md:mt-10 [column-fill:_balance] sm:columns-2 gap-3 lg:columns-3 md:gap-5">
           {feedbackData.map((item: ITestimonial) => (
             <div
-              key={item.date}
+              key={item._id}
               className="mb-5 sm:break-inside-avoid cursor-pointer"
             >
               <blockquote className="card p-5 bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300">

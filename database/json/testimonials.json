@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "_id": "1",
     "name": "Alice Johnson",
     "role": "Student",
     "course": "Full-Stack Web Development",
@@ -10,7 +10,7 @@
     "avatar": "https://randomuser.me/api/portraits/women/1.jpg"
   },
   {
-    "id": "2",
+    "_id": "2",
     "name": "Robert Lee",
     "role": "Instructor",
     "course": "Data Science and Machine Learning",
@@ -20,7 +20,7 @@
     "avatar": "https://randomuser.me/api/portraits/men/2.jpg"
   },
   {
-    "id": "3",
+    "_id": "3",
     "name": "Maria Hernandez",
     "role": "Student",
     "course": "Digital Marketing",
@@ -30,7 +30,7 @@
     "avatar": "https://randomuser.me/api/portraits/women/3.jpg"
   },
   {
-    "id": "4",
+    "_id": "4",
     "name": "David Kim",
     "role": "Instructor",
     "course": "Python Programming",
@@ -40,7 +40,7 @@
     "avatar": "https://randomuser.me/api/portraits/men/4.jpg"
   },
   {
-    "id": "5",
+    "_id": "5",
     "name": "Samantha Brown",
     "role": "Student",
     "course": "Graphic Design",
@@ -50,7 +50,7 @@
     "avatar": "https://randomuser.me/api/portraits/women/5.jpg"
   },
   {
-    "id": "6",
+    "_id": "6",
     "name": "Michael Green",
     "role": "Instructor",
     "course": "Project Management",
@@ -60,7 +60,7 @@
     "avatar": "https://randomuser.me/api/portraits/men/6.jpg"
   },
   {
-    "id": "7",
+    "_id": "7",
     "name": "Linda Martinez",
     "role": "Student",
     "course": "Photography",
@@ -70,7 +70,7 @@
     "avatar": "https://randomuser.me/api/portraits/women/7.jpg"
   },
   {
-    "id": "8",
+    "_id": "8",
     "name": "James Wilson",
     "role": "Instructor",
     "course": "Public Speaking",
@@ -80,7 +80,7 @@
     "avatar": "https://randomuser.me/api/portraits/men/8.jpg"
   },
   {
-    "id": "9",
+    "_id": "9",
     "name": "Sophia Adams",
     "role": "Student",
     "course": "User Experience Design",
