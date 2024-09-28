@@ -230,7 +230,7 @@ const ProfileInfoTab = () => {
         {userData?.role === "instructor" && (
           <div>
             <h3 className="text-2xl font-bold text-primary mt-10">
-              Teaching Experience
+              Experience
             </h3>
             {userData?.experience && userData?.experience.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
