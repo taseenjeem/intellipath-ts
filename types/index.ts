@@ -123,6 +123,7 @@ export interface ICourse {
   requirements: string;
   coupons?: { _id?: string; code: string; discount: number }[];
   lessons: { _id?: string; title: string; url: string }[];
+  enrollments?: Types.ObjectId[];
   testimonials: ITestimonial[];
   short_description: string;
   full_description: string;
