@@ -17,6 +17,11 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
     language: { type: String, required: true },
     duration: { type: String, required: true },
     requirements: { type: String, required: true },
+    level: {
+      type: String,
+      enum: ["beginner", "intermediate", "professional"],
+      required: true,
+    },
     coupons: [
       {
         code: { type: String, required: true },

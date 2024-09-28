@@ -121,6 +121,7 @@ export interface ICourse {
   language: string;
   duration: string;
   requirements: string;
+  level: string;
   coupons?: { _id?: string; code: string; discount: number }[];
   lessons: { _id?: string; title: string; url: string }[];
   enrollments?: Types.ObjectId[];
