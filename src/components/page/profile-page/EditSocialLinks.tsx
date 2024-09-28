@@ -8,7 +8,7 @@ interface IEditSocialLinkProps {
 const EditSocialLinks = ({ formData, onChange }: IEditSocialLinkProps) => {
   return (
     <>
-      <h3 className="text-2xl font-semibold text-primary underline underline-offset-4 mt-16 mb-5">
+      <h3 className="text-2xl font-semibold text-primary mt-16 mb-5">
         Social Links
       </h3>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
