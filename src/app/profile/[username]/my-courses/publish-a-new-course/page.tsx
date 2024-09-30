@@ -1,6 +1,9 @@
 "use client";
+import { useAppSelector } from "@/redux/store";
 
 const PublishCoursePage = () => {
+  const { _id: instructor } = useAppSelector((state) => state.userInfo);
+
   return (
     <>
       <h1 className="text-xl md:text-2xl text-primary font-semibold my-5">
