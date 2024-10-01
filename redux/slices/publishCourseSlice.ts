@@ -10,7 +10,7 @@ interface publishCourse {
   duration: number | null;
   requirements: string;
   level: string | null;
-  lessons: [];
+  lessons: { title: string; url: string }[];
   short_description: string;
   full_description: string;
 }
@@ -67,6 +67,14 @@ const publishCourseSlice = createSlice({
     updateFullDescription: (state, action) => {
       state.full_description = action.payload;
     },
+    addLesson: (state, action) => {
+      state.lessons.push(action.payload);
+    },
+    removeLesson: (state, action) => {
+      state.lessons = state.lessons.filter(
+        (lesson) => lesson.title !== action.payload
+      );
+    },
     resetPublishCourseForm: (state) => {
       return (state = initialState);
     },
@@ -85,6 +93,8 @@ export const {
   updateLevel,
   updateShortDescription,
   updateFullDescription,
+  addLesson,
+  removeLesson,
   resetPublishCourseForm,
 } = publishCourseSlice.actions;
 

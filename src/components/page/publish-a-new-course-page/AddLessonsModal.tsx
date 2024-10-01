@@ -1,15 +1,32 @@
+"use client";
+import { useAppDispatch } from "@/redux/store";
+import { addLesson } from "@/redux/slices/publishCourseSlice";
 import { CgClose } from "react-icons/cg";
-
-const closeModal = () => {
-  const lessonModal = document.getElementById(
-    "add_lesson"
-  ) as HTMLDialogElement | null;
-  if (lessonModal) {
-    lessonModal.close();
-  }
-};
+import { useState } from "react";
 
 const AddLessonsModal = () => {
+  const dispatch = useAppDispatch();
+  const [lessonDetails, setLessonDetails] = useState({ title: "", url: "" });
+
+  const handleAddLesson = () => {
+    if (lessonDetails.title && lessonDetails.url) {
+      dispatch(
+        addLesson({ title: lessonDetails.title, url: lessonDetails.url })
+      );
+      closeModal();
+      setLessonDetails({ title: "", url: "" });
+    }
+  };
+
+  const closeModal = () => {
+    const lessonModal = document.getElementById(
+      "add_lesson"
+    ) as HTMLDialogElement | null;
+    if (lessonModal) {
+      lessonModal.close();
+    }
+  };
+
   return (
     <>
       <dialog id="add_lesson" className="modal modal-bottom sm:modal-middle">
@@ -33,22 +50,32 @@ const AddLessonsModal = () => {
                 name="title"
                 type="text"
                 className="input input-bordered"
+                value={lessonDetails.title}
+                onChange={(e) =>
+                  setLessonDetails({ ...lessonDetails, title: e.target.value })
+                }
               />
             </div>
             <div className="form-control">
-              <label htmlFor="title" className="label">
+              <label htmlFor="url" className="label">
                 <span className="label-text">Lesson URL</span>
                 <span className="label-text">(YouTube Video)</span>
               </label>
               <input
-                id="title"
-                name="title"
+                id="url"
+                name="url"
                 type="text"
                 className="input input-bordered"
+                value={lessonDetails.url}
+                onChange={(e) =>
+                  setLessonDetails({ ...lessonDetails, url: e.target.value })
+                }
               />
             </div>
             <div className="flex justify-end">
-              <button className="btn btn-primary">Add lesson</button>
+              <button className="btn btn-primary" onClick={handleAddLesson}>
+                Add lesson
+              </button>
             </div>
           </div>
         </div>

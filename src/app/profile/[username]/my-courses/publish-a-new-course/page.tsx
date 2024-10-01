@@ -13,8 +13,9 @@ import {
   updateShortDescription,
   updateFullDescription,
   resetPublishCourseForm,
+  removeLesson,
 } from "@/redux/slices/publishCourseSlice";
-import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5";
+import { IoCloseSharp, IoCheckmarkSharp, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
@@ -57,7 +58,7 @@ const PublishCoursePage = () => {
             <button
               onClick={handleCancel}
               type="reset"
-              className="btn btn-primary "
+              className="btn btn-primary"
             >
               Cancel <IoCloseSharp size={20} />
             </button>
@@ -219,10 +220,10 @@ const PublishCoursePage = () => {
             </div>
           </div>
           <div>
-            <label htmlFor="" className="label">
+            <label className="label">
               <span className="label-text">Lessons</span>
             </label>
-            {course.lessons.length > 0 ? (
+            {course.lessons.length === 0 ? (
               <div
                 onClick={openModal}
                 role="button"
@@ -232,7 +233,33 @@ const PublishCoursePage = () => {
                 Add lessons for your course
               </div>
             ) : (
-              <div></div>
+              <div className="space-y-3">
+                <div className="grid grid-cols-3 gap-5">
+                  {course.lessons.map((lesson) => (
+                    <div
+                      key={lesson.title}
+                      className="p-3 bg-primary rounded-xl text-primary-content relative"
+                    >
+                      <button
+                        type="button"
+                        className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
+                        onClick={() => dispatch(removeLesson(lesson.title))}
+                      >
+                        <IoClose />
+                      </button>
+                      <h4 className="text-lg font-semibold">{lesson.title}</h4>
+                      <p>{lesson.url}</p>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={openModal}
+                  className="btn btn-primary btn-outline w-full"
+                >
+                  <IoIosAddCircleOutline size={24} />
+                  Add lessons for your course
+                </button>
+              </div>
             )}
           </div>
           <div className="form-control">
