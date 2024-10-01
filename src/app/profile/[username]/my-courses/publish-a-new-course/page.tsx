@@ -40,6 +40,9 @@ const PublishCoursePage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const data = { ...course, instructor };
+    console.log(data);
   };
 
   const handleCancel = () => {

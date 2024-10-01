@@ -13,7 +13,7 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
     thumbnail: { type: String, required: true },
     category: { type: String, required: true },
     price: { type: Number, required: true },
-    discount: { type: Number, required: true },
+    discount: { type: Number, default: null },
     language: { type: String, required: true },
     duration: { type: String, required: true },
     requirements: { type: String, required: true },

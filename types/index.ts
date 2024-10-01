@@ -72,7 +72,7 @@ export interface IUserInfo {
   phone?: string | null;
   address?: string | null;
   role: string;
-  courses?: string[];
+  courses?: Types.ObjectId[];
   expertise?: string[];
   biography?: string | null;
   education?: {
@@ -117,7 +117,7 @@ export interface ICourse {
   thumbnail: string;
   category: string;
   price: number;
-  discount: number;
+  discount: number | null;
   language: string;
   duration: string;
   requirements: string;
