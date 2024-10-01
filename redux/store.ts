@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import userInfoReducer from "./slices/UserInfoSlice";
 import editProfileInfoReducer from "./slices/profileInfoSlice";
+import publishCourseReducer from "./slices/publishCourseSlice";
 
 const createNoopStorage = () => {
   return {
@@ -37,13 +38,14 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["userInfo"],
+  whitelist: ["userInfo", "publishCourseInfo"],
 };
 
 // Combine reducers into a root reducer
 const rootReducer = combineReducers({
   userInfo: userInfoReducer,
   editProfileInfo: editProfileInfoReducer,
+  publishCourseInfo: publishCourseReducer,
 });
 
 // Create a persisted reducer using the persist configuration
