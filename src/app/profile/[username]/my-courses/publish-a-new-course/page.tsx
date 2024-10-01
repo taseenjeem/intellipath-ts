@@ -235,7 +235,7 @@ const PublishCoursePage = () => {
             ) : (
               <div className="space-y-3">
                 <div className="grid grid-cols-3 gap-5">
-                  {course.lessons.map((lesson) => (
+                  {course.lessons.map((lesson, index) => (
                     <div
                       key={lesson.title}
                       className="p-3 bg-primary rounded-xl text-primary-content relative"
@@ -247,7 +247,9 @@ const PublishCoursePage = () => {
                       >
                         <IoClose />
                       </button>
-                      <h4 className="text-lg font-semibold">{lesson.title}</h4>
+                      <h4 className="text-lg font-semibold">
+                        {index + 1}. {lesson.title}
+                      </h4>
                       <p>{lesson.url}</p>
                     </div>
                   ))}
