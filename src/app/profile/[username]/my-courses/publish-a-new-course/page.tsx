@@ -61,6 +61,7 @@ const PublishCoursePage = () => {
                 <span className="label-text">Course Title</span>
               </label>
               <input
+                required
                 type="text"
                 id="title"
                 name="title"
@@ -75,6 +76,7 @@ const PublishCoursePage = () => {
                 <span className="label-text">(Slug)</span>
               </label>
               <input
+                required
                 type="text"
                 id="slug"
                 name="slug"
@@ -112,6 +114,7 @@ const PublishCoursePage = () => {
                 <span className="label-text">Select a thumbnail</span>
               </label>
               <input
+                required
                 id="thumbnail"
                 name="thumbnail"
                 type="file"
@@ -123,11 +126,12 @@ const PublishCoursePage = () => {
                 <span className="label-text">Price (in USD)</span>
               </label>
               <input
+                required
                 type="number"
                 id="price"
                 name="price"
                 className="input input-bordered"
-                value={course.price}
+                value={!!course.price ? course.price : ""}
                 onChange={(e) => dispatch(updatePrice(Number(e.target.value)))}
               />
             </div>
@@ -140,7 +144,7 @@ const PublishCoursePage = () => {
                 id="discount"
                 name="discount"
                 className="input input-bordered"
-                value={course.discount}
+                value={!!course.discount ? course.discount : ""}
                 onChange={(e) =>
                   dispatch(updateDiscount(Number(e.target.value)))
                 }
@@ -151,6 +155,7 @@ const PublishCoursePage = () => {
                 <span className="label-text">Select your course language</span>
               </label>
               <select
+                required
                 id="language"
                 name="language"
                 className="select select-bordered"
@@ -169,11 +174,12 @@ const PublishCoursePage = () => {
                 <span className="label-text">(in minutes)</span>
               </label>
               <input
+                required
                 type="number"
                 id="duration"
                 name="duration"
                 className="input input-bordered"
-                value={course.duration}
+                value={!!course.duration ? course.duration : ""}
                 onChange={(e) =>
                   dispatch(updateDuration(Number(e.target.value)))
                 }
@@ -184,6 +190,7 @@ const PublishCoursePage = () => {
                 <span className="label-text">Course level</span>
               </label>
               <select
+                required
                 id="level"
                 name="level"
                 className="select select-bordered"
@@ -202,6 +209,7 @@ const PublishCoursePage = () => {
               <span className="label-text">(minimum 1000 characters)</span>
             </label>
             <textarea
+              required
               maxLength={1000}
               id="requirements"
               name="requirements"
@@ -216,6 +224,7 @@ const PublishCoursePage = () => {
               <span className="label-text">(maximum 100 characters)</span>
             </label>
             <textarea
+              required
               maxLength={100}
               id="short_description"
               name="short_description"
@@ -229,6 +238,7 @@ const PublishCoursePage = () => {
               <span className="label-text">Full description of the course</span>
             </label>
             <textarea
+              required
               maxLength={1000}
               id="full_description"
               name="full_description"

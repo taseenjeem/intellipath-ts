@@ -4,10 +4,10 @@ interface publishCourse {
   title: string;
   slug: string;
   category: string;
-  price: number;
-  discount: number;
+  price: number | null;
+  discount: number | null;
   language: string;
-  duration: number;
+  duration: number | null;
   requirements: string;
   level: string;
   lessons: [{ title: string; url: string }];
@@ -19,10 +19,10 @@ const initialState: publishCourse = {
   title: "",
   slug: "",
   category: "",
-  price: 0,
-  discount: 0,
+  price: null,
+  discount: null,
   language: "",
-  duration: 0,
+  duration: null,
   requirements: "",
   level: "",
   lessons: [{ title: "", url: "" }],
