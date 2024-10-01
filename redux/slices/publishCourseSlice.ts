@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 interface publishCourse {
   title: string;
   slug: string;
-  category: string;
+  category: string | null;
   price: number | null;
   discount: number | null;
-  language: string;
+  language: string | null;
   duration: number | null;
   requirements: string;
-  level: string;
+  level: string | null;
   lessons: [{ title: string; url: string }];
   short_description: string;
   full_description: string;
@@ -18,13 +18,13 @@ interface publishCourse {
 const initialState: publishCourse = {
   title: "",
   slug: "",
-  category: "",
+  category: null,
   price: null,
   discount: null,
-  language: "",
+  language: null,
   duration: null,
   requirements: "",
-  level: "",
+  level: null,
   lessons: [{ title: "", url: "" }],
   short_description: "",
   full_description: "",

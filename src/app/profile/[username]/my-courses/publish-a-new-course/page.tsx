@@ -90,13 +90,14 @@ const PublishCoursePage = () => {
                 <span className="label-text">Select your category</span>
               </label>
               <select
+                required
                 id="category"
                 name="category"
                 className="select select-bordered"
-                value={course.category}
+                value={course.category ?? ""}
                 onChange={(e) => dispatch(updateCategory(e.target.value))}
               >
-                <option disabled>Pick a category</option>
+                <option value="">Pick a category</option>
                 <option value="Business & Finance">Business & Finance</option>
                 <option value="Technology & Programming">
                   Technology & Programming
@@ -159,9 +160,10 @@ const PublishCoursePage = () => {
                 id="language"
                 name="language"
                 className="select select-bordered"
-                value={course.language}
+                value={course.language ?? ""}
                 onChange={(e) => dispatch(updateLanguage(e.target.value))}
               >
+                <option value="">Pick your course language</option>
                 <option value="English">English - International</option>
                 <option value="বাংলা">বাংলা - Bangla</option>
                 <option value="اردو">اردو - Urdu</option>
@@ -194,9 +196,10 @@ const PublishCoursePage = () => {
                 id="level"
                 name="level"
                 className="select select-bordered"
-                value={course.level}
+                value={course.level ?? ""}
                 onChange={(e) => dispatch(updateLevel(e.target.value))}
               >
+                <option value="">Pick a course level</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
                 <option value="Professional">Professional</option>
