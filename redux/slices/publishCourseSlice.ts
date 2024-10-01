@@ -10,7 +10,7 @@ interface publishCourse {
   duration: number | null;
   requirements: string;
   level: string | null;
-  lessons: [{ title: string; url: string }];
+  lessons: [];
   short_description: string;
   full_description: string;
 }
@@ -25,7 +25,7 @@ const initialState: publishCourse = {
   duration: null,
   requirements: "",
   level: null,
-  lessons: [{ title: "", url: "" }],
+  lessons: [],
   short_description: "",
   full_description: "",
 };

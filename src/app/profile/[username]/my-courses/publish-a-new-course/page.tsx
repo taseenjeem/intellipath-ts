@@ -16,6 +16,8 @@ import {
 } from "@/redux/slices/publishCourseSlice";
 import { IoCloseSharp, IoCheckmarkSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +26,16 @@ const PublishCoursePage = () => {
   const { _id: instructor, username } = useAppSelector(
     (state) => state.userInfo
   );
+
+  const openModal = () => {
+    const logoutModal = document.getElementById(
+      "add_lesson"
+    ) as HTMLDialogElement | null;
+
+    if (logoutModal) {
+      logoutModal.showModal();
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -206,6 +218,23 @@ const PublishCoursePage = () => {
               </select>
             </div>
           </div>
+          <div>
+            <label htmlFor="" className="label">
+              <span className="label-text">Lessons</span>
+            </label>
+            {course.lessons.length > 0 ? (
+              <div
+                onClick={openModal}
+                role="button"
+                className="border rounded-2xl w-full h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
+              >
+                <IoIosAddCircleOutline size={60} />
+                Add lessons for your course
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </div>
           <div className="form-control">
             <label className="label" htmlFor="requirements">
               <span className="label-text">Minimum requirements</span>
@@ -252,6 +281,7 @@ const PublishCoursePage = () => {
           </div>
         </div>
       </form>
+      <AddLessonsModal />
     </>
   );
 };
