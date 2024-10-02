@@ -19,13 +19,14 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
     requirements: { type: String, required: true },
     level: {
       type: String,
-      enum: ["beginner", "intermediate", "professional"],
+      enum: ["Beginner", "Intermediate", "Professional"],
       required: true,
     },
     coupons: [
       {
-        code: { type: String, required: true },
-        discount: { type: Number, required: true },
+        code: { type: String },
+        discount: { type: Number },
+        default: [],
       },
     ],
     lessons: [
@@ -34,8 +35,10 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
         url: { type: String, required: true },
       },
     ],
-    testimonials: [{ type: Schema.Types.ObjectId, ref: "testimonials" }],
-    enrollments: [{ type: Schema.Types.ObjectId, ref: "users" }],
+    testimonials: [
+      { type: Schema.Types.ObjectId, ref: "testimonials", default: [] },
+    ],
+    enrollments: [{ type: Schema.Types.ObjectId, ref: "users", default: [] }],
     short_description: { type: String, required: true },
     full_description: { type: String, required: true },
   },
@@ -44,7 +47,7 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
   }
 );
 
-const Course: Model<ICourse> =
+const Courses: Model<ICourse> =
   mongoose.models.courses || model<ICourse>("courses", CourseSchema);
 
-export default Course;
+export default Courses;

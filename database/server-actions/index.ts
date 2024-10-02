@@ -3,6 +3,7 @@ import { signIn } from "@/auth";
 import { IChangePassForm, ICourse, ICredentialLoginFormData } from "@/types";
 import connectMongodb from "../services/connectMongodb";
 import User from "../db-models/userModel";
+import Courses from "../db-models/courseModel";
 import bcrypt from "bcryptjs";
 
 export const credentialLogin = async (formData: ICredentialLoginFormData) => {
@@ -12,7 +13,6 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
       password: formData.password,
       redirect: false,
     });
-
     return {
       success: true,
       message: "You have successfully logged in.",
