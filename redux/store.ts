@@ -38,7 +38,7 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["userInfo", "publishCourseInfo"],
+  whitelist: ["userInfo"],
 };
 
 // Combine reducers into a root reducer
