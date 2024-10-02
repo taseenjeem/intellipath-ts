@@ -14,19 +14,24 @@ import {
   updateFullDescription,
   resetPublishCourseForm,
   removeLesson,
+  updateThumbnail,
+  updateInstructor,
 } from "@/redux/slices/publishCourseSlice";
 import { IoCloseSharp, IoCheckmarkSharp, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
+import { useEffect } from "react";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
   const course = useAppSelector((state) => state.publishCourseInfo);
   const router = useRouter();
-  const { _id: instructor, username } = useAppSelector(
-    (state) => state.userInfo
-  );
+  const { _id, username } = useAppSelector((state) => state.userInfo);
+
+  useEffect(() => {
+    dispatch(updateInstructor(_id));
+  }, [_id, dispatch]);
 
   const openModal = () => {
     const logoutModal = document.getElementById(
@@ -40,9 +45,7 @@ const PublishCoursePage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const data = { ...course, instructor };
-    console.log(data);
+    console.log(course);
   };
 
   const handleCancel = () => {
@@ -82,7 +85,7 @@ const PublishCoursePage = () => {
                 id="title"
                 name="title"
                 className="input input-bordered"
-                value={course.title}
+                value={course.title ?? ""}
                 onChange={(e) => dispatch(updateTitle(e.target.value))}
               />
             </div>
@@ -97,7 +100,7 @@ const PublishCoursePage = () => {
                 id="slug"
                 name="slug"
                 className="input input-bordered"
-                value={course.slug}
+                value={course.slug ?? ""}
                 onChange={(e) => dispatch(updateSlug(e.target.value))}
               />
             </div>
@@ -136,8 +139,14 @@ const PublishCoursePage = () => {
                 name="thumbnail"
                 type="file"
                 className="file-input file-input-bordered"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    dispatch(updateThumbnail(e.target.files[0].name));
+                  }
+                }}
               />
             </div>
+
             <div className="form-control">
               <label className="label" htmlFor="price">
                 <span className="label-text">Price (in USD)</span>
@@ -278,7 +287,7 @@ const PublishCoursePage = () => {
               id="requirements"
               name="requirements"
               className="textarea textarea-bordered min-h-44"
-              value={course.requirements}
+              value={course.requirements ?? ""}
               onChange={(e) => dispatch(updateRequirements(e.target.value))}
             />
           </div>
@@ -293,7 +302,7 @@ const PublishCoursePage = () => {
               id="short_description"
               name="short_description"
               className="textarea textarea-bordered min-h-44"
-              value={course.short_description}
+              value={course.short_description ?? ""}
               onChange={(e) => dispatch(updateShortDescription(e.target.value))}
             />
           </div>
@@ -307,7 +316,7 @@ const PublishCoursePage = () => {
               id="full_description"
               name="full_description"
               className="textarea textarea-bordered min-h-96"
-              value={course.full_description}
+              value={course.full_description ?? ""}
               onChange={(e) => dispatch(updateFullDescription(e.target.value))}
             />
           </div>

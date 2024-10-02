@@ -1,6 +1,6 @@
 "use server";
 import { signIn } from "@/auth";
-import { IChangePassForm, ICredentialLoginFormData } from "@/types";
+import { IChangePassForm, ICourse, ICredentialLoginFormData } from "@/types";
 import connectMongodb from "../services/connectMongodb";
 import User from "../db-models/userModel";
 import bcrypt from "bcryptjs";
@@ -159,5 +159,15 @@ export const changeUserPassword = async (
     const err = error as Error;
     console.error("Error updating user password:", err.message);
     throw new Error(err.message || "Error updating user password");
+  }
+};
+
+export const publishCourse = async (userID: string, data: ICourse) => {
+  try {
+    await connectMongodb();
+  } catch (error) {
+    const err = error as Error;
+    console.error("Error in publishing courses", err.message);
+    throw new Error(err.message || "Error while publishing course");
   }
 };

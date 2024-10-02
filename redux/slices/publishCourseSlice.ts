@@ -1,33 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface publishCourse {
-  title: string;
-  slug: string;
+  title: string | null;
+  slug: string | null;
+  instructor: string | null;
   category: string | null;
+  thumbnail: string | null;
   price: number | null;
   discount: number | null;
   language: string | null;
   duration: number | null;
-  requirements: string;
+  requirements: string | null;
   level: string | null;
   lessons: { title: string; url: string }[];
-  short_description: string;
-  full_description: string;
+  short_description: string | null;
+  full_description: string | null;
 }
 
 const initialState: publishCourse = {
-  title: "",
-  slug: "",
+  title: null,
+  slug: null,
+  instructor: null,
   category: null,
+  thumbnail: null,
   price: null,
   discount: null,
   language: null,
   duration: null,
-  requirements: "",
+  requirements: null,
   level: null,
   lessons: [],
-  short_description: "",
-  full_description: "",
+  short_description: null,
+  full_description: null,
 };
 
 const publishCourseSlice = createSlice({
@@ -40,8 +44,14 @@ const publishCourseSlice = createSlice({
     updateSlug: (state, action) => {
       state.slug = action.payload;
     },
+    updateInstructor: (state, action) => {
+      state.instructor = action.payload;
+    },
     updateCategory: (state, action) => {
       state.category = action.payload;
+    },
+    updateThumbnail: (state, action) => {
+      state.thumbnail = action.payload;
     },
     updatePrice: (state, action) => {
       state.price = action.payload;
@@ -84,7 +94,9 @@ const publishCourseSlice = createSlice({
 export const {
   updateTitle,
   updateSlug,
+  updateInstructor,
   updateCategory,
+  updateThumbnail,
   updatePrice,
   updateDiscount,
   updateLanguage,

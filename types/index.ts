@@ -110,7 +110,7 @@ export interface IUserInfo {
 }
 
 export interface ICourse {
-  _id: string;
+  _id?: string;
   title: string;
   slug: string;
   instructor: Types.ObjectId;
