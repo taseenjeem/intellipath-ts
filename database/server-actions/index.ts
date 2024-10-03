@@ -1,6 +1,11 @@
 "use server";
 import { signIn } from "@/auth";
-import { IChangePassForm, ICourse, ICredentialLoginFormData } from "@/types";
+import {
+  IChangePassForm,
+  ICourse,
+  ICredentialLoginFormData,
+  IPublishCourse,
+} from "@/types";
 import connectMongodb from "../services/connectMongodb";
 import User from "../db-models/userModel";
 import Courses from "../db-models/courseModel";
@@ -162,9 +167,13 @@ export const changeUserPassword = async (
   }
 };
 
-export const publishCourse = async (userID: string, data: ICourse) => {
+export const publishCourse = async (
+  userID: string,
+  courseData: IPublishCourse
+) => {
   try {
     await connectMongodb();
+    console.log(courseData.thumbnail);
   } catch (error) {
     const err = error as Error;
     console.error("Error in publishing courses", err.message);

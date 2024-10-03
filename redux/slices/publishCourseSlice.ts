@@ -1,23 +1,7 @@
+import { IPublishCourse } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface publishCourse {
-  title: string | null;
-  slug: string | null;
-  instructor: string | null;
-  category: string | null;
-  thumbnail: string | null;
-  price: number | null;
-  discount: number | null;
-  language: string | null;
-  duration: number | null;
-  requirements: string | null;
-  level: string | null;
-  lessons: { title: string; url: string }[];
-  short_description: string | null;
-  full_description: string | null;
-}
-
-const initialState: publishCourse = {
+const initialState: IPublishCourse = {
   title: null,
   slug: null,
   instructor: null,

@@ -140,8 +140,8 @@ const PublishCoursePage = () => {
                 type="file"
                 className="file-input file-input-bordered"
                 onChange={(e) => {
-                  if (e.target.files && e.target.files.length > 0) {
-                    dispatch(updateThumbnail(e.target.files[0].name));
+                  if (e.target.files) {
+                    dispatch(updateThumbnail(e.target.files[0]));
                   }
                 }}
               />

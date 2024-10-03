@@ -131,3 +131,20 @@ export interface ICourse {
   createdAt?: Date | null;
   updatedAt?: Date | null;
 }
+
+export interface IPublishCourse {
+  title: string | null;
+  slug: string | null;
+  instructor: string | null;
+  category: string | null;
+  thumbnail: string | null;
+  price: number | null;
+  discount: number | null;
+  language: string | null;
+  duration: number | null;
+  requirements: string | null;
+  level: string | null;
+  lessons: { title: string; url: string }[];
+  short_description: string | null;
+  full_description: string | null;
+}
