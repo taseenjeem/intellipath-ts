@@ -77,11 +77,11 @@ const EditUserAvatar = ({
           }
         } else {
           toast.error(`Image upload failed: ${result.message}`);
-          console.error("Image upload failed:", result.message);
+          console.log("Image upload failed:", result.message);
         }
       } catch (error) {
         toast.error("Error uploading image. Please try again.");
-        console.error("Error uploading image:", error);
+        console.log("Error uploading image:", error);
       }
     } else {
       toast.error("No file selected. Please choose a file.");

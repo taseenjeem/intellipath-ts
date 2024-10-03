@@ -35,7 +35,7 @@ export const POST = async (req: NextRequest) => {
     const result = await publishCourse(userID, courseData, imageUrl);
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
-    console.error("Error in POST /api/publish-course:", error);
+    console.log("Error in POST /api/publish-course:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
       { status: 500 }

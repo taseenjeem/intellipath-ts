@@ -23,7 +23,7 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
       userEmail: formData.email,
     };
   } catch (error: any) {
-    console.error(error);
+    console.log(error);
     return {
       success: false,
       message: "An unexpected error occurred during login.",
@@ -37,7 +37,7 @@ export const getUserByEmail = async (email: string) => {
     const user = await User.findOne({ email }).populate("courses").lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    console.error("Error finding user by email:", error);
+    console.log("Error finding user by email:", error);
     throw new Error("Error finding user by email");
   }
 };
@@ -48,7 +48,7 @@ export const getUserByID = async (userID: string) => {
     const user = await User.findById(userID).populate("courses").lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    console.error("Error finding user by ID:", error);
+    console.log("Error finding user by ID:", error);
     throw new Error("Error finding user by ID");
   }
 };
@@ -66,7 +66,7 @@ export const getUserByUsername = async (username: string) => {
       .lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    console.error("Error finding user by username:", error);
+    console.log("Error finding user by username:", error);
     throw new Error("Error finding user by username");
   }
 };
@@ -100,7 +100,7 @@ export const uploadImage = async (file: File) => {
       message: "Image uploaded successfully",
     };
   } catch (error) {
-    console.error("Error uploading image", error);
+    console.log("Error uploading image", error);
     return {
       success: false,
       imageUrl: null,
@@ -123,7 +123,7 @@ export const updateUserProfileImage = async (userId: string, file: File) => {
         message,
       };
     } else {
-      console.error("Error uploading image or updating user:", message);
+      console.log("Error uploading image or updating user:", message);
       return {
         success: false,
         imageUrl: null,
@@ -131,7 +131,7 @@ export const updateUserProfileImage = async (userId: string, file: File) => {
       };
     }
   } catch (error) {
-    console.error("Error uploading image or updating user:", error);
+    console.log("Error uploading image or updating user:", error);
     return {
       success: false,
       message: "Failed to upload profile picture of the user",
@@ -144,7 +144,7 @@ export const updateUserDetails = async (userId: string, updatedData: any) => {
     await connectMongodb();
     await User.findByIdAndUpdate(userId, updatedData);
   } catch (error) {
-    console.error("Error updating user details:", error);
+    console.log("Error updating user details:", error);
     throw new Error("Error updating user details");
   }
 };
@@ -155,7 +155,7 @@ export const checkUsernameAvailability = async (username: string) => {
     const existingUser = await User.findOne({ username });
     return !!existingUser;
   } catch (error) {
-    console.error("Error checking username:", error);
+    console.log("Error checking username:", error);
     throw new Error("Error checking username availability");
   }
 };
@@ -198,7 +198,7 @@ export const changeUserPassword = async (
     });
   } catch (error) {
     const err = error as Error;
-    console.error("Error updating user password:", err.message);
+    console.log("Error updating user password:", err.message);
     throw new Error(err.message || "Error updating user password");
   }
 };
@@ -228,7 +228,7 @@ export const publishCourse = async (
     return { success: false, message: "Failed to save the course" };
   } catch (error) {
     const err = error as Error;
-    console.error("Error in publishCourse:", err.message);
+    console.log("Error in publishCourse:", err.message);
     return {
       success: false,
       message: err.message || "Error while publishing course",
@@ -244,7 +244,7 @@ export const getCourseBySlug = async (slug: string) => {
       .lean();
     return JSON.parse(JSON.stringify(course));
   } catch (error) {
-    console.error("Error in getCourseBySlug:", error);
+    console.log("Error in getCourseBySlug:", error);
     throw new Error("Error while getting course by slug");
   }
 };

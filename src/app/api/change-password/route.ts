@@ -24,7 +24,7 @@ export const POST = async (req: NextRequest) => {
     );
   } catch (error: any) {
     // Catch and handle errors (e.g., invalid password, user not found)
-    console.error("Error in changing password:", error);
+    console.log("Error in changing password:", error);
 
     // Return appropriate error message
     if (error.message === "User not found") {

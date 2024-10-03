@@ -48,10 +48,10 @@ export const POST = async (request: NextRequest) => {
       return new NextResponse("User created successfully", { status: 201 }); // Respond with success
     } catch (err: unknown) {
       if (err instanceof Error) {
-        console.error("Failed to create new user:", err.message); // Log the error message
+        console.log("Failed to create new user:", err.message); // Log the error message
         return new NextResponse("Failed to create new user", { status: 500 }); // Respond with a server error
       } else {
-        console.error("Failed to create new user due to an unknown error"); // Log an unknown error
+        console.log("Failed to create new user due to an unknown error"); // Log an unknown error
         return new NextResponse(
           "Failed to create new user due to an unknown error",
           { status: 500 }

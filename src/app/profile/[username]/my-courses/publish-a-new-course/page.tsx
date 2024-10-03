@@ -62,7 +62,7 @@ const PublishCoursePage = () => {
 
         if (!response.ok) {
           const errorData = await response.json();
-          console.error("Failed to publish course:", errorData.message);
+          console.log("Failed to publish course:", errorData.message);
           return;
         }
 
@@ -74,9 +74,11 @@ const PublishCoursePage = () => {
           router.push(`/profile/${username}/my-courses`);
         }
       } catch (error) {
-        console.error("Error in handleSubmit:", error);
+        toast.warn("Please attach a thumbnail");
+        console.log("Error in handleSubmit:", error);
       }
     } else {
+      toast.warn("Please attach a thumbnail");
       console.warn("No file selected");
     }
   };

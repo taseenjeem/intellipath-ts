@@ -54,7 +54,7 @@ export const {
             throw new Error("User not found.");
           }
         } catch (error) {
-          console.error(error);
+          console.log(error);
           throw new Error("An unexpected error occurred.");
         }
       },
