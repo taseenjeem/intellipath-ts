@@ -65,12 +65,13 @@ export const getUserByUsername = async (username: string) => {
   }
 };
 
-export const updateUserProfileImage = async (userId: string, file: File) => {
+export const uploadImage = async (file: File) => {
   const formData = new FormData();
   formData.append("image", file);
 
   try {
     const imgbbApiKey = process.env.IMGBB_API_KEY;
+
     const response = await fetch(
       `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
       {
@@ -87,18 +88,47 @@ export const updateUserProfileImage = async (userId: string, file: File) => {
 
     const imageUrl = data.data.url;
 
-    await connectMongodb();
-    await User.findByIdAndUpdate(userId, { profileImageUrl: imageUrl });
-
     return {
       success: true,
       imageUrl,
+      message: "Image uploaded successfully",
     };
+  } catch (error) {
+    console.error("Error uploading image", error);
+    return {
+      success: false,
+      imageUrl: null,
+      message: "Failed to upload image",
+    };
+  }
+};
+
+export const updateUserProfileImage = async (userId: string, file: File) => {
+  try {
+    const { success, imageUrl, message } = await uploadImage(file);
+
+    if (success) {
+      await connectMongodb();
+      await User.findByIdAndUpdate(userId, { profileImageUrl: imageUrl });
+
+      return {
+        success: true,
+        imageUrl,
+        message,
+      };
+    } else {
+      console.error("Error uploading image or updating user:", message);
+      return {
+        success: false,
+        imageUrl: null,
+        message: "Failed to upload image",
+      };
+    }
   } catch (error) {
     console.error("Error uploading image or updating user:", error);
     return {
       success: false,
-      message: "Failed to upload image or update user",
+      message: "Failed to upload profile picture of the user",
     };
   }
 };

@@ -21,13 +21,14 @@ import { IoCloseSharp, IoCheckmarkSharp, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
   const course = useAppSelector((state) => state.publishCourseInfo);
   const router = useRouter();
   const { _id, username } = useAppSelector((state) => state.userInfo);
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
 
   useEffect(() => {
     dispatch(updateInstructor(_id));
@@ -43,8 +44,20 @@ const PublishCoursePage = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (thumbnailFile) {
+      const formData = new FormData();
+      formData.append("image", thumbnailFile);
+
+      const response = await fetch(`/api/publish-course`, {
+        method: "POST",
+        body: formData,
+      });
+
+      console.log(response);
+    }
     console.log(course);
   };
 
@@ -141,7 +154,7 @@ const PublishCoursePage = () => {
                 className="file-input file-input-bordered"
                 onChange={(e) => {
                   if (e.target.files) {
-                    dispatch(updateThumbnail(e.target.files[0]));
+                    setThumbnailFile(e.target.files[0]);
                   }
                 }}
               />
