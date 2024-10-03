@@ -1,5 +1,5 @@
 import CourseCard from "@/src/components/global/ui/CourseCard";
-import { ICourse } from "@/types";
+import { ICourse, IUserInfo } from "@/types";
 import illustrator from "/public/assets/images/search.png";
 import Image from "next/image";
 import { getUserByUsername } from "@/database/server-actions";
@@ -8,14 +8,15 @@ import Link from "next/link";
 const MyCoursesPage = async ({
   params,
 }: Readonly<{ params: { username: string } }>) => {
-  const { courses, role } = await getUserByUsername(params.username);
+  const user: IUserInfo = await getUserByUsername(params.username);
+  const { courses, role } = user;
 
   return (
     <>
       {role === "instructor" && (
         <div className="my-5 space-y-2 flex justify-between">
           <h3 className="text-xl md:text-2xl text-primary font-semibold">
-            You have published total {courses?.length} courses
+            You have published total {courses?.length ?? 0} courses
           </h3>
           <Link
             href={`/profile/${params.username}/my-courses/publish-a-new-course`}
@@ -25,7 +26,7 @@ const MyCoursesPage = async ({
           </Link>
         </div>
       )}
-      {courses.length > 0 ? (
+      {courses && courses.length > 0 ? (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 w-full mt-5">
           {courses.map((item: ICourse) => (
             <CourseCard

@@ -56,7 +56,14 @@ export const getUserByID = async (userID: string) => {
 export const getUserByUsername = async (username: string) => {
   try {
     await connectMongodb();
-    const user = await User.findOne({ username }).populate("courses").lean();
+    const user = await User.findOne({ username })
+      .populate({
+        path: "courses",
+        populate: {
+          path: "instructor",
+        },
+      })
+      .lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by username:", error);
