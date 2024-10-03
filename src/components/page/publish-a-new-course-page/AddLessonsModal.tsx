@@ -7,9 +7,35 @@ import { useState } from "react";
 const AddLessonsModal = () => {
   const dispatch = useAppDispatch();
   const [lessonDetails, setLessonDetails] = useState({ title: "", url: "" });
+  const [error, setError] = useState({ titleError: "", urlError: "" });
+
+  const isValidYouTubeUrl = (url: string) => {
+    const youtubeRegex =
+      /^(https?:\/\/)?(www\.youtube\.com|youtu\.be)\/(watch\?v=)?[a-zA-Z0-9_-]{11}$/;
+    return youtubeRegex.test(url);
+  };
 
   const handleAddLesson = () => {
-    if (lessonDetails.title && lessonDetails.url) {
+    let valid = true;
+
+    if (!lessonDetails.title) {
+      setError((prev) => ({ ...prev, titleError: "Title is required" }));
+      valid = false;
+    } else {
+      setError((prev) => ({ ...prev, titleError: "" }));
+    }
+
+    if (!lessonDetails.url || !isValidYouTubeUrl(lessonDetails.url)) {
+      setError((prev) => ({
+        ...prev,
+        urlError: "Please enter a valid YouTube URL",
+      }));
+      valid = false;
+    } else {
+      setError((prev) => ({ ...prev, urlError: "" }));
+    }
+
+    if (valid) {
       dispatch(
         addLesson({ title: lessonDetails.title, url: lessonDetails.url })
       );
@@ -25,6 +51,8 @@ const AddLessonsModal = () => {
     if (lessonModal) {
       lessonModal.close();
     }
+    setLessonDetails({ title: "", url: "" });
+    setError({ titleError: "", urlError: "" });
   };
 
   return (
@@ -43,35 +71,69 @@ const AddLessonsModal = () => {
           <div className="space-y-5">
             <div className="form-control">
               <label htmlFor="title" className="label">
-                <span className="label-text">Lesson title</span>
+                <span
+                  className={`label-text ${
+                    error.titleError ? "text-error" : ""
+                  }`}
+                >
+                  Lesson title
+                </span>
               </label>
               <input
                 id="title"
                 name="title"
                 type="text"
-                className="input input-bordered"
+                className={`input input-bordered ${
+                  error.titleError ? "input-error" : ""
+                }`}
                 value={lessonDetails.title}
                 onChange={(e) =>
                   setLessonDetails({ ...lessonDetails, title: e.target.value })
                 }
               />
+              {error.titleError && (
+                <label htmlFor="title" className="label">
+                  <span className="label-text text-error">
+                    {error.titleError}
+                  </span>
+                </label>
+              )}
             </div>
+
             <div className="form-control">
               <label htmlFor="url" className="label">
-                <span className="label-text">Lesson URL</span>
-                <span className="label-text">(YouTube Video)</span>
+                <span
+                  className={`label-text ${error.urlError ? "text-error" : ""}`}
+                >
+                  Lesson URL
+                </span>
+                <span
+                  className={`label-text ${error.urlError ? "text-error" : ""}`}
+                >
+                  (YouTube Video)
+                </span>
               </label>
               <input
                 id="url"
                 name="url"
                 type="text"
-                className="input input-bordered"
+                className={`input input-bordered ${
+                  error.urlError ? "input-error" : ""
+                }`}
                 value={lessonDetails.url}
                 onChange={(e) =>
                   setLessonDetails({ ...lessonDetails, url: e.target.value })
                 }
               />
+              {error.urlError && (
+                <label htmlFor="url" className="label">
+                  <span className="label-text text-error">
+                    {error.urlError}
+                  </span>
+                </label>
+              )}
             </div>
+
             <div className="flex justify-end">
               <button className="btn btn-primary" onClick={handleAddLesson}>
                 Add lesson
