@@ -2,7 +2,6 @@
 import { signIn } from "@/auth";
 import {
   IChangePassForm,
-  ICourse,
   ICredentialLoginFormData,
   IPublishCourse,
 } from "@/types";
@@ -35,7 +34,7 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
 export const getUserByEmail = async (email: string) => {
   try {
     await connectMongodb();
-    const user = await User.findOne({ email }).lean();
+    const user = await User.findOne({ email }).populate("courses").lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by email:", error);
@@ -46,7 +45,7 @@ export const getUserByEmail = async (email: string) => {
 export const getUserByID = async (userID: string) => {
   try {
     await connectMongodb();
-    const user = await User.findById(userID).lean();
+    const user = await User.findById(userID).populate("courses").lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by ID:", error);
@@ -57,7 +56,7 @@ export const getUserByID = async (userID: string) => {
 export const getUserByUsername = async (username: string) => {
   try {
     await connectMongodb();
-    const user = await User.findOne({ username }).lean();
+    const user = await User.findOne({ username }).populate("courses").lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.error("Error finding user by username:", error);
@@ -199,14 +198,46 @@ export const changeUserPassword = async (
 
 export const publishCourse = async (
   userID: string,
-  courseData: IPublishCourse
+  courseData: IPublishCourse,
+  thumbnail: string
 ) => {
   try {
     await connectMongodb();
-    console.log(courseData.thumbnail);
+    const data = { ...courseData, thumbnail };
+    const newCourse = new Courses(data);
+    const result = await newCourse.save();
+
+    if (result) {
+      await User.findByIdAndUpdate(userID, {
+        $push: { courses: result._id },
+      });
+      return {
+        success: true,
+        message: "Course published successfully",
+        courseId: result._id,
+      };
+    }
+
+    return { success: false, message: "Failed to save the course" };
   } catch (error) {
     const err = error as Error;
-    console.error("Error in publishing courses", err.message);
-    throw new Error(err.message || "Error while publishing course");
+    console.error("Error in publishCourse:", err.message);
+    return {
+      success: false,
+      message: err.message || "Error while publishing course",
+    };
+  }
+};
+
+export const getCourseBySlug = async (slug: string) => {
+  try {
+    await connectMongodb();
+    const course = await Courses.findOne({ slug })
+      .populate("instructor")
+      .lean();
+    return JSON.parse(JSON.stringify(course));
+  } catch (error) {
+    console.error("Error in getCourseBySlug:", error);
+    throw new Error("Error while getting course by slug");
   }
 };

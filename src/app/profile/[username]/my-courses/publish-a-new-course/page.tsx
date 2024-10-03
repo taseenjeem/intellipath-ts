@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
@@ -48,17 +49,36 @@ const PublishCoursePage = () => {
     e.preventDefault();
 
     if (thumbnailFile) {
-      const formData = new FormData();
-      formData.append("image", thumbnailFile);
+      try {
+        const formData = new FormData();
+        formData.append("image", thumbnailFile);
+        formData.append("userID", _id);
+        formData.append("courseData", JSON.stringify(course));
 
-      const response = await fetch(`/api/publish-course`, {
-        method: "POST",
-        body: formData,
-      });
+        const response = await fetch(`/api/publish-course`, {
+          method: "POST",
+          body: formData,
+        });
 
-      console.log(response);
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Failed to publish course:", errorData.message);
+          return;
+        }
+
+        const result = await response.json();
+
+        if (result) {
+          toast.success("Course published successfully!");
+          dispatch(resetPublishCourseForm());
+          router.push(`/profile/${username}/my-courses`);
+        }
+      } catch (error) {
+        console.error("Error in handleSubmit:", error);
+      }
+    } else {
+      console.warn("No file selected");
     }
-    console.log(course);
   };
 
   const handleCancel = () => {

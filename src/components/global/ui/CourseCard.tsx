@@ -39,7 +39,7 @@ const CourseCard = ({
           </span>
           <span className="flex items-center gap-2 text-accent text-xs md:text-base mt-2 md:mt-0">
             <span className="cursor-pointer" title="Total reviews">
-              ({courseDetails?.testimonials.length})
+              ({courseDetails?.testimonials?.length || 0})
             </span>{" "}
             <span className="cursor-pointer" title="Average ratings">
               5

@@ -1,4 +1,4 @@
-import { getCourseBySlug } from "@/database/db-queries";
+import { getCourseBySlug } from "@/database/server-actions";
 import Breadcrumbs from "@/src/components/page/purchased-course/Breadcrumbs";
 import CourseControls from "@/src/components/page/purchased-course/CourseControls";
 
