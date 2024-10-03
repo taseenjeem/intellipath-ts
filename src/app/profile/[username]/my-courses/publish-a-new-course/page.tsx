@@ -48,38 +48,39 @@ const PublishCoursePage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (thumbnailFile) {
-      try {
-        const formData = new FormData();
-        formData.append("image", thumbnailFile);
-        formData.append("userID", _id);
-        formData.append("courseData", JSON.stringify(course));
+    try {
+      const formData = new FormData();
+      formData.append("userID", _id);
+      formData.append("courseData", JSON.stringify(course));
 
-        const response = await fetch(`/api/publish-course`, {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.log("Failed to publish course:", errorData.message);
-          return;
-        }
-
-        const result = await response.json();
-
-        if (result) {
-          toast.success("Course published successfully!");
-          dispatch(resetPublishCourseForm());
-          router.push(`/profile/${username}/my-courses`);
-        }
-      } catch (error) {
+      if (thumbnailFile) {
+        formData.append("thumbnail", thumbnailFile);
+      } else {
         toast.warn("Please attach a thumbnail");
-        console.log("Error in handleSubmit:", error);
+        return;
       }
-    } else {
+
+      const response = await fetch(`/api/publish-course`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log("Failed to publish course:", errorData.message);
+        return;
+      }
+
+      const result = await response.json();
+
+      if (result) {
+        toast.success("Course published successfully!");
+        dispatch(resetPublishCourseForm());
+        router.push(`/profile/${username}/my-courses`);
+      }
+    } catch (error) {
       toast.warn("Please attach a thumbnail");
-      console.warn("No file selected");
+      console.log("Error in handleSubmit:", error);
     }
   };
 
