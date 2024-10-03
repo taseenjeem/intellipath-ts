@@ -146,7 +146,6 @@ const PublishCoursePage = () => {
                 }}
               />
             </div>
-
             <div className="form-control">
               <label className="label" htmlFor="price">
                 <span className="label-text">Price (in USD)</span>
