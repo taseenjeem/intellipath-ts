@@ -14,7 +14,6 @@ import {
   updateFullDescription,
   resetPublishCourseForm,
   removeLesson,
-  updateThumbnail,
   updateInstructor,
 } from "@/redux/slices/publishCourseSlice";
 import { IoCloseSharp, IoCheckmarkSharp, IoClose } from "react-icons/io5";
