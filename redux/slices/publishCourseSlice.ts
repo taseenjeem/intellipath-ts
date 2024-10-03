@@ -6,7 +6,6 @@ const initialState: IPublishCourse = {
   slug: null,
   instructor: null,
   category: null,
-  thumbnail: null,
   price: null,
   discount: null,
   language: null,
@@ -33,9 +32,6 @@ const publishCourseSlice = createSlice({
     },
     updateCategory: (state, action) => {
       state.category = action.payload;
-    },
-    updateThumbnail: (state, action) => {
-      state.thumbnail = action.payload;
     },
     updatePrice: (state, action) => {
       state.price = action.payload;
@@ -80,7 +76,6 @@ export const {
   updateSlug,
   updateInstructor,
   updateCategory,
-  updateThumbnail,
   updatePrice,
   updateDiscount,
   updateLanguage,

@@ -137,7 +137,6 @@ export interface IPublishCourse {
   slug: string | null;
   instructor: string | null;
   category: string | null;
-  thumbnail: string | null;
   price: number | null;
   discount: number | null;
   language: string | null;
