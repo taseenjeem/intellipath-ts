@@ -12,9 +12,6 @@ interface IEditUserAvatarProps {
   userEmail: string;
 }
 
-// Supported file types
-const supportedFileTypes = ["image/jpeg", "image/png"];
-
 const EditUserAvatar = ({
   profileImageUrl,
   userId,
@@ -34,26 +31,9 @@ const EditUserAvatar = ({
 
     const file = files?.[0]; // Getting the selected file
 
-    // Check if a file was selected
+    // Proceed if a file was selected
     if (file) {
-      // Validate file type
-      if (!supportedFileTypes.includes(file.type)) {
-        toast.error(
-          "Unsupported file type. Please select a jpeg or png image."
-        );
-        return;
-      }
-
-      // Maximum file size (32MB)
-      const MAX_FILE_SIZE = 32 * 1024 * 1024; // 32MB in bytes
-
-      // Validate file size
-      if (file.size > MAX_FILE_SIZE) {
-        toast.error("File is too large. Maximum allowed size is 32MB.");
-        return;
-      }
-
-      const formData = new FormData(); // Creating FormData object to send file data
+      const formData = new FormData();
       formData.append("image", file); // Appending the file to the formData
       formData.append("userId", userId); // Adding user ID to the formData
 

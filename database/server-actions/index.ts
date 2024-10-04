@@ -72,6 +72,25 @@ export const getUserByUsername = async (username: string) => {
 };
 
 export const uploadImage = async (file: File) => {
+  const SUPPORTED_FILE_TYPES = ["image/jpeg", "image/png"];
+  const MAX_FILE_SIZE = 32 * 1024 * 1024;
+
+  if (!SUPPORTED_FILE_TYPES.includes(file.type)) {
+    return {
+      success: false,
+      imageUrl: null,
+      message: "Unsupported file type. Please upload a JPEG or PNG image.",
+    };
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    return {
+      success: false,
+      imageUrl: null,
+      message: "File is too large. Maximum allowed size is 32MB.",
+    };
+  }
+
   const formData = new FormData();
   formData.append("image", file);
 
