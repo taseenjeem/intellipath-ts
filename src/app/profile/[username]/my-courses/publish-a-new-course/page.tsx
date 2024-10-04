@@ -53,7 +53,7 @@ const PublishCoursePage = () => {
       formData.append("courseData", JSON.stringify(course));
 
       if (thumbnailFile) {
-        formData.append("thumbnail", thumbnailFile);
+        formData.append("image", thumbnailFile);
       } else {
         toast.warn("Please attach a thumbnail");
         return;
@@ -66,6 +66,7 @@ const PublishCoursePage = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message);
         console.log("Failed to publish course:", errorData.message);
         return;
       }
