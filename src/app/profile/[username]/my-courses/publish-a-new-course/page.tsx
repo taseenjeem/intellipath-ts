@@ -2,7 +2,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   updateTitle,
-  updateSlug,
   updateCategory,
   updatePrice,
   updateDiscount,
@@ -15,6 +14,8 @@ import {
   resetPublishCourseForm,
   removeLesson,
   updateInstructor,
+  generateSlug,
+  setIsLoading,
 } from "@/redux/slices/publishCourseSlice";
 import { IoCloseSharp, IoCheckmarkSharp, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
@@ -32,7 +33,11 @@ const PublishCoursePage = () => {
 
   useEffect(() => {
     dispatch(updateInstructor(_id));
-  }, [_id, dispatch]);
+
+    if (username && course.title) {
+      dispatch(generateSlug({ title: course.title, username }));
+    }
+  }, [_id, dispatch, username, course.title]);
 
   const openModal = () => {
     const logoutModal = document.getElementById(
@@ -46,47 +51,50 @@ const PublishCoursePage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(setIsLoading(true));
 
-    try {
-      const formData = new FormData();
-      formData.append("userID", _id);
-      formData.append("courseData", JSON.stringify(course));
+    if (course.lessons.length > 0) {
+      try {
+        const formData = new FormData();
+        formData.append("userID", _id);
+        formData.append("courseData", JSON.stringify(course));
 
-      if (thumbnailFile) {
-        formData.append("image", thumbnailFile);
-      } else {
+        if (thumbnailFile) {
+          formData.append("image", thumbnailFile);
+        } else {
+          toast.warn("Please attach a thumbnail");
+          return;
+        }
+
+        const response = await fetch(`/api/publish-course`, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          toast.error(errorData.message);
+          console.log("Failed to publish course:", errorData.message);
+          return;
+        }
+
+        const result = await response.json();
+
+        if (result) {
+          dispatch(setIsLoading(false));
+          dispatch(resetPublishCourseForm());
+          toast.success("Course published successfully!");
+          router.push(`/profile/${username}/my-courses`);
+        }
+      } catch (error) {
+        dispatch(setIsLoading(false));
         toast.warn("Please attach a thumbnail");
-        return;
+        console.log("Error in handleSubmit:", error);
       }
-
-      const response = await fetch(`/api/publish-course`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(errorData.message);
-        console.log("Failed to publish course:", errorData.message);
-        return;
-      }
-
-      const result = await response.json();
-
-      if (result) {
-        toast.success("Course published successfully!");
-        dispatch(resetPublishCourseForm());
-        router.push(`/profile/${username}/my-courses`);
-      }
-    } catch (error) {
-      toast.warn("Please attach a thumbnail");
-      console.log("Error in handleSubmit:", error);
+    } else {
+      toast.warn("Please add at least one lesson");
+      dispatch(setIsLoading(false));
     }
-  };
-
-  const handleCancel = () => {
-    dispatch(resetPublishCourseForm());
-    router.push(`/profile/${username}/my-courses`);
   };
 
   return (
@@ -96,18 +104,17 @@ const PublishCoursePage = () => {
           <h1 className="text-xl md:text-2xl text-primary font-semibold my-5">
             Publish a new course
           </h1>
-          <div className="space-x-5">
-            <button
-              onClick={handleCancel}
-              type="reset"
-              className="btn btn-primary"
-            >
-              Cancel <IoCloseSharp size={20} />
+
+          {course.isLoading ? (
+            <button disabled className="btn btn-primary no-animation">
+              <span className="loading loading-spinner"></span>
+              Publishing...
             </button>
+          ) : (
             <button type="submit" className="btn btn-primary ">
               Publish Course <IoCheckmarkSharp size={20} />
             </button>
-          </div>
+          )}
         </div>
         <div className="space-y-5">
           <div className="grid grid-cols-3 gap-5">
@@ -123,21 +130,6 @@ const PublishCoursePage = () => {
                 className="input input-bordered"
                 value={course.title ?? ""}
                 onChange={(e) => dispatch(updateTitle(e.target.value))}
-              />
-            </div>
-            <div className="form-control">
-              <label className="label" htmlFor="slug">
-                <span className="label-text">Course URL</span>
-                <span className="label-text">(Slug)</span>
-              </label>
-              <input
-                required
-                type="text"
-                id="slug"
-                name="slug"
-                className="input input-bordered"
-                value={course.slug ?? ""}
-                onChange={(e) => dispatch(updateSlug(e.target.value))}
               />
             </div>
             <div className="form-control">

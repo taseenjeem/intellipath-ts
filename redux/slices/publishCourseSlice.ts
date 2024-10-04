@@ -2,6 +2,7 @@ import { IPublishCourse } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: IPublishCourse = {
+  isLoading: false,
   title: null,
   slug: null,
   instructor: null,
@@ -21,11 +22,21 @@ const publishCourseSlice = createSlice({
   name: "publishCourse",
   initialState,
   reducers: {
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
     updateTitle: (state, action) => {
       state.title = action.payload;
     },
-    updateSlug: (state, action) => {
-      state.slug = action.payload;
+    generateSlug: (state, action) => {
+      const { title, username } = action.payload;
+
+      const formattedTitle = title
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "");
+
+      state.slug = `${formattedTitle}-by-${username}`;
     },
     updateInstructor: (state, action) => {
       state.instructor = action.payload;
@@ -72,8 +83,9 @@ const publishCourseSlice = createSlice({
 });
 
 export const {
+  setIsLoading,
   updateTitle,
-  updateSlug,
+  generateSlug,
   updateInstructor,
   updateCategory,
   updatePrice,

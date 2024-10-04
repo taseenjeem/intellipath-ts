@@ -133,6 +133,7 @@ export interface ICourse {
 }
 
 export interface IPublishCourse {
+  isLoading: boolean;
   title: string | null;
   slug: string | null;
   instructor: string | null;
