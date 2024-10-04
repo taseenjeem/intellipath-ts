@@ -1,7 +1,11 @@
 "use client";
 import ReactPlayer from "react-player";
 
-const VideoPlayer = () => {
+interface VideoPlayerProps {
+  url: string;
+}
+
+const VideoPlayer = ({ url }: VideoPlayerProps) => {
   return (
     <>
       <div className="size-full lg:w-[70%] bg-base-200 p-5 rounded-2xl">
@@ -11,7 +15,7 @@ const VideoPlayer = () => {
             height="100%"
             className="absolute top-0 left-0"
             controls
-            url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+            url={url}
           />
           <span className="text-xl font-semibold animate-pulse -z-10">
             Loading...

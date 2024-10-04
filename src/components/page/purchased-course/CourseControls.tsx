@@ -1,19 +1,31 @@
+"use client";
+import { ICourse } from "@/types";
 import DescriptionTab from "./DescriptionTab";
 import LessonsList from "./LessonsList";
-import RefsTab from "./RefsTab";
 import ReviewTab from "./ReviewTab";
 import VideoPlayer from "./VideoPlayer";
+import { useState } from "react";
 
-const CourseControls = () => {
+const CourseControls = ({ courseData }: { courseData: ICourse }) => {
+  const [selectedLessonUrl, setSelectedLessonUrl] = useState<string>(
+    courseData.lessons[0]?.url
+  );
+
+  const handleLessonClick = (url: string) => {
+    setSelectedLessonUrl(url);
+  };
+
   return (
     <>
       <section className="flex flex-col lg:flex-row gap-5 aspect-1 lg:aspect-3">
-        <VideoPlayer />
-        <LessonsList />
+        <VideoPlayer url={selectedLessonUrl} />
+        <LessonsList
+          lessons={courseData.lessons}
+          onLessonClick={handleLessonClick}
+        />
       </section>
       <div role="tablist" className="tabs tabs-bordered lg:tabs-lg mt-5">
-        <DescriptionTab />
-        <RefsTab />
+        <DescriptionTab description={courseData.full_description} />
         <ReviewTab />
       </div>
     </>
