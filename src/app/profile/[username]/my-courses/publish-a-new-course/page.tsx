@@ -23,6 +23,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import FullDescription from "@/src/components/page/publish-a-new-course-page/FullDescription";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
@@ -333,20 +334,7 @@ const PublishCoursePage = () => {
               onChange={(e) => dispatch(updateShortDescription(e.target.value))}
             />
           </div>
-          <div className="form-control">
-            <label className="label" htmlFor="full_description">
-              <span className="label-text">Full description of the course</span>
-            </label>
-            <textarea
-              required
-              maxLength={1000}
-              id="full_description"
-              name="full_description"
-              className="textarea textarea-bordered min-h-96"
-              value={course.full_description ?? ""}
-              onChange={(e) => dispatch(updateFullDescription(e.target.value))}
-            />
-          </div>
+          <FullDescription />
         </div>
       </form>
       <AddLessonsModal />
