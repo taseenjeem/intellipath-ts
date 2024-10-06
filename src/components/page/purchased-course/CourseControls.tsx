@@ -22,6 +22,7 @@ const CourseControls = ({ courseData }: { courseData: ICourse }) => {
         <LessonsList
           lessons={courseData.lessons}
           onLessonClick={handleLessonClick}
+          selectedLessonUrl={selectedLessonUrl}
         />
       </section>
       <div role="tablist" className="tabs tabs-bordered lg:tabs-lg mt-5">
