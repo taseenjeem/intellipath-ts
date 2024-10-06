@@ -9,7 +9,7 @@ const MyCoursesPage = async ({
   params,
 }: Readonly<{ params: { username: string } }>) => {
   const user: IUserInfo = await getUserByUsername(params.username);
-  const { courses, role } = user;
+  const { courses, role, username } = user;
 
   return (
     <>
@@ -34,6 +34,8 @@ const MyCoursesPage = async ({
               href={`/profile/${params.username}/my-courses/${item.slug}`}
               courseDetails={item}
               purchased
+              instructorMode={role === "instructor"}
+              username={username}
             />
           ))}
         </div>

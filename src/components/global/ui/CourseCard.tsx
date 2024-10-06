@@ -6,12 +6,16 @@ import { FaStar } from "react-icons/fa";
 interface CourseCardProps {
   courseDetails: ICourse;
   purchased?: boolean;
+  instructorMode?: boolean;
+  username?: string;
   href: string;
 }
 
 const CourseCard = ({
   courseDetails,
   purchased = false,
+  instructorMode = false,
+  username,
   href,
 }: CourseCardProps) => {
   return (
@@ -54,9 +58,21 @@ const CourseCard = ({
         </div>
 
         <div className="card-actions w-full md:mt-5 mt-2">
-          <Link href={href} className="btn btn-sm md:btn-md btn-primary w-full">
-            {purchased ? "Start learning" : "Learn more"}
-          </Link>
+          {instructorMode ? (
+            <Link
+              href={`/profile/${username}/my-courses/edit-course/${courseDetails.slug}`}
+              className="btn btn-sm md:btn-md btn-primary w-full"
+            >
+              Edit Course Details
+            </Link>
+          ) : (
+            <Link
+              href={href}
+              className="btn btn-sm md:btn-md btn-primary w-full"
+            >
+              {purchased ? "Start learning" : "Learn more"}
+            </Link>
+          )}
         </div>
       </div>
     </div>

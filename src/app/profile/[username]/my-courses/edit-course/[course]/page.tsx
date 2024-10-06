@@ -1,8 +1,7 @@
 import { getCourseBySlug } from "@/database/server-actions";
 import Breadcrumbs from "@/src/components/global/ui/Breadcrumbs";
-import CourseControls from "@/src/components/page/purchased-course/CourseControls";
 
-const PurchasedCourse = async ({
+const EditCoursePage = async ({
   params,
 }: Readonly<{ params: { username: string; course: string } }>) => {
   const course = await getCourseBySlug(params.course);
@@ -13,9 +12,8 @@ const PurchasedCourse = async ({
         username={params.username}
         course={course?.title ?? "Failed to load course name"}
       />
-      <CourseControls courseData={course} />
     </>
   );
 };
 
-export default PurchasedCourse;
+export default EditCoursePage;
