@@ -20,10 +20,10 @@ const LessonsList = ({ lessons, onLessonClick }: LessonsListProps) => {
         {lessons.map((lesson, index) => (
           <button
             key={index}
-            className="btn btn-primary btn-outline justify-start flex items-center gap-2 p-2 rounded-xl w-full"
+            className="w-full border border-primary text-primary flex gap-3 items-center p-3 rounded-xl hover:bg-primary hover:text-primary-content duration-150"
             onClick={() => onLessonClick(lesson.url)}
           >
-            <FaRegCirclePlay /> <p>{lesson.title}</p>
+            <p className="text-start">{lesson.title}</p>
           </button>
         ))}
       </div>

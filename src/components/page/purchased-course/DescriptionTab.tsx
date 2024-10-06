@@ -1,3 +1,5 @@
+import "/styles/description.scss";
+
 const DescriptionTab = ({ description }: { description: string }) => {
   return (
     <>
@@ -10,7 +12,10 @@ const DescriptionTab = ({ description }: { description: string }) => {
         defaultChecked
       />
       <div role="tabpanel" className="tab-content pt-5 min-h-[60vh]">
-        {description}
+        <div
+          className="description-container"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </div>
     </>
   );
