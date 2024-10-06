@@ -101,24 +101,11 @@ const PublishCoursePage = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-between">
-          <h1 className="text-xl md:text-2xl text-primary font-semibold my-5">
-            Publish a new course
-          </h1>
-
-          {course.isLoading ? (
-            <button disabled className="btn btn-primary no-animation">
-              <span className="loading loading-spinner"></span>
-              Publishing...
-            </button>
-          ) : (
-            <button type="submit" className="btn btn-primary ">
-              Publish Course <IoCheckmarkSharp size={20} />
-            </button>
-          )}
-        </div>
+        <h1 className="text-xl md:text-2xl text-primary font-semibold my-5">
+          Publish a new course
+        </h1>
         <div className="space-y-5">
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <div className="form-control">
               <label className="label" htmlFor="title">
                 <span className="label-text">Course Title</span>
@@ -335,6 +322,21 @@ const PublishCoursePage = () => {
             />
           </div>
           <FullDescription />
+        </div>
+        <div className="mt-5 md:mt-10 flex justify-end">
+          {course.isLoading ? (
+            <button
+              disabled
+              className="btn btn-primary no-animation w-full md:w-auto"
+            >
+              <span className="loading loading-spinner"></span>
+              Publishing...
+            </button>
+          ) : (
+            <button type="submit" className="btn btn-primary w-full md:w-auto">
+              Publish Course <IoCheckmarkSharp size={20} />
+            </button>
+          )}
         </div>
       </form>
       <AddLessonsModal />
