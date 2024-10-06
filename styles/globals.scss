@@ -9,6 +9,8 @@
 .custom-border {
   border-color: var(--fallback-bc, oklch(var(--bc) / 0.2));
 }
+
+// CSS overrides for the text editor of course's full description
 .quill {
   margin-top: 4px !important;
 }
