@@ -16,12 +16,6 @@ const FullDescription = () => {
         <span className="label-text">Full description of the course</span>
       </label>
       <ReactQuill
-        style={{
-          height: "300px",
-          width: "100%",
-          marginBottom: "100px",
-          marginTop: "5px",
-        }}
         modules={{
           toolbar: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],

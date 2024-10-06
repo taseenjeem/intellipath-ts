@@ -267,7 +267,7 @@ const PublishCoursePage = () => {
               <div
                 onClick={openModal}
                 role="button"
-                className="border rounded-2xl w-full h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
+                className="border custom-border rounded-xl w-full h-44 flex gap-2 flex-col items-center justify-center hover:text-primary hover:border-primary duration-300"
               >
                 <IoIosAddCircleOutline size={60} />
                 Add lessons for your course
