@@ -11,7 +11,7 @@ const AddLessonsModal = () => {
 
   const isValidYouTubeUrl = (url: string) => {
     const youtubeRegex =
-      /^(https?:\/\/)?(www\.youtube\.com|youtu\.be)\/(watch\?v=)?[a-zA-Z0-9_-]{11}$/;
+      /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm;
     return youtubeRegex.test(url);
   };
 

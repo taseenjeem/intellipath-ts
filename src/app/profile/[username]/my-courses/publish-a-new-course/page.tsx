@@ -24,6 +24,7 @@ import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/Add
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import FullDescription from "@/src/components/page/publish-a-new-course-page/FullDescription";
+import Link from "next/link";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
@@ -261,7 +262,7 @@ const PublishCoursePage = () => {
               </div>
             ) : (
               <div className="space-y-3">
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {course.lessons.map((lesson, index) => (
                     <div
                       key={lesson.title}
@@ -277,7 +278,16 @@ const PublishCoursePage = () => {
                       <h4 className="text-lg font-semibold">
                         {index + 1}. {lesson.title}
                       </h4>
-                      <p>{lesson.url}</p>
+                      <span className="text-sm line-clamp-1">
+                        <strong>Link: </strong>
+                        <Link
+                          className="link-hover"
+                          target="_blank"
+                          href={lesson.url}
+                        >
+                          {lesson.url}
+                        </Link>
+                      </span>
                     </div>
                   ))}
                 </div>
