@@ -267,3 +267,14 @@ export const getCourseBySlug = async (slug: string) => {
     throw new Error("Error while getting course by slug");
   }
 };
+
+export const getAllCourses = async () => {
+  try {
+    await connectMongodb();
+    const courses = await Courses.find({}).populate("instructor").lean();
+    return JSON.parse(JSON.stringify(courses));
+  } catch (error) {
+    console.log("Error in getAllCourses:", error);
+    throw new Error("Error while getting all courses");
+  }
+};

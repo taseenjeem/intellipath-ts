@@ -1,10 +1,10 @@
-import { getTopCourses } from "@/database/db-queries";
 import Link from "next/link";
 import CourseCard from "../../global/ui/CourseCard";
-import { ICourses } from "@/types";
+import { ICourse } from "@/types";
+import { getAllCourses } from "@/database/server-actions";
 
 const TopCourses = async () => {
-  const topCourses: ICourses[] = await getTopCourses();
+  const topCourses = await getAllCourses();
 
   return (
     <section className="container min-h-screen w-full mt-7 md:mt-28">
@@ -28,7 +28,7 @@ const TopCourses = async () => {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 w-full mt-5 md:mt-10">
-        {topCourses.map((item: ICourses) => (
+        {topCourses.map((item: ICourse) => (
           <CourseCard
             key={item._id}
             courseDetails={item}
