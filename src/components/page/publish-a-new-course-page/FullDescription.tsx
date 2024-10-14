@@ -4,11 +4,18 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const FullDescription = () => {
+const FullDescription = ({ editMode = false }: { editMode?: boolean }) => {
   const dispatch = useAppDispatch();
-  const { full_description } = useAppSelector(
+
+  const { full_description: fromUpload } = useAppSelector(
     (state) => state.publishCourseInfo
   );
+
+  const {
+    courseData: { full_description: fromEdit },
+  } = useAppSelector((state) => state.editCourse);
+
+  const handleChange = (e: React.ChangeEvent) => {};
 
   return (
     <>
@@ -30,7 +37,7 @@ const FullDescription = () => {
           ],
         }}
         theme="snow"
-        value={full_description ?? ""}
+        value={editMode ? fromEdit ?? "" : fromUpload ?? ""}
         onChange={(value) => dispatch(updateFullDescription(value))}
       />
     </>

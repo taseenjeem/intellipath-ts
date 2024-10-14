@@ -4,7 +4,7 @@ import { addLesson } from "@/redux/slices/publishCourseSlice";
 import { CgClose } from "react-icons/cg";
 import { useState } from "react";
 
-const AddLessonsModal = () => {
+const AddLessonsModal = ({ editMode = false }: { editMode?: boolean }) => {
   const dispatch = useAppDispatch();
   const [lessonDetails, setLessonDetails] = useState({ title: "", url: "" });
   const [error, setError] = useState({ titleError: "", urlError: "" });
@@ -36,9 +36,11 @@ const AddLessonsModal = () => {
     }
 
     if (valid) {
-      dispatch(
-        addLesson({ title: lessonDetails.title, url: lessonDetails.url })
-      );
+      if (!editMode) {
+        dispatch(
+          addLesson({ title: lessonDetails.title, url: lessonDetails.url })
+        );
+      }
       closeModal();
       setLessonDetails({ title: "", url: "" });
     }
