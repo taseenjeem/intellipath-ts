@@ -15,7 +15,7 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
     price: { type: Number, required: true },
     discount: { type: Number, default: null },
     language: { type: String, required: true },
-    duration: { type: String, required: true },
+    duration: { type: Number, required: true },
     requirements: { type: String, required: true },
     level: {
       type: String,

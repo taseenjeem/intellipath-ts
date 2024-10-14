@@ -119,7 +119,7 @@ export interface ICourse {
   price: number;
   discount: number | null;
   language: string;
-  duration: string;
+  duration: number;
   requirements: string;
   level: string;
   coupons?: { _id?: string; code: string; discount: number }[];
