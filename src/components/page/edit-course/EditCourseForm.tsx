@@ -14,6 +14,7 @@ import {
   editPrice,
   editShortDescription,
   editTitle,
+  removeLesson,
 } from "@/redux/slices/editCourse";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
@@ -195,6 +196,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 <button
                   type="button"
                   className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
+                  onClick={() => dispatch(removeLesson(lesson._id))}
                 >
                   <IoClose />
                 </button>

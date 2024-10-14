@@ -53,7 +53,7 @@ const editCourseSlice = createSlice({
     addNewLesson(state, action: PayloadAction<[]>) {
       state.courseData.lessons = action.payload;
     },
-    removeLesson(state, action: PayloadAction<string>) {
+    removeLesson(state, action: PayloadAction<string | undefined>) {
       const allLessons = state.courseData.lessons;
       const existingLessons = allLessons?.filter(
         (item) => item._id !== action.payload
