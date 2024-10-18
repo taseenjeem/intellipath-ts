@@ -2,6 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { ICourse } from "@/types";
 import { useEffect } from "react";
+import { BiDollarCircle } from "react-icons/bi";
 import {
   initializeCourseData,
   setIsLoading,
@@ -95,28 +96,34 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             <label className="label" htmlFor="price">
               <span className="label-text">Price (in USD)</span>
             </label>
-            <input
-              required
-              type="number"
-              id="price"
-              name="price"
-              className="input input-bordered"
-              value={courseData.price}
-              onChange={(e) => dispatch(editPrice(Number(e.target.value)))}
-            />
+            <span className="input input-bordered flex items-center gap-2">
+              <BiDollarCircle size={24} />
+              <input
+                required
+                type="number"
+                id="price"
+                name="price"
+                className="grow"
+                value={courseData.price}
+                onChange={(e) => dispatch(editPrice(Number(e.target.value)))}
+              />
+            </span>
           </div>
           <div className="form-control">
             <label className="label" htmlFor="discount">
               <span className="label-text">Discount (in USD)</span>
             </label>
-            <input
-              type="number"
-              id="discount"
-              name="discount"
-              className="input input-bordered"
-              value={!!courseData.discount ? courseData.discount : ""}
-              onChange={(e) => dispatch(editDiscount(Number(e.target.value)))}
-            />
+            <span className="input input-bordered flex items-center gap-2">
+              <BiDollarCircle size={24} />
+              <input
+                type="number"
+                id="discount"
+                name="discount"
+                className="grow"
+                value={!!courseData.discount ? courseData.discount : ""}
+                onChange={(e) => dispatch(editDiscount(Number(e.target.value)))}
+              />
+            </span>
           </div>
           <div className="form-control">
             <label className="label" htmlFor="language">
