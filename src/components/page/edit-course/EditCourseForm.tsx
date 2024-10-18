@@ -241,7 +241,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
         </div>
       </form>
       <FullDescription editMode />
-      <AddLessonsModal />
+      <AddLessonsModal editMode />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useAppDispatch } from "@/redux/store";
 import { addLesson } from "@/redux/slices/publishCourseSlice";
 import { CgClose } from "react-icons/cg";
 import { useState } from "react";
+import { addNewLesson } from "@/redux/slices/editCourse";
 
 const AddLessonsModal = ({ editMode = false }: { editMode?: boolean }) => {
   const dispatch = useAppDispatch();
@@ -39,6 +40,10 @@ const AddLessonsModal = ({ editMode = false }: { editMode?: boolean }) => {
       if (!editMode) {
         dispatch(
           addLesson({ title: lessonDetails.title, url: lessonDetails.url })
+        );
+      } else {
+        dispatch(
+          addNewLesson({ title: lessonDetails.title, url: lessonDetails.url })
         );
       }
       closeModal();
@@ -138,7 +143,7 @@ const AddLessonsModal = ({ editMode = false }: { editMode?: boolean }) => {
 
             <div className="flex justify-end">
               <button className="btn btn-primary" onClick={handleAddLesson}>
-                Add lesson
+                {editMode ? "Add New Lesson" : "Add Lesson"}
               </button>
             </div>
           </div>

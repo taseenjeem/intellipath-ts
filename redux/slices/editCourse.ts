@@ -50,8 +50,8 @@ const editCourseSlice = createSlice({
       );
       state.courseData.coupons = existingCoupons;
     },
-    addNewLesson(state, action: PayloadAction<[]>) {
-      state.courseData.lessons = action.payload;
+    addNewLesson(state, action) {
+      state.courseData.lessons.push(action.payload);
     },
     removeLesson(state, action: PayloadAction<string | undefined>) {
       const allLessons = state.courseData.lessons;
