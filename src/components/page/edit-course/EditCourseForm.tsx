@@ -26,6 +26,7 @@ import FullDescription from "../publish-a-new-course-page/FullDescription";
 const EditCourseForm = ({ course }: { course: ICourse }) => {
   const dispatch = useAppDispatch();
   const { courseData } = useAppSelector((state) => state.editCourse);
+  console.log("🚀 ~ EditCourseForm ~ courseData:", courseData.coupons);
 
   useEffect(() => {
     dispatch(initializeCourseData(course));
@@ -193,12 +194,61 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             onChange={(e) => dispatch(editRequirements(e.target.value))}
           />
         </div>
-        <div className="space-y-3">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">
+              Manage your coupons and discounts
+            </span>
+          </label>
+          <div className="flex items-center gap-3">
+            <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60">
+              {courseData.coupons && courseData.coupons.length > 0 ? (
+                courseData.coupons.map((coupon) => <div key={coupon._id} />)
+              ) : (
+                <div className="flex items-center justify-center h-full text-sm">
+                  <p>There are no coupons added yet!</p>
+                </div>
+              )}
+            </div>
+            <div className="lg:w-[30%] w-full">
+              <div className="form-control">
+                <label className="label" htmlFor="code">
+                  <span className="label-text">Coupon Code</span>
+                </label>
+                <input
+                  type="text"
+                  id="code"
+                  name="code"
+                  className="input input-bordered"
+                />
+              </div>
+              <span className="form-control">
+                <label className="label" htmlFor="discount">
+                  <span className="label-text">Coupon Discount</span>
+                </label>
+                <input
+                  min={10}
+                  type="number"
+                  id="discount"
+                  name="discount"
+                  className="input input-bordered"
+                />
+              </span>
+              <button className="btn btn-primary w-full mt-4">
+                Add Coupon
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="">
+          <label className="label">
+            <span className="label-text">Manage your Lessons</span>
+          </label>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {courseData.lessons?.map((lesson, index) => (
               <div
                 key={lesson.title}
-                className="p-3 bg-primary rounded-xl text-primary-content relative"
+                className="p-3 border border-primary rounded-xl relative"
               >
                 <button
                   type="button"
@@ -207,7 +257,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 >
                   <IoClose />
                 </button>
-                <h4 className="text-lg font-semibold">
+                <h4 className="text-lg font-semibold leading-none mb-3">
                   {index + 1}. {lesson.title}
                 </h4>
                 <span className="text-sm line-clamp-1">
@@ -223,10 +273,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               </div>
             ))}
           </div>
-          <button
-            onClick={openModal}
-            className="btn btn-primary btn-outline w-full"
-          >
+          <button onClick={openModal} className="btn btn-primary w-full mt-3">
             <IoIosAddCircleOutline size={24} />
             Add lessons for your course
           </button>

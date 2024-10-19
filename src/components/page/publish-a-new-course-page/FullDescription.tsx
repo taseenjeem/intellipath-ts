@@ -22,7 +22,7 @@ const FullDescription = ({ editMode = false }: FullDescriptionProps) => {
   };
 
   return (
-    <>
+    <div className="form-control mt-5">
       <label className="label" htmlFor="full_description">
         <span className="label-text">Full description of the course</span>
       </label>
@@ -44,7 +44,7 @@ const FullDescription = ({ editMode = false }: FullDescriptionProps) => {
         value={fullDescription ?? ""}
         onChange={handleChange}
       />
-    </>
+    </div>
   );
 };
 
