@@ -35,7 +35,6 @@ import EditSocialLinks from "./EditSocialLinks";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 import { IUserInfo } from "@/types";
 
-// Function to fetch country data from a JSON file
 const getCountries = async () => {
   return import("@/database/json/countries.json").then(
     (module) => module.default
@@ -43,7 +42,7 @@ const getCountries = async () => {
 };
 
 const ProfileInfoForm = () => {
-  const dispatch = useAppDispatch(); // Hook to dispatch actions to Redux
+  const dispatch = useAppDispatch();
   const {
     formData,
     allCountries,
@@ -52,41 +51,37 @@ const ProfileInfoForm = () => {
     education,
     certifications,
     experience,
-  } = useAppSelector((state) => state.editProfileInfo); // Selecting relevant state from Redux
+  } = useAppSelector((state) => state.editProfileInfo);
 
-  const userInfo = useAppSelector((state) => state.userInfo); // Selecting user info from Redux
+  const userInfo = useAppSelector((state) => state.userInfo);
 
   const [initialFormData, setInitialFormData] = useState<IUserInfo | null>(
     null
-  ); // Local state for initial form data
-  const [isFormChanged, setIsFormChanged] = useState(false); // Local state to track if form data has changed
+  );
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
-  // Effect to fetch countries and initialize form data on component mount
   useEffect(() => {
     const fetchCountries = async () => {
-      const countries = await getCountries(); // Fetching countries
-      dispatch(setAllCountries(countries)); // Storing countries in Redux state
+      const countries = await getCountries();
+      dispatch(setAllCountries(countries));
     };
 
     fetchCountries();
-    dispatch(initializeFormData(userInfo)); // Initializing form data with user info
-    setInitialFormData(userInfo); // Setting initial form data state
+    dispatch(initializeFormData(userInfo));
+    setInitialFormData(userInfo);
   }, [dispatch, userInfo]);
 
-  // Effect to compare current form data with initial data to check for changes
   useEffect(() => {
     if (JSON.stringify(formData) !== JSON.stringify(initialFormData)) {
-      setIsFormChanged(true); // Mark form as changed
+      setIsFormChanged(true);
     } else {
-      setIsFormChanged(false); // Mark form as not changed
+      setIsFormChanged(false);
     }
   }, [formData, initialFormData]);
 
-  // Handler to add education
   const handleAddEducation = () => {
     const { degree, institution, location, startDate, endDate } = education;
 
-    // Validation check for required fields
     if (
       degree === "" ||
       institution === "" ||
@@ -97,29 +92,25 @@ const ProfileInfoForm = () => {
       toast.error("Please fill in all required fields for education.");
       return;
     } else {
-      dispatch(addEducation()); // Dispatching action to add education
+      dispatch(addEducation());
     }
   };
 
-  // Handler to add certification
   const handleAddCertification = () => {
     const { issuer, dateOfIssue, title, url } = certifications;
 
-    // Validation check for required fields
     if (issuer === "" || dateOfIssue === "" || title === "" || url === "") {
       toast.error("Please fill in all required fields for certification.");
       return;
     } else {
-      dispatch(addCertification()); // Dispatching action to add certification
+      dispatch(addCertification());
     }
   };
 
-  // Handler to add work experience
   const handleAddExperience = () => {
     const { companyName, designation, location, startDate, endDate } =
       experience;
 
-    // Validation check for required fields
     if (
       companyName === "" ||
       designation === "" ||
@@ -130,81 +121,73 @@ const ProfileInfoForm = () => {
       toast.error("Please fill in all required fields for experience.");
       return;
     } else {
-      dispatch(addExperience()); // Dispatching action to add experience
+      dispatch(addExperience());
     }
   };
 
-  // Handler to add expertise/skills
   const handleAddExpertise = (newExpertise: string) => {
-    // Checking if skill already exists
     const alreadyExisted = formData.expertise?.find(
-      (item) => item.toLowerCase === newExpertise.toLowerCase
+      (item) => item.toLowerCase() === newExpertise.toLowerCase()
     );
 
     if (alreadyExisted) {
       toast.warning("Skill already exists.");
       return;
     } else {
-      dispatch(addSkill()); // Dispatching action to add skill
+      dispatch(addSkill());
     }
   };
 
-  // Handler for input changes
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    const { name, value } = e.target; // Destructuring name and value from the event target
+    const { name, value } = e.target;
 
-    // Checking if the changed input is a social link
     if (formData?.socialLinks && name in formData.socialLinks) {
       dispatch(
         setFormData({
           ...formData,
           socialLinks: {
             ...formData.socialLinks,
-            [name]: value, // Updating the specific social link
+            [name]: value,
           },
         })
       );
     } else {
-      dispatch(setFormData({ ...formData, [name]: value })); // Updating other form fields
+      dispatch(setFormData({ ...formData, [name]: value }));
     }
   };
 
-  // Handler for form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setIsLoading(true));
 
     try {
-      // Checking if the username is available
       const isUsernameTaken = await checkUsernameAvailability(
         formData.username
       );
 
-      // Conditional warning if username is taken
       if (isUsernameTaken && userInfo.username !== formData.username) {
         toast.warning("Username is already taken. Please choose another one.");
         dispatch(setIsLoading(false));
         return;
       }
 
-      await updateUserDetails(formData._id, formData); // Updating user details in the database
-      const updatedUserInfo = await getUserByEmail(formData.email); // Fetching updated user info
+      await updateUserDetails(formData._id, formData);
+      const updatedUserInfo = await getUserByEmail(formData.email);
 
-      // Updating Redux state with new user info
       if (updatedUserInfo) {
         dispatch(setFormData(updatedUserInfo));
         dispatch(updateUserInfo(updatedUserInfo));
         toast.success("User updated successfully");
       }
     } catch (error) {
-      console.log(error); // Logging error
-      toast.error("Failed to update user information"); // Error toast
+      console.log(error);
+      toast.error("Failed to update user information");
     } finally {
-      dispatch(setIsLoading(false)); // Resetting loading state
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -227,10 +210,10 @@ const ProfileInfoForm = () => {
           education={education}
           formData={formData}
           onAdd={handleAddEducation}
-          onRemove={(_id) => dispatch(removeEducation(_id))} // Dispatching action to remove education
+          onRemove={(_id) => dispatch(removeEducation(_id))}
           onChange={(e) =>
             dispatch(
-              setEducation({ ...education, [e.target.name]: e.target.value }) // Updating education fields
+              setEducation({ ...education, [e.target.name]: e.target.value })
             )
           }
         />
@@ -238,27 +221,27 @@ const ProfileInfoForm = () => {
           certifications={certifications}
           formData={formData}
           onAdd={handleAddCertification}
-          onRemove={(_id) => dispatch(removeCertification(_id))} // Dispatching action to remove certification
+          onRemove={(_id) => dispatch(removeCertification(_id))}
           onChange={(e) =>
             dispatch(
               setCertifications({
                 ...certifications,
-                [e.target.name]: e.target.value, // Updating certification fields
+                [e.target.name]: e.target.value,
               })
             )
           }
         />
-        {formData.role === "instructor" && ( // Conditional rendering based on user role
+        {formData.role === "instructor" && (
           <EditExperience
             formData={formData}
             experience={experience}
             onAdd={handleAddExperience}
-            onRemove={(_id) => dispatch(removeExperience(_id))} // Dispatching action to remove experience
+            onRemove={(_id) => dispatch(removeExperience(_id))}
             onChange={(e) =>
               dispatch(
                 setExperience({
                   ...experience,
-                  [e.target.name]: e.target.value, // Updating experience fields
+                  [e.target.name]: e.target.value,
                 })
               )
             }
@@ -267,9 +250,9 @@ const ProfileInfoForm = () => {
         <EditExpertise
           formData={formData}
           onAdd={handleAddExpertise}
-          onRemove={(skill) => dispatch(removeSkill(skill))} // Dispatching action to remove skill
+          onRemove={(skill) => dispatch(removeSkill(skill))}
           newExpertise={newExpertise}
-          setNewExpertise={(value) => dispatch(setNewExpertise(value))} // Dispatching action to set new expertise
+          setNewExpertise={(value) => dispatch(setNewExpertise(value))}
         />
 
         <EditSocialLinks formData={formData} onChange={handleChange} />
