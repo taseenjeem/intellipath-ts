@@ -203,7 +203,9 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
           <div className="flex items-center gap-3">
             <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60 overflow-auto">
               {courseData.coupons && courseData.coupons.length > 0 ? (
-                courseData.coupons.map((coupon) => <div key={coupon._id} />)
+                courseData.coupons.map((coupon) => (
+                  <div key={coupon._id ? coupon._id : coupon.code} />
+                ))
               ) : (
                 <div className="flex items-center justify-center h-full text-sm">
                   <p>There are no coupons added yet!</p>
