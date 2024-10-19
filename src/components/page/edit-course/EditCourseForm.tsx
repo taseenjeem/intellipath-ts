@@ -201,7 +201,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             </span>
           </label>
           <div className="flex items-center gap-3">
-            <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60">
+            <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60 overflow-auto">
               {courseData.coupons && courseData.coupons.length > 0 ? (
                 courseData.coupons.map((coupon) => <div key={coupon._id} />)
               ) : (
