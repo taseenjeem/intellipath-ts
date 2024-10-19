@@ -2,12 +2,8 @@ import ProfileNavigation from "@/src/components/page/profile-page/ProfileNavigat
 
 const ProfileLayout = ({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: {
-    username: string;
-  };
 }>) => {
   return (
     <>
@@ -16,7 +12,7 @@ const ProfileLayout = ({
           Dashboard
         </h1>
         <div className="w-full mt-5">
-          <ProfileNavigation username={params.username} />
+          <ProfileNavigation />
           {children}
         </div>
       </section>
