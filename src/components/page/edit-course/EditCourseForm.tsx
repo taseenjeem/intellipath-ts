@@ -222,7 +222,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               Manage your coupons and discounts
             </span>
           </label>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col md:flex-row items-center gap-3">
             <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60 overflow-auto flex flex-wrap gap-3">
               {courseData.coupons && courseData.coupons.length > 0 ? (
                 courseData.coupons.map((coupon) => (
@@ -333,6 +333,12 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                     {lesson.url}
                   </Link>
                 </span>
+
+                <div className="flex justify-end size-full mt-3">
+                  <button type="button" className="btn btn-sm btn-primary">
+                    Edit
+                  </button>
+                </div>
               </div>
             ))}
           </div>
