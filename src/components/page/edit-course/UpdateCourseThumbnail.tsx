@@ -1,4 +1,6 @@
 "use client";
+import { editThumbnail } from "@/redux/slices/editCourse";
+import { useAppDispatch } from "@/redux/store";
 import Image from "next/image";
 import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -14,6 +16,8 @@ const UpdateCourseThumbnail = ({
   altText,
   courseId,
 }: IUpdateCourseThumbnailProps) => {
+  const dispatch = useAppDispatch();
+
   const handleUpdateThumbnail = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -45,6 +49,7 @@ const UpdateCourseThumbnail = ({
         const result = await response.json();
 
         if (result.success) {
+          dispatch(editThumbnail(result.imageUrl));
           toast.success("Course thumbnail updated successfully");
         } else {
           toast.error(`Image upload failed: ${result.message}`);

@@ -16,6 +16,9 @@ const editCourseSlice = createSlice({
     initializeCourseData(state, action: PayloadAction<ICourse>) {
       state.courseData = action.payload;
     },
+    editThumbnail(state, action: PayloadAction<string>) {
+      state.courseData.thumbnail = action.payload;
+    },
     editTitle(state, action: PayloadAction<string>) {
       state.courseData.title = action.payload;
     },
@@ -88,6 +91,7 @@ const editCourseSlice = createSlice({
 export const {
   setIsLoading,
   initializeCourseData,
+  editThumbnail,
   editTitle,
   editCategory,
   editPrice,

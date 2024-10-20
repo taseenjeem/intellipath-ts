@@ -119,9 +119,9 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
       <form onSubmit={handleEditCourse} className="space-y-5">
         <div className="flex flex-col lg:flex-row gap-5 mb-5">
           <UpdateCourseThumbnail
-            prevImage={course.thumbnail}
-            altText={course.title}
-            courseId={course._id}
+            prevImage={courseData.thumbnail}
+            altText={courseData.title}
+            courseId={courseData._id}
           />
           <div className="w-full lg:max-w-[488px] space-y-3">
             <div className="form-control">
