@@ -3,6 +3,7 @@ import { editLessonTitle, editLessonURL } from "@/redux/slices/editCourse";
 import { useAppDispatch } from "@/redux/store";
 import { CgClose } from "react-icons/cg";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface IEditLessonModalProps {
   lesson: {
@@ -32,9 +33,14 @@ const EditLessonModal = ({ lesson }: IEditLessonModalProps) => {
   };
 
   const handleSaveChanges = () => {
-    dispatch(editLessonTitle({ lessonId: lesson._id, newTitle: title }));
-    dispatch(editLessonURL({ lessonId: lesson._id, newURL: url }));
-    closeModal();
+    if (!title || !url) {
+      toast.warn("You must provide a title or url");
+      return;
+    } else {
+      dispatch(editLessonTitle({ lessonId: lesson._id, newTitle: title }));
+      dispatch(editLessonURL({ lessonId: lesson._id, newURL: url }));
+      closeModal();
+    }
   };
 
   return (
