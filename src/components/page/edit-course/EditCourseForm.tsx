@@ -27,6 +27,7 @@ import FullDescription from "../publish-a-new-course-page/FullDescription";
 import { toast } from "react-toastify";
 import EditLessonModal from "../publish-a-new-course-page/EditLessonModal";
 import { updateCourseData } from "@/database/server-actions";
+import UpdateCourseThumbnail from "./UpdateCourseThumbnail";
 
 interface ICouponData {
   code: string | null;
@@ -114,6 +115,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
 
   return (
     <>
+      <UpdateCourseThumbnail />
       <form onSubmit={handleEditCourse} className="space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div className="form-control">

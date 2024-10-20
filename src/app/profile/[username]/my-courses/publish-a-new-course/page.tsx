@@ -10,14 +10,13 @@ import {
   updateRequirements,
   updateLevel,
   updateShortDescription,
-  updateFullDescription,
   resetPublishCourseForm,
   removeLesson,
   updateInstructor,
   generateSlug,
   setIsLoading,
 } from "@/redux/slices/publishCourseSlice";
-import { IoCloseSharp, IoCheckmarkSharp, IoClose } from "react-icons/io5";
+import { IoCheckmarkSharp, IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "@/src/components/page/publish-a-new-course-page/AddLessonsModal";
