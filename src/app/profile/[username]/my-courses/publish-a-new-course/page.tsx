@@ -164,7 +164,8 @@ const PublishCoursePage = () => {
             </div>
             <div className="form-control">
               <label className="label" htmlFor="price">
-                <span className="label-text">Price (in USD)</span>
+                <span className="label-text">Price</span>
+                <span className="label-text">(in USD)</span>
               </label>
               <input
                 required
@@ -178,7 +179,8 @@ const PublishCoursePage = () => {
             </div>
             <div className="form-control">
               <label className="label" htmlFor="discount">
-                <span className="label-text">Discount (in USD)</span>
+                <span className="label-text">Discounted Price</span>
+                <span className="label-text">(in USD)</span>
               </label>
               <input
                 type="number"
