@@ -16,7 +16,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("@tailwindcss/aspect-ratio")],
   daisyui: {
     themes: ["sunset", "winter"],
   },

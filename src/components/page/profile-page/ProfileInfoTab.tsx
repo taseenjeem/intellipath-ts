@@ -120,7 +120,7 @@ const ProfileInfoTab = () => {
           </ul>
         </div>
         <div className="space-y-3 md:mt-10">
-          <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
+          <h3 className="text-2xl font-bold text-primary">
             About {userData?.fullName}
           </h3>
           {userData?.biography ? (
@@ -137,7 +137,7 @@ const ProfileInfoTab = () => {
         <hr className="md:my-10 my-5" />
         <div className="grid grid-cols-1 gap-5 md:gap-0 md:grid-cols-2">
           <div>
-            <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
+            <h3 className="text-2xl font-bold text-primary">
               Personal Information
             </h3>
             <div className="mt-2">
@@ -162,7 +162,7 @@ const ProfileInfoTab = () => {
             </div>
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-primary underline underline-offset-4">
+            <h3 className="text-2xl font-bold text-primary">
               Contact Information
             </h3>
             <div className="mt-2">
@@ -187,7 +187,7 @@ const ProfileInfoTab = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
+          <h3 className="text-2xl font-bold text-primary mt-10">
             Academic Education
           </h3>
           {userData?.education && userData?.education.length > 0 ? (
@@ -229,8 +229,8 @@ const ProfileInfoTab = () => {
         </div>
         {userData?.role === "instructor" && (
           <div>
-            <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
-              Teaching Experience
+            <h3 className="text-2xl font-bold text-primary mt-10">
+              Experience
             </h3>
             {userData?.experience && userData?.experience.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
@@ -271,7 +271,7 @@ const ProfileInfoTab = () => {
           </div>
         )}
         <div>
-          <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
+          <h3 className="text-2xl font-bold text-primary mt-10">
             Certifications
           </h3>
           {userData?.certifications && userData.certifications.length > 0 ? (
@@ -311,7 +311,7 @@ const ProfileInfoTab = () => {
           )}
         </div>
         <div>
-          <h3 className="text-2xl font-bold text-primary underline underline-offset-4 mt-10">
+          <h3 className="text-2xl font-bold text-primary mt-10">
             Skill and Expertise
           </h3>
           {userData?.expertise && userData.expertise.length > 0 ? (

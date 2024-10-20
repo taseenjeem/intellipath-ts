@@ -30,10 +30,12 @@ const NameInputField = ({ register, errors }: NameInputFieldProps) => {
               errors?.firstName ? "input-error" : ""
             }`} // Conditional styling based on error state
           />
-          {errors?.firstName && ( // Display error message if there are errors
+
+          {/* Display error message if there are errors */}
+          {errors?.firstName && (
             <div className="label">
               <span className="label-text-alt text-error">
-                {errors.firstName.message} {/* Displaying the error message */}
+                {errors.firstName.message}
               </span>
             </div>
           )}

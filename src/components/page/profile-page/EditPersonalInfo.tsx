@@ -22,6 +22,9 @@ const EditPersonalInfo = ({
 }: IEditPersonalInfoProps) => {
   return (
     <>
+      <h3 className="text-2xl font-semibold text-primary mb-5">
+        Personal information
+      </h3>
       <EditUserAvatar
         profileImageUrl={profileImageUrl}
         userEmail={userEmail}

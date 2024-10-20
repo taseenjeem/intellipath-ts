@@ -5,3 +5,26 @@
 .custom-min-h {
   min-height: calc(100vh - 64px);
 }
+
+.custom-border {
+  border-color: var(--fallback-bc, oklch(var(--bc) / 0.2));
+}
+
+// CSS overrides for the text editor of course's full description
+.quill {
+  margin-top: 4px !important;
+}
+.ql-container.ql-snow {
+  border-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  min-height: 500px;
+}
+.ql-toolbar.ql-snow {
+  border-color: var(--fallback-bc, oklch(var(--bc) / 0.2)) !important;
+  border-top-right-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
+}
+.ql-editor.ql-blank {
+  min-height: 500px;
+}

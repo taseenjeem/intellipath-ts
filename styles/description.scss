@@ -1,0 +1,97 @@
+.description-container {
+  h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  h5 {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  h6 {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  // Text formatting styles
+  b,
+  strong {
+    font-weight: bold;
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  del,
+  s {
+    text-decoration: line-through;
+  }
+
+  blockquote {
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
+    margin: 0 0 15px 0;
+  }
+
+  // List styles
+  ul,
+  ol {
+    list-style-position: inside;
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+
+  ol {
+    li {
+      list-style: decimal;
+    }
+  }
+
+  ul {
+    li {
+      list-style: disc;
+    }
+  }
+
+  // Indentation styles
+  .ql-indent-1 {
+    margin-left: 20px;
+  }
+
+  .ql-indent-2 {
+    margin-left: 40px;
+  }
+
+  // Link and image styles
+  a {
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

@@ -64,7 +64,7 @@ const ChangePassForm = () => {
       toast.error(
         error.message || "An unexpected error occurred. Please try again."
       );
-      console.error("Error:", error);
+      console.log("Error:", error);
     } finally {
       // Reset loading state
       setIsLoading(false);

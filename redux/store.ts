@@ -12,6 +12,8 @@ import {
 } from "redux-persist";
 import userInfoReducer from "./slices/UserInfoSlice";
 import editProfileInfoReducer from "./slices/profileInfoSlice";
+import publishCourseReducer from "./slices/publishCourseSlice";
+import editCourseReducer from "./slices/editCourse";
 
 const createNoopStorage = () => {
   return {
@@ -44,6 +46,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userInfo: userInfoReducer,
   editProfileInfo: editProfileInfoReducer,
+  publishCourseInfo: publishCourseReducer,
+  editCourse: editCourseReducer,
 });
 
 // Create a persisted reducer using the persist configuration
