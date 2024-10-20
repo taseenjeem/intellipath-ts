@@ -372,7 +372,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                   </Link>
                 </span>
 
-                <div className="flex justify-end size-full mt-3">
+                <div className="flex justify-end mt-3">
                   <button
                     onClick={() => openEditLessonModal(lesson)}
                     type="button"
