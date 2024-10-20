@@ -28,6 +28,7 @@ import { toast } from "react-toastify";
 import EditLessonModal from "../publish-a-new-course-page/EditLessonModal";
 import { updateCourseData } from "@/database/server-actions";
 import UpdateCourseThumbnail from "./UpdateCourseThumbnail";
+import { BiSolidCoupon } from "react-icons/bi";
 
 interface ICouponData {
   code: string | null;
@@ -350,6 +351,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 onClick={handleAddCoupon}
                 className="btn btn-primary w-full mt-4"
               >
+                <BiSolidCoupon size={24} />
                 Add Coupon
               </span>
             </div>
@@ -397,11 +399,15 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 </div>
               </div>
             ))}
+            <div
+              role="button"
+              onClick={openModal}
+              className="p-3 border rounded-xl flex flex-col justify-center items-center hover:border-primary hover:text-primary duration-300 cursor-pointer"
+            >
+              <IoIosAddCircleOutline size={50} />
+              <p>Add lessons for your course</p>
+            </div>
           </div>
-          <span onClick={openModal} className="btn btn-primary w-full mt-3">
-            <IoIosAddCircleOutline size={24} />
-            Add lessons for your course
-          </span>
         </div>
         <div className="form-control">
           <label className="label" htmlFor="short_description">
