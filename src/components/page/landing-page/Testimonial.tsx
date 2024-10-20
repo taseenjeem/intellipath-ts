@@ -1,11 +1,10 @@
 import { getTestimonials } from "@/database/db-queries";
-import { ITestimonial } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa6";
 
 const Testimonial = async () => {
-  const feedbackData: ITestimonial[] = await getTestimonials();
+  const feedbackData = await getTestimonials();
 
   return (
     <>
@@ -30,7 +29,7 @@ const Testimonial = async () => {
         </div>
 
         <div className="mt-5 md:mt-10 [column-fill:_balance] sm:columns-2 gap-3 lg:columns-3 md:gap-5">
-          {feedbackData.map((item: ITestimonial) => (
+          {feedbackData.map((item) => (
             <div
               key={item._id}
               className="mb-5 sm:break-inside-avoid cursor-pointer"
