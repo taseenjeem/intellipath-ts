@@ -36,7 +36,7 @@ export default async function RootLayout({
           <SessionProvider>
             <ReduxProvider>
               <Navbar>
-                <ToastContainer position="top-center" theme="colored" />
+                <ToastContainer theme="colored" />
                 {children}
                 <ModalContainer />
                 <Footer />
