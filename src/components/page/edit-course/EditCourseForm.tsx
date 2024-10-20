@@ -17,6 +17,7 @@ import {
   editTitle,
   removeLesson,
   addNewCoupon,
+  removeCoupon,
 } from "@/redux/slices/editCourse";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
@@ -227,8 +228,19 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 courseData.coupons.map((coupon) => (
                   <div
                     key={coupon._id ? coupon._id : coupon.code}
-                    className="bg-primary text-primary-content p-2 rounded-lg inline-block flex-grow-0 flex-shrink-0 h-fit"
+                    className="bg-primary text-primary-content p-2 rounded-lg inline-block flex-grow-0 flex-shrink-0 h-fit relative"
                   >
+                    <button
+                      type="button"
+                      className="bg-red-500 text-white p-1 rounded-full flex justify-end items-center absolute -top-2 -right-2"
+                      onClick={() =>
+                        dispatch(
+                          removeCoupon(coupon._id ? coupon._id : coupon.code)
+                        )
+                      }
+                    >
+                      <IoClose />
+                    </button>
                     <div className="text-lg">
                       <strong className="text-sm">Coupon code:</strong>{" "}
                       {coupon.code}

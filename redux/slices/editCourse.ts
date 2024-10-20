@@ -45,8 +45,8 @@ const editCourseSlice = createSlice({
     },
     removeCoupon(state, action: PayloadAction<string>) {
       const allCoupons = state.courseData.coupons;
-      const existingCoupons = allCoupons?.filter(
-        (item) => item._id !== action.payload
+      const existingCoupons = allCoupons?.filter((item) =>
+        item._id ? item._id : item.code !== action.payload
       );
       state.courseData.coupons = existingCoupons;
     },
