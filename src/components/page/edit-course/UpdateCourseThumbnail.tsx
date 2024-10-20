@@ -12,7 +12,7 @@ const UpdateCourseThumbnail = ({
   altText,
 }: IUpdateCourseThumbnailProps) => {
   return (
-    <div className="mt-8 relative w-full h-[380px] bg-black rounded-2xl">
+    <div className="relative w-full h-[380px] bg-black rounded-2xl">
       <Image
         fill
         className="w-full mx-auto border-2 border-primary object-contain rounded-2xl"

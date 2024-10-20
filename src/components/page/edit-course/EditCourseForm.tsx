@@ -117,7 +117,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
   return (
     <>
       <form onSubmit={handleEditCourse} className="space-y-5">
-        <div className="flex flex-col lg:flex-row items-center gap-5 mb-5">
+        <div className="flex flex-col lg:flex-row gap-5 mb-5">
           <UpdateCourseThumbnail
             prevImage={course.thumbnail}
             altText={course.title}
@@ -163,7 +163,8 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             </div>
             <div className="form-control">
               <label className="label" htmlFor="price">
-                <span className="label-text">Price (in USD)</span>
+                <span className="label-text">Price</span>
+                <span className="label-text">(in USD)</span>
               </label>
               <span className="input input-bordered flex items-center gap-2">
                 <BiDollarCircle size={24} />
@@ -180,7 +181,8 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             </div>
             <div className="form-control">
               <label className="label" htmlFor="discount">
-                <span className="label-text">Discount (in USD)</span>
+                <span className="label-text">Discounted Price</span>
+                <span className="label-text">(in USD)</span>
               </label>
               <span className="input input-bordered flex items-center gap-2">
                 <BiDollarCircle size={24} />
