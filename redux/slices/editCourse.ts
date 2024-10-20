@@ -40,8 +40,8 @@ const editCourseSlice = createSlice({
     editLevel(state, action: PayloadAction<string>) {
       state.courseData.level = action.payload;
     },
-    addNewCoupon(state, action: PayloadAction<[]>) {
-      state.courseData.coupons = action.payload;
+    addNewCoupon(state, action) {
+      state.courseData.coupons?.push(action.payload);
     },
     removeCoupon(state, action: PayloadAction<string>) {
       const allCoupons = state.courseData.coupons;

@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { ICourse } from "@/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BiDollarCircle } from "react-icons/bi";
 import {
   initializeCourseData,
@@ -16,17 +16,27 @@ import {
   editShortDescription,
   editTitle,
   removeLesson,
+  addNewCoupon,
 } from "@/redux/slices/editCourse";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "../publish-a-new-course-page/AddLessonsModal";
 import FullDescription from "../publish-a-new-course-page/FullDescription";
+import { toast } from "react-toastify";
+
+interface ICouponData {
+  code: string | null;
+  discount: number | null;
+}
 
 const EditCourseForm = ({ course }: { course: ICourse }) => {
   const dispatch = useAppDispatch();
   const { courseData } = useAppSelector((state) => state.editCourse);
-  console.log("🚀 ~ EditCourseForm ~ courseData:", courseData.coupons);
+  const [couponData, setCouponData] = useState<ICouponData>({
+    code: null,
+    discount: null,
+  });
 
   useEffect(() => {
     dispatch(initializeCourseData(course));
@@ -39,6 +49,17 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
 
     if (logoutModal) {
       logoutModal.showModal();
+    }
+  };
+
+  const handleAddCoupon = () => {
+    if (!couponData.code) {
+      return toast.warn("You must provide a coupon code");
+    } else if (!couponData.discount) {
+      return toast.warn("You must provide a coupon discount amount");
+    } else {
+      dispatch(addNewCoupon(couponData));
+      setCouponData({ code: null, discount: null });
     }
   };
 
@@ -201,17 +222,30 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             </span>
           </label>
           <div className="flex items-center gap-3">
-            <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60 overflow-auto">
+            <div className="lg:w-[70%] w-full border custom-border p-5 rounded-xl h-60 overflow-auto flex flex-wrap gap-3">
               {courseData.coupons && courseData.coupons.length > 0 ? (
                 courseData.coupons.map((coupon) => (
-                  <div key={coupon._id ? coupon._id : coupon.code} />
+                  <div
+                    key={coupon._id ? coupon._id : coupon.code}
+                    className="bg-primary text-primary-content p-2 rounded-lg inline-block flex-grow-0 flex-shrink-0 h-fit"
+                  >
+                    <div className="text-lg">
+                      <strong className="text-sm">Coupon code:</strong>{" "}
+                      {coupon.code}
+                    </div>
+                    <div className="text-lg">
+                      <strong className="text-sm">Discount Percentage:</strong>{" "}
+                      {coupon.discount}%
+                    </div>
+                  </div>
                 ))
               ) : (
-                <div className="flex items-center justify-center h-full text-sm">
+                <div className="flex items-center justify-center h-full text-sm w-full">
                   <p>There are no coupons added yet!</p>
                 </div>
               )}
             </div>
+
             <div className="lg:w-[30%] w-full">
               <div className="form-control">
                 <label className="label" htmlFor="code">
@@ -222,6 +256,10 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                   id="code"
                   name="code"
                   className="input input-bordered"
+                  value={couponData.code ?? ""}
+                  onChange={(e) =>
+                    setCouponData((prev) => ({ ...prev, code: e.target.value }))
+                  }
                 />
               </div>
               <span className="form-control">
@@ -230,13 +268,24 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 </label>
                 <input
                   min={10}
+                  max={100}
                   type="number"
                   id="discount"
                   name="discount"
                   className="input input-bordered"
+                  value={couponData.discount ?? ""}
+                  onChange={(e) =>
+                    setCouponData((prev) => ({
+                      ...prev,
+                      discount: Number(e.target.value),
+                    }))
+                  }
                 />
               </span>
-              <button className="btn btn-primary w-full mt-4">
+              <button
+                onClick={handleAddCoupon}
+                className="btn btn-primary w-full mt-4"
+              >
                 Add Coupon
               </button>
             </div>
