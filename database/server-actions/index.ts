@@ -2,6 +2,7 @@
 import { signIn } from "@/auth";
 import {
   IChangePassForm,
+  ICourse,
   ICredentialLoginFormData,
   IPublishCourse,
 } from "@/types";
@@ -276,5 +277,32 @@ export const getAllCourses = async () => {
   } catch (error) {
     console.log("Error in getAllCourses:", error);
     throw new Error("Error while getting all courses");
+  }
+};
+
+export const updateCourseData = async (
+  courseId: string,
+  updatedData: ICourse
+) => {
+  if (!courseId) {
+    throw new Error("Course ID is required");
+  }
+
+  try {
+    await connectMongodb();
+
+    const result = await Courses.findByIdAndUpdate(courseId, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!result) {
+      throw new Error("Course not found");
+    }
+
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    console.error("Error in update course data:", error);
+    throw new Error("An error occurred while updating the course data.");
   }
 };

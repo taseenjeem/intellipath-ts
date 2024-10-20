@@ -26,6 +26,7 @@ import AddLessonsModal from "../publish-a-new-course-page/AddLessonsModal";
 import FullDescription from "../publish-a-new-course-page/FullDescription";
 import { toast } from "react-toastify";
 import EditLessonModal from "../publish-a-new-course-page/EditLessonModal";
+import { updateCourseData } from "@/database/server-actions";
 
 interface ICouponData {
   code: string | null;
@@ -40,7 +41,7 @@ interface ISelectedLesson {
 
 const EditCourseForm = ({ course }: { course: ICourse }) => {
   const dispatch = useAppDispatch();
-  const { courseData } = useAppSelector((state) => state.editCourse);
+  const { courseData, isLoading } = useAppSelector((state) => state.editCourse);
   const [selectedLesson, setSelectedLesson] = useState<ISelectedLesson | null>(
     null
   );
@@ -85,12 +86,23 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
     }
   };
 
-  const handleEditCourse = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEditCourse = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setIsLoading(true));
+
     try {
+      if (!course._id) {
+        throw new Error("Course ID is required");
+      }
+
+      const updatedCourse = await updateCourseData(course._id, courseData);
+
+      if (updatedCourse) {
+        toast.success("Course updated successfully!");
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      toast.error("Failed to update the course. Please try again.");
     } finally {
       dispatch(setIsLoading(false));
     }
@@ -315,12 +327,12 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                   }
                 />
               </span>
-              <button
+              <span
                 onClick={handleAddCoupon}
                 className="btn btn-primary w-full mt-4"
               >
                 Add Coupon
-              </button>
+              </span>
             </div>
           </div>
         </div>
@@ -367,10 +379,10 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               </div>
             ))}
           </div>
-          <button onClick={openModal} className="btn btn-primary w-full mt-3">
+          <span onClick={openModal} className="btn btn-primary w-full mt-3">
             <IoIosAddCircleOutline size={24} />
             Add lessons for your course
-          </button>
+          </span>
         </div>
         <div className="form-control">
           <label className="label" htmlFor="short_description">
@@ -387,8 +399,20 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             onChange={(e) => dispatch(editShortDescription(e.target.value))}
           />
         </div>
+        <FullDescription editMode />
+        <div className="flex justify-end">
+          {isLoading ? (
+            <button className="btn btn-primary" disabled>
+              <span className="loading loading-spinner"></span>
+              Saving Changes...
+            </button>
+          ) : (
+            <button type="submit" className="btn btn-primary">
+              Save Changes
+            </button>
+          )}
+        </div>
       </form>
-      <FullDescription editMode />
       <AddLessonsModal editMode />
       <EditLessonModal lesson={selectedLesson ?? { title: "", url: "" }} />
     </>
