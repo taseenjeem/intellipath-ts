@@ -1,5 +1,4 @@
 "use client";
-import { uploadImage } from "@/database/server-actions";
 import Image from "next/image";
 import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
