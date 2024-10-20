@@ -80,6 +80,10 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
       return toast.warn("You must provide a coupon code");
     } else if (!couponData.discount) {
       return toast.warn("You must provide a coupon discount amount");
+    } else if (couponData.discount > 100) {
+      return toast.warn("You cannot give discount over 100%");
+    } else if (couponData.discount < 10) {
+      return toast.warn("You cannot give discount less than 10%");
     } else {
       dispatch(addNewCoupon(couponData));
       setCouponData({ code: null, discount: null });
@@ -310,6 +314,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               <span className="form-control">
                 <label className="label" htmlFor="discount">
                   <span className="label-text">Coupon Discount</span>
+                  <span className="label-text">(10% - 100%)</span>
                 </label>
                 <input
                   min={10}
