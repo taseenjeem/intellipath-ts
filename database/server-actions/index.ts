@@ -306,3 +306,36 @@ export const updateCourseData = async (
     throw new Error("An error occurred while updating the course data.");
   }
 };
+
+export const updateCourseThumbnail = async (courseId: string, file: File) => {
+  try {
+    const { success, imageUrl, message } = await uploadImage(file);
+
+    if (success) {
+      await connectMongodb();
+      await Courses.findByIdAndUpdate(courseId, { thumbnail: imageUrl });
+
+      return {
+        success: true,
+        imageUrl,
+        message,
+      };
+    } else {
+      console.log(
+        "Error uploading image or updating course thumbnail:",
+        message
+      );
+      return {
+        success: false,
+        imageUrl: null,
+        message: "Failed to upload image",
+      };
+    }
+  } catch (error) {
+    console.log("Error uploading image or course thumbnail:", error);
+    return {
+      success: false,
+      message: "Failed to upload the thumbnail of the course",
+    };
+  }
+};

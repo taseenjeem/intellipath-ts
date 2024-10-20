@@ -121,6 +121,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
           <UpdateCourseThumbnail
             prevImage={course.thumbnail}
             altText={course.title}
+            courseId={course._id}
           />
           <div className="w-full lg:max-w-[488px] space-y-3">
             <div className="form-control">
