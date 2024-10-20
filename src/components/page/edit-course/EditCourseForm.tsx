@@ -115,78 +115,90 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
 
   return (
     <>
-      <UpdateCourseThumbnail />
       <form onSubmit={handleEditCourse} className="space-y-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <div className="form-control">
-            <label htmlFor="title" className="label">
-              <span className="label-text">Course Title</span>
-            </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              className="input input-bordered"
-              value={courseData.title}
-              onChange={(e) => dispatch(editTitle(e.target.value))}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="category">
-              <span className="label-text">Select your category</span>
-            </label>
-            <select
-              required
-              id="category"
-              name="category"
-              className="select select-bordered"
-              value={courseData.category}
-              onChange={(e) => dispatch(editCategory(e.target.value))}
-            >
-              <option value="">Pick a category</option>
-              <option value="Business & Finance">Business & Finance</option>
-              <option value="Technology & Programming">
-                Technology & Programming
-              </option>
-              <option value="Health & Wellness">Health & Wellness</option>
-              <option value="Creative Arts">Creative Arts</option>
-              <option value="Personal Development">Personal Development</option>
-              <option value="Language & Culture">Language & Culture</option>
-            </select>
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="price">
-              <span className="label-text">Price (in USD)</span>
-            </label>
-            <span className="input input-bordered flex items-center gap-2">
-              <BiDollarCircle size={24} />
+        <div className="flex flex-col lg:flex-row items-center gap-5 mb-5">
+          <UpdateCourseThumbnail
+            prevImage={course.thumbnail}
+            altText={course.title}
+          />
+          <div className="w-full lg:max-w-[488px] space-y-3">
+            <div className="form-control">
+              <label htmlFor="title" className="label">
+                <span className="label-text">Course Title</span>
+              </label>
               <input
+                type="text"
+                id="title"
+                name="title"
+                className="input input-bordered"
+                value={courseData.title}
+                onChange={(e) => dispatch(editTitle(e.target.value))}
+              />
+            </div>
+            <div className="form-control">
+              <label className="label" htmlFor="category">
+                <span className="label-text">Select your category</span>
+              </label>
+              <select
                 required
-                type="number"
-                id="price"
-                name="price"
-                className="grow"
-                value={courseData.price}
-                onChange={(e) => dispatch(editPrice(Number(e.target.value)))}
-              />
-            </span>
+                id="category"
+                name="category"
+                className="select select-bordered"
+                value={courseData.category}
+                onChange={(e) => dispatch(editCategory(e.target.value))}
+              >
+                <option value="">Pick a category</option>
+                <option value="Business & Finance">Business & Finance</option>
+                <option value="Technology & Programming">
+                  Technology & Programming
+                </option>
+                <option value="Health & Wellness">Health & Wellness</option>
+                <option value="Creative Arts">Creative Arts</option>
+                <option value="Personal Development">
+                  Personal Development
+                </option>
+                <option value="Language & Culture">Language & Culture</option>
+              </select>
+            </div>
+            <div className="form-control">
+              <label className="label" htmlFor="price">
+                <span className="label-text">Price (in USD)</span>
+              </label>
+              <span className="input input-bordered flex items-center gap-2">
+                <BiDollarCircle size={24} />
+                <input
+                  required
+                  type="number"
+                  id="price"
+                  name="price"
+                  className="grow"
+                  value={courseData.price}
+                  onChange={(e) => dispatch(editPrice(Number(e.target.value)))}
+                />
+              </span>
+            </div>
+            <div className="form-control">
+              <label className="label" htmlFor="discount">
+                <span className="label-text">Discount (in USD)</span>
+              </label>
+              <span className="input input-bordered flex items-center gap-2">
+                <BiDollarCircle size={24} />
+                <input
+                  type="number"
+                  id="discount"
+                  name="discount"
+                  className="grow"
+                  value={!!courseData.discount ? courseData.discount : ""}
+                  onChange={(e) =>
+                    dispatch(editDiscount(Number(e.target.value)))
+                  }
+                />
+              </span>
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label" htmlFor="discount">
-              <span className="label-text">Discount (in USD)</span>
-            </label>
-            <span className="input input-bordered flex items-center gap-2">
-              <BiDollarCircle size={24} />
-              <input
-                type="number"
-                id="discount"
-                name="discount"
-                className="grow"
-                value={!!courseData.discount ? courseData.discount : ""}
-                onChange={(e) => dispatch(editDiscount(Number(e.target.value)))}
-              />
-            </span>
-          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div className="form-control">
             <label className="label" htmlFor="language">
               <span className="label-text">Select your course language</span>
