@@ -60,6 +60,22 @@ const editCourseSlice = createSlice({
       );
       state.courseData.lessons = existingLessons;
     },
+    editLessonTitle(state, action) {
+      const lessonIndex = state.courseData.lessons.findIndex(
+        (lesson) => lesson._id === action.payload.lessonId
+      );
+      if (lessonIndex !== -1) {
+        state.courseData.lessons[lessonIndex].title = action.payload.newTitle;
+      }
+    },
+    editLessonURL(state, action) {
+      const lessonIndex = state.courseData.lessons.findIndex(
+        (lesson) => lesson._id === action.payload.lessonId
+      );
+      if (lessonIndex !== -1) {
+        state.courseData.lessons[lessonIndex].url = action.payload.newURL;
+      }
+    },
     editShortDescription(state, action: PayloadAction<string>) {
       state.courseData.short_description = action.payload;
     },
@@ -84,6 +100,8 @@ export const {
   removeCoupon,
   addNewLesson,
   removeLesson,
+  editLessonTitle,
+  editLessonURL,
   editShortDescription,
   editFullDescription,
 } = editCourseSlice.actions;

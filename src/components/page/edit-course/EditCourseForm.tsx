@@ -25,15 +25,26 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import AddLessonsModal from "../publish-a-new-course-page/AddLessonsModal";
 import FullDescription from "../publish-a-new-course-page/FullDescription";
 import { toast } from "react-toastify";
+import EditLessonModal from "../publish-a-new-course-page/EditLessonModal";
 
 interface ICouponData {
   code: string | null;
   discount: number | null;
 }
 
+interface ISelectedLesson {
+  _id?: string;
+  title: string;
+  url: string;
+}
+
 const EditCourseForm = ({ course }: { course: ICourse }) => {
   const dispatch = useAppDispatch();
   const { courseData } = useAppSelector((state) => state.editCourse);
+  const [selectedLesson, setSelectedLesson] = useState<ISelectedLesson | null>(
+    null
+  );
+
   const [couponData, setCouponData] = useState<ICouponData>({
     code: null,
     discount: null,
@@ -50,6 +61,16 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
 
     if (logoutModal) {
       logoutModal.showModal();
+    }
+  };
+
+  const openEditLessonModal = (lesson: ISelectedLesson) => {
+    setSelectedLesson(lesson);
+    const editLessonModal = document.getElementById(
+      "edit_lesson"
+    ) as HTMLDialogElement | null;
+    if (editLessonModal) {
+      editLessonModal.showModal();
     }
   };
 
@@ -303,7 +324,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div>
           <label className="label">
             <span className="label-text">Manage your Lessons</span>
           </label>
@@ -335,7 +356,11 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 </span>
 
                 <div className="flex justify-end size-full mt-3">
-                  <button type="button" className="btn btn-sm btn-primary">
+                  <button
+                    onClick={() => openEditLessonModal(lesson)}
+                    type="button"
+                    className="btn btn-sm btn-primary"
+                  >
                     Edit
                   </button>
                 </div>
@@ -365,6 +390,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
       </form>
       <FullDescription editMode />
       <AddLessonsModal editMode />
+      <EditLessonModal lesson={selectedLesson ?? { title: "", url: "" }} />
     </>
   );
 };
