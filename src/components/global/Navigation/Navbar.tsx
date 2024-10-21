@@ -46,7 +46,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
               <ul className="flex items-center justify-center text-primary">
                 {/* Navbar menu content here */}
                 <li>
-                  <ActiveLink href={`/features`}>Features</ActiveLink>
+                  <ActiveLink href={`/courses`}>Courses</ActiveLink>
                 </li>
                 <li>
                   <ActiveLink href={`#`}>Pricing</ActiveLink>
@@ -88,8 +88,8 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           <CloseBtn />
           {/* Sidebar content here */}
           <li>
-            <ActiveLink isSmallDevice={true} href={`/features`}>
-              Features
+            <ActiveLink isSmallDevice={true} href={`/courses`}>
+              Courses
             </ActiveLink>
           </li>
           <li>
