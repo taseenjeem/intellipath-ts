@@ -34,6 +34,7 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
       router.push(`?search=${searchValue}`);
     } else {
       router.push("");
+      setResult(courses);
     }
   };
 

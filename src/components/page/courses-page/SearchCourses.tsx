@@ -14,7 +14,11 @@ const SearchCourses = ({ onSearch, onReset }: SearchProps) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchValue(value);
-    onSearch(value);
+    if (value === "") {
+      onReset();
+    } else {
+      onSearch(value);
+    }
   };
 
   const handleResetClick = () => {
