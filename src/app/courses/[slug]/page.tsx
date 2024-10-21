@@ -1,4 +1,4 @@
-import { getCourseBySlug } from "@/database/db-queries";
+import { getCourseBySlug } from "@/database/server-actions";
 
 const CourseDetailsPage = async ({
   params,
