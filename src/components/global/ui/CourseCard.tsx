@@ -20,7 +20,7 @@ const CourseCard = async ({
 }: CourseCardProps) => {
   return (
     <div className="card card-compact bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300 group">
-      <figure className="w-full max-w-[358px] max-h-[202px] overflow-hidden">
+      <figure className="w-full max-h-[202px] overflow-hidden">
         <Image
           src={courseDetails?.thumbnail}
           alt={`${courseDetails?.title} thumbnail`}
