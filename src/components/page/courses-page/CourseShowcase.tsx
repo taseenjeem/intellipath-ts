@@ -49,29 +49,29 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
           </div>
           <SearchCourses onSearch={handleSearch} />
         </div>
-        <div className="grid md:grid-cols-3 grid-cols-1 md:gap-4 gap-2 mt-6">
-          {result.length > 0 ? (
-            result.map((course) => (
+        {result.length > 0 ? (
+          <div className="grid md:grid-cols-3 grid-cols-1 md:gap-4 gap-2 mt-6">
+            {result.map((course) => (
               <div key={course._id}>
                 <CourseCard
                   courseDetails={course}
                   href={`/courses/${course.slug}`}
                 />
               </div>
-            ))
-          ) : (
-            <div className="w-full flex flex-col justify-center ">
-              <Image
-                src={searchImg}
-                alt="search illustrator"
-                className="mx-auto"
-              />
-              <p className="text-lg text-center">
-                No courses found for &quot;{searchQuery}&quot;.
-              </p>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="min-h-[50hv] size-full flex flex-col justify-center ">
+            <Image
+              src={searchImg}
+              alt="search illustrator"
+              className="max-w-sm mx-auto"
+            />
+            <p className="text-lg text-center">
+              No courses found for &quot;{searchQuery}&quot;.
+            </p>
+          </div>
+        )}
       </div>
     </>
   );
