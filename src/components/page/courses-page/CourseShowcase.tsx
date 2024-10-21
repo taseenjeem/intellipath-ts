@@ -14,7 +14,9 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const searchValue = e.currentTarget.search.value.toLowerCase();
+
     const filteredCourses = courses.filter((course) =>
       course.title.toLowerCase().includes(searchValue)
     );
