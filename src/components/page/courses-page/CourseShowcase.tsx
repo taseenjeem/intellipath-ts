@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { ICourse } from "@/types";
 import FilterModal from "./FilterModal";
 import CourseCard from "../../global/ui/CourseCard";
@@ -13,22 +14,32 @@ interface CourseShowcaseProps {
 
 const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
   const [result, setResult] = useState(courses);
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const searchQuery = searchParams.get("search") || "";
 
   useEffect(() => {
+    if (searchQuery) {
+      const filteredCourses = courses.filter((course) =>
+        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setResult(filteredCourses);
+    } else {
+      setResult(courses);
+    }
+  }, [searchQuery, courses]);
+
+  const handleSearch = (searchValue: string) => {
+    if (searchValue) {
+      router.push(`?search=${searchValue}`);
+    } else {
+      router.push("");
+    }
+  };
+
+  const handleReset = () => {
+    router.push("");
     setResult(courses);
-  }, [courses]);
-
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const searchValue = e.currentTarget.search.value.toLowerCase();
-    setSearchQuery(searchValue);
-
-    const filteredCourses = courses.filter((course) =>
-      course.title.toLowerCase().includes(searchValue)
-    );
-
-    setResult(filteredCourses);
   };
 
   return (
@@ -47,7 +58,7 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
             )}
             <FilterModal />
           </div>
-          <SearchCourses onSearch={handleSearch} />
+          <SearchCourses onSearch={handleSearch} onReset={handleReset} />
         </div>
         {result.length > 0 ? (
           <div className="grid md:grid-cols-3 grid-cols-1 md:gap-4 gap-2 mt-6">
