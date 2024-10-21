@@ -11,7 +11,7 @@ interface CourseCardProps {
   href: string;
 }
 
-const CourseCard = async ({
+const CourseCard = ({
   courseDetails,
   purchased = false,
   instructorMode = false,
