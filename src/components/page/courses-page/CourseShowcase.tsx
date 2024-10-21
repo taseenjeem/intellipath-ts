@@ -33,13 +33,13 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
     if (searchValue) {
       router.push(`?search=${searchValue}`);
     } else {
-      router.push("");
+      router.push("/courses");
       setResult(courses);
     }
   };
 
   const handleReset = () => {
-    router.push("");
+    router.push("/courses");
     setResult(courses);
   };
 
