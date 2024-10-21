@@ -50,10 +50,10 @@ const SearchCourses = ({ onSearch, onReset }: SearchProps) => {
             className="ml-2 text-red-500"
             aria-label="Reset search"
           >
-            <IoClose size={18} />
+            <IoClose size={20} />
           </button>
         ) : (
-          <IoSearch size={18} className="text-primary" />
+          <IoSearch size={20} className="text-primary" />
         )}
       </div>
     </>
