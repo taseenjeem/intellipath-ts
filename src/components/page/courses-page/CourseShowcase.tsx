@@ -16,7 +16,7 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
   const [result, setResult] = useState(courses);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const searchQuery = searchParams.get("search") || "";
+  const searchQuery = searchParams.get("search-courses") || "";
 
   useEffect(() => {
     if (searchQuery) {
@@ -31,7 +31,7 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
 
   const handleSearch = (searchValue: string) => {
     if (searchValue) {
-      router.push(`?search=${searchValue}`);
+      router.push(`?search-courses=${searchValue}`);
     } else {
       router.push("/courses");
       setResult(courses);
