@@ -63,7 +63,7 @@ const CourseDetailsPage = async ({
               </h3>
             </div>
 
-            <div className="mt-5 flex items-end gap-10">
+            <div className="mt-5 flex flex-col md:flex-row md:items-end gap-5 md:gap-10">
               <div className="text-primary">
                 <strong>Price: </strong>
                 {course.discount ? (
@@ -92,7 +92,7 @@ const CourseDetailsPage = async ({
             <h2 className="text-lg text-primary capitalize">
               <strong>Course Modules: </strong>
             </h2>
-            <div className="grid grid-cols-4 gap-5 mt-3">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-5 mt-3">
               {course.lessons.map((lesson, index) => (
                 <div
                   key={lesson._id}
