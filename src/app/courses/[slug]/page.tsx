@@ -3,6 +3,7 @@ import { ICourse } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
 import Image from "next/image";
+import "/styles/description.scss";
 
 const CourseDetailsPage = async ({
   params,
@@ -61,7 +62,50 @@ const CourseDetailsPage = async ({
                   : "N/A"}
               </h3>
             </div>
+
+            <div className="mt-5 text-primary">
+              <strong>Price: </strong>
+              {course.discount ? (
+                <div className="flex items-end gap-2">
+                  <p className="text-5xl font-semibold">${course.discount}</p>
+                  <p className="text-xl line-through">${course.price}</p>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-5xl font-semibold">${course.price}</p>
+                </div>
+              )}
+            </div>
           </div>
+        </div>
+        <div className="space-y-5 md:space-y-10 mt-5 md:mt-10">
+          <div>
+            <h2 className="text-lg text-primary capitalize">
+              <strong>Minimum Requirements: </strong>
+            </h2>
+            <p>{course.requirements}</p>
+          </div>
+          <div>
+            <h2 className="text-lg text-primary capitalize">
+              <strong>Course Modules: </strong>
+            </h2>
+            <div className="grid grid-cols-4 gap-5 mt-3">
+              {course.lessons.map((lesson, index) => (
+                <div
+                  key={lesson._id}
+                  className="bg-base-300 p-5 rounded-xl flex justify-center items-center"
+                >
+                  <p className="text-center">
+                    {index + 1}. {lesson.title}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div
+            className="description-container"
+            dangerouslySetInnerHTML={{ __html: course.full_description }}
+          />
         </div>
       </section>
     </>
