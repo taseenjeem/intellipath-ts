@@ -269,6 +269,19 @@ export const getCourseBySlug = async (slug: string) => {
   }
 };
 
+export const getCourseById = async (courseID: string) => {
+  try {
+    await connectMongodb();
+    const course = await Courses.findById(courseID)
+      .populate("instructor")
+      .lean();
+    return JSON.parse(JSON.stringify(course));
+  } catch (error) {
+    console.log("Error in getCourseById:", error);
+    throw new Error("Error while getting course by ID");
+  }
+};
+
 export const getAllCourses = async () => {
   try {
     await connectMongodb();
