@@ -4,6 +4,7 @@ import { formatDate } from "@/utils/dateFormatter";
 import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
 import Image from "next/image";
 import "/styles/description.scss";
+import Link from "next/link";
 
 const CourseDetailsPage = async ({
   params,
@@ -77,7 +78,12 @@ const CourseDetailsPage = async ({
                   </div>
                 )}
               </div>
-              <button className="btn btn-primary">Enroll Now</button>
+              <Link
+                href={`/checkout/${course._id}`}
+                className="btn btn-primary"
+              >
+                Enroll Now
+              </Link>
             </div>
           </div>
         </div>
