@@ -63,18 +63,21 @@ const CourseDetailsPage = async ({
               </h3>
             </div>
 
-            <div className="mt-5 text-primary">
-              <strong>Price: </strong>
-              {course.discount ? (
-                <div className="flex items-end gap-2">
-                  <p className="text-5xl font-semibold">${course.discount}</p>
-                  <p className="text-xl line-through">${course.price}</p>
-                </div>
-              ) : (
-                <div>
-                  <p className="text-5xl font-semibold">${course.price}</p>
-                </div>
-              )}
+            <div className="mt-5 flex items-end gap-10">
+              <div className="text-primary">
+                <strong>Price: </strong>
+                {course.discount ? (
+                  <div className="flex items-end gap-2">
+                    <p className="text-5xl font-semibold">${course.discount}</p>
+                    <p className="text-xl line-through">${course.price}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-5xl font-semibold">${course.price}</p>
+                  </div>
+                )}
+              </div>
+              <button className="btn btn-primary">Enroll Now</button>
             </div>
           </div>
         </div>
