@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   checkUsernameAvailability,
+  getCountries,
   getUserByEmail,
   updateUserDetails,
 } from "@/database/server-actions";
@@ -34,12 +35,6 @@ import EditExperience from "./EditExperience";
 import EditSocialLinks from "./EditSocialLinks";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 import { IUserInfo } from "@/types";
-
-const getCountries = async () => {
-  return import("@/database/json/countries.json").then(
-    (module) => module.default
-  );
-};
 
 const ProfileInfoForm = () => {
   const dispatch = useAppDispatch();

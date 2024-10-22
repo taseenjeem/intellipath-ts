@@ -11,6 +11,12 @@ import User from "../db-models/userModel";
 import Courses from "../db-models/courseModel";
 import bcrypt from "bcryptjs";
 
+export const getCountries = async () => {
+  return import("@/database/json/countries.json").then(
+    (module) => module.default
+  );
+};
+
 export const credentialLogin = async (formData: ICredentialLoginFormData) => {
   try {
     await signIn("credentials", {
