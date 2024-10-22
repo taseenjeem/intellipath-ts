@@ -55,15 +55,15 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
   };
 
   return (
-    <section>
-      <div className="flex items-center gap-3">
+    <section className="max-w-[800px] w-full">
+      <div className="flex flex-col md:flex-row md:items-center gap-3">
         <div>
           <Image
             width={400}
             height={100}
             src={course.thumbnail}
             alt={course.title}
-            className="max-w-[400px] w-full border-2 border-primary rounded-xl"
+            className="max-w-[393px] w-full border-2 border-primary rounded-xl"
           />
         </div>
         <div>
@@ -141,15 +141,18 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
       </div>
       <form onSubmit={handleCouponChange} className="mt-3">
         <div className="form-control">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <input
+              required
               type="text"
               id="coupon"
               name="coupon"
               placeholder="Use a valid promo code"
               className="input input-bordered w-full"
             />
-            <button className="btn btn-primary">Apply Coupon Code</button>
+            <button className="btn btn-primary btn-outline w-full md:w-auto">
+              Apply Coupon Code
+            </button>
           </div>
         </div>
       </form>
