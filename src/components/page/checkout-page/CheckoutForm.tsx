@@ -151,11 +151,12 @@ const CheckoutForm = () => {
           <label className="label" htmlFor="address">
             <span className="label-text">Your Full Address</span>
           </label>
-          <textarea
+          <input
             required
+            type="text"
             id="address"
             name="address"
-            className="textarea textarea-bordered min-h-28"
+            className="input input-bordered"
             value={formData.address ?? ""}
             onChange={handleChange}
           />
