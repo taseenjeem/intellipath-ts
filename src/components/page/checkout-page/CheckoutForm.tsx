@@ -64,7 +64,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="lg:max-w-[50%] space-y-3 mt-5">
+      <form onSubmit={handleSubmit} className="space-y-3 mt-5">
         <div className="flex items-center gap-5">
           <div className="form-control w-full">
             <label htmlFor="firstName" className="label">
