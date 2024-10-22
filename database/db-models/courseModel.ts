@@ -26,7 +26,6 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
       {
         code: { type: String },
         discount: { type: Number },
-        default: [],
       },
     ],
     lessons: [
@@ -35,10 +34,8 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
         url: { type: String, required: true },
       },
     ],
-    testimonials: [
-      { type: Schema.Types.ObjectId, ref: "testimonials", default: [] },
-    ],
-    enrollments: [{ type: Schema.Types.ObjectId, ref: "users", default: [] }],
+    testimonials: [{ type: Schema.Types.ObjectId, ref: "testimonials" }],
+    enrollments: [{ type: Schema.Types.ObjectId, ref: "users" }],
     short_description: { type: String, required: true },
     full_description: { type: String, required: true },
   },

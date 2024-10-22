@@ -35,7 +35,9 @@ const CheckoutForm = () => {
   }, [dispatch, userInfo]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     dispatch(setFormData({ ...formData, [name]: value }));
@@ -64,7 +66,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-3 mt-5">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <div className="flex items-center gap-5">
           <div className="form-control w-full">
             <label htmlFor="firstName" className="label">
@@ -147,14 +149,13 @@ const CheckoutForm = () => {
         </div>
         <div className="form-control">
           <label className="label" htmlFor="address">
-            <span className="label-text">Your Address</span>
+            <span className="label-text">Your Full Address</span>
           </label>
-          <input
+          <textarea
             required
             id="address"
             name="address"
-            type="text"
-            className="input input-bordered"
+            className="textarea textarea-bordered min-h-28"
             value={formData.address ?? ""}
             onChange={handleChange}
           />
