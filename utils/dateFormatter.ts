@@ -5,7 +5,7 @@ export const formatDate = (isoDate: string | null | undefined): string => {
 
   const options: Intl.DateTimeFormatOptions = {
     day: "numeric",
-    month: "short",
+    month: "long",
     year: "numeric",
   };
 
