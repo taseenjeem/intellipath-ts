@@ -19,7 +19,7 @@ const CourseCard = ({
   href,
 }: CourseCardProps) => {
   return (
-    <div className="card card-compact bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300 group">
+    <div className="card size-full card-compact bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300 group">
       <figure className="w-full max-h-[202px] overflow-hidden">
         <Image
           src={courseDetails?.thumbnail}
