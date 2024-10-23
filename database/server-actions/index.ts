@@ -6,7 +6,7 @@ import {
   ICredentialLoginFormData,
   IPublishCourse,
 } from "@/types";
-import connectMongodb from "../../services/connectMongodb";
+import connectMongodb from "@/services/mongoose/connectMongodb";
 import User from "../db-models/userModel";
 import Courses from "../db-models/courseModel";
 import bcrypt from "bcryptjs";
