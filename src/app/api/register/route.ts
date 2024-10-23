@@ -1,6 +1,6 @@
 import User from "@/database/db-models/userModel";
 import { getUserByEmail } from "@/database/server-actions";
-import connectMongodb from "@/database/services/connectMongodb";
+import connectMongodb from "@/services/connectMongodb";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 

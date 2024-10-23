@@ -7,7 +7,7 @@ import Navbar from "../components/global/Navigation/Navbar";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import connectMongodb from "@/database/services/connectMongodb";
+import connectMongodb from "@/services/connectMongodb";
 import { SessionProvider } from "next-auth/react";
 import ModalContainer from "../components/global/Modals/ModalContainer";
 
