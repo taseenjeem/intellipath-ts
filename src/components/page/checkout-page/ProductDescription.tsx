@@ -3,7 +3,6 @@ import { ICourse } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import CheckoutBtn from "./CheckoutBtn";
