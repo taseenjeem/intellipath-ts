@@ -13,39 +13,51 @@ const editCourseSlice = createSlice({
     setIsLoading(state, action) {
       state.isLoading = action.payload;
     },
+
     initializeCourseData(state, action: PayloadAction<ICourse>) {
       state.courseData = action.payload;
     },
+
     editThumbnail(state, action: PayloadAction<string>) {
       state.courseData.thumbnail = action.payload;
     },
+
     editTitle(state, action: PayloadAction<string>) {
       state.courseData.title = action.payload;
     },
+
     editCategory(state, action: PayloadAction<string>) {
       state.courseData.category = action.payload;
     },
+
     editPrice(state, action: PayloadAction<number>) {
       state.courseData.price = action.payload;
     },
+
     editDiscount(state, action: PayloadAction<number | null>) {
       state.courseData.discount = action.payload;
     },
+
     editLanguage(state, action: PayloadAction<string>) {
       state.courseData.language = action.payload;
     },
+
     editDuration(state, action: PayloadAction<number>) {
       state.courseData.duration = action.payload;
     },
+
     editRequirements(state, action: PayloadAction<string>) {
       state.courseData.requirements = action.payload;
     },
+
     editLevel(state, action: PayloadAction<string>) {
       state.courseData.level = action.payload;
     },
+
     addNewCoupon(state, action) {
       state.courseData.coupons?.push(action.payload);
     },
+
     removeCoupon(state, action: PayloadAction<string>) {
       const allCoupons = state.courseData.coupons;
       const existingCoupons = allCoupons?.filter((item) =>
@@ -53,9 +65,11 @@ const editCourseSlice = createSlice({
       );
       state.courseData.coupons = existingCoupons;
     },
+
     addNewLesson(state, action) {
       state.courseData.lessons.push(action.payload);
     },
+
     removeLesson(state, action: PayloadAction<string | undefined>) {
       const allLessons = state.courseData.lessons;
       const existingLessons = allLessons?.filter(
@@ -63,6 +77,7 @@ const editCourseSlice = createSlice({
       );
       state.courseData.lessons = existingLessons;
     },
+
     editLessonTitle(state, action) {
       const lessonIndex = state.courseData.lessons.findIndex(
         (lesson) => lesson._id === action.payload.lessonId
@@ -71,6 +86,7 @@ const editCourseSlice = createSlice({
         state.courseData.lessons[lessonIndex].title = action.payload.newTitle;
       }
     },
+
     editLessonURL(state, action) {
       const lessonIndex = state.courseData.lessons.findIndex(
         (lesson) => lesson._id === action.payload.lessonId
@@ -79,9 +95,11 @@ const editCourseSlice = createSlice({
         state.courseData.lessons[lessonIndex].url = action.payload.newURL;
       }
     },
+
     editShortDescription(state, action: PayloadAction<string>) {
       state.courseData.short_description = action.payload;
     },
+
     editFullDescription(state, action: PayloadAction<string>) {
       state.courseData.full_description = action.payload;
     },
