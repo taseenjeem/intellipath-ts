@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 interface IUserActionBtnsProps {
@@ -13,24 +13,23 @@ interface IUserActionBtnsProps {
 }
 
 const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
-  const pathName = usePathname(); // Get the current pathname
-  const isActive = pathName.includes("/auth"); // Check if the current path is for authentication routes
-  const { data: session, status } = useSession(); // Session data and status from next-auth
-  const authData = useAppSelector((state) => state.userInfo); // Get the user information from Redux store
-  const dispatch = useAppDispatch(); // Redux dispatch function
+  const pathName = usePathname();
+  const isActive = pathName.includes("/auth");
+  const { data: session, status } = useSession();
+  const authData = useAppSelector((state) => state.userInfo);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  // Fetch user data from server if authenticated
   useEffect(() => {
     const fetchUserData = async () => {
       if (status === "authenticated" && session?.user?.email) {
-        const userData = await getUserByEmail(session.user.email); // Fetch user data by email
-        dispatch(updateUserInfo(userData)); // Update the user information in Redux store
+        const userData = await getUserByEmail(session.user.email);
+        dispatch(updateUserInfo(userData));
       }
     };
     fetchUserData();
   }, [dispatch, session?.user?.email, status]);
 
-  // Close the drawer menu on small devices
   const closeDrawer = () => {
     const menuCheckbox = document.getElementById(
       "menu-contents"
@@ -41,7 +40,6 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
     }
   };
 
-  // Open the logout modal
   const openLogoutModal = () => {
     const logoutModal = document.getElementById(
       "logout-modal"
@@ -51,12 +49,16 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
     }
   };
 
+  const handleSmallDeviceProfileButton = () => {
+    router.push(`/profile/${authData?.username}`);
+    closeDrawer();
+  };
+
   return (
     <>
-      {status === "authenticated" || authData.status ? ( // Check if user is authenticated
+      {status === "authenticated" || authData.status ? (
         <>
-          {/* Desktop view of user profile and logout options */}
-          <div className="dropdown dropdown-end lg:mx-3 lg:mt-1 hidden md:block">
+          <div className="dropdown dropdown-end lg:mx-3 lg:mt-1 hidden lg:block">
             <button tabIndex={0} className="avatar">
               <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
                 <Image
@@ -83,10 +85,10 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
               </li>
             </ul>
           </div>
-          {/* Mobile view of user profile and logout options */}
-          <Link
-            href={`/profile/${authData?.username}`}
-            className="flex justify-center items-center gap-4 mt-5 md:hidden"
+
+          <button
+            onClick={handleSmallDeviceProfileButton}
+            className="flex justify-center items-center gap-4 mt-5 lg:hidden"
           >
             <div className="avatar">
               <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
@@ -106,17 +108,16 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
               <h4 className="text-base font-semibold">@{authData?.username}</h4>
               <p>{authData?.email}</p>
             </div>
-          </Link>
-          {/* Logout button for mobile */}
+          </button>
+
           <button
             onClick={openLogoutModal}
-            className="btn btn-primary btn-sm mt-3 block md:hidden"
+            className="btn btn-primary btn-sm mt-3 block lg:hidden"
           >
             Logout
           </button>
         </>
       ) : (
-        // Login button for unauthenticated users
         <Link
           onClick={isSmallDevice ? closeDrawer : undefined}
           href={`/auth/login`}
