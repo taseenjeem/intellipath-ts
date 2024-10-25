@@ -5,6 +5,7 @@ import { getUserByEmail } from "@/database/server-actions";
 import { useAppDispatch } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
 import { toast } from "react-toastify";
+import { placeholderBase64 } from "@/utils/placeholderBase64";
 
 interface IEditUserAvatarProps {
   profileImageUrl: string | null | undefined;
@@ -71,6 +72,8 @@ const EditUserAvatar = ({
             width={160}
             height={160}
             alt="User profile avatar"
+            placeholder="blur"
+            blurDataURL={placeholderBase64}
           />
         </div>
       </div>

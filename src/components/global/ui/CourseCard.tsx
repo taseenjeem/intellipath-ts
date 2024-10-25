@@ -1,4 +1,5 @@
 import { ICourse } from "@/types";
+import { placeholderBase64 } from "@/utils/placeholderBase64";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
@@ -26,6 +27,8 @@ const CourseCard = ({
           alt={`${courseDetails?.title} thumbnail`}
           width={358}
           height={202}
+          placeholder="blur"
+          blurDataURL={placeholderBase64}
           className="w-full h-auto object-cover object-center transform transition-transform duration-300 group-hover:scale-110"
         />
       </figure>

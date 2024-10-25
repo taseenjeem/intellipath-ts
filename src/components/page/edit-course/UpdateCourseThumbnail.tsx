@@ -1,6 +1,7 @@
 "use client";
 import { editThumbnail } from "@/redux/slices/editCourse";
 import { useAppDispatch } from "@/redux/store";
+import { placeholderBase64 } from "@/utils/placeholderBase64";
 import Image from "next/image";
 import { MdModeEdit } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -71,6 +72,8 @@ const UpdateCourseThumbnail = ({
         className="w-full mx-auto border-2 border-primary object-contain rounded-2xl"
         src={prevImage}
         alt={altText}
+        placeholder="blur"
+        blurDataURL={placeholderBase64}
       />
       <label
         htmlFor="thumbnail"

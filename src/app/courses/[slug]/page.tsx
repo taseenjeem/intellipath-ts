@@ -5,6 +5,7 @@ import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
 import Image from "next/image";
 import "/styles/description.scss";
 import Link from "next/link";
+import { placeholderBase64 } from "@/utils/placeholderBase64";
 
 const CourseDetailsPage = async ({
   params,
@@ -15,13 +16,16 @@ const CourseDetailsPage = async ({
     <>
       <section className="container">
         <div className="mt-5 md:mt-10 flex flex-col lg:flex-row gap-5">
-          <Image
-            width={400}
-            height={400}
-            src={course.thumbnail}
-            alt={course.title}
-            className="max-w-3xl w-full rounded-xl border-2 border-primary"
-          />
+          <div className="border-2 border-primary max-w-3xl w-full rounded-xl relative">
+            <Image
+              fill
+              src={course.thumbnail}
+              alt={course.title}
+              placeholder="blur"
+              blurDataURL={placeholderBase64}
+              className="max-w-3xl w-full rounded-xl object-cover object-center"
+            />
+          </div>
           <div>
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-primary">
               {course.title}

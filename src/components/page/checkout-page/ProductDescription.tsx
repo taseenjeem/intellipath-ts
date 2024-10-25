@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import CheckoutBtn from "./CheckoutBtn";
+import { placeholderBase64 } from "@/utils/placeholderBase64";
 
 interface ProductDescriptionProps {
   course: ICourse;
@@ -63,6 +64,8 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
             height={100}
             src={course.thumbnail}
             alt={course.title}
+            placeholder="blur"
+            blurDataURL={placeholderBase64}
             className="max-w-[393px] w-full border-2 border-primary rounded-xl"
           />
         </div>

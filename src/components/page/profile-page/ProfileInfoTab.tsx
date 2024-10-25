@@ -12,6 +12,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
 import { PiStudentFill } from "react-icons/pi";
 import { useAppSelector } from "@/redux/store";
+import { placeholderBase64 } from "@/utils/placeholderBase64";
 
 const ProfileInfoTab = () => {
   const userData = useAppSelector((state) => state.userInfo);
@@ -26,6 +27,8 @@ const ProfileInfoTab = () => {
                 <Image
                   width={176}
                   height={176}
+                  placeholder="blur"
+                  blurDataURL={placeholderBase64}
                   src={
                     userData?.profileImageUrl
                       ? userData.profileImageUrl
