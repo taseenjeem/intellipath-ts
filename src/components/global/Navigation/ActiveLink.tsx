@@ -11,12 +11,11 @@ interface ActiveLinkProps {
 const ActiveLink = ({
   href,
   children,
-  isSmallDevice = false, // Defaults to false if not provided
+  isSmallDevice = false,
 }: ActiveLinkProps) => {
-  const path = usePathname(); // Get the current pathname
-  const isActive = path === href; // Determine if the current link is active
+  const path = usePathname();
+  const isActive = path.includes(href);
 
-  // Function to close the drawer menu on small devices
   const closeDrawer = () => {
     const menuCheckbox = document.getElementById(
       "menu-contents"
@@ -35,7 +34,7 @@ const ActiveLink = ({
       }`}
       href={href}
     >
-      {children} {/* Display the children content */}
+      {children}
     </Link>
   );
 };
