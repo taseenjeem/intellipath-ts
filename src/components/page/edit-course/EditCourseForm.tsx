@@ -212,7 +212,7 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               id="language"
               name="language"
               className="select select-bordered"
-              value={course.language}
+              value={courseData.language}
               onChange={(e) => dispatch(editLanguage(e.target.value))}
             >
               <option value="">Pick your course language</option>
