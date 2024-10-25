@@ -29,6 +29,11 @@ import EditLessonModal from "../publish-a-new-course-page/EditLessonModal";
 import { updateCourseData } from "@/database/server-actions";
 import UpdateCourseThumbnail from "./UpdateCourseThumbnail";
 import { BiSolidCoupon } from "react-icons/bi";
+import {
+  courseCategory,
+  courseLanguages,
+  courseLevel,
+} from "@/database/static-data";
 
 interface ICouponData {
   code: string | null;
@@ -150,16 +155,11 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
                 onChange={(e) => dispatch(editCategory(e.target.value))}
               >
                 <option value="">Pick a category</option>
-                <option value="Business & Finance">Business & Finance</option>
-                <option value="Technology & Programming">
-                  Technology & Programming
-                </option>
-                <option value="Health & Wellness">Health & Wellness</option>
-                <option value="Creative Arts">Creative Arts</option>
-                <option value="Personal Development">
-                  Personal Development
-                </option>
-                <option value="Language & Culture">Language & Culture</option>
+                {courseCategory.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="form-control">
@@ -216,10 +216,11 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               onChange={(e) => dispatch(editLanguage(e.target.value))}
             >
               <option value="">Pick your course language</option>
-              <option value="English">English - International</option>
-              <option value="বাংলা">বাংলা - Bangla</option>
-              <option value="اردو">اردو - Urdu</option>
-              <option value="हिंदी">हिंदी - Hindi</option>
+              {courseLanguages.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-control">
@@ -250,9 +251,11 @@ const EditCourseForm = ({ course }: { course: ICourse }) => {
               onChange={(e) => dispatch(editLevel(e.target.value))}
             >
               <option value="">Pick a course level</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Professional">Professional</option>
+              {courseLevel.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
             </select>
           </div>
         </div>

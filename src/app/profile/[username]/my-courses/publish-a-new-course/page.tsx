@@ -24,6 +24,11 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import FullDescription from "@/src/components/page/publish-a-new-course-page/FullDescription";
 import Link from "next/link";
+import {
+  courseCategory,
+  courseLanguages,
+  courseLevel,
+} from "@/database/static-data";
 
 const PublishCoursePage = () => {
   const dispatch = useAppDispatch();
@@ -133,16 +138,11 @@ const PublishCoursePage = () => {
                 onChange={(e) => dispatch(updateCategory(e.target.value))}
               >
                 <option value="">Pick a category</option>
-                <option value="Business & Finance">Business & Finance</option>
-                <option value="Technology & Programming">
-                  Technology & Programming
-                </option>
-                <option value="Health & Wellness">Health & Wellness</option>
-                <option value="Creative Arts">Creative Arts</option>
-                <option value="Personal Development">
-                  Personal Development
-                </option>
-                <option value="Language & Culture">Language & Culture</option>
+                {courseCategory.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="form-control">
@@ -206,10 +206,11 @@ const PublishCoursePage = () => {
                 onChange={(e) => dispatch(updateLanguage(e.target.value))}
               >
                 <option value="">Pick your course language</option>
-                <option value="English">English - International</option>
-                <option value="বাংলা">বাংলা - Bangla</option>
-                <option value="اردو">اردو - Urdu</option>
-                <option value="हिंदी">हिंदी - Hindi</option>
+                {courseLanguages.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="form-control">
@@ -242,9 +243,11 @@ const PublishCoursePage = () => {
                 onChange={(e) => dispatch(updateLevel(e.target.value))}
               >
                 <option value="">Pick a course level</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Professional">Professional</option>
+                {courseLevel.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
