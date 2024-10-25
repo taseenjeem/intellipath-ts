@@ -1,4 +1,9 @@
 "use client";
+import {
+  courseCategory,
+  courseLanguages,
+  courseLevel,
+} from "@/database/static-data";
 import { IoIosCloseCircle } from "react-icons/io";
 
 const FilterModal = () => {
@@ -33,130 +38,61 @@ const FilterModal = () => {
       <dialog id="filter_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <div className="flex justify-between items-center">
-            <h3 className="font-bold text-xl text-white">Sort Products</h3>
+            <h3 className="font-bold text-xl">Sort Products</h3>
             <button onClick={closeModal}>
               <IoIosCloseCircle className="size-8 text-primary" />
             </button>
           </div>
           <div className="py-4">
-            <h3 className="text-lg ">Select category</h3>
+            <h3 className="text-lg ">Category</h3>
             <hr className="my-2" />
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
+            {courseCategory.map((item) => (
+              <div key={item} className="form-control">
+                <label className="cursor-pointer label">
+                  <span className="label-text">{item}</span>
+                  <input
+                    id={item}
+                    name={item}
+                    type="checkbox"
+                    className="checkbox checkbox-sm checkbox-primary"
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+          <div className="py-4">
+            <h3 className="text-lg ">Language</h3>
+            <hr className="my-2" />
+            {courseLanguages.map((item) => (
+              <div key={item} className="form-control">
+                <label className="cursor-pointer label">
+                  <span className="label-text">{item}</span>
+                  <input
+                    id={item}
+                    name={item}
+                    type="checkbox"
+                    className="checkbox checkbox-sm checkbox-primary"
+                  />
+                </label>
+              </div>
+            ))}
           </div>
           <div className="py-4">
             <h3 className="text-lg ">Select category</h3>
             <hr className="my-2" />
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-          </div>
-          <div className="py-4">
-            <h3 className="text-lg ">Select category</h3>
-            <hr className="my-2" />
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="cursor-pointer label">
-                <span className="label-text">Filter 1</span>
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                />
-              </label>
-            </div>
+            {courseLevel.map((item) => (
+              <div key={item} className="form-control">
+                <label className="cursor-pointer label">
+                  <span className="label-text">{item}</span>
+                  <input
+                    id={item}
+                    name={item}
+                    type="checkbox"
+                    className="checkbox checkbox-sm checkbox-primary"
+                  />
+                </label>
+              </div>
+            ))}
           </div>
           <button
             onClick={closeModal}
