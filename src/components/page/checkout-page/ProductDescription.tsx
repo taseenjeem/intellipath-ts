@@ -58,15 +58,14 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
   return (
     <section className="max-w-[800px] w-full">
       <div className="flex flex-col md:flex-row md:items-center gap-3">
-        <div>
+        <div className="max-w-[393px] w-full h-[220px] border-2 border-primary rounded-xl relative">
           <Image
-            width={400}
-            height={100}
+            fill
             src={course.thumbnail}
             alt={course.title}
             placeholder="blur"
             blurDataURL={placeholderBase64}
-            className="max-w-[393px] w-full border-2 border-primary rounded-xl"
+            className="object-cover object-center rounded-xl"
           />
         </div>
         <div>

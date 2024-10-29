@@ -12,21 +12,56 @@ interface CourseShowcaseProps {
   courses: ICourse[];
 }
 
+const refineFilterQueries = (query: string) => {
+  const decodedQuery = decodeURI(query);
+  if (decodedQuery === "undefined" || !decodedQuery) {
+    return null;
+  }
+  return decodedQuery.split("|").map((item) => item.trim());
+};
+
 const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
-  const [result, setResult] = useState(courses);
-  const searchParams = useSearchParams();
+  const [result, setResult] = useState<ICourse[]>(courses);
+  const queryParams = useSearchParams();
   const router = useRouter();
-  const searchQuery = searchParams.get("search-courses") || "";
+
+  const searchQuery = queryParams.get("search-courses") || "";
+  const categoryFilterQuery = refineFilterQueries(
+    queryParams.get("category") ?? ""
+  );
+  const languageFilterQuery = refineFilterQueries(
+    queryParams.get("language") ?? ""
+  );
+  const levelFilterQuery = refineFilterQueries(queryParams.get("level") ?? "");
 
   useEffect(() => {
+    let filteredCourses = courses;
+
     if (searchQuery) {
-      const filteredCourses = courses.filter((course) =>
+      filteredCourses = filteredCourses.filter((course) =>
         course.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setResult(filteredCourses);
-    } else {
-      setResult(courses);
     }
+
+    if (categoryFilterQuery && categoryFilterQuery.length > 0) {
+      filteredCourses = filteredCourses.filter((course) =>
+        categoryFilterQuery.includes(course.category)
+      );
+    }
+
+    if (languageFilterQuery && languageFilterQuery.length > 0) {
+      filteredCourses = filteredCourses.filter((course) =>
+        languageFilterQuery.includes(course.language)
+      );
+    }
+
+    if (levelFilterQuery && levelFilterQuery.length > 0) {
+      filteredCourses = filteredCourses.filter((course) =>
+        levelFilterQuery.includes(course.level)
+      );
+    }
+
+    setResult(filteredCourses);
   }, [searchQuery, courses]);
 
   const handleSearch = (searchValue: string) => {
@@ -79,9 +114,13 @@ const CourseShowcase = ({ courses }: CourseShowcaseProps) => {
               alt="search illustrator"
               className="max-w-sm mx-auto"
             />
-            <p className="text-lg text-center">
-              No courses found for &quot;{searchQuery}&quot;.
-            </p>
+            {searchQuery ? (
+              <p className="text-lg text-center">
+                No courses found for &quot;{searchQuery}&quot;.
+              </p>
+            ) : (
+              <p className="text-lg text-center">No data found</p>
+            )}
           </div>
         )}
       </div>
