@@ -3,7 +3,7 @@ import { ICourse } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import CheckoutBtn from "./CheckoutBtn";
 import { placeholderBase64 } from "@/utils/placeholderBase64";
@@ -22,6 +22,8 @@ const VAT_PERCENTAGE = 1;
 
 const ProductDescription = ({ course }: ProductDescriptionProps) => {
   const [coupon, setCoupon] = useState<ICoupon | null>(null);
+  const [totalPrice, setTotalPrice] = useState<number | null>(null);
+  console.log("🚀 ~ ProductDescription ~ totalPrice:", totalPrice);
 
   const handleCouponChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
     }
   };
 
-  const calculateTotalPrice = () => {
+  useEffect(() => {
     let priceAfterDiscount = course.discount || course.price;
 
     if (coupon) {
@@ -50,10 +52,10 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
     }
 
     const vatAmount = (priceAfterDiscount * VAT_PERCENTAGE) / 100;
-    const totalPrice = priceAfterDiscount + vatAmount;
+    const totalAmount = priceAfterDiscount + vatAmount;
 
-    return Math.round(totalPrice);
-  };
+    setTotalPrice(Math.round(totalAmount));
+  }, [coupon, course.discount, course.price]);
 
   return (
     <section className="max-w-[800px] w-full">
@@ -138,7 +140,7 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
         <div className="border-t border-dashed w-full my-5" />
         <span className="flex items-center justify-between text-primary text-lg font-semibold">
           <p>Total :</p>
-          <p>${calculateTotalPrice()}</p>
+          <p>${totalPrice}</p>
         </span>
       </div>
       <form onSubmit={handleCouponChange} className="mt-3">
@@ -158,7 +160,7 @@ const ProductDescription = ({ course }: ProductDescriptionProps) => {
           </div>
         </div>
       </form>
-      <CheckoutBtn />
+      <CheckoutBtn course={course} />
     </section>
   );
 };

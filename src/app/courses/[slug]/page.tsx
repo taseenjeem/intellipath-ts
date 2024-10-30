@@ -6,6 +6,7 @@ import Image from "next/image";
 import "/styles/description.scss";
 import Link from "next/link";
 import { placeholderBase64 } from "@/utils/placeholderBase64";
+import CouponModal from "@/src/components/page/couese-details-page/CouponModal";
 
 const CourseDetailsPage = async ({
   params,
@@ -120,6 +121,7 @@ const CourseDetailsPage = async ({
             dangerouslySetInnerHTML={{ __html: course.full_description }}
           />
         </div>
+        <CouponModal coupons={course.coupons || []} />
       </section>
     </>
   );
