@@ -148,3 +148,26 @@ export interface IPublishCourse {
   short_description: string | null;
   full_description: string | null;
 }
+
+export interface IEnrollments {
+  stripe_session_id: string;
+  amount_subtotal: number;
+  amount_total: number;
+  currency: string | null;
+  created: number;
+  expires_at: number;
+  payment_intent: string | null;
+  payment_status: string;
+  mode: string;
+  status: string | null;
+  success_url: string | null;
+  cancel_url: string | null;
+  customer_details?: {
+    email_while_payment?: string | null;
+    name_while_payment?: string | null;
+    address_while_payment?: string | null;
+  };
+  payment_method_type: string[];
+  purchased_by: IUserInfo;
+  purchased_course: ICourse;
+}
