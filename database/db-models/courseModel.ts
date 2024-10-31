@@ -35,7 +35,7 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
       },
     ],
     testimonials: [{ type: Schema.Types.ObjectId, ref: "testimonials" }],
-    enrollments: [{ type: Schema.Types.ObjectId, ref: "users" }],
+    enrollments: [{ type: Schema.Types.ObjectId, ref: "enrollments" }],
     short_description: { type: String, required: true },
     full_description: { type: String, required: true },
   },
