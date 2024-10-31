@@ -3,8 +3,16 @@ import { createCheckoutSession } from "@/services/stripe/stripe";
 import { ICourse } from "@/types";
 import { toast } from "react-toastify";
 
-const CheckoutBtn = ({ course }: { course: ICourse }) => {
-  const formAction = async (data: any) => {
+const CheckoutBtn = ({
+  course,
+  purchasedPrice,
+}: {
+  course: ICourse;
+  purchasedPrice: number;
+}) => {
+  const formAction = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = { title: course.title, id: course._id, price: purchasedPrice };
     const { url } = await createCheckoutSession(data);
 
     if (url) {

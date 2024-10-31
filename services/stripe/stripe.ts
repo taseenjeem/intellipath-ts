@@ -14,13 +14,13 @@ export const createCheckoutSession = async (data: any) => {
         quantity: 1,
         price_data: {
           currency: "USD",
-          product_data: { name: "Full Stack Web Development" },
-          unit_amount: 1000,
+          product_data: { name: data.title },
+          unit_amount: data.price * 100,
         },
       },
     ],
     ...(ui_mode === "hosted" && {
-      success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=12445`,
+      success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${data.id}`,
       cancel_url: `${origin}/courses`,
     }),
     ui_mode,
@@ -34,7 +34,7 @@ export const createCheckoutSession = async (data: any) => {
 
 export const createPaymentIntent = async (data: any) => {
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1000,
+    amount: data.price * 100,
     automatic_payment_methods: { enabled: true },
     currency: "USD",
   });
