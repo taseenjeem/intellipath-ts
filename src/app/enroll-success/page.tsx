@@ -3,7 +3,11 @@ import img from "/public/assets/images/enroll-success.png";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import Link from "next/link";
 import { ICourse, IEnrollments, IUserInfo } from "@/types";
-import { getCourseById, getUserByEmail } from "@/database/server-actions";
+import {
+  enrollment,
+  getCourseById,
+  getUserByEmail,
+} from "@/database/server-actions";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { stripe } from "@/services/stripe/stripeConfig";
@@ -72,6 +76,8 @@ const EnrollSuccessPage = async ({ searchParams }: EnrollSuccessPageProps) => {
     !userSession?.user?.email
   ) {
     redirect("/");
+  } else {
+    await enrollment(data, user._id, course._id ?? "");
   }
 
   return (

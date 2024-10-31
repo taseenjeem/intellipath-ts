@@ -4,12 +4,14 @@ import {
   IChangePassForm,
   ICourse,
   ICredentialLoginFormData,
+  IEnrollments,
   IPublishCourse,
 } from "@/types";
 import connectMongodb from "@/services/mongoose/connectMongodb";
 import User from "../db-models/userModel";
 import Courses from "../db-models/courseModel";
 import bcrypt from "bcryptjs";
+import Enrollments from "../db-models/enrollmentsModel";
 
 export const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -356,5 +358,38 @@ export const updateCourseThumbnail = async (courseId: string, file: File) => {
       success: false,
       message: "Failed to upload the thumbnail of the course",
     };
+  }
+};
+
+export const enrollment = async (
+  data: IEnrollments,
+  userID: string,
+  courseID: string
+) => {
+  try {
+    await connectMongodb();
+    const result = await Enrollments.create(data);
+
+    if (result) {
+      await User.findByIdAndUpdate(userID, {
+        $push: { courses: result._id },
+      });
+      await Courses.findByIdAndUpdate(courseID, {
+        $push: { enrollments: result._id },
+      });
+      return {
+        success: true,
+        message: "Enrollment successful",
+        enrollmentId: result._id,
+      };
+    } else {
+      return {
+        success: false,
+        message: "Failed to enroll in the course",
+      };
+    }
+  } catch (error) {
+    console.log("Error in enrollment:", error);
+    throw new Error("An error occurred while enrolling in the course.");
   }
 };
