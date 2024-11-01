@@ -73,7 +73,8 @@ const EnrollSuccessPage = async ({ searchParams }: EnrollSuccessPageProps) => {
   if (
     !searchParams.courseId ||
     !searchParams.session_id ||
-    !userSession?.user?.email
+    !userSession?.user?.email ||
+    user.role === "instructor"
   ) {
     redirect("/");
   } else {

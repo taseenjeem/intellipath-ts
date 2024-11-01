@@ -73,6 +73,7 @@ export interface IUserInfo {
   address?: string | null;
   role: string;
   courses?: ICourse[];
+  enrolledCourses?: IEnrollments[];
   expertise?: string[];
   biography?: string | null;
   education?: {
@@ -150,6 +151,7 @@ export interface IPublishCourse {
 }
 
 export interface IEnrollments {
+  _id?: string;
   stripe_session_id: string;
   amount_subtotal: number;
   amount_total: number;

@@ -20,6 +20,7 @@ const initialState: IUserInfo = {
   role: "",
   expertise: [],
   courses: [],
+  enrolledCourses: [],
   biography: null,
   education: [],
   experience: [],

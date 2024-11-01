@@ -67,15 +67,22 @@ export const getUserByUsername = async (username: string) => {
     await connectMongodb();
     const user = await User.findOne({ username })
       .populate({
+        path: "enrolledCourses",
+        model: "enrollments",
+        populate: [
+          { path: "purchased_by", model: "users" },
+          { path: "purchased_course", model: "courses" },
+        ],
+      })
+      .populate({
         path: "courses",
-        populate: {
-          path: "instructor",
-        },
+        model: "courses",
       })
       .lean();
+
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    console.log("Error finding user by username:", error);
+    console.error("Error finding user by username:", error);
     throw new Error("Error finding user by username");
   }
 };
@@ -372,7 +379,7 @@ export const enrollment = async (
 
     if (result) {
       await User.findByIdAndUpdate(userID, {
-        $push: { courses: result._id },
+        $push: { enrolledCourses: result._id },
       });
       await Courses.findByIdAndUpdate(courseID, {
         $push: { enrollments: result._id },
