@@ -375,6 +375,19 @@ export const enrollment = async (
 ) => {
   try {
     await connectMongodb();
+
+    const existingEnrollment = await Enrollments.findOne({
+      purchased_by: userID,
+      purchased_course: courseID,
+    });
+
+    if (existingEnrollment) {
+      return {
+        success: false,
+        message: "You are already enrolled in this course.",
+      };
+    }
+
     const result = await Enrollments.create(data);
 
     if (result) {
