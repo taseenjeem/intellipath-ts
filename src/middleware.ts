@@ -1,8 +1,5 @@
 import { authConfig } from "@/auth.config";
-import {
-  AUTHENTICATED_RESTRICTED_ROUTES,
-  PRIVATE_ROUTES,
-} from "@/utils/privateRoutes";
+import { PRIVATE_ROUTES } from "@/utils/privateRoutes";
 import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
 
