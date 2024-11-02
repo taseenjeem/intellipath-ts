@@ -77,6 +77,7 @@ export const getUserByUsername = async (username: string) => {
       .populate({
         path: "courses",
         model: "courses",
+        populate: [{ path: "instructor", model: "users" }],
       })
       .lean();
 

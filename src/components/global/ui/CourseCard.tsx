@@ -42,10 +42,10 @@ const CourseCard = ({
         <div className="flex flex-col md:flex-row justify-between">
           <span className="text-xs md:text-base">
             <strong>Instructor: </strong>
-            {/* <span className="link-hover cursor-pointer">
+            <span className="link-hover cursor-pointer">
               {courseDetails.instructor.firstName}{" "}
               {courseDetails.instructor.lastName}
-            </span> */}
+            </span>
           </span>
           <span className="flex items-center gap-2 text-accent text-xs md:text-base mt-2 md:mt-0">
             <span className="cursor-pointer" title="Total reviews">
