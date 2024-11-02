@@ -23,7 +23,6 @@ const VAT_PERCENTAGE = 1;
 const ProductDescription = ({ course }: ProductDescriptionProps) => {
   const [coupon, setCoupon] = useState<ICoupon | null>(null);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  console.log("🚀 ~ ProductDescription ~ totalPrice:", totalPrice);
 
   const handleCouponChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
