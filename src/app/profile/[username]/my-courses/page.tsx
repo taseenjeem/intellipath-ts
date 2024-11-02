@@ -10,7 +10,6 @@ const MyCoursesPage = async ({
 }: Readonly<{ params: { username: string } }>) => {
   const user: IUserInfo = await getUserByUsername(params.username);
   const { courses, enrolledCourses, role } = user;
-  console.log("🚀 ~ user:", user);
 
   return (
     <>
