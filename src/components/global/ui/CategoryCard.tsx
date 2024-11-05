@@ -7,7 +7,10 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
   return (
-    <Link href={`/course-categories/${category.slug}`}>
+    <Link
+      passHref
+      href={`/courses?category=${encodeURIComponent(category.title)}`}
+    >
       <div className="card w-full h-full card-compact bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300">
         <figure className="px-5 pt-5">
           <Image
