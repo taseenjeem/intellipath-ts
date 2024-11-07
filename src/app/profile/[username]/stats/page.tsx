@@ -15,7 +15,6 @@ const StatsPage = async ({ params }: { params: { username: string } }) => {
     <>
       <div className="overflow-x-auto">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>SL</th>
