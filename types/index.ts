@@ -173,4 +173,6 @@ export interface IEnrollments {
   instructor: IUserInfo;
   purchased_by: IUserInfo;
   purchased_course: ICourse;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 }

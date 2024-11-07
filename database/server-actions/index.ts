@@ -414,3 +414,18 @@ export const enrollment = async (
     throw new Error("An error occurred while enrolling in the course.");
   }
 };
+
+export const getAllEnrollmentsByInstructorId = async (id: string) => {
+  try {
+    await connectMongodb();
+    const enrollments = await Enrollments.find({ instructor: id })
+      .populate({ path: "instructor", model: "users" })
+      .populate({ path: "purchased_by", model: "users" })
+      .populate({ path: "purchased_course", model: "courses" })
+      .lean();
+    return JSON.parse(JSON.stringify(enrollments));
+  } catch (error) {
+    console.log("Error in getAllEnrollmentsByInstructorId:", error);
+    throw new Error("Error while getting enrollments by instructor ID");
+  }
+};
