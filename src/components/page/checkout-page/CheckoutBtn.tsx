@@ -12,7 +12,12 @@ const CheckoutBtn = ({
 }) => {
   const formAction = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = { title: course.title, id: course._id, price: purchasedPrice };
+    const data = {
+      title: course.title,
+      id: course._id,
+      instructor: course.instructor._id,
+      price: purchasedPrice,
+    };
     const { url } = await createCheckoutSession(data);
 
     if (url) {

@@ -170,6 +170,7 @@ export interface IEnrollments {
     address_while_payment?: string | null;
   };
   payment_method_type: string[];
+  instructor: IUserInfo;
   purchased_by: IUserInfo;
   purchased_course: ICourse;
 }

@@ -21,6 +21,7 @@ const enrollmentsSchema: Schema<IEnrollments> = new mongoose.Schema(
       address_while_payment: { type: String, default: null },
     },
     payment_method_type: { type: [String], required: true },
+    instructor: { type: Schema.Types.ObjectId, ref: "users" },
     purchased_by: { type: Schema.Types.ObjectId, ref: "users" },
     purchased_course: { type: Schema.Types.ObjectId, ref: "courses" },
   },

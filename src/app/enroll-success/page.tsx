@@ -7,6 +7,7 @@ import {
   enrollment,
   getCourseById,
   getUserByEmail,
+  getUserByID,
 } from "@/database/server-actions";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
@@ -16,6 +17,7 @@ interface EnrollSuccessPageProps {
   searchParams: {
     courseId: string;
     session_id: string;
+    instructorId: string;
   };
 }
 
@@ -23,6 +25,7 @@ const EnrollSuccessPage = async ({ searchParams }: EnrollSuccessPageProps) => {
   const userSession = await auth();
   const course: ICourse = await getCourseById(searchParams.courseId);
   const user: IUserInfo = await getUserByEmail(userSession?.user?.email ?? "");
+  const instructor: IUserInfo = await getUserByID(searchParams.instructorId);
   const checkoutSession = await stripe.checkout.sessions.retrieve(
     searchParams.session_id
   );
@@ -66,6 +69,7 @@ const EnrollSuccessPage = async ({ searchParams }: EnrollSuccessPageProps) => {
       address_while_payment: customer_details?.address?.country,
     },
     payment_method_type: payment_method_types,
+    instructor: instructor,
     purchased_by: user,
     purchased_course: course,
   };
@@ -73,6 +77,7 @@ const EnrollSuccessPage = async ({ searchParams }: EnrollSuccessPageProps) => {
   if (
     !searchParams.courseId ||
     !searchParams.session_id ||
+    !searchParams.instructorId ||
     !userSession?.user?.email ||
     user.role === "instructor"
   ) {
@@ -102,7 +107,10 @@ const EnrollSuccessPage = async ({ searchParams }: EnrollSuccessPageProps) => {
             goals. Welcome to a new world of knowledge and opportunities!
           </p>
           <div className="space-x-3">
-            <Link href={`/profile/my-courses/`} className="btn btn-primary">
+            <Link
+              href={`/profile/${user.username}/my-courses/`}
+              className="btn btn-primary"
+            >
               Start Learning
             </Link>
             <Link href={`/courses`} className="btn btn-primary">

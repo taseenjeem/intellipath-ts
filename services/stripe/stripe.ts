@@ -20,7 +20,7 @@ export const createCheckoutSession = async (data: any) => {
       },
     ],
     ...(ui_mode === "hosted" && {
-      success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${data.id}`,
+      success_url: `${origin}/enroll-success?session_id={CHECKOUT_SESSION_ID}&courseId=${data.id}&instructorId=${data.instructor}`,
       cancel_url: `${origin}/courses`,
     }),
     ui_mode,
