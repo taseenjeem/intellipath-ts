@@ -9,6 +9,9 @@ const Table = ({ enrollments }: ITable) => {
   return (
     <>
       <div className="overflow-x-auto mt-10">
+        <h2 className="text-2xl uppercase font-semibold text-primary mb-3">
+          Enrollment History
+        </h2>
         <table className="table">
           <thead>
             <tr>

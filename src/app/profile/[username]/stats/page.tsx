@@ -2,6 +2,7 @@ import {
   getAllEnrollmentsByInstructorId,
   getUserByUsername,
 } from "@/database/server-actions";
+import Reports from "@/src/components/page/stats-page/Reports";
 import Table from "@/src/components/page/stats-page/Table";
 import { IEnrollments, IUserInfo } from "@/types";
 
@@ -13,6 +14,10 @@ const StatsPage = async ({ params }: { params: { username: string } }) => {
 
   return (
     <>
+      <Reports
+        enrollments={enrollments}
+        totalCourses={instructor.courses?.length}
+      />
       <Table enrollments={enrollments} />
     </>
   );
