@@ -15,7 +15,6 @@ const TestimonialSchema: Schema<ITestimonial> = new mongoose.Schema(
     },
     content: { type: String, required: true },
     rating: { type: Number, required: true },
-    date: { type: String, required: true },
   },
   {
     timestamps: true,

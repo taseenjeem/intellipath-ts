@@ -25,7 +25,6 @@ export interface ITestimonial {
   course: Types.ObjectId;
   content: string;
   rating: number;
-  date: string;
   createdAt?: Date | null;
   updatedAt?: Date | null;
 }
