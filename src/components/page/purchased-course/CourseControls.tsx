@@ -27,7 +27,7 @@ const CourseControls = ({ courseData }: { courseData: ICourse }) => {
       </section>
       <div role="tablist" className="tabs tabs-bordered lg:tabs-lg mt-5">
         <DescriptionTab description={courseData.full_description} />
-        <ReviewTab />
+        <ReviewTab courseId={courseData._id ?? ""} />
       </div>
     </>
   );

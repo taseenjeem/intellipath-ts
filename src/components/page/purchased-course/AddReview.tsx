@@ -1,28 +1,56 @@
 "use client";
+import { addReview } from "@/database/server-actions";
+import { useAppSelector } from "@/redux/store";
 import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
+import { toast } from "react-toastify";
 
-const AddReview = () => {
+const AddReviewForm = ({ courseId }: { courseId: string }) => {
   const [ratingValue, setRatingValue] = useState<number>(0);
+  const [reviewText, setReviewText] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { _id } = useAppSelector((state) => state.userInfo);
 
   const handleRating = (rate: number) => {
     setRatingValue(rate);
   };
 
-  const addReview = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleReviewForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    if (ratingValue === 0) {
+      return toast.warn("Please select a rating");
+    } else if (reviewText === "") {
+      return toast.warn("Please add your valuable review");
+    }
+
+    const data = {
+      user: _id,
+      course: courseId,
+      content: reviewText,
+      rating: ratingValue,
+    };
+
+    const addReviewResult = await addReview(data);
+
+    if (addReviewResult) {
+      toast.success("Review added successfully!");
+      setRatingValue(0);
+      setReviewText("");
+      setIsSubmitting(false);
+    } else {
+      toast.error("Failed to add review. Please try again.");
+    }
   };
 
   return (
-    <div className="mt-10 space-y-4">
-      <h3 className="text-2xl text-primary font-semibold underline">
-        Add your review
-      </h3>
+    <div className="space-y-4">
       <div>
         <h3 className="label-text">Rate this course out of 5 stars:</h3>
         <Rating SVGstyle={{ display: "inline-block" }} onClick={handleRating} />
       </div>
-      <form onSubmit={addReview}>
+      <form onSubmit={handleReviewForm}>
         <div className="form-control">
           <label className="label" htmlFor="review">
             <span className="label-text">
@@ -33,14 +61,23 @@ const AddReview = () => {
             id="review"
             name="review"
             className="textarea textarea-bordered min-h-52"
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-5">
-          Add your review
-        </button>
+        {isSubmitting ? (
+          <button className="btn btn-primary mt-5">
+            <span className="loading loading-spinner"></span>
+            Loading
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-primary mt-5">
+            Add your review
+          </button>
+        )}
       </form>
     </div>
   );
 };
 
-export default AddReview;
+export default AddReviewForm;

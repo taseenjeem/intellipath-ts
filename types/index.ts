@@ -8,21 +8,10 @@ export interface ICategory {
   description: string;
 }
 
-export interface ICourses {
-  _id: string;
-  title: string;
-  slug: string;
-  thumbnail: string;
-  description: string;
-  instructor: string;
-  rating: number;
-  reviews: number;
-}
-
 export interface ITestimonial {
-  _id: string;
-  user: Types.ObjectId;
-  course: Types.ObjectId;
+  _id?: string;
+  user: IUserInfo | string;
+  course: ICourse | string;
   content: string;
   rating: number;
   createdAt?: Date | null;

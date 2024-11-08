@@ -6,12 +6,14 @@ import {
   ICredentialLoginFormData,
   IEnrollments,
   IPublishCourse,
+  ITestimonial,
 } from "@/types";
 import connectMongodb from "@/services/mongoose/connectMongodb";
 import User from "../db-models/userModel";
 import Courses from "../db-models/courseModel";
 import bcrypt from "bcryptjs";
 import Enrollments from "../db-models/enrollmentsModel";
+import Testimonials from "../db-models/testimonialModel";
 
 export const getCountries = async () => {
   return import("@/database/json/countries.json").then(
@@ -427,5 +429,22 @@ export const getAllEnrollmentsByInstructorId = async (id: string) => {
   } catch (error) {
     console.log("Error in getAllEnrollmentsByInstructorId:", error);
     throw new Error("Error while getting enrollments by instructor ID");
+  }
+};
+
+export const addReview = async (data: ITestimonial) => {
+  try {
+    await connectMongodb();
+    const review = await Testimonials.create(data);
+
+    if (review) {
+      await Courses.findByIdAndUpdate(data.course, {
+        $push: { testimonials: review._id },
+      });
+      return { message: "Review successfully added", review: review };
+    }
+  } catch (error) {
+    console.log("Error in addReview:", error);
+    throw new Error("An error occurred while adding the review.");
   }
 };
