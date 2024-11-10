@@ -52,13 +52,12 @@ const TestimonialSlide = ({
 }: {
   testimonials: ITestimonial[];
 }) => {
-  console.log("🚀 ~ testimonials:", testimonials);
   return (
     <>
       <div className="mt-10">
         <Slider {...settings}>
           {testimonials.map((review) => (
-            <div key={review._id}>
+            <div key={review._id} className="px-3">
               <blockquote className="card p-5 bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300">
                 <div className="flex items-center gap-4">
                   <div className="avatar">
