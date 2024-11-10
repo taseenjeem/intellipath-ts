@@ -1,4 +1,4 @@
-import { getCourseBySlug } from "@/database/server-actions";
+import { getCourseBySlug, getUserByEmail } from "@/database/server-actions";
 import { ICourse } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
@@ -8,11 +8,14 @@ import Link from "next/link";
 import { placeholderBase64 } from "@/utils/placeholderBase64";
 import CouponModal from "@/src/components/page/couese-details-page/CouponModal";
 import TestimonialSlide from "@/src/components/page/courses-page/TestimonialSlide";
+import { auth } from "@/auth";
 
 const CourseDetailsPage = async ({
   params,
 }: Readonly<{ params: { slug: string } }>) => {
   const course: ICourse = await getCourseBySlug(params.slug);
+  const userSession = await auth();
+  const { role } = await getUserByEmail(userSession?.user?.email ?? "");
 
   return (
     <>
@@ -84,12 +87,14 @@ const CourseDetailsPage = async ({
                   </div>
                 )}
               </div>
-              <Link
-                href={`/checkout/${course._id}`}
-                className="btn btn-primary"
-              >
-                Enroll Now
-              </Link>
+              {role === "learner" && (
+                <Link
+                  href={`/checkout/${course._id}`}
+                  className="btn btn-primary"
+                >
+                  Enroll Now
+                </Link>
+              )}
             </div>
           </div>
         </div>
