@@ -278,8 +278,17 @@ export const getCourseBySlug = async (slug: string) => {
   try {
     await connectMongodb();
     const course = await Courses.findOne({ slug })
-      .populate("instructor")
+      .populate({ path: "instructor", model: "users" })
+      .populate({
+        path: "testimonials",
+        model: "testimonials",
+        populate: [
+          { path: "user", model: "users" },
+          { path: "course", model: "courses" },
+        ],
+      })
       .lean();
+
     return JSON.parse(JSON.stringify(course));
   } catch (error) {
     console.log("Error in getCourseBySlug:", error);

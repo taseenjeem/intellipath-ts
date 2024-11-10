@@ -7,6 +7,7 @@ import "/styles/description.scss";
 import Link from "next/link";
 import { placeholderBase64 } from "@/utils/placeholderBase64";
 import CouponModal from "@/src/components/page/couese-details-page/CouponModal";
+import TestimonialSlide from "@/src/components/page/courses-page/TestimonialSlide";
 
 const CourseDetailsPage = async ({
   params,
@@ -120,6 +121,33 @@ const CourseDetailsPage = async ({
             className="description-container"
             dangerouslySetInnerHTML={{ __html: course.full_description }}
           />
+        </div>
+        <div className="mt-10">
+          <div className="md:flex md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <h2 className="lg:text-5xl text-3xl text-primary uppercase font-bold">
+                Voices of Success
+              </h2>
+
+              <p className="mt-6">
+                Hear from our vibrant community! Discover inspiring testimonials
+                and reviews from students and instructors who have experienced
+                the transformative power of IntelliPath. See how our courses
+                have made a real difference in their educational journeys and
+                career advancements.
+              </p>
+            </div>
+            <Link href="/shop" className="mt-6 md:mt-0 btn btn-primary ">
+              Join Our Community
+            </Link>
+          </div>
+          {course.testimonials && course.testimonials?.length > 0 ? (
+            <TestimonialSlide testimonials={course.testimonials ?? []} />
+          ) : (
+            <div className="border custom-border p-5 rounded-xl h-72 flex justify-center items-center mt-5">
+              <p>No reviews have been added yet!</p>
+            </div>
+          )}
         </div>
         <CouponModal coupons={course.coupons || []} />
       </section>
