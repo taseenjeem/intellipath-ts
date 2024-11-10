@@ -448,3 +448,37 @@ export const addReview = async (data: ITestimonial) => {
     throw new Error("An error occurred while adding the review.");
   }
 };
+
+export const getAllReviews = async () => {
+  try {
+    await connectMongodb();
+    const testimonials = await Testimonials.find({})
+      .populate({ path: "user", model: "users" })
+      .populate({ path: "course", model: "courses" });
+
+    return JSON.parse(JSON.stringify(testimonials));
+  } catch (error) {
+    console.log("Error in getAllTestimonials:", error);
+    throw new Error("Error while getting all testimonials");
+  }
+};
+
+export const getReviewByUsername = async (username: string) => {
+  try {
+    await connectMongodb();
+    const allReviews = await Testimonials.find({})
+      .populate({ path: "user", model: "users" })
+      .populate({ path: "course", model: "courses" });
+
+    const userReview = allReviews.find(
+      (review) =>
+        review.user &&
+        typeof review.user === "object" &&
+        review.user.username === username
+    );
+    return JSON.parse(JSON.stringify(userReview));
+  } catch (error) {
+    console.log("Error in getReviewByUsername:", error);
+    throw new Error("Error while getting testimonial by username");
+  }
+};

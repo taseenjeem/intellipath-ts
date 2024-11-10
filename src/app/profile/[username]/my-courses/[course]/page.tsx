@@ -13,7 +13,7 @@ const PurchasedCourse = async ({
         username={params.username}
         course={course?.title ?? "Failed to load course name"}
       />
-      <CourseControls courseData={course} />
+      <CourseControls courseData={course} username={params.username} />
     </>
   );
 };

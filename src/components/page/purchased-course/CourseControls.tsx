@@ -6,7 +6,13 @@ import ReviewTab from "./ReviewTab";
 import VideoPlayer from "./VideoPlayer";
 import { useState } from "react";
 
-const CourseControls = ({ courseData }: { courseData: ICourse }) => {
+const CourseControls = ({
+  courseData,
+  username,
+}: {
+  courseData: ICourse;
+  username: string;
+}) => {
   const [selectedLessonUrl, setSelectedLessonUrl] = useState<string>(
     courseData.lessons[0]?.url
   );
@@ -27,7 +33,7 @@ const CourseControls = ({ courseData }: { courseData: ICourse }) => {
       </section>
       <div role="tablist" className="tabs tabs-bordered lg:tabs-lg mt-5">
         <DescriptionTab description={courseData.full_description} />
-        <ReviewTab courseId={courseData._id ?? ""} />
+        <ReviewTab courseId={courseData._id ?? ""} username={username} />
       </div>
     </>
   );
