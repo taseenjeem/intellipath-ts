@@ -1,8 +1,8 @@
 "use client";
-import { addReview } from "@/database/server-actions";
+import { addReview, editReview } from "@/database/server-actions";
 import { useAppSelector } from "@/redux/store";
 import { ITestimonial } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 
@@ -10,15 +10,26 @@ const AddReviewForm = ({
   courseId,
   setReview,
   review,
+  editMode = false,
+  setReviewEditMode,
 }: {
   courseId: string;
-  review?: ITestimonial | null;
   setReview: React.Dispatch<React.SetStateAction<ITestimonial | null>>;
+  review?: ITestimonial | null;
+  editMode?: boolean;
+  setReviewEditMode?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [ratingValue, setRatingValue] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { _id } = useAppSelector((state) => state.userInfo);
+
+  useEffect(() => {
+    if (editMode && review) {
+      setRatingValue(review.rating);
+      setReviewText(review.content);
+    }
+  }, [editMode, review]);
 
   const handleRating = (rate: number) => {
     setRatingValue(rate);
@@ -29,9 +40,13 @@ const AddReviewForm = ({
     setIsSubmitting(true);
 
     if (ratingValue === 0) {
-      return toast.warn("Please select a rating");
+      toast.warn("Please select a rating");
+      setIsSubmitting(false);
+      return;
     } else if (reviewText === "") {
-      return toast.warn("Please add your valuable review");
+      toast.warn("Please add your valuable review");
+      setIsSubmitting(false);
+      return;
     }
 
     const data = {
@@ -41,30 +56,53 @@ const AddReviewForm = ({
       rating: ratingValue,
     };
 
-    const addReviewResult = await addReview(data);
-
-    if (addReviewResult) {
-      toast.success("Review added successfully!");
-      setRatingValue(0);
-      setReviewText("");
+    try {
+      if (editMode && review?._id) {
+        const editReviewResult = await editReview(review._id, data);
+        if (editReviewResult) {
+          toast.success("Review updated successfully!");
+          setReview(editReviewResult.review);
+        } else {
+          throw new Error("Failed to update review");
+        }
+      } else {
+        const addReviewResult = await addReview(data);
+        if (addReviewResult) {
+          toast.success("Review added successfully!");
+          setReview(addReviewResult.review);
+        } else {
+          throw new Error("Failed to add review");
+        }
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setReview(addReviewResult.review);
-    } else {
-      toast.error("Failed to add review. Please try again.");
+      if (setReviewEditMode) setReviewEditMode(false);
     }
   };
 
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="label-text">Rate this course out of 5 stars:</h3>
-        <Rating SVGstyle={{ display: "inline-block" }} onClick={handleRating} />
+        <h3 className="label-text">
+          {editMode
+            ? "Update your review:"
+            : "Rate this course out of 5 stars:"}
+        </h3>
+        <Rating
+          SVGstyle={{ display: "inline-block" }}
+          onClick={handleRating}
+          initialValue={ratingValue}
+        />
       </div>
       <form onSubmit={handleReviewForm}>
         <div className="form-control">
           <label className="label" htmlFor="review">
             <span className="label-text">
-              Tell us about your experience and improvements
+              {editMode
+                ? "Update your experience and improvements"
+                : "Tell us about your experience and improvements"}
             </span>
           </label>
           <textarea
@@ -75,16 +113,30 @@ const AddReviewForm = ({
             onChange={(e) => setReviewText(e.target.value)}
           />
         </div>
-        {isSubmitting ? (
-          <button className="btn btn-primary mt-5">
-            <span className="loading loading-spinner"></span>
-            Loading
+        <div className="flex gap-4 mt-5">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <span className="loading loading-spinner"></span>
+            ) : editMode ? (
+              "Update Review"
+            ) : (
+              "Add Review"
+            )}
           </button>
-        ) : (
-          <button type="submit" className="btn btn-primary mt-5">
-            Add your review
-          </button>
-        )}
+          {editMode && setReviewEditMode && (
+            <button
+              type="button"
+              onClick={() => setReviewEditMode(false)}
+              className="btn btn-secondary"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

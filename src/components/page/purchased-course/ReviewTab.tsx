@@ -19,6 +19,7 @@ interface IReviewTabProps {
 const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
   const [review, setReview] = useState<ITestimonial | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [reviewEditMode, setReviewEditMode] = useState<boolean>(false);
   const { firstName, lastName } = useAppSelector((state) => state.userInfo);
 
   useEffect(() => {
@@ -40,6 +41,10 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
     getUserReview();
   }, [username]);
 
+  const handleEditReview = () => {
+    setReviewEditMode(!reviewEditMode);
+  };
+
   return (
     <>
       <input
@@ -54,63 +59,67 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
           <LoadingScreen />
         ) : (
           <>
-            {review && (
-              <>
-                <blockquote className="card p-5 bg-base-300">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="avatar">
-                        <div className="ring-primary ring-offset-base-100 rounded-full ring ring-offset-2">
-                          <Image
-                            alt="Profile Picture"
-                            src={
-                              typeof review.user !== "string" &&
-                              review.user.profileImageUrl
-                                ? review.user.profileImageUrl
-                                : userPlaceholder
-                            }
-                            width={48}
-                            height={48}
-                            className="size-14 rounded-full object-cover"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="font-semibold text-lg">
-                          {typeof review.user !== "string"
-                            ? `${review.user.firstName} ${review.user.lastName}`
-                            : `${firstName} ${lastName}`}
-                        </p>
-                        <span className="flex items-center text-sm gap-2 text-accent">
-                          {review.rating}
-                          <FaStar />
-                        </span>
+            {review && !reviewEditMode && (
+              <blockquote className="card p-5 bg-base-300">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="avatar">
+                      <div className="ring-primary ring-offset-base-100 rounded-full ring ring-offset-2">
+                        <Image
+                          alt="Profile Picture"
+                          src={
+                            typeof review.user !== "string" &&
+                            review.user.profileImageUrl
+                              ? review.user.profileImageUrl
+                              : userPlaceholder
+                          }
+                          width={48}
+                          height={48}
+                          className="size-14 rounded-full object-cover"
+                        />
                       </div>
                     </div>
-                    <span className="md:space-x-2 space-x-0 space-y-2 md:space-y-0 flex flex-col md:flex-row">
-                      <DeleteModal
-                        reviewId={review._id ?? ""}
-                        courseId={courseId}
-                        setReview={setReview}
-                      />
-                      <button className="btn btn-primary btn-xs md:btn-sm">
-                        <MdEdit /> Edit
-                      </button>
-                    </span>
-                  </div>
 
-                  <p className="mt-4 italic text-xs md:text-base">
-                    &quot; {review.content} &quot;
-                  </p>
-                </blockquote>
-              </>
+                    <div>
+                      <p className="font-semibold text-lg">
+                        {typeof review.user !== "string"
+                          ? `${review.user.firstName} ${review.user.lastName}`
+                          : `${firstName} ${lastName}`}
+                      </p>
+                      <span className="flex items-center text-sm gap-2 text-accent">
+                        {review.rating}
+                        <FaStar />
+                      </span>
+                    </div>
+                  </div>
+                  <span className="md:space-x-2 space-x-0 space-y-2 md:space-y-0 flex flex-col md:flex-row">
+                    <DeleteModal
+                      reviewId={review._id ?? ""}
+                      courseId={courseId}
+                      setReview={setReview}
+                    />
+                    <button
+                      onClick={handleEditReview}
+                      className="btn btn-primary btn-xs md:btn-sm"
+                    >
+                      <MdEdit /> Edit
+                    </button>
+                  </span>
+                </div>
+
+                <p className="mt-4 italic text-xs md:text-base">
+                  &quot; {review.content} &quot;
+                </p>
+              </blockquote>
             )}
-            {!review && (
+
+            {(!review || reviewEditMode) && (
               <AddReviewForm
                 courseId={courseId}
                 setReview={setReview}
                 review={review}
+                editMode={reviewEditMode}
+                setReviewEditMode={setReviewEditMode}
               />
             )}
           </>

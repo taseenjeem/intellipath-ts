@@ -505,3 +505,17 @@ export const deleteReview = async (reviewId: string, courseId: string) => {
     throw new Error("An error occurred while deleting the review.");
   }
 };
+
+export const editReview = async (
+  reviewId: string,
+  updatedData: ITestimonial
+) => {
+  try {
+    await connectMongodb();
+    const result = await Testimonials.findByIdAndUpdate(reviewId, updatedData);
+    return { message: "Review successfully updated", review: result };
+  } catch (error) {
+    console.log("Error in editReview:", error);
+    throw new Error("An error occurred while editing the review.");
+  }
+};
