@@ -42,6 +42,17 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
   }
 };
 
+export const getAllUsers = async () => {
+  try {
+    await connectMongodb();
+    const users = await User.find().lean();
+    return JSON.parse(JSON.stringify(users));
+  } catch (error) {
+    console.log("Error fetching all users:", error);
+    throw new Error("Error fetching all users");
+  }
+};
+
 export const getUserByEmail = async (email: string) => {
   try {
     await connectMongodb();

@@ -2,8 +2,23 @@ import CourseCard from "@/src/components/global/ui/CourseCard";
 import { ICourse, IEnrollments, IUserInfo } from "@/types";
 import illustrator from "/public/assets/images/search.png";
 import Image from "next/image";
-import { getUserByUsername } from "@/database/server-actions";
+import { getAllUsers, getUserByUsername } from "@/database/server-actions";
 import Link from "next/link";
+
+export const generateStaticParams = async () => {
+  const allUsers: IUserInfo[] = await getAllUsers();
+  return allUsers.map((user: IUserInfo) => ({ username: user.username }));
+};
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { username: string };
+}) => {
+  return {
+    title: `${params.username} - My Courses | Intellipath`,
+  };
+};
 
 const MyCoursesPage = async ({
   params,
