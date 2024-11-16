@@ -450,7 +450,10 @@ export const addReview = async (data: ITestimonial) => {
       await Courses.findByIdAndUpdate(data.course, {
         $push: { testimonials: review._id },
       });
-      return { message: "Review successfully added", review: review };
+      return {
+        message: "Review successfully added",
+        review: JSON.parse(JSON.stringify(review)),
+      };
     }
   } catch (error) {
     console.log("Error in addReview:", error);
@@ -518,7 +521,10 @@ export const editReview = async (
     if (!result) {
       throw new Error("Review not found.");
     }
-    return { message: "Review successfully updated", review: result };
+    return {
+      message: "Review successfully updated",
+      review: JSON.parse(JSON.stringify(result)),
+    };
   } catch (error) {
     console.log("Error in editReview:", error);
     throw new Error("An error occurred while editing the review.");
