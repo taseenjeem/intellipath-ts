@@ -19,6 +19,22 @@ const CourseCard = ({
   username,
   href,
 }: CourseCardProps) => {
+  const averageRating = (): number => {
+    if (
+      !courseDetails?.testimonials ||
+      courseDetails.testimonials.length === 0
+    ) {
+      return 0;
+    }
+
+    const totalRating = courseDetails.testimonials.reduce(
+      (sum, testimonial) => sum + (testimonial.rating || 0),
+      0
+    );
+
+    return totalRating / courseDetails.testimonials.length;
+  };
+
   return (
     <div className="card size-full card-compact bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300 group">
       <figure className="w-full max-h-[202px] overflow-hidden">
@@ -53,7 +69,7 @@ const CourseCard = ({
             </span>{" "}
             <span className="flex items-center gap-[2px]">
               <span className="cursor-pointer" title="Average ratings">
-                5
+                {averageRating()}
               </span>
               <FaStar />
             </span>

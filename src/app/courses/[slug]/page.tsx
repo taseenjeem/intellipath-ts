@@ -17,6 +17,19 @@ const CourseDetailsPage = async ({
   const userSession = await auth();
   const { role } = await getUserByEmail(userSession?.user?.email ?? "");
 
+  const averageRating = (): number => {
+    if (!course?.testimonials || course.testimonials.length === 0) {
+      return 0;
+    }
+
+    const totalRating = course.testimonials.reduce(
+      (sum, testimonial) => sum + (testimonial.rating || 0),
+      0
+    );
+
+    return totalRating / course.testimonials.length;
+  };
+
   return (
     <>
       <section className="container">
@@ -60,6 +73,9 @@ const CourseDetailsPage = async ({
               <h3>
                 <strong>Total Enrollments: </strong>
                 {course.enrollments ? course.enrollments.length : 0}
+              </h3>
+              <h3>
+                <strong>Ratings: {averageRating()}</strong>
               </h3>
               <h3>
                 <strong>Course Updated On: </strong>

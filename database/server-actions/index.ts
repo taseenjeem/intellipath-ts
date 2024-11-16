@@ -312,7 +312,17 @@ export const getCourseById = async (courseID: string) => {
 export const getAllCourses = async () => {
   try {
     await connectMongodb();
-    const courses = await Courses.find({}).populate("instructor").lean();
+    const courses = await Courses.find({})
+      .populate({ path: "instructor", model: "users" })
+      .populate({
+        path: "testimonials",
+        model: "testimonials",
+        populate: [
+          { path: "user", model: "users" },
+          { path: "course", model: "courses" },
+        ],
+      })
+      .lean();
     return JSON.parse(JSON.stringify(courses));
   } catch (error) {
     console.log("Error in getAllCourses:", error);
