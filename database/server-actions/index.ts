@@ -491,3 +491,17 @@ export const getReviewByUsername = async (username: string) => {
     throw new Error("Error while getting testimonial by username");
   }
 };
+
+export const deleteReview = async (reviewId: string, courseId: string) => {
+  try {
+    await connectMongodb();
+    await Testimonials.findByIdAndDelete(reviewId);
+    await Courses.findByIdAndUpdate(courseId, {
+      $pull: { testimonials: reviewId },
+    });
+    return { message: "Review successfully deleted" };
+  } catch (error) {
+    console.log("Error in deleteReview:", error);
+    throw new Error("An error occurred while deleting the review.");
+  }
+};

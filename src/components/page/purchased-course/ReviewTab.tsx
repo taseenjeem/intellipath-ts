@@ -7,6 +7,8 @@ import Image from "next/image";
 import userPlaceholder from "/public/assets/images/profile-placeholder.jpg";
 import { FaStar } from "react-icons/fa6";
 import LoadingScreen from "../../global/Loadings/LoadingScreen";
+import { MdDelete, MdEdit } from "react-icons/md";
+import DeleteModal from "./DeleteModal";
 
 interface IReviewTabProps {
   courseId: string;
@@ -55,36 +57,48 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
                 <h3 className="mb-5 font-semibold">
                   Thank you for your response
                 </h3>
-                <blockquote className="card p-5 bg-base-300 hover:shadow-xl border border-base-300 hover:border-primary duration-300">
-                  <div className="flex items-center gap-4">
-                    <div className="avatar">
-                      <div className="ring-primary ring-offset-base-100 rounded-full ring ring-offset-2">
-                        <Image
-                          alt="Profile Picture"
-                          src={
-                            typeof review.user !== "string" &&
-                            review.user.profileImageUrl
-                              ? review.user.profileImageUrl
-                              : userPlaceholder
-                          }
-                          width={48}
-                          height={48}
-                          className="size-14 rounded-full object-cover"
-                        />
+                <blockquote className="card p-5 bg-base-300">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="avatar">
+                        <div className="ring-primary ring-offset-base-100 rounded-full ring ring-offset-2">
+                          <Image
+                            alt="Profile Picture"
+                            src={
+                              typeof review.user !== "string" &&
+                              review.user.profileImageUrl
+                                ? review.user.profileImageUrl
+                                : userPlaceholder
+                            }
+                            width={48}
+                            height={48}
+                            className="size-14 rounded-full object-cover"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="font-semibold text-lg">
+                          {typeof review.user !== "string"
+                            ? `${review.user.firstName} ${review.user.lastName}`
+                            : "Unknown User"}
+                        </p>
+                        <span className="flex items-center text-sm gap-2 text-accent">
+                          {review.rating}
+                          <FaStar />
+                        </span>
                       </div>
                     </div>
-
-                    <div>
-                      <p className="font-semibold text-lg">
-                        {typeof review.user !== "string"
-                          ? `${review.user.firstName} ${review.user.lastName}`
-                          : "Unknown User"}
-                      </p>
-                      <span className="flex items-center text-sm gap-2 text-accent">
-                        {review.rating}
-                        <FaStar />
-                      </span>
-                    </div>
+                    <span className="md:space-x-2 space-x-0 space-y-2 md:space-y-0 flex flex-col md:flex-row">
+                      <DeleteModal
+                        reviewId={review._id ?? ""}
+                        courseId={courseId}
+                        setReview={setReview}
+                      />
+                      <button className="btn btn-primary btn-xs md:btn-sm">
+                        <MdEdit /> Edit
+                      </button>
+                    </span>
                   </div>
 
                   <p className="mt-4 italic text-xs md:text-base">
