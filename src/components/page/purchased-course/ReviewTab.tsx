@@ -7,8 +7,9 @@ import Image from "next/image";
 import userPlaceholder from "/public/assets/images/profile-placeholder.jpg";
 import { FaStar } from "react-icons/fa6";
 import LoadingScreen from "../../global/Loadings/LoadingScreen";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 import DeleteModal from "./DeleteModal";
+import { useAppSelector } from "@/redux/store";
 
 interface IReviewTabProps {
   courseId: string;
@@ -18,6 +19,7 @@ interface IReviewTabProps {
 const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
   const [review, setReview] = useState<ITestimonial | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { firstName, lastName } = useAppSelector((state) => state.userInfo);
 
   useEffect(() => {
     const getUserReview = async () => {
@@ -54,9 +56,6 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
           <>
             {review && (
               <>
-                <h3 className="mb-5 font-semibold">
-                  Thank you for your response
-                </h3>
                 <blockquote className="card p-5 bg-base-300">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -81,7 +80,7 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
                         <p className="font-semibold text-lg">
                           {typeof review.user !== "string"
                             ? `${review.user.firstName} ${review.user.lastName}`
-                            : "Unknown User"}
+                            : `${firstName} ${lastName}`}
                         </p>
                         <span className="flex items-center text-sm gap-2 text-accent">
                           {review.rating}
@@ -108,7 +107,11 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
               </>
             )}
             {!review && (
-              <AddReviewForm courseId={courseId} setReview={setReview} />
+              <AddReviewForm
+                courseId={courseId}
+                setReview={setReview}
+                review={review}
+              />
             )}
           </>
         )}

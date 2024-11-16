@@ -9,8 +9,10 @@ import { toast } from "react-toastify";
 const AddReviewForm = ({
   courseId,
   setReview,
+  review,
 }: {
   courseId: string;
+  review?: ITestimonial | null;
   setReview: React.Dispatch<React.SetStateAction<ITestimonial | null>>;
 }) => {
   const [ratingValue, setRatingValue] = useState<number>(0);

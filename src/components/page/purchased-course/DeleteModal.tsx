@@ -1,6 +1,7 @@
 "use client";
 import { deleteReview } from "@/database/server-actions";
 import { ITestimonial } from "@/types";
+import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
@@ -11,6 +12,8 @@ interface IDeleteModalProps {
 }
 
 const DeleteModal = ({ reviewId, courseId, setReview }: IDeleteModalProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const openModal = () => {
     const filterModal = document.getElementById(
       "delete_review_modal"
@@ -33,6 +36,7 @@ const DeleteModal = ({ reviewId, courseId, setReview }: IDeleteModalProps) => {
 
   const handleDelete = async () => {
     try {
+      setIsLoading(true);
       const result = await deleteReview(reviewId, courseId);
 
       if (result) {
@@ -45,6 +49,8 @@ const DeleteModal = ({ reviewId, courseId, setReview }: IDeleteModalProps) => {
     } catch (error) {
       console.error("Error deleting review:", error);
       toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,9 +75,16 @@ const DeleteModal = ({ reviewId, courseId, setReview }: IDeleteModalProps) => {
             <button onClick={closeModal} className="btn btn-primary">
               Cancel
             </button>
-            <button onClick={handleDelete} className="btn btn-error">
-              Delete
-            </button>
+            {isLoading ? (
+              <button className="btn">
+                <span className="loading loading-spinner"></span>
+                Deleting...
+              </button>
+            ) : (
+              <button onClick={handleDelete} className="btn btn-error">
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </dialog>
