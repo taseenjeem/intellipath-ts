@@ -107,7 +107,9 @@ const ReviewTab = ({ courseId, username }: IReviewTabProps) => {
                 </blockquote>
               </>
             )}
-            {!review && <AddReviewForm courseId={courseId} />}
+            {!review && (
+              <AddReviewForm courseId={courseId} setReview={setReview} />
+            )}
           </>
         )}
       </div>

@@ -1,11 +1,18 @@
 "use client";
 import { addReview } from "@/database/server-actions";
 import { useAppSelector } from "@/redux/store";
+import { ITestimonial } from "@/types";
 import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import { toast } from "react-toastify";
 
-const AddReviewForm = ({ courseId }: { courseId: string }) => {
+const AddReviewForm = ({
+  courseId,
+  setReview,
+}: {
+  courseId: string;
+  setReview: React.Dispatch<React.SetStateAction<ITestimonial | null>>;
+}) => {
   const [ratingValue, setRatingValue] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,6 +46,7 @@ const AddReviewForm = ({ courseId }: { courseId: string }) => {
       setRatingValue(0);
       setReviewText("");
       setIsSubmitting(false);
+      setReview(addReviewResult.review);
     } else {
       toast.error("Failed to add review. Please try again.");
     }
