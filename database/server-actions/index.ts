@@ -512,7 +512,12 @@ export const editReview = async (
 ) => {
   try {
     await connectMongodb();
-    const result = await Testimonials.findByIdAndUpdate(reviewId, updatedData);
+    const result = await Testimonials.findByIdAndUpdate(reviewId, updatedData, {
+      new: true,
+    });
+    if (!result) {
+      throw new Error("Review not found.");
+    }
     return { message: "Review successfully updated", review: result };
   } catch (error) {
     console.log("Error in editReview:", error);
