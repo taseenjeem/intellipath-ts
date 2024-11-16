@@ -62,8 +62,8 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
             <button tabIndex={0} className="avatar">
               <div className="ring-primary ring-offset-base-100 size-8 rounded-full ring ring-offset-2">
                 <Image
-                  width={32}
-                  height={32}
+                  width={100}
+                  height={100}
                   src={
                     authData?.profileImageUrl
                       ? authData.profileImageUrl
