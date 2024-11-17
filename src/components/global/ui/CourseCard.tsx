@@ -79,7 +79,7 @@ const CourseCard = ({
         <div className="card-actions w-full md:mt-5 mt-2">
           {instructorMode ? (
             <Link
-              href={`/profile/${username}/my-courses/edit-course/${courseDetails.slug}`}
+              href={href}
               className="btn btn-sm md:btn-md btn-primary w-full"
             >
               Edit Course Details
