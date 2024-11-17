@@ -36,6 +36,18 @@ const CheckOutPage = async ({ params }: { params: { id: string } }) => {
     }
   }
 
+  if (authInfo?.user?.email) {
+    const user: IUserInfo = await getUserByEmail(authInfo.user?.email);
+    if (user.role === "learner" && user.enrolledCourses) {
+      const isSameCourse = user.enrolledCourses.find(
+        (course) => course.purchased_course._id === params.id
+      );
+      if (isSameCourse) {
+        redirect(`/checkout/course-already-purchased`);
+      }
+    }
+  }
+
   return (
     <>
       <section className="container mt-5 md:mt-10 min-h-screen">

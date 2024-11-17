@@ -56,7 +56,21 @@ export const getAllUsers = async () => {
 export const getUserByEmail = async (email: string) => {
   try {
     await connectMongodb();
-    const user = await User.findOne({ email }).populate("courses").lean();
+    const user = await User.findOne({ email })
+      .populate({
+        path: "enrolledCourses",
+        model: "enrollments",
+        populate: [
+          { path: "purchased_by", model: "users" },
+          { path: "purchased_course", model: "courses" },
+        ],
+      })
+      .populate({
+        path: "courses",
+        model: "courses",
+        populate: [{ path: "instructor", model: "users" }],
+      })
+      .lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.log("Error finding user by email:", error);
