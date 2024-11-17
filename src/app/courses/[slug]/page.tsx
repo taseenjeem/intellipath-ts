@@ -1,4 +1,8 @@
-import { getCourseBySlug, getUserByEmail } from "@/database/server-actions";
+import {
+  getAllCourses,
+  getCourseBySlug,
+  getUserByEmail,
+} from "@/database/server-actions";
 import { ICourse } from "@/types";
 import { formatDate } from "@/utils/dateFormatter";
 import { convertMinutesToHoursAndMinutes } from "@/utils/minFormatter";
@@ -9,6 +13,21 @@ import { placeholderBase64 } from "@/utils/placeholderBase64";
 import CouponModal from "@/src/components/page/couese-details-page/CouponModal";
 import TestimonialSlide from "@/src/components/page/courses-page/TestimonialSlide";
 import { auth } from "@/auth";
+
+export const generateStaticParams = async () => {
+  const allCourses: ICourse[] = await getAllCourses();
+  return allCourses.map((item: ICourse) => ({ slug: item.slug }));
+};
+
+export const generateMetadata = async ({
+  params,
+}: Readonly<{ params: { slug: string } }>) => {
+  const course: ICourse = await getCourseBySlug(params.slug);
+
+  return {
+    title: `${course.title} | Intellipath`,
+  };
+};
 
 const CourseDetailsPage = async ({
   params,
