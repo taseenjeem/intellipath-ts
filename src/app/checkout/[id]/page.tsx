@@ -1,9 +1,41 @@
-import { getCourseById } from "@/database/server-actions";
+import { auth } from "@/auth";
+import {
+  getAllCourses,
+  getCourseById,
+  getUserByEmail,
+} from "@/database/server-actions";
 import ProductDescription from "@/src/components/page/checkout-page/ProductDescription";
-import { ICourse } from "@/types";
+import { ICourse, IUserInfo } from "@/types";
+import { redirect } from "next/navigation";
+
+export const generateStaticParams = async () => {
+  const allCourses = await getAllCourses();
+  return allCourses.map((course: ICourse) => ({ id: course._id }));
+};
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
+  const course: ICourse = await getCourseById(params.id);
+
+  return {
+    title: `Checkout - ${course.title}`,
+  };
+};
 
 const CheckOutPage = async ({ params }: { params: { id: string } }) => {
   const course: ICourse = await getCourseById(params.id);
+  const authInfo = await auth();
+
+  if (authInfo?.user?.email) {
+    const user: IUserInfo = await getUserByEmail(authInfo.user?.email);
+    if (user.role === "instructor") {
+      redirect("/");
+    }
+  }
+
   return (
     <>
       <section className="container mt-5 md:mt-10 min-h-screen">
