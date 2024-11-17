@@ -4,7 +4,15 @@ import { ICourse } from "@/types";
 import { getAllCourses } from "@/database/server-actions";
 
 const TopCourses = async () => {
-  const topCourses = await getAllCourses();
+  const allCourses: ICourse[] = await getAllCourses();
+
+  const sortedCourses = allCourses
+    .filter(
+      (course) =>
+        Array.isArray(course.enrollments) && course.enrollments.length > 0
+    )
+    .sort((a, b) => (b.enrollments?.length || 0) - (a.enrollments?.length || 0))
+    .slice(0, 8);
 
   return (
     <section className="container min-h-screen w-full mt-7 md:mt-28">
@@ -28,7 +36,7 @@ const TopCourses = async () => {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 w-full mt-5 md:mt-10">
-        {topCourses.map((item: ICourse) => (
+        {sortedCourses.map((item: ICourse) => (
           <CourseCard
             key={item._id}
             courseDetails={item}
