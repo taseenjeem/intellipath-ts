@@ -74,6 +74,7 @@ const MyCoursesPage = async ({
                 key={item._id}
                 href={`/profile/${params.username}/my-courses/${item.purchased_course.slug}`}
                 courseDetails={item.purchased_course}
+                purchased
               />
             ))}
           </div>
