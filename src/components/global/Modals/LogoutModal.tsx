@@ -19,11 +19,15 @@ const LogoutModal = () => {
   };
 
   const logout = async () => {
-    dispatch(resetUserInfo());
-    await signOut();
-    closeModal();
-    toast.success("Logged out successfully!");
-    router.push("/");
+    try {
+      await signOut({ redirect: false });
+      dispatch(resetUserInfo());
+      toast.success("Logged out successfully!");
+      closeModal();
+      router.push("/");
+    } catch (error) {
+      toast.error("An error occurred during logout.");
+    }
   };
 
   return (
