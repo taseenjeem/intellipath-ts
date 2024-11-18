@@ -49,22 +49,16 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
                   <ActiveLink href={`/courses`}>Courses</ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink href={`#`}>Pricing</ActiveLink>
-                </li>
-                <li>
-                  <ActiveLink href={`/contact-us`}>Blogs</ActiveLink>
-                </li>
-                <li>
-                  <ActiveLink href={`#`}>Documentation</ActiveLink>
-                </li>
-                <li>
-                  <ActiveLink href={`#`}>Contact Us</ActiveLink>
+                  <ActiveLink href={`/blogs`}>Blogs</ActiveLink>
                 </li>
                 <li>
                   <ActiveLink href={`#`}>Support Section</ActiveLink>
                 </li>
                 <li>
                   <ActiveLink href={`#`}>Our Community</ActiveLink>
+                </li>
+                <li>
+                  <ActiveLink href={`#`}>Contact Us</ActiveLink>
                 </li>
                 <li>
                   <UserActionBtns />
@@ -93,23 +87,8 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink isSmallDevice={true} href={`#`}>
-              Pricing
-            </ActiveLink>
-          </li>
-          <li>
             <ActiveLink isSmallDevice={true} href={`/contact-us`}>
               Blogs
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink isSmallDevice={true} href={`#`}>
-              Documentation
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink isSmallDevice={true} href={`#`}>
-              Contact Us
             </ActiveLink>
           </li>
           <li>
@@ -120,6 +99,11 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           <li>
             <ActiveLink isSmallDevice={true} href={`#`}>
               Our Community
+            </ActiveLink>
+          </li>
+          <li>
+            <ActiveLink isSmallDevice={true} href={`#`}>
+              Contact Us
             </ActiveLink>
           </li>
           <li>
