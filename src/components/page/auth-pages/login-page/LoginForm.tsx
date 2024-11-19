@@ -75,15 +75,6 @@ const LoginForm = () => {
               Login
             </button>
           )}
-
-          <label className="label flex justify-start mt-3">
-            <Link
-              href="/reset-password"
-              className="label-text-alt link link-hover"
-            >
-              Forgot password?
-            </Link>
-          </label>
         </div>
       </form>
     </FormProvider>
