@@ -30,11 +30,15 @@ const Cta = () => {
             <div className="space-y-3">
               <h3 className="text-2xl font-semibold">Become an instructor</h3>
               <p className="text-sm md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam cupiditate voluptatibus dolor, reiciendis eos
-                repudiandae perspiciatis nisi quia odio!
+                To become an instructor, you need to register as one through our
+                dedicated registration page. This step ensures your profile is
+                tailored for teaching, allowing you to share your expertise,
+                create courses, and inspire learners worldwide.
               </p>
-              <Link href={`#`} className="btn btn-primary btn-outline">
+              <Link
+                href={`/auth/register`}
+                className="btn btn-primary btn-outline"
+              >
                 Become an Instructor
               </Link>
             </div>
@@ -50,11 +54,15 @@ const Cta = () => {
             <div className="space-y-3">
               <h3 className="text-2xl font-semibold">Become an learner</h3>
               <p className="text-sm md:text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam cupiditate voluptatibus dolor, reiciendis eos
-                repudiandae perspiciatis nisi quia odio!
+                To embark on your learning journey, you must register as a
+                learner on our dedicated registration page. This step unlocks
+                access to a world of knowledge, personalized courses, and tools
+                designed to help you achieve your goals and grow.
               </p>
-              <Link href={`#`} className="btn btn-primary btn-outline">
+              <Link
+                href={`/auth/register`}
+                className="btn btn-primary btn-outline"
+              >
                 Become a Learner
               </Link>
             </div>
