@@ -20,8 +20,8 @@ const Cta = () => {
             Join our community and start shaping your future today!
           </p>
         </div>
-        <Link href="/shop" className="mt-6 md:mt-0 btn btn-primary ">
-          Read Documentation
+        <Link href="/auth/register" className="mt-6 md:mt-0 btn btn-primary ">
+          Let&apos;s Start
         </Link>
       </div>
       <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 mt-5 md:mt-10">
