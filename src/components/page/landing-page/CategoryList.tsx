@@ -24,7 +24,7 @@ const CategoryList = async () => {
               journey with IntelliPath.
             </p>
           </div>
-          <Link href="/shop" className="mt-6 md:mt-0 btn btn-primary ">
+          <Link href="/courses" className="mt-6 md:mt-0 btn btn-primary ">
             See All Categories
           </Link>
         </div>
