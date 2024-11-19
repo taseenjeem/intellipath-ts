@@ -39,11 +39,8 @@ const Hero = () => {
           resources and support you need to succeed.
         </h2>
         <div className="sm:mt-10 mt-8 flex gap-3">
-          <Link href="#" className="btn btn-primary">
+          <Link href="/courses" className="btn btn-primary">
             Start Learning
-          </Link>
-          <Link href="#" className="btn btn-accent btn-outline">
-            Become an instructor
           </Link>
         </div>
       </div>
