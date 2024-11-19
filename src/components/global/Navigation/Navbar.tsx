@@ -43,22 +43,13 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
               </label>
             </div>
             <div className="flex-none hidden items-center lg:block">
-              <ul className="flex items-center justify-center text-primary">
+              <ul className="flex items-center gap-4 justify-center text-primary">
                 {/* Navbar menu content here */}
                 <li>
-                  <ActiveLink href={`/courses`}>Courses</ActiveLink>
+                  <ActiveLink href={`/courses`}>Our Courses</ActiveLink>
                 </li>
                 <li>
                   <ActiveLink href={`/blogs`}>Blogs</ActiveLink>
-                </li>
-                <li>
-                  <ActiveLink href={`#`}>Support Section</ActiveLink>
-                </li>
-                <li>
-                  <ActiveLink href={`#`}>Our Community</ActiveLink>
-                </li>
-                <li>
-                  <ActiveLink href={`#`}>Contact Us</ActiveLink>
                 </li>
                 <li>
                   <UserActionBtns />
@@ -83,27 +74,12 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           {/* Sidebar content here */}
           <li>
             <ActiveLink isSmallDevice={true} href={`/courses`}>
-              Courses
+              Our Courses
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink isSmallDevice={true} href={`/contact-us`}>
+            <ActiveLink isSmallDevice={true} href={`/blogs`}>
               Blogs
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink isSmallDevice={true} href={`#`}>
-              Support Section
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink isSmallDevice={true} href={`#`}>
-              Our Community
-            </ActiveLink>
-          </li>
-          <li>
-            <ActiveLink isSmallDevice={true} href={`#`}>
-              Contact Us
             </ActiveLink>
           </li>
           <li>
