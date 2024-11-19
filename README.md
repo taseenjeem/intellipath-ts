@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IntelliPath - E-Learning Platform
 
-## Getting Started
+**IntelliPath** is a feature-rich, full-stack e-learning platform designed to connect instructors and learners. Built with the MERN stack and Next.js, IntelliPath allows instructors to upload and manage courses while learners can explore, purchase, and engage with high-quality educational content.
 
-First, run the development server:
+🌟 **Live Demo**: [Check it out here!](https://intellipath.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### For Learners
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Seamless Registration**: Sign up as a learner to access a variety of courses.
+- **Explore & Purchase**: Browse through courses and purchase the ones that suit your learning goals.
+- **Interactive Classes**: Engage with dynamic and interactive video content.
 
-## Learn More
+### For Instructors
 
-To learn more about Next.js, take a look at the following resources:
+- **Dedicated Registration**: Register as an instructor to share your expertise.
+- **Upload Courses**: Create and manage your classes effortlessly.
+- **Earn Income**: Monetize your knowledge through a user-friendly platform.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🛠️ Technologies Used
 
-## Deploy on Vercel
+### Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js**: Fast and SEO-optimized React framework.
+- **React Hook Form**: Simplifies form validation and state management.
+- **Tailwind CSS**: Rapidly build modern, responsive UI.
+- **DaisyUI**: Predefined Tailwind components for faster development.
+- **React Toastify**: Provides notifications for success and error feedback.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Backend
+
+- **MongoDB & Mongoose**: Database and ODM for managing user and course data.
+- **NextAuth.js**: Secure authentication and authorization.
+- **Stripe**: Payment gateway integration for seamless transactions.
+
+### State Management
+
+- **Redux Toolkit**: Centralized state management.
+- **Redux Persist**: Ensures state persistence across sessions.
+
+### Additional Libraries
+
+- **React Quill**: Rich text editor for course descriptions.
+- **React Player**: Stream video content for learners.
+- **React Slick**: Elegant carousels for showcasing featured content.
+- **Bcrypt.js**: Password hashing for secure user authentication.
