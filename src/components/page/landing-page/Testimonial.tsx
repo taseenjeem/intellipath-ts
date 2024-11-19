@@ -24,7 +24,7 @@ const Testimonial = async () => {
             </p>
           </div>
           <Link href="/shop" className="mt-6 md:mt-0 btn btn-primary ">
-            Join Our Community
+            Start Learning
           </Link>
         </div>
 
