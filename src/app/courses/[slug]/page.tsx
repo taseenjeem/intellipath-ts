@@ -34,7 +34,7 @@ const CourseDetailsPage = async ({
 }: Readonly<{ params: { slug: string } }>) => {
   const course: ICourse = await getCourseBySlug(params.slug);
   const userSession = await auth();
-  const { role } = await getUserByEmail(userSession?.user?.email ?? "");
+  const user = await getUserByEmail(userSession?.user?.email ?? "");
 
   const averageRating = (): number => {
     if (!course?.testimonials || course.testimonials.length === 0) {
@@ -122,7 +122,7 @@ const CourseDetailsPage = async ({
                   </div>
                 )}
               </div>
-              {role === "learner" && (
+              {user?.role === "learner" && (
                 <Link
                   href={`/checkout/${course._id}`}
                   className="btn btn-primary"

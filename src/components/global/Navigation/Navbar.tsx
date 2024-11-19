@@ -4,6 +4,7 @@ import ThemeController from "./ThemeController";
 import UserActionBtns from "./UserActionBtns";
 import CloseBtn from "./CloseBtn";
 import Logo from "../ui/Logo";
+import Search from "./Search";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -45,6 +46,9 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
             <div className="flex-none hidden items-center lg:block">
               <ul className="flex items-center gap-4 justify-center text-primary">
                 {/* Navbar menu content here */}
+                <li className="w-96 hidden md:block">
+                  <Search />
+                </li>
                 <li>
                   <ActiveLink href={`/courses`}>Our Courses</ActiveLink>
                 </li>
