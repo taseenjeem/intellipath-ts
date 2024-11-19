@@ -1,5 +1,5 @@
 import Image from "next/image";
-import img from "/public/assets/images/enroll-success.png";
+import img from "/public/assets/images/enroll-success.svg";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import Link from "next/link";
 import { ICourse, IEnrollments, IUserInfo } from "@/types";

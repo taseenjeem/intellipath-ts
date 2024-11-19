@@ -3,42 +3,42 @@
     "id": "1",
     "title": "Business & Finance",
     "slug": "business-and-finance",
-    "thumbnail": "/assets/images/category-thumbnails/business-finance.png",
+    "thumbnail": "/assets/images/category-thumbnails/business-finance.svg",
     "description": "Master the essentials of business management, financial planning, and entrepreneurship to elevate your professional skills."
   },
   {
     "id": "2",
     "title": "Technology & Programming",
     "slug": "technology-and-programming",
-    "thumbnail": "/assets/images/category-thumbnails/tech.png",
+    "thumbnail": "/assets/images/category-thumbnails/tech.svg",
     "description": "Learn the latest in software development, data science, and IT to stay ahead in the ever-evolving tech landscape."
   },
   {
     "id": "3",
     "title": "Health & Wellness",
     "slug": "health-and-wellness",
-    "thumbnail": "/assets/images/category-thumbnails/health.png",
+    "thumbnail": "/assets/images/category-thumbnails/health.svg",
     "description": "Discover courses on fitness, nutrition, mental health, and overall well-being to lead a balanced and healthy lifestyle."
   },
   {
     "id": "4",
     "title": "Creative Arts",
     "slug": "creative-arts",
-    "thumbnail": "/assets/images/category-thumbnails/creative.png",
+    "thumbnail": "/assets/images/category-thumbnails/creative.svg",
     "description": "Unleash your creativity with classes in photography, graphic design, music, writing, and more."
   },
   {
     "id": "5",
     "title": "Personal Development",
     "slug": "personal-development",
-    "thumbnail": "/assets/images/category-thumbnails/personal-dev.png",
+    "thumbnail": "/assets/images/category-thumbnails/personal-dev.svg",
     "description": "Enhance your personal growth with courses on leadership, communication, time management, and self-improvement."
   },
   {
     "id": "6",
-    "title": "Languages & Culture",
+    "title": "Language & Culture",
     "slug": "language-and-culture",
-    "thumbnail": "/assets/images/category-thumbnails/culture.png",
+    "thumbnail": "/assets/images/category-thumbnails/culture.svg",
     "description": "Explore new languages and understand diverse cultures to broaden your global perspective and communication skills."
   }
 ]

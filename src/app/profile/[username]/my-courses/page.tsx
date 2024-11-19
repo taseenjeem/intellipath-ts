@@ -1,6 +1,6 @@
 import CourseCard from "@/src/components/global/ui/CourseCard";
 import { ICourse, IEnrollments, IUserInfo } from "@/types";
-import illustrator from "/public/assets/images/search.png";
+import illustrator from "/public/assets/images/search.svg";
 import Image from "next/image";
 import { getAllUsers, getUserByUsername } from "@/database/server-actions";
 import Link from "next/link";

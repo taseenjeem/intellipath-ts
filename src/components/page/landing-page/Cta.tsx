@@ -1,5 +1,5 @@
-import student from "/public/assets/images/student.png";
-import instructor from "/public/assets/images/instructor.png";
+import student from "/public/assets/images/student.svg";
+import instructor from "/public/assets/images/instructor.svg";
 import Link from "next/link";
 import Image from "next/image";
 

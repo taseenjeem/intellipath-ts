@@ -5,7 +5,7 @@ import { ICourse } from "@/types";
 import FilterModal from "./FilterModal";
 import CourseCard from "../../global/ui/CourseCard";
 import SearchCourses from "./SearchCourses";
-import searchImg from "/public/assets/images/search.png";
+import searchImg from "/public/assets/images/search.svg";
 import Image from "next/image";
 
 interface CourseShowcaseProps {

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import notFoundIllustrator from "/public/assets/images/404.png";
+import notFoundIllustrator from "/public/assets/images/404.svg";
 import { RiArrowGoBackFill, RiHome5Line } from "react-icons/ri";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
