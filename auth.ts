@@ -3,6 +3,8 @@ import CredentialProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "./database/db-models/userModel";
 import { authConfig } from "./auth.config";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import mongoAdapterConfig from "./lib/mongoAdapterConfig";
 
 export const {
   handlers: { GET, POST },
@@ -10,41 +12,37 @@ export const {
   signOut,
   auth,
 } = NextAuth({
-  ...authConfig, // Spreading authentication configuration
+  adapter: MongoDBAdapter(mongoAdapterConfig, {
+    databaseName: process.env.DB_NAME,
+  }),
+  trustHost: true,
+  ...authConfig,
   providers: [
     CredentialProvider({
-      // Async function to authorize users
       async authorize(credentials) {
-        // Check if email and password are provided
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password are required.");
         }
 
-        // Ensure the password is a string
         if (typeof credentials.password !== "string") {
           throw new Error("Invalid password format. Password must be a string");
         }
 
         try {
-          // Attempt to find the user by email
           const existingUser = await User.findOne({
-            email: credentials?.email, // Querying for user with the provided email
+            email: credentials?.email,
           });
 
-          // If user is not found, throw an error
           if (!existingUser) {
             throw new Error("User email is not found.");
           }
 
-          // Check if the user exists and has a password
           if (existingUser && existingUser.password) {
-            // Compare provided password with the hashed password in the database
             const verifyPassword = await bcrypt.compare(
-              credentials.password, // User-provided password
-              existingUser.password // Hashed password from the database
+              credentials.password,
+              existingUser.password
             );
 
-            // If passwords match, return the existing user
             if (verifyPassword) {
               return existingUser;
             } else {
