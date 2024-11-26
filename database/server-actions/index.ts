@@ -28,17 +28,8 @@ export const credentialLogin = async (formData: ICredentialLoginFormData) => {
       password: formData.password,
       redirect: false,
     });
-    return {
-      success: true,
-      message: "You have successfully logged in.",
-      userEmail: formData.email,
-    };
   } catch (error: any) {
     console.log(error);
-    return {
-      success: false,
-      message: "An unexpected error occurred during login.",
-    };
   }
 };
 
