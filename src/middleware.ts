@@ -7,16 +7,18 @@ const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   const { nextUrl } = req;
-  const isAuthenticated = !!req.auth;
+  const isAuthenticated = req.auth;
 
   const isPrivateRoute = PRIVATE_ROUTES.find((route) =>
     nextUrl.pathname.startsWith(route)
   );
 
-  if (isPrivateRoute && !isAuthenticated) {
-    const redirectedUrl = new URL("/auth/login", nextUrl);
-    redirectedUrl.searchParams.set("message", "login_required");
-    return Response.redirect(redirectedUrl);
+  if (isPrivateRoute) {
+    if (isAuthenticated === null) {
+      const redirectedUrl = new URL("/auth/login", nextUrl);
+      redirectedUrl.searchParams.set("message", "login_required");
+      return Response.redirect(redirectedUrl);
+    }
   }
 
   return NextResponse.next();
