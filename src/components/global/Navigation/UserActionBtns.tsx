@@ -16,7 +16,6 @@ const UserActionBtns = ({ isSmallDevice = false }: IUserActionBtnsProps) => {
   const pathName = usePathname();
   const isActive = pathName.includes("/auth");
   const { data: session, status } = useSession();
-  console.log("🚀 ~ UserActionBtns ~ session:", session);
   const authData = useAppSelector((state) => state.userInfo);
   const dispatch = useAppDispatch();
   const router = useRouter();

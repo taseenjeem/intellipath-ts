@@ -11,6 +11,7 @@ import { credentialLogin, getUserByEmail } from "@/database/server-actions";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/redux/store";
 import { updateUserInfo } from "@/redux/slices/UserInfoSlice";
+import { useSession } from "next-auth/react";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,6 +19,8 @@ const LoginForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
+  const { data: session, status } = useSession();
+  console.log("🚀 ~ LoginForm ~ session:", session);
 
   useEffect(() => {
     const message = searchParams.get("message");
@@ -33,10 +36,12 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       await credentialLogin(data);
-      const userInfo = await getUserByEmail(data.email);
-      dispatch(updateUserInfo(userInfo));
-      toast.success("Login Successful");
-      router.push("/");
+      if (session?.user?.email) {
+        const userInfo = await getUserByEmail(session?.user?.email);
+        dispatch(updateUserInfo(userInfo));
+        toast.success("Login Successful");
+        router.push("/");
+      }
     } catch (error: any) {
       console.log(error);
       toast.error("An error occurred while processing your request.");
