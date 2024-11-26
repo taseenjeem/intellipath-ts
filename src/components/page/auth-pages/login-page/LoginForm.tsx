@@ -43,6 +43,7 @@ const LoginForm = () => {
         methods.setError("root.serverError", { message: response.message });
       }
     } catch (error: any) {
+      console.log(error);
       toast.error("An error occurred while processing your request.");
       methods.setError("root.serverError", { message: error.message });
     } finally {
