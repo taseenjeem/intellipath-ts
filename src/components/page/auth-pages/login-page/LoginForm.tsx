@@ -36,11 +36,11 @@ const LoginForm = () => {
       if (response?.success) {
         const userInfo = await getUserByEmail(data.email);
         dispatch(updateUserInfo(userInfo));
-        toast.success(response.message);
+        toast.success(response?.message);
         router.push("/");
       } else {
         toast.error("Invalid credentials. Try again!");
-        methods.setError("root.serverError", { message: response.message });
+        methods.setError("root.serverError", { message: response?.message });
       }
     } catch (error: any) {
       console.log(error);
