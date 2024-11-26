@@ -15,15 +15,9 @@ export const {
   adapter: MongoDBAdapter(mongoAdapterConfig, {
     databaseName: process.env.DB_NAME,
   }),
-  trustHost: true,
   ...authConfig,
   providers: [
     CredentialProvider({
-      credentials: {
-        email: {},
-        password: {},
-      },
-
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password are required.");

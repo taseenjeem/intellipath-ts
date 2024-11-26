@@ -22,15 +22,11 @@ export const getCountries = async () => {
 };
 
 export const credentialLogin = async (formData: ICredentialLoginFormData) => {
-  try {
-    await signIn("credentials", {
-      email: formData.email,
-      password: formData.password,
-      redirect: false,
-    });
-  } catch (error: any) {
-    console.log(error);
-  }
+  await signIn("credentials", {
+    email: formData.email,
+    password: formData.password,
+    redirect: false,
+  });
 };
 
 export const getAllUsers = async () => {

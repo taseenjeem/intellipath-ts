@@ -36,12 +36,10 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       await credentialLogin(data);
-      if (session?.user?.email) {
-        const userInfo = await getUserByEmail(session?.user?.email);
-        dispatch(updateUserInfo(userInfo));
-        toast.success("Login Successful");
-        router.push("/");
-      }
+      const userInfo = await getUserByEmail(session?.user?.email ?? data.email);
+      dispatch(updateUserInfo(userInfo));
+      toast.success("Login Successful");
+      router.push("/");
     } catch (error: any) {
       console.log(error);
       toast.error("An error occurred while processing your request.");
