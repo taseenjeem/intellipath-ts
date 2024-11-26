@@ -33,7 +33,7 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const response = await credentialLogin(data);
-      if (response.success) {
+      if (response?.success) {
         const userInfo = await getUserByEmail(data.email);
         dispatch(updateUserInfo(userInfo));
         toast.success(response.message);
